@@ -44,8 +44,7 @@ public class Snake : MonoBehaviour
       if(Math.Abs(horizontal) < Math.Abs(vertical))
         direction = new Vector3(0, vertical < 0 ? -1 : 1, 0);
       // snake cannot go backwards...
-      Vector3 diff = direction + head.transform.up;
-      if(diff.x == 0 && diff.y == 0)
+      if(direction + head.transform.up == new Vector3(0,0,0))
         direction = head.transform.up;
     }
 
