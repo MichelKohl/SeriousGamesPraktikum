@@ -8,7 +8,9 @@ public class Snake : MonoBehaviour
     [SerializeField] private Joystick joystick;
     [SerializeField] private float movement;
     [SerializeField] private float startUpdateFrequ;
+    [SerializeField] private float acceleration;
     [SerializeField] private GameObject bodypart;
+    [SerializeField] private GameManager manager;
 
     private Vector3 direction;
     private float updateFrequency, counter;
@@ -30,6 +32,7 @@ public class Snake : MonoBehaviour
 
     void FixedUpdate()
     {
+      if(!manager.isGameplay()) return;
       if(counter > updateFrequency){
         UpdateDirection();
         Move();
@@ -68,6 +71,7 @@ public class Snake : MonoBehaviour
 
     public void Eat()
     {
+      updateFrequency /= acceleration;
       eating = true;
     }
 }
