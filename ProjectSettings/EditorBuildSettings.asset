@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Mini Games/Snake/SnakeGameplay.unity
+    guid: ff93b8acd70904d3292512a30320020d
   m_configObjects: {}
