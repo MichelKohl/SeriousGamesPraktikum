@@ -10,7 +10,7 @@ public class Snake : MonoBehaviour
     [SerializeField] private float startUpdateFrequ;
     [SerializeField] private float acceleration;
     [SerializeField] private GameObject bodypart;
-    [SerializeField] private GameManager manager;
+    [SerializeField] private SnakeGameManager manager;
 
     private Vector3 direction;
     private float updateFrequency, counter;

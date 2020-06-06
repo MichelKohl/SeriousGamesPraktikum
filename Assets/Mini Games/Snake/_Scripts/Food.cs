@@ -28,7 +28,7 @@ public class Food : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider){
       transform.position = GetRandomPosition();
       collider.gameObject.transform.parent.gameObject.GetComponent<Snake>().Eat();
-      GameObject.Find("GameManager").GetComponent<GameManager>().IncreaseScoreBy(points);
+      GameObject.Find("GameManager").GetComponent<SnakeGameManager>().IncreaseScoreBy(points);
     }
 
     private Vector3 GetRandomPosition()

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class GameManager : MonoBehaviour
+public class SnakeGameManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI scoreLabel;
     [SerializeField] private TextMeshProUGUI pointsLabel;
