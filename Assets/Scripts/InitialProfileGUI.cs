@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -9,8 +11,8 @@ public class InitialProfileGUI : MonoBehaviour
     public TMP_InputField _nameInput;
     public Button _localResidentButton;
     public Button _touristButton;
-    public Toggle _notificationToggle;
-    public Toggle _vibrationToggle;
+    public GameObject _notificationToggle;
+    public GameObject _vibrationToggle;
     public Button _profileImageButton;
     public Button _okButton;
     public Color _pressedColor;
@@ -18,8 +20,10 @@ public class InitialProfileGUI : MonoBehaviour
     public Button _dialogPanelButton;
 
     private Profiletype _type = Profiletype.NONE;
-    private bool _notifications = false;
-    private bool _vibration = false;
+    private bool _notificationStatus;
+    private bool _vibrationsStatus;
+
+    private TouchScreenKeyboard keyboard;
 
     /// <summary>
     /// This Method will be invoked, if the player presses the "I'm a local Resident" Button. It will set up a profile for
@@ -58,8 +62,12 @@ public class InitialProfileGUI : MonoBehaviour
         {
             Debug.Log("Profile creation successfull");
 
-            Profile profile = new Profile(_nameInput.text, _type, _notifications, _vibration, 0);
-            
+            _notificationToggle.GetComponent<Toggle>().isOn = _notificationStatus;
+            _vibrationToggle.GetComponent<Toggle>().isOn = _vibrationsStatus;
+
+            Profile profile = new Profile(_nameInput.text, _type, _notificationStatus, _vibrationsStatus, 0);
+            GameManager._instance.SaveProfile(profile);
+            SceneManager.LoadScene("DefaultScreen");
         }
 
     }
@@ -71,5 +79,9 @@ public class InitialProfileGUI : MonoBehaviour
     {
         _dialogPanel.SetActive(false);
         _okButton.interactable = true;
+    }
+
+    public void openKeyboard() {
+        keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default);
     }
 }

@@ -1,13 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class Profile
 {
     private string _name;
     private Profiletype _type = Profiletype.NONE;
-    private bool _notifications = true;
-    private bool _vibrations = true;
+    private bool _notifications;
+    private bool _vibrations;
     private int _coins;
 
     public Profile(string name, Profiletype type, bool notifications, bool vibrations, int coins) {
