@@ -24,7 +24,7 @@ public class Food : MonoBehaviour
       xUnits = (int) ((maxX - minX) / offset);
       yUnits = (int) ((maxY - minY) / offset);
     }
-
+    
     private void OnTriggerEnter2D(Collider2D collider){
       transform.position = GetRandomPosition();
       collider.gameObject.transform.parent.gameObject.GetComponent<Snake>().Eat();

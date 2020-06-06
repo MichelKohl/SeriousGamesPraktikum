@@ -7,10 +7,7 @@ public class SpaceShipController : MonoBehaviour
     [SerializeField] private Joystick joystick;
     [SerializeField] private float speed;
 
-    void Start()
-    {
-
-    }
+    private float lastTimeShot;
 
     void FixedUpdate()
     {
