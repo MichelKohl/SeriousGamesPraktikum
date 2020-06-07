@@ -2,27 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpaceInvader : MonoBehaviour
+public class SpaceInvader : GameplayObject
 {
     [SerializeField] private float speed;
     [SerializeField] private float acceleration;
 
-    private SpaceInvaderGameManager manager;
     private Vector2 direction;
     private Rigidbody2D body;
 
-    void Start()
-    {
-      manager = GameObject.Find("GameManager").GetComponent<SpaceInvaderGameManager>();
-      direction = new Vector2(1, 0);
-    }
-
     void Awake()
     {
+      direction = new Vector2(1, 0);
       body = GetComponent<Rigidbody2D>();
     }
 
-    void FixedUpdate()
+    protected override void DoUpdate()
     {
       Vector3 pos = transform.position;
       body.MovePosition(new Vector2(pos.x, pos.y) + direction * speed * Time.deltaTime);
@@ -30,14 +24,22 @@ public class SpaceInvader : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-      string name = collision.gameObject.name;
-      if(name == "Border")
+      switch(collision.gameObject.name)
+      {
+        case "Border":
         foreach(Transform row in transform.parent.transform.parent)
           foreach(Transform invader in row)
             if(invader.gameObject.activeSelf)
               invader.gameObject.GetComponent<SpaceInvader>().ChangeDirection();
-      if(name == "Game Over Border")
-        GameObject.Find("GameManager").GetComponent<SpaceInvaderGameManager>().GameOver();
+        break;
+        case "Game Over Border":
+        manager.GameOver();
+        break;
+        default:
+        Physics2D.IgnoreCollision( GetComponent<Collider2D>(),
+              collision.gameObject.GetComponent<Collider2D>());
+        break;
+      }
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -47,6 +49,7 @@ public class SpaceInvader : MonoBehaviour
       else {
         collider.gameObject.GetComponent<Projectile>().Deactivate();
         transform.Find("Explosion").GetComponent<Explosion>().Explode();
+        manager.IncreaseScoreBy(100);
       }
     }
 
