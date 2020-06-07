@@ -24,22 +24,10 @@ public class SpaceInvader : GameplayObject
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-      switch(collision.gameObject.name)
-      {
-        case "Border":
-        foreach(Transform row in transform.parent.transform.parent)
-          foreach(Transform invader in row)
-            if(invader.gameObject.activeSelf)
-              invader.gameObject.GetComponent<SpaceInvader>().ChangeDirection();
-        break;
-        case "Game Over Border":
-        manager.GameOver();
-        break;
-        default:
-        Physics2D.IgnoreCollision( GetComponent<Collider2D>(),
-              collision.gameObject.GetComponent<Collider2D>());
-        break;
-      }
+      foreach(Transform row in transform.parent.transform.parent)
+        foreach(Transform invader in row)
+          if(invader.gameObject.activeSelf)
+            invader.gameObject.GetComponent<SpaceInvader>().ChangeDirection();
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -47,9 +35,11 @@ public class SpaceInvader : GameplayObject
       if(collider.tag == "Friendly Fire")
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), collider);
       else {
-        collider.gameObject.GetComponent<Projectile>().Deactivate();
-        transform.Find("Explosion").GetComponent<Explosion>().Explode();
-        manager.IncreaseScoreBy(100);
+        if(collider.tag == "Projectile"){
+          collider.gameObject.GetComponent<Projectile>().Deactivate();
+          transform.Find("Explosion").GetComponent<Explosion>().Explode();
+          manager.IncreaseScoreBy(100);
+        } else manager.GameOver();
       }
     }
 

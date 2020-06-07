@@ -29,6 +29,7 @@ public class SpaceInvaderGameManager : MiniGameManager
           infoLabel.gameObject.SetActive(true);
           StopCoroutine(blinking);
           infoLabel.text = "GAME OVER";
+          infoLabel.color = new Color(infoLabel.color.r, infoLabel.color.g, infoLabel.color.b, 1);
           tryAgainButton.gameObject.SetActive(true);
         break;
       }
