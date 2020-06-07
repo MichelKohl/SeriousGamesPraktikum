@@ -7,11 +7,13 @@ public class SpaceInvader : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float acceleration;
 
+    private SpaceInvaderGameManager manager;
     private Vector2 direction;
     private Rigidbody2D body;
 
     void Start()
     {
+      manager = GameObject.Find("GameManager").GetComponent<SpaceInvaderGameManager>();
       direction = new Vector2(1, 0);
     }
 
@@ -32,9 +34,20 @@ public class SpaceInvader : MonoBehaviour
       if(name == "Border")
         foreach(Transform row in transform.parent.transform.parent)
           foreach(Transform invader in row)
-            invader.gameObject.GetComponent<SpaceInvader>().ChangeDirection();
+            if(invader.gameObject.activeSelf)
+              invader.gameObject.GetComponent<SpaceInvader>().ChangeDirection();
       if(name == "Game Over Border")
         GameObject.Find("GameManager").GetComponent<SpaceInvaderGameManager>().GameOver();
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+      if(collider.tag == "Friendly Fire")
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), collider);
+      else {
+        collider.gameObject.GetComponent<Projectile>().Deactivate();
+        transform.Find("Explosion").GetComponent<Explosion>().Explode();
+      }
     }
 
     public void ChangeDirection()

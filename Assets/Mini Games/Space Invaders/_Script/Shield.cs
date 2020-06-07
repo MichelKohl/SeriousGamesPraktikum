@@ -7,7 +7,6 @@ public class Shield : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collider)
     {
       collider.gameObject.GetComponent<Projectile>().Deactivate();
-      GetComponent<SpriteRenderer>().color = new Color(0,0,0,0);
-      gameObject.SetActive(false);
+      transform.Find("Explosion").GetComponent<Explosion>().Explode();
     }
 }
