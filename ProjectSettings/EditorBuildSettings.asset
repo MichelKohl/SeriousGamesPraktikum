@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DefaultScreen.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+<<<<<<< HEAD
+=======
+  - enabled: 1
+    path: Assets/Scenes/InitialProfileScreen.unity
+    guid: cc8befcbe8a838847a944b34c35ca6ee
+>>>>>>> Profilemanagement
   m_configObjects: {}

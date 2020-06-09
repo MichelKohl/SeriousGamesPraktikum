@@ -264,6 +264,39 @@ PlayerSettings:
   - m_BuildTarget: Android
     m_Icons:
     - m_Textures: []
+<<<<<<< HEAD
+=======
+      m_Width: 432
+      m_Height: 432
+      m_Kind: 2
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 324
+      m_Height: 324
+      m_Kind: 2
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 216
+      m_Height: 216
+      m_Kind: 2
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 162
+      m_Height: 162
+      m_Kind: 2
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 108
+      m_Height: 108
+      m_Kind: 2
+      m_SubKind: 
+    - m_Textures: []
+      m_Width: 81
+      m_Height: 81
+      m_Kind: 2
+      m_SubKind: 
+    - m_Textures: []
+>>>>>>> Profilemanagement
       m_Width: 192
       m_Height: 192
       m_Kind: 0
@@ -323,6 +356,7 @@ PlayerSettings:
       m_Height: 36
       m_Kind: 1
       m_SubKind: 
+<<<<<<< HEAD
     - m_Textures: []
       m_Width: 432
       m_Height: 432
@@ -353,6 +387,8 @@ PlayerSettings:
       m_Height: 81
       m_Kind: 2
       m_SubKind: 
+=======
+>>>>>>> Profilemanagement
   m_BuildTargetBatching:
   - m_BuildTarget: Standalone
     m_StaticBatching: 1
