@@ -8,13 +8,20 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager _instance;
-    public Profile _profile = null;
+    /// <summary>
+    /// The singleton variable.
+    /// </summary>
+    public static GameManager INSTANCE;
+
+    /// <summary>
+    /// The profile attached to the game.
+    /// </summary>
+    public Profile profile = null;
 
     private void Awake()
     {
-        if (_instance == null) {
-            _instance = this;
+        if (INSTANCE == null) {
+            INSTANCE = this;
         }
         DontDestroyOnLoad(this);
     }
@@ -36,7 +43,10 @@ public class GameManager : MonoBehaviour
         
     }
 
-
+    /// <summary>
+    /// This method saves the profile from the initial creation screen view to a file on the device.
+    /// </summary>
+    /// <param name="profile"></param>
     public void SaveProfile(Profile profile) 
     {
         BinaryFormatter bf = new BinaryFormatter();
@@ -46,6 +56,9 @@ public class GameManager : MonoBehaviour
         file.Close();
     }
 
+    /// <summary>
+    /// This method loads the profile from a file on the device.
+    /// </summary>
     public void LoadProfile() {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Open(Application.persistentDataPath + "/profileInfo.dat", FileMode.Open);
@@ -53,6 +66,6 @@ public class GameManager : MonoBehaviour
         Profile profile = (Profile)bf.Deserialize(file);
         file.Close();
 
-        this._profile = profile;
+        this.profile = profile;
     }
 }

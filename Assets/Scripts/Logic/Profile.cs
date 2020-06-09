@@ -3,61 +3,83 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This class represents a valid profile of the game.
+/// </summary>
 [Serializable]
 public class Profile
 {
-    private string _name;
-    private Profiletype _type = Profiletype.NONE;
-    private bool _notifications;
-    private bool _vibrations;
-    private int _coins;
+    /// <summary>
+    /// The name of the profile.
+    /// </summary>
+    private string name;
+
+    /// <summary>
+    /// The type of the profile (tourist or local resident).
+    /// </summary>
+    private Profiletype type = Profiletype.NONE;
+
+    /// <summary>
+    /// The setting, whether notifications are allowed or not.
+    /// </summary>
+    private bool notifications;
+
+    /// <summary>
+    /// The setting, whether vibrations are allowed or not.
+    /// </summary>
+    private bool vibrations;
+
+    /// <summary>
+    /// The amount of coins the profile has.
+    /// </summary>
+    private int coins;
 
     public Profile(string name, Profiletype type, bool notifications, bool vibrations, int coins) {
-        this._name = name;
-        this._type = type;
-        this._notifications = notifications;
-        this._vibrations = vibrations;
-        this._coins = coins;
+        this.name = name;
+        this.type = type;
+        this.notifications = notifications;
+        this.vibrations = vibrations;
+        this.coins = coins;
     }
 
     public void setProfileName(string name) {
-        this._name = name;
+        this.name = name;
     }
 
     public string getProfileName() {
-        return this._name;
+        return this.name;
     }
 
     public void setProfileType(Profiletype type) {
-        this._type = type;
+        this.type = type;
     }
 
     public Profiletype getProfileType() {
-        return this._type;
+        return this.type;
     }
 
     public void setNotificationStatus(bool status) {
-        this._notifications = status;
+        this.notifications = status;
     }
 
     public bool getNotificationStatus() {
-        return this._notifications;
+        return this.notifications;
     }
 
     public void setVibrationStatus(bool status) {
-        this._vibrations = status;
+        this.vibrations = status;
     }
 
     public bool getVibrationsStatus() {
-        return this._vibrations;
+        return this.vibrations;
     }
 
     public void setCoins(int amount) {
-        this._coins = amount;
+        this.coins = amount;
     }
 
     public int getCoins() {
-        return this._coins;
+        return this.coins;
     }
 
 }

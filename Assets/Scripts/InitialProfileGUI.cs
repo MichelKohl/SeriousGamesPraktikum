@@ -6,22 +6,35 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+/// <summary>
+/// This class handles all GUI interactions within the inital profile creation screen.
+/// </summary>
 public class InitialProfileGUI : MonoBehaviour
 {
-    public TMP_InputField _nameInput;
-    public Button _localResidentButton;
-    public Button _touristButton;
-    public GameObject _notificationToggle;
-    public GameObject _vibrationToggle;
-    public Button _profileImageButton;
-    public Button _okButton;
-    public Color _pressedColor;
-    public GameObject _dialogPanel;
-    public Button _dialogPanelButton;
+    [SerializeField]
+    private TMP_InputField nameInput;
+    [SerializeField]
+    private Button localResidentButton;
+    [SerializeField]
+    private Button touristButton;
+    [SerializeField]
+    private GameObject notificationToggle;
+    [SerializeField]
+    private GameObject vibrationToggle;
+    [SerializeField]
+    private Button profileImageButton;
+    [SerializeField]
+    private Button okButton;
+    [SerializeField]
+    private Color pressedColor;
+    [SerializeField]
+    private GameObject dialogPanel;
+    [SerializeField]
+    private Button dialogPanelButton;
 
-    private Profiletype _type = Profiletype.NONE;
-    private bool _notificationStatus;
-    private bool _vibrationsStatus;
+    private Profiletype type = Profiletype.NONE;
+    private bool notificationStatus;
+    private bool vibrationsStatus;
 
     private TouchScreenKeyboard keyboard;
 
@@ -31,9 +44,9 @@ public class InitialProfileGUI : MonoBehaviour
     /// </summary>
     public void localResidentButtonPressed()
     {
-        _localResidentButton.GetComponent<Image>().color = _pressedColor;
-        _touristButton.GetComponent<Image>().color = Color.white;
-        _type = Profiletype.LOCALRESIDENT;
+        localResidentButton.GetComponent<Image>().color = pressedColor;
+        touristButton.GetComponent<Image>().color = Color.white;
+        type = Profiletype.LOCALRESIDENT;
     }
 
     /// <summary>
@@ -42,9 +55,9 @@ public class InitialProfileGUI : MonoBehaviour
     /// </summary>
     public void touristButtonPressed()
     {
-        _touristButton.GetComponent<Image>().color = _pressedColor;
-        _localResidentButton.GetComponent<Image>().color = Color.white;
-        _type = Profiletype.TOURIST;
+        touristButton.GetComponent<Image>().color = pressedColor;
+        localResidentButton.GetComponent<Image>().color = Color.white;
+        type = Profiletype.TOURIST;
     }
 
     /// <summary>
@@ -52,21 +65,22 @@ public class InitialProfileGUI : MonoBehaviour
     /// </summary>
     public void okButtonPressed()
     {
-        if (_nameInput.text == "Enter your name..." || (_type == Profiletype.NONE) || _nameInput.text.Length == 0 ||
-                _nameInput.text.StartsWith(" "))
+        if (nameInput.text == "Enter your name..." || (type == Profiletype.NONE) || nameInput.text.Length == 0 ||
+                nameInput.text.StartsWith(" "))
         {
-            _dialogPanel.SetActive(true);
-            _okButton.interactable = false;
+            dialogPanel.SetActive(true);
+            okButton.interactable = false;
         }
         else
         {
             Debug.Log("Profile creation successfull");
 
-            _notificationToggle.GetComponent<Toggle>().isOn = _notificationStatus;
-            _vibrationToggle.GetComponent<Toggle>().isOn = _vibrationsStatus;
+            notificationStatus = notificationToggle.GetComponent<Toggle>().isOn;
+            vibrationsStatus = vibrationToggle.GetComponent<Toggle>().isOn;
 
-            Profile profile = new Profile(_nameInput.text, _type, _notificationStatus, _vibrationsStatus, 0);
-            GameManager._instance.SaveProfile(profile);
+            Profile profile = new Profile(nameInput.text, type, notificationStatus, vibrationsStatus, 0);
+            GameManager.INSTANCE.SaveProfile(profile);
+            GameManager.INSTANCE.LoadProfile();
             SceneManager.LoadScene("DefaultScreen");
         }
 
@@ -77,8 +91,8 @@ public class InitialProfileGUI : MonoBehaviour
     /// </summary>
     public void dialogButtonPressed()
     {
-        _dialogPanel.SetActive(false);
-        _okButton.interactable = true;
+        dialogPanel.SetActive(false);
+        okButton.interactable = true;
     }
 
     public void openKeyboard() {

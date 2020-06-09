@@ -4,69 +4,144 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// This class handles all GUI interactions within the default screen.
+/// </summary>
 public class GeneralGUI : MonoBehaviour
 {
-    public Button _profileButton;
-    public GameObject _profileView;
-    public Button _returnFromProfileViewButton;
-    public TextMeshProUGUI _profiletypeText;
-    public TextMeshProUGUI _profilenameText;
-    public TextMeshProUGUI _coinsText;
-    public Toggle _notificationsToggle;
-    public Toggle _vibrationsToggle;
+    [SerializeField]
+    private Button profileButton;
+    [SerializeField]
+    private GameObject profileView;
+    [SerializeField]
+    private Button returnFromProfileViewButton;
+    [SerializeField]
+    private TextMeshProUGUI profiletypeText;
+    [SerializeField]
+    private TextMeshProUGUI profilenameText;
+    [SerializeField]
+    private TextMeshProUGUI coinsText;
+    [SerializeField]
+    private GameObject notificationsToggle;
+    [SerializeField]
+    private GameObject vibrationsToggle;
+    [SerializeField]
+    private Button changeTypeButton;
+    [SerializeField]
+    private Button changeNameButton;
+
+    private TouchScreenKeyboard keyboard;
+    private bool changeName = false;
+
 
     // Start is called before the first frame update
     void Start()
     {
-
+    
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (changeName)
+        {
+            if (keyboard.status == TouchScreenKeyboard.Status.Done)
+            {
+                changeName = false;
+                GameManager.INSTANCE.profile.setProfileName(keyboard.text);
+                setProfileInfo();
+            }
+        }
     }
 
+    /// <summary>
+    /// This method will make the profile view visible and will set up all necessary informations.
+    /// </summary>
     public void showProfileView()
     {
-        //update Profileinformations
-        updateProfileInfo();
+        setProfileInfo();
 
-        _profileView.SetActive(true);
-        _profileButton.gameObject.SetActive(false);
+        profileView.SetActive(true);
+        profileButton.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// This method will make the profile view invisible by return to default screen view. It will also save setting changes that were made.
+    /// </summary>
     public void backToDefaultView()
     {
-        _profileView.SetActive(false);
-        _profileButton.gameObject.SetActive(true);
+        if (notificationsToggle.GetComponent<Toggle>().isOn)
+        {
+            GameManager.INSTANCE.profile.setNotificationStatus(true);
+        }
+        else GameManager.INSTANCE.profile.setNotificationStatus(false);
+
+        if (vibrationsToggle.GetComponent<Toggle>().isOn)
+        {
+            GameManager.INSTANCE.profile.setVibrationStatus(true);
+        }
+        else GameManager.INSTANCE.profile.setVibrationStatus(false);
+
+        profileView.SetActive(false);
+        profileButton.gameObject.SetActive(true);
+
+        GameManager.INSTANCE.SaveProfile(GameManager.INSTANCE.profile);
     }
 
-    private void updateProfileInfo()
+    /// <summary>
+    /// This method sets up all profile informations by requesting them from the saved profile.
+    /// </summary>
+    private void setProfileInfo()
     {
-    //    _profilenameText.SetText(GameManager._instance._profile.getProfileName());
+        profilenameText.SetText(GameManager.INSTANCE.profile.getProfileName());
 
-        if (GameManager._instance._profile.getProfileType() == Profiletype.LOCALRESIDENT)
+        if (GameManager.INSTANCE.profile.getProfileType() == Profiletype.LOCALRESIDENT)
         {
-            _profiletypeText.SetText("Local Resident");
+            profiletypeText.SetText("Local Resident");
         }
-        if (GameManager._instance._profile.getProfileType() == Profiletype.TOURIST)
+        if (GameManager.INSTANCE.profile.getProfileType() == Profiletype.TOURIST)
         {
-            _profiletypeText.SetText("Tourist");
+            profiletypeText.SetText("Tourist");
         }
 
-        _coinsText.SetText(GameManager._instance._profile.getCoins().ToString());
+        coinsText.SetText(GameManager.INSTANCE.profile.getCoins().ToString());
 
-        if (GameManager._instance._profile.getNotificationStatus())
+        if (GameManager.INSTANCE.profile.getNotificationStatus())
         {
-            _notificationsToggle.isOn = true;
+            notificationsToggle.GetComponent<Toggle>().isOn = true;
         }
-        else _notificationsToggle.isOn = false;
+        else notificationsToggle.GetComponent<Toggle>().isOn = false;
 
-        if (GameManager._instance._profile.getVibrationsStatus())
+        if (GameManager.INSTANCE.profile.getVibrationsStatus())
         {
-            _vibrationsToggle.isOn = true;
+            vibrationsToggle.GetComponent<Toggle>().isOn = true;
         }
-        else _vibrationsToggle.isOn = false;
+        else vibrationsToggle.GetComponent<Toggle>().isOn = false;
+    }
+
+    /// <summary>
+    /// This method will be invoked, if the player changes the current profile type.
+    /// </summary>
+    public void changeProfiletype()
+    {
+        if (GameManager.INSTANCE.profile.getProfileType() == Profiletype.TOURIST)
+        {
+            GameManager.INSTANCE.profile.setProfileType(Profiletype.LOCALRESIDENT);
+        }
+        else if (GameManager.INSTANCE.profile.getProfileType() == Profiletype.LOCALRESIDENT)
+        {
+            GameManager.INSTANCE.profile.setProfileType(Profiletype.TOURIST);
+        }
+
+        setProfileInfo();
+    }
+
+    /// <summary>
+    /// This method will be invoked, if the player presses the button for changing the profile name.
+    /// </summary>
+    public void changeProfilename()
+    {
+        keyboard = TouchScreenKeyboard.Open(GameManager.INSTANCE.profile.getProfileName(), TouchScreenKeyboardType.Default, false);
+        changeName = true;
     }
 }
