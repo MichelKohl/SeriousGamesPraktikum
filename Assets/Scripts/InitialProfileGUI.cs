@@ -78,7 +78,7 @@ public class InitialProfileGUI : MonoBehaviour
             notificationStatus = notificationToggle.GetComponent<Toggle>().isOn;
             vibrationsStatus = vibrationToggle.GetComponent<Toggle>().isOn;
 
-            Profile profile = new Profile(nameInput.text, type, notificationStatus, vibrationsStatus, 0);
+            Profile profile = new Profile(nameInput.text, type, notificationStatus, vibrationsStatus);
             GameManager.INSTANCE.SaveProfile(profile);
             GameManager.INSTANCE.LoadProfile();
             SceneManager.LoadScene("DefaultScreen");

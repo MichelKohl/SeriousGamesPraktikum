@@ -34,12 +34,12 @@ public class Profile
     /// </summary>
     private int coins;
 
-    public Profile(string name, Profiletype type, bool notifications, bool vibrations, int coins) {
+    public Profile(string name, Profiletype type, bool notifications, bool vibrations) {
         this.name = name;
         this.type = type;
         this.notifications = notifications;
         this.vibrations = vibrations;
-        this.coins = coins;
+        this.coins = 0;
     }
 
     public void setProfileName(string name) {
