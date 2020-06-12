@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Food : MonoBehaviour
+public class Food : GameplayObject
 {
     [SerializeField] private int points;
     [SerializeField] private GameObject borders;
@@ -10,8 +10,8 @@ public class Food : MonoBehaviour
 
     private float minX = 0, minY = 0;
     private int xUnits = 0, yUnits = 0;
-    // Start is called before the first frame update
-    void Start()
+
+    void Awake()
     {
       float maxX = 0, maxY = 0;
       foreach(Transform borderTransform in borders.transform){
@@ -28,7 +28,7 @@ public class Food : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider){
       transform.position = GetRandomPosition();
       collider.gameObject.transform.parent.gameObject.GetComponent<Snake>().Eat();
-      GameObject.Find("GameManager").GetComponent<SnakeGameManager>().IncreaseScoreBy(points);
+      manager.IncreaseScoreBy(points);
     }
 
     private Vector3 GetRandomPosition()

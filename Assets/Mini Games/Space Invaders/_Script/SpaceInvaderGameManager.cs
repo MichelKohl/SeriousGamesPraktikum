@@ -9,26 +9,25 @@ public class SpaceInvaderGameManager : MiniGameManager
     [SerializeField] private Button tryAgainButton;
 
     private Coroutine blinking;
-    private float lastTimeShot;
 
     protected override void InitGameState()
     {
       switch(state)
-      {
+        {
         case GameState.Start:
-          blinking = StartCoroutine(FadeBlink(infoLabel));
-          tryAgainButton.gameObject.SetActive(false);
+            blinking = StartCoroutine(FadeBlink(infoLabel));
+            tryAgainButton.gameObject.SetActive(false);
         break;
         case GameState.Gameplay:
-          infoLabel.gameObject.SetActive(false);
-          startButton.gameObject.SetActive(false);
+            infoLabel.gameObject.SetActive(false);
+            startButton.gameObject.SetActive(false);
         break;
         case GameState.GameOver:
-          infoLabel.gameObject.SetActive(true);
-          StopCoroutine(blinking);
-          infoLabel.text = "GAME OVER";
-          infoLabel.color = new Color(infoLabel.color.r, infoLabel.color.g, infoLabel.color.b, 1);
-          tryAgainButton.gameObject.SetActive(true);
+            infoLabel.gameObject.SetActive(true);
+            StopCoroutine(blinking);
+            infoLabel.text = "GAME OVER";
+            infoLabel.color = new Color(infoLabel.color.r, infoLabel.color.g, infoLabel.color.b, 1);
+            tryAgainButton.gameObject.SetActive(true);
         break;
       }
     }

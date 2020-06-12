@@ -16,7 +16,7 @@ public class SpaceInvader : GameplayObject
       body = GetComponent<Rigidbody2D>();
     }
 
-    protected override void DoUpdate()
+    protected override void DoFixedUpdate()
     {
       Vector3 pos = transform.position;
       body.MovePosition(new Vector2(pos.x, pos.y) + direction * speed * Time.deltaTime);

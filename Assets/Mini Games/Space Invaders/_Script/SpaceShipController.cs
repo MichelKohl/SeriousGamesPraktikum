@@ -18,7 +18,7 @@ public class SpaceShipController : GameplayObject
       lastTimeShot = reloadTime;
     }
 
-    protected override void DoUpdate()
+    protected override void DoFixedUpdate()
     {
       Vector3 position = transform.position;
       GetComponent<Rigidbody2D>().MovePosition(new Vector2(position.x, position.y) +

@@ -3,22 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Snake : MonoBehaviour
+public class Snake : GameplayObject
 {
     [SerializeField] private Joystick joystick;
     [SerializeField] private float movement;
     [SerializeField] private float startUpdateFrequ;
     [SerializeField] private float acceleration;
     [SerializeField] private GameObject bodypart;
-    [SerializeField] private SnakeGameManager manager;
 
     private Vector3 direction;
     private float updateFrequency, counter;
     private GameObject head;
     private List<GameObject> body;
     private bool eating;
-    // Start is called before the first frame update
-    void Start()
+
+    void Awake()
     {
       counter = 0;
       eating = false;
@@ -30,9 +29,8 @@ public class Snake : MonoBehaviour
       body.Add(GameObject.Find("Bodypart 1"));
     }
 
-    void FixedUpdate()
+    protected override void DoFixedUpdate()
     {
-      if(!manager.isGameplay()) return;
       if(counter > updateFrequency){
         UpdateDirection();
         Move();

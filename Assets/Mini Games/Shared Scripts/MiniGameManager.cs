@@ -41,17 +41,17 @@ public class MiniGameManager : MonoBehaviour
         Mathf.Max(PlayerPrefs.GetInt($"{gameName} Score", 0), score));
     }
 
-    public bool isStartMenu()
+    public bool IsStartMenu()
     {
       return state == GameState.Start;
     }
 
-    public bool isGameplay()
+    public bool IsGameplay()
     {
       return state == GameState.Gameplay;
     }
 
-    public bool isGameOver()
+    public bool IsGameOver()
     {
       return state == GameState.GameOver;
     }
