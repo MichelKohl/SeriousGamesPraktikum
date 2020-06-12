@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using TMPro;
 
 public class SnakeGameManager : MiniGameManager
@@ -16,20 +13,21 @@ public class SnakeGameManager : MiniGameManager
     {
       switch (state)
       {
-        case GameState.Start:
-                joystick.gameObject.SetActive(false);
-                gameOverLabel.gameObject.SetActive(false);
-                playAgainButton.gameObject.SetActive(false);
-                StartCoroutine(FadeBlink(startButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>()));
-        break;
-        case GameState.Gameplay:
-                joystick.gameObject.SetActive(true);
-                startButton.gameObject.SetActive(false);
-        break;
-        case GameState.GameOver:
-                playAgainButton.gameObject.SetActive(true);
-                joystick.gameObject.SetActive(false);
-        break;
+            case GameState.Start:
+                    joystick.gameObject.SetActive(false);
+                    gameOverLabel.gameObject.SetActive(false);
+                    playAgainButton.gameObject.SetActive(false);
+                    StartCoroutine(FadeBlink(startButton.transform.GetChild(0).
+                            GetComponent<TextMeshProUGUI>()));
+            break;
+            case GameState.Gameplay:
+                    joystick.gameObject.SetActive(true);
+                    startButton.gameObject.SetActive(false);
+            break;
+            case GameState.GameOver:
+                    playAgainButton.gameObject.SetActive(true);
+                    joystick.gameObject.SetActive(false);
+            break;
       }
     }
 }

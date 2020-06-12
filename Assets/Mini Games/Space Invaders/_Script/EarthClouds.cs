@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EarthClouds : MonoBehaviour
 {
@@ -8,6 +6,6 @@ public class EarthClouds : MonoBehaviour
 
     void Update()
     {
-      transform.Rotate(0, 0, speed * Time.deltaTime);
+        transform.Rotate(0, 0, speed * Time.deltaTime);
     }
 }

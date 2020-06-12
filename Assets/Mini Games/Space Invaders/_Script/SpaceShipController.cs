@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class SpaceShipController : GameplayObject
@@ -35,7 +33,11 @@ public class SpaceShipController : GameplayObject
         new Vector2(joystick.Horizontal, 0) * speed * Time.fixedDeltaTime);
       lastTimeShot += Time.fixedDeltaTime;
     }
-
+    /// <summary>
+    /// Shoots a projectile by getting it from a designated projectile pool.
+    /// Also changes the color of the shooting button indicating that the button
+    /// was pressed.
+    /// </summary>
     public void Shoot()
     {
       knob.GetComponent<Image>().color = new Color(255, 138, 0, 233);
@@ -44,7 +46,9 @@ public class SpaceShipController : GameplayObject
         lastTimeShot = 0;
       }
     }
-
+    /// <summary>
+    /// Changes color of shooting button back to default color.
+    /// </summary>
     public void Release()
     {
       knob.GetComponent<Image>().color = new Color(0, 255, 0, 255);

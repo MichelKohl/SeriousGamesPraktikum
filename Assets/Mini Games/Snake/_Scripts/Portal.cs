@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
@@ -8,6 +6,6 @@ public class Portal : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-      collider.gameObject.transform.position += moveBy;
+        collider.gameObject.transform.position += moveBy;
     }
 }

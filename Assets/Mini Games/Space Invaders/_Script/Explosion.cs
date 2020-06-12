@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Explosion : MonoBehaviour
@@ -8,22 +7,20 @@ public class Explosion : MonoBehaviour
 
     public void Explode()
     {
-      StartCoroutine(ExplosionProcess());
+        StartCoroutine(ExplosionProcess());
     }
-
-    void Update()
-    {
-
-    }
-
+    /// <summary>
+    /// Coroutine that plays the explosion and deactivates parent object.
+    /// </summary>
+    /// <returns>Explosion coroutine</returns>
     IEnumerator ExplosionProcess()
     {
-      GameObject parentObj = transform.parent.gameObject;
-      ParticleSystem explosion = GetComponent<ParticleSystem>();
-      parentObj.GetComponent<Rigidbody2D>().simulated = false;
-      parentObj.GetComponent<SpriteRenderer>().enabled = false;
-      explosion.Play();
-      while(explosion.isPlaying) yield return null;
-      parentObj.SetActive(false);
+        GameObject parentObj = transform.parent.gameObject;
+        ParticleSystem explosion = GetComponent<ParticleSystem>();
+        parentObj.GetComponent<Rigidbody2D>().simulated = false;
+        parentObj.GetComponent<SpriteRenderer>().enabled = false;
+        explosion.Play();
+        while(explosion.isPlaying) yield return null;
+        parentObj.SetActive(false);
     }
 }

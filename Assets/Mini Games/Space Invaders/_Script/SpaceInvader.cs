@@ -60,7 +60,9 @@ public class SpaceInvader : GameplayObject
             break;
         }
     }
-
+    /// <summary>
+    /// Function used to toggle current direction of the space invaders.
+    /// </summary>
     public void ChangeDirection()
     {
         if (lastTimeDirectionChanged < 1) return;
@@ -68,7 +70,10 @@ public class SpaceInvader : GameplayObject
         StartCoroutine(Advance());
         lastTimeDirectionChanged = 0;
     }
-
+    /// <summary>
+    /// Coroutine used by function above.
+    /// </summary>
+    /// <returns>Coroutine, that changes direction of the space invaders</returns>
     IEnumerator Advance()
     {
         bool right = direction.x > 0;

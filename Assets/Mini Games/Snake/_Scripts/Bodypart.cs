@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Bodypart : MonoBehaviour
 {
     void OnTriggerEnter2D(Collider2D collider)
     {
-      GameObject.Find("GameManager").GetComponent<SnakeGameManager>().GameOver();
+        GameObject.Find("GameManager").GetComponent<SnakeGameManager>().GameOver();
     }
 }

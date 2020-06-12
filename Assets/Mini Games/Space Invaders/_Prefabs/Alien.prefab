@@ -144,8 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c83ebf6fcc94f43b4087b890f33434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.2
-  acceleration: 1.05
+  speed: 0.25
+  acceleration: 1.1
   shootProbabilty: 1
 --- !u!1001 &1031589052004545760
 PrefabInstance:

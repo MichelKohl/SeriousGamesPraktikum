@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Food : GameplayObject
 {
@@ -13,27 +11,30 @@ public class Food : GameplayObject
 
     void Awake()
     {
-      float maxX = 0, maxY = 0;
-      foreach(Transform borderTransform in borders.transform){
-        Vector3 position = borderTransform.position;
-        minX = Mathf.Min(minX, position.x);
-        minY = Mathf.Min(minY, position.y);
-        maxX = Mathf.Max(maxX, position.x);
-        maxY = Mathf.Max(maxY, position.y);
-      }
-      xUnits = (int) ((maxX - minX) / offset);
-      yUnits = (int) ((maxY - minY) / offset);
+        float maxX = 0, maxY = 0;
+        foreach(Transform borderTransform in borders.transform){
+            Vector3 position = borderTransform.position;
+            minX = Mathf.Min(minX, position.x);
+            minY = Mathf.Min(minY, position.y);
+            maxX = Mathf.Max(maxX, position.x);
+            maxY = Mathf.Max(maxY, position.y);
+        }
+        xUnits = (int) ((maxX - minX) / offset);
+        yUnits = (int) ((maxY - minY) / offset);
     }
     
     private void OnTriggerEnter2D(Collider2D collider){
-      transform.position = GetRandomPosition();
-      collider.gameObject.transform.parent.gameObject.GetComponent<Snake>().Eat();
-      manager.IncreaseScoreBy(points);
+        transform.position = GetRandomPosition();
+        collider.gameObject.transform.parent.gameObject.GetComponent<Snake>().Eat();
+        manager.IncreaseScoreBy(points);
     }
-
+    /// <summary>
+    /// Gets a random position for the food object to spawn in.
+    /// </summary>
+    /// <returns>Random position inside the game borders.</returns>
     private Vector3 GetRandomPosition()
     {
-      return new Vector3( minX + Mathf.FloorToInt(Random.Range(1, xUnits)) * offset,
-                          minY + Mathf.FloorToInt(Random.Range(1, yUnits)) * offset, 0);
+        return new Vector3( minX + Mathf.FloorToInt(Random.Range(1, xUnits)) * offset,
+            minY + Mathf.FloorToInt(Random.Range(1, yUnits)) * offset, 0);
     }
 }

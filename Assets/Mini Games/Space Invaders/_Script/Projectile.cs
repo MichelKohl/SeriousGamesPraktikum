@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
@@ -20,39 +18,47 @@ public class Projectile : MonoBehaviour
 
     void Awake()
     {
-      rb = GetComponent<Rigidbody2D>();
-      sr = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     void FixedUpdate()
     {
         timeAlive += Time.fixedDeltaTime;
-      rb.MovePosition(transform.position + transform.up * speed * Time.fixedDeltaTime);
-      if(timeAlive > timeToDie) {
-        pooler.AddProjectile(this);
-        Deactivate();
-      }
+        rb.MovePosition(transform.position + transform.up * speed * Time.fixedDeltaTime);
+        if(timeAlive > timeToDie) {
+            pooler.AddProjectile(this);
+            Deactivate();
+        }
     }
-
+    /// <summary>
+    /// Initialized projectile. Binds it to a projectile pooler.
+    /// </summary>
+    /// <param name="pooler">Projectile pooler the projectile should be bound to</param>
     public void Init(ProjectilePooler pooler)
     {
-      this.pooler = pooler;
+        this.pooler = pooler;
     }
-
+    /// <summary>
+    /// Activates a projectile.
+    /// </summary>
+    /// <param name="position">Position where the projectile should be fired from</param>
     public void Activate(Vector3 position)
     {
-      rb.simulated = true;
-      sr.enabled = true;
-      transform.position = verticalOffset != 0 ? position + new Vector3(0, verticalOffset, 0) : position;
-      timeAlive = 0;
+        rb.simulated = true;
+        sr.enabled = true;
+        transform.position = verticalOffset != 0 ? position + new Vector3(0, verticalOffset, 0) : position;
+        timeAlive = 0;
     }
-
+    /// <summary>
+    /// Deactivates a projectile. Should be called if a collision occured.
+    /// </summary>
     public void Deactivate()
     {
-      rb.simulated = false;
-      sr.enabled = false;
-      transform.position = new Vector3(0, 0, 200);
-      pooler.AddProjectile(this);
-      gameObject.SetActive(false);
+        rb.simulated = false;
+        sr.enabled = false;
+        transform.position = new Vector3(0, 0, 200);
+        pooler.AddProjectile(this);
+        gameObject.SetActive(false);
     }
 }
