@@ -584,7 +584,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 9323a6c37ab7cee46aff0f07c38607a9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2438,7 +2438,7 @@ MonoBehaviour:
   joystick: {fileID: 1242337937}
   speed: 4
   pooler: {fileID: 112217069}
-  reloadTime: 0.5
+  reloadTime: 0.6
   knob: {fileID: 705368940}
 --- !u!1001 &841758507
 PrefabInstance:
@@ -7592,7 +7592,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: b4b46f397c9379144b897273484d1510, type: 3}
   m_Color: {r: 0.41709682, g: 0.82664853, b: 0.9716981, a: 0.85882354}
   m_FlipX: 0
