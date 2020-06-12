@@ -67,6 +67,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyProjectile
       objectReference: {fileID: 0}
+    - target: {fileID: 8754805558776314044, guid: 2f039b027c0ca434a92ab2c61ea1151e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy Projectile
+      objectReference: {fileID: 0}
     - target: {fileID: 8754805558776314046, guid: 2f039b027c0ca434a92ab2c61ea1151e,
         type: 3}
       propertyPath: m_Color.g
@@ -76,6 +81,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.b
       value: 0.031372547
+      objectReference: {fileID: 0}
+    - target: {fileID: 8754805558776314047, guid: 2f039b027c0ca434a92ab2c61ea1151e,
+        type: 3}
+      propertyPath: verticalOffset
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8754805558776314047, guid: 2f039b027c0ca434a92ab2c61ea1151e,
+        type: 3}
+      propertyPath: isEnemyProjectile
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8754805558776314047, guid: 2f039b027c0ca434a92ab2c61ea1151e,
+        type: 3}
+      propertyPath: speed
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f039b027c0ca434a92ab2c61ea1151e, type: 3}

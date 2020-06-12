@@ -6,6 +6,7 @@ public class ProjectilePooler : MonoBehaviour
 {
     [SerializeField] private Projectile prefab;
     [SerializeField] private Transform shooterTransform;
+    [SerializeField] private bool isEnemyPooler;
 
     private List<Projectile> pooler = new List<Projectile>();
 
@@ -20,10 +21,10 @@ public class ProjectilePooler : MonoBehaviour
           projectile.Activate(shooterTransform.position);
         } catch (Exception)
         {
-          Projectile newProjectile = Instantiate(prefab, shooterTransform.position,
-            shooterTransform.rotation, transform);
-          newProjectile.Init(this);
-          newProjectile.Activate(shooterTransform.position);
+            Quaternion rotation = isEnemyPooler ? Quaternion.Euler(0, 0, 180) : shooterTransform.rotation;
+            Projectile newProjectile = Instantiate(prefab, shooterTransform.position, rotation, transform);
+            newProjectile.Init(this);
+            newProjectile.Activate(shooterTransform.position);
         }
     }
 

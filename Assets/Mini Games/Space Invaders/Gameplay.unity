@@ -365,6 +365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 8754805558776314047, guid: 2f039b027c0ca434a92ab2c61ea1151e, type: 3}
   shooterTransform: {fileID: 240406174}
+  isEnemyPooler: 0
 --- !u!1 &118467372
 GameObject:
   m_ObjectHideFlags: 0
@@ -1681,7 +1682,7 @@ GameObject:
   - component: {fileID: 523215556}
   m_Layer: 0
   m_Name: Game Over Border
-  m_TagString: Untagged
+  m_TagString: Game Over
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4406,6 +4407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 4132345572927359032, guid: e2344d027f506476b851a5dad17d06a7, type: 3}
   shooterTransform: {fileID: 0}
+  isEnemyPooler: 1
 --- !u!1 &1318138611
 GameObject:
   m_ObjectHideFlags: 0

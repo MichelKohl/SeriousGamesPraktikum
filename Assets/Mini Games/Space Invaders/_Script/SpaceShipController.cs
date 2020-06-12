@@ -18,6 +18,16 @@ public class SpaceShipController : GameplayObject
       lastTimeShot = reloadTime;
     }
 
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.CompareTag("Enemy Projectile"))
+        {
+            collider.gameObject.GetComponent<Projectile>().Deactivate();
+            transform.Find("Explosion").GetComponent<Explosion>().Explode();
+            manager.GameOver();
+        }
+    }
+
     protected override void DoFixedUpdate()
     {
       Vector3 position = transform.position;

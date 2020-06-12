@@ -26,7 +26,7 @@ public class Projectile : MonoBehaviour
 
     void FixedUpdate()
     {
-      timeAlive += Time.fixedDeltaTime;
+        timeAlive += Time.fixedDeltaTime;
       rb.MovePosition(transform.position + transform.up * speed * Time.fixedDeltaTime);
       if(timeAlive > timeToDie) {
         pooler.AddProjectile(this);
