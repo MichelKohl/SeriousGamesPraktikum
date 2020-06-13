@@ -13,6 +13,7 @@ public class SpaceInvader : GameplayObject
     private ProjectilePooler pooler;
     private float lastTimeShot;
     private float lastTimeDirectionChanged;
+    private int points;
 
     void Awake()
     {
@@ -21,6 +22,10 @@ public class SpaceInvader : GameplayObject
         lastTimeShot = Random.Range(0, 1);
         lastTimeDirectionChanged = 0;
         pooler = GameObject.Find("Projectile Pooler").transform.Find("Enemies").GetComponent<ProjectilePooler>();
+
+        int currentLevel = PlayerPrefs.GetInt("Space Invaders Level", 1);
+        points = 100 * currentLevel;
+        acceleration += 0.05f * currentLevel;
     }
 
     protected override void DoFixedUpdate()
@@ -51,7 +56,8 @@ public class SpaceInvader : GameplayObject
             case "Projectile":
                 collider.gameObject.GetComponent<Projectile>().Deactivate();
                 transform.Find("Explosion").GetComponent<Explosion>().Explode();
-                manager.IncreaseScoreBy(100);
+                manager.IncreaseScoreBy(points);
+                ((SpaceInvaderGameManager)manager).IncreaseKillCount();
             break;
             case "Game Over":
                 manager.GameOver();

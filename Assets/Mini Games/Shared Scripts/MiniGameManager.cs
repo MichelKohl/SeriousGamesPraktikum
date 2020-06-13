@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 
 public class MiniGameManager : MonoBehaviour
-{
+{   // TODO delete all player prefs on app start.
     [SerializeField] protected string gameName;
     [SerializeField] protected TextMeshProUGUI scoreLabel;
 
@@ -16,6 +16,7 @@ public class MiniGameManager : MonoBehaviour
     /// Is called after a change of game state (used to toggle UI etc.).
     /// </summary>
     protected virtual void InitGameState(){}
+    protected virtual void DoUpdate(){}
     
     protected enum GameState{
       Start,
@@ -95,6 +96,11 @@ public class MiniGameManager : MonoBehaviour
     {
         score += points;
     }
+
+    public int GetScore()
+    {
+        return score;
+    }
     /// <summary>
     /// Coroutine used to make a text blink (by fading in and out).
     /// </summary>
@@ -144,5 +150,6 @@ public class MiniGameManager : MonoBehaviour
             InitGameState();
             initGameState = false;
         } else scoreLabel.text = $"{score}";
+        DoUpdate();
     }
 }
