@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/InitialProfileScreen.unity
     guid: cc8befcbe8a838847a944b34c35ca6ee
+  - enabled: 1
+    path: Assets/Mini Games/Space Invaders/Gameplay.unity
+    guid: a1af60f009a4a4e9da61deab7842b388
   m_configObjects: {}
