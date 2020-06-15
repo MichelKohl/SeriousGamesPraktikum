@@ -355,6 +355,8 @@ MonoBehaviour:
   profiletypeText: {fileID: 104686049}
   profilenameText: {fileID: 1127325287}
   coinsText: {fileID: 279882080}
+  totalPlayTimeText: {fileID: 5858054719010872067}
+  distanceTravelledText: {fileID: 1308640343}
   notificationsToggle: {fileID: 50689937}
   vibrationsToggle: {fileID: 502775483}
   changeTypeButton: {fileID: 1264477851}
@@ -809,6 +811,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1308640343 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5858054719540754942, guid: b113f4b5f92c60047bbffbcf42b47f86,
+    type: 3}
+  m_PrefabInstance: {fileID: 5858054719010872066}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1316074769
@@ -3674,3 +3688,15 @@ PrefabInstance:
       objectReference: {fileID: 173385201}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b113f4b5f92c60047bbffbcf42b47f86, type: 3}
+--- !u!114 &5858054719010872067 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5858054718669804117, guid: b113f4b5f92c60047bbffbcf42b47f86,
+    type: 3}
+  m_PrefabInstance: {fileID: 5858054719010872066}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -34,12 +34,24 @@ public class Profile
     /// </summary>
     private int coins;
 
+    /// <summary>
+    /// The total amount of time played the game in minutes.
+    /// </summary>
+    private float playTime;
+
+    /// <summary>
+    /// The total amount of distance travelled while the game was played in kilometers.
+    /// </summary>
+    private double distanceTravelled;
+
     public Profile(string name, Profiletype type, bool notifications, bool vibrations) {
         this.name = name;
         this.type = type;
         this.notifications = notifications;
         this.vibrations = vibrations;
         this.coins = 0;
+        this.playTime = 0;
+        this.distanceTravelled = 0;
     }
 
     public void setProfileName(string name) {
@@ -80,6 +92,22 @@ public class Profile
 
     public int getCoins() {
         return this.coins;
+    }
+
+    public void setPlayTime(float playTime) {
+        this.playTime = playTime;
+    }
+
+    public float getPlayTime() {
+        return this.playTime;
+    }
+
+    public void setDistanceTravelled(double distance) {
+        this.distanceTravelled = distance;
+    }
+
+    public double getDistanceTravelled() {
+        return this.distanceTravelled;
     }
 
 }
