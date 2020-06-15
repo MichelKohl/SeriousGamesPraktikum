@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class GameplayObject : MonoBehaviour
 {
@@ -9,17 +10,26 @@ public class GameplayObject : MonoBehaviour
     protected virtual void DoUpdate(){}
     protected virtual void DoFixedUpdate(){}
 
-    void Start()
-    {
-        manager = GameObject.Find("Game Manager").GetComponent<MiniGameManager>();
-    }
-
     void Update()
     {
-        if (manager.IsGameplay()) DoUpdate();
+        try
+        {
+            if (manager.IsGameplay()) DoUpdate();
+        }
+        catch (Exception)
+        {
+            manager = GameObject.Find("Game Manager").GetComponent<MiniGameManager>();
+        }
     }
 
     void FixedUpdate(){
-        if (manager.IsGameplay()) DoFixedUpdate();
+        try
+        {
+            if (manager.IsGameplay()) DoFixedUpdate();
+        }
+        catch (Exception)
+        {
+            manager = GameObject.Find("Game Manager").GetComponent<MiniGameManager>();
+        }
     }
 }
