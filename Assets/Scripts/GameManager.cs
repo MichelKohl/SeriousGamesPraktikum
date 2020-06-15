@@ -60,11 +60,6 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void LoadMiniGames() 
     {
-        Debug.Log("I am definitiley called");
-
-        if (Resources.Load<Sprite>("Space Invaders")) {
-            Debug.Log("it works bro");
-        }
         miniGames.Add(
             new MiniGame(
                 "SpaceInvaders",
@@ -77,7 +72,7 @@ public class GameManager : MonoBehaviour
             new MiniGame(
                 "Snake",
                 "Mini Games/Snake/Gameplay",
-                Resources.Load<Sprite>("Images/Ressources/Snake")
+                Resources.Load<Sprite>("Snake")
             )
         );
     }
