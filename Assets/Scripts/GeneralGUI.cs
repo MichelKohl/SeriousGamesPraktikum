@@ -77,7 +77,6 @@ public class GeneralGUI : MonoBehaviour
             CheapRuler cr = new CheapRuler(old_loc_array[1], CheapRulerUnits.Kilometers);
             GameManager.INSTANCE.profile.setDistanceTravelled(GameManager.INSTANCE.profile.getDistanceTravelled() + cr.Distance(old_loc_array, new_loc_array));
 
-            distanceTravelledText.SetText(GameManager.INSTANCE.profile.getDistanceTravelled().ToString("0.000") + " km");
             locationUpdated = false;
         }
     }
