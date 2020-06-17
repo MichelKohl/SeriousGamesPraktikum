@@ -13,7 +13,8 @@ public class SpaceShipController : GameplayObject
 
     void Awake()
     {
-      lastTimeShot = reloadTime;
+        Debug.Log(manager != null);
+        lastTimeShot = reloadTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -32,6 +33,7 @@ public class SpaceShipController : GameplayObject
       GetComponent<Rigidbody2D>().MovePosition(new Vector2(position.x, position.y) +
         new Vector2(joystick.Horizontal, 0) * speed * Time.fixedDeltaTime);
       lastTimeShot += Time.fixedDeltaTime;
+        Debug.Log(manager != null);
     }
     /// <summary>
     /// Shoots a projectile by getting it from a designated projectile pool.

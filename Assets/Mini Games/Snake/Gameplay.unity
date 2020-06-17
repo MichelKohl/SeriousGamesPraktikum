@@ -2850,6 +2850,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4279cd7a3c0c40eb84e908bbff9d59e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 1705010298}
   joystick: {fileID: 468567882}
   movement: 2
   startUpdateFrequ: 1.2
@@ -3244,5 +3245,10 @@ PrefabInstance:
       propertyPath: offset
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8062491625381525150, guid: d413c2f3a9eeb4815938d6997115aabc,
+        type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 1705010298}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d413c2f3a9eeb4815938d6997115aabc, type: 3}
