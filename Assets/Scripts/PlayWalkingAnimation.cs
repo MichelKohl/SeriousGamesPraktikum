@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayWalkingAnimation : MonoBehaviour
 {
     [SerializeField] private Animator AnimationController;
+    [SerializeField] private float InitalWaitForWalking = 2.0f;
+    [SerializeField] private float UpdateWalking = 0.5f;
     private GameObject player = null;
     private Vector3 lastPosition;
 
@@ -16,9 +18,12 @@ public class PlayWalkingAnimation : MonoBehaviour
             player = GameObject.FindGameObjectsWithTag("Player")[0];
             lastPosition = player.transform.position;
         }
-        InvokeRepeating("checkWalk", 2.0f, 1.0f);
+        InvokeRepeating("checkWalk", InitalWaitForWalking, UpdateWalking);
     }
 
+    /// <summary>
+    /// Checks if the player location has changed to trigger the walking animation
+    /// </summary>
     void checkWalk()
     {
         if (Vector3.Distance(lastPosition, player.transform.position) > Vector3.kEpsilon)
