@@ -149,7 +149,6 @@ public class MiniGameManager : MonoBehaviour
         if(initGameState) {
             InitGameState();
             initGameState = false;
-            Debug.Log($"{state}");
         } else scoreLabel.text = $"{score}";
         DoUpdate();
     }

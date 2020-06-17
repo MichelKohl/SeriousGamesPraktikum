@@ -33,7 +33,6 @@ public class SpaceShipController : GameplayObject
       GetComponent<Rigidbody2D>().MovePosition(new Vector2(position.x, position.y) +
         new Vector2(joystick.Horizontal, 0) * speed * Time.fixedDeltaTime);
       lastTimeShot += Time.fixedDeltaTime;
-        Debug.Log(manager != null);
     }
     /// <summary>
     /// Shoots a projectile by getting it from a designated projectile pool.
