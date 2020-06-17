@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayWalkingAnimation : MonoBehaviour
 {
     [SerializeField] private Animator AnimationController;
-    [SerializeField] private float InitalWaitForWalking = 2.0f;
+    [SerializeField] private float InitalWaitForWalking = 0.0f;
     [SerializeField] private float UpdateWalking = 0.5f;
     private GameObject player = null;
     private Vector3 lastPosition;
