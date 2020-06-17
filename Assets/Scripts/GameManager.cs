@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using UnityEngine;
@@ -18,12 +17,24 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public Profile profile = null;
 
+    /// <summary>
+    /// GamePopUp is a reference to the game pop up screen
+    /// </summary>
+    public GameObject GamePopUp;
+
+    /// <summary>
+    /// List of mini games that we have playable
+    /// </summary>
+    public List<MiniGame> miniGames = new List<MiniGame>();
+
     private void Awake()
     {
-        if (INSTANCE == null) {
-            INSTANCE = this;
+        if (INSTANCE != null && INSTANCE != this)
+        {
+            Destroy(gameObject);
         }
-        DontDestroyOnLoad(this);
+        else INSTANCE = this;
+        
     }
 
     // Start is called before the first frame update
@@ -35,12 +46,50 @@ public class GameManager : MonoBehaviour
             LoadProfile();
         }
         else SceneManager.LoadScene("InitialProfileScreen");
+
+        LoadMiniGames();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    /// <summary>
+    /// LoadMiniGames populates a list of the available mini games
+    /// which is later used for game pop ups and scene transtitions
+    /// </summary>
+    public void LoadMiniGames() 
+    {
+        miniGames.Add(
+            new MiniGame(
+                "SpaceInvaders",
+                "Mini Games/Space Invaders/Gameplay",
+                Resources.Load<Sprite>("Space Invaders")
+            )
+        );
+
+        miniGames.Add(
+            new MiniGame(
+                "Snake",
+                "Mini Games/Snake/Gameplay",
+                Resources.Load<Sprite>("Snake")
+            )
+        );
+    }
+
+    /// <summary>
+    /// GetRandomMiniGame selects a mini game from the 
+    /// mini game list at random and returns it
+    /// </summary>
+    /// <returns>A MiniGame</returns>
+    public MiniGame GetRandomMiniGame() 
+    {
+        if (miniGames.Count < 1) return null;
+
+        var index = Random.Range(0, this.miniGames.Count);
+        return miniGames[index];
     }
 
     /// <summary>

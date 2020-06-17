@@ -86,7 +86,7 @@ public class MiniGameManager : MonoBehaviour
     /// </summary>
     public void ExitGame()
     {
-        //TODO
+        SceneManager.LoadScene("Scenes/DefaultScreen");
     }
     /// <summary>
     /// Increases current score.

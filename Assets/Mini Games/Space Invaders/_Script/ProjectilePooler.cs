@@ -20,6 +20,11 @@ public class ProjectilePooler : MonoBehaviour
         try
         {
             Projectile projectile = pooler[0];
+            if (projectile.gameObject.activeSelf)
+            {
+                ActivateProjectile(shooter);
+                return;
+            }
             pooler.RemoveAt(0);
             projectile.gameObject.SetActive(true);
             projectile.Activate(shooterTransform.position);
