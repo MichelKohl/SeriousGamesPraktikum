@@ -13,7 +13,8 @@ public class SpaceShipController : GameplayObject
 
     void Awake()
     {
-      lastTimeShot = reloadTime;
+        Debug.Log(manager != null);
+        lastTimeShot = reloadTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collider)

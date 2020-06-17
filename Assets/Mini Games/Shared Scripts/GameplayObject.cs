@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GameplayObject : MonoBehaviour
 {
-    protected MiniGameManager manager;
+    [SerializeField] protected MiniGameManager manager;
     /// <summary>
     /// Update methods that need to be implemented by the inheriting class
     /// </summary>
@@ -12,24 +12,10 @@ public class GameplayObject : MonoBehaviour
 
     void Update()
     {
-        try
-        {
-            if (manager.IsGameplay()) DoUpdate();
-        }
-        catch (Exception)
-        {
-            manager = GameObject.Find("Game Manager").GetComponent<MiniGameManager>();
-        }
+       if (manager.IsGameplay()) DoUpdate();
     }
 
     void FixedUpdate(){
-        try
-        {
-            if (manager.IsGameplay()) DoFixedUpdate();
-        }
-        catch (Exception)
-        {
-            manager = GameObject.Find("Game Manager").GetComponent<MiniGameManager>();
-        }
+       if (manager.IsGameplay()) DoFixedUpdate();
     }
 }
