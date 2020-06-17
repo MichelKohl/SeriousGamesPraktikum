@@ -33,7 +33,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        else INSTANCE = this;
+        else
+        {
+            INSTANCE = this;
+            DontDestroyOnLoad(gameObject);
+        }
         
     }
 
