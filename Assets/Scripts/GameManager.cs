@@ -29,10 +29,12 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (INSTANCE == null) {
-            INSTANCE = this;
+        if (INSTANCE != null && INSTANCE != this)
+        {
+            Destroy(gameObject);
         }
-        DontDestroyOnLoad(this);
+        else INSTANCE = this;
+        
     }
 
     // Start is called before the first frame update
