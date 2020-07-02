@@ -61,24 +61,6 @@ public class GeneralGUI : MonoBehaviour
                 setProfileInfo();
             }
         }
-
-        if (!locationUpdated && GameObject.Find("LocationProvider").GetComponent<LocationProviderFactory>().DefaultLocationProvider.CurrentLocation.LatitudeLongitude.x != 0
-                && GameObject.Find("LocationProvider").GetComponent<LocationProviderFactory>().DefaultLocationProvider.CurrentLocation.LatitudeLongitude.y != 0)
-        {
-            Mapbox.Utils.Vector2d old_loc = GameObject.Find("LocationProvider").GetComponent<LocationProviderFactory>().DefaultLocationProvider.CurrentLocation.LatitudeLongitude;
-            old_loc_array = old_loc.ToArray();
-            locationUpdated = true;
-        }
-
-        if (GameObject.Find("LocationProvider").GetComponent<LocationProviderFactory>().DefaultLocationProvider.CurrentLocation.IsLocationUpdated)
-        {
-            Mapbox.Utils.Vector2d new_loc = GameObject.Find("LocationProvider").GetComponent<LocationProviderFactory>().DefaultLocationProvider.CurrentLocation.LatitudeLongitude;
-            double[] new_loc_array = new_loc.ToArray();
-            CheapRuler cr = new CheapRuler(old_loc_array[1], CheapRulerUnits.Kilometers);
-            GameManager.INSTANCE.profile.setDistanceTraveled(GameManager.INSTANCE.profile.getDistanceTraveled() + cr.Distance(old_loc_array, new_loc_array));
-
-            locationUpdated = false;
-        }
     }
 
     /// <summary>
