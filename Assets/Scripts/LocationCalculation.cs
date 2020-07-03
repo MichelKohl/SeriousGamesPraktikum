@@ -6,27 +6,38 @@ using Mapbox.CheapRulerCs;
 using System.Net.Http;
 using System.IO;
 using Mapbox.Unity;
+using TMPro;
+using System.Text;
+using System.Threading.Tasks;
 
 /// <summary>
-/// This class handles all calculations, that are bounded by the players location.
+/// This class handles all calculations, that are bounded to the players location.
 /// </summary>
 public class LocationCalculation : MonoBehaviour
 {
     private bool locationUpdated = false;
     double[] old_loc_array;
+    public Mapbox.Utils.Vector2d old_loc;
 
-    HttpClient client = new HttpClient();
+    MapboxConfiguration mcTest;
+    Mapbox.Platform.FileSource fsTest;
+    Mapbox.Geocoding.Geocoder geocoderTest;
 
+    private void Start()
+    {
+        mcTest = new MapboxConfiguration();
+        fsTest = new Mapbox.Platform.FileSource(mcTest.GetMapsSkuToken, "pk.eyJ1IjoiZmxlZGVybWF1c2xvY2hlciIsImEiOiJjazlrNWh4b3owMjZpM2lteHhoaDRvcm1iIn0.zBKAX3s9ia8a6IgYsVU2EQ");
+        geocoderTest = new Mapbox.Geocoding.Geocoder(fsTest);
+        
+        InvokeRepeating("requestCity", 1f, 10f);
+    }
 
     private void Update()
     {
-        //    requestCityAsync();
-        grofAsync();
-
         if (!locationUpdated && GameObject.Find("LocationProvider").GetComponent<LocationProviderFactory>().DefaultLocationProvider.CurrentLocation.LatitudeLongitude.x != 0
                && GameObject.Find("LocationProvider").GetComponent<LocationProviderFactory>().DefaultLocationProvider.CurrentLocation.LatitudeLongitude.y != 0)
         {
-            Mapbox.Utils.Vector2d old_loc = GameObject.Find("LocationProvider").GetComponent<LocationProviderFactory>().DefaultLocationProvider.CurrentLocation.LatitudeLongitude;
+            old_loc = GameObject.Find("LocationProvider").GetComponent<LocationProviderFactory>().DefaultLocationProvider.CurrentLocation.LatitudeLongitude;
             old_loc_array = old_loc.ToArray();
             locationUpdated = true;
         }
@@ -42,49 +53,50 @@ public class LocationCalculation : MonoBehaviour
         }
     }
 
-    private async System.Threading.Tasks.Task requestCityAsync()
+    private void requestCity()
     {
-        FormUrlEncodedContent requestContent = new FormUrlEncodedContent(new[] {
-            new KeyValuePair<string, string>("types", "place"), new KeyValuePair<string, string>("access_token", "eyJ1IjoiZmxlZGVybWF1c2xvY2hlciIsImEiOiJjazlrNWh4b3owMjZpM2lteHhoaDRvcm1iIn0")});
-
-        HttpResponseMessage response = await client.PostAsync("https://api.mapbox.com/geocoding/v5/mapbox.places/-73.989,40.733.json", requestContent);
-
-        HttpContent responseContent = response.Content;
-
-        using (var reader = new StreamReader(await responseContent.ReadAsStreamAsync()))
-        {
-            Debug.Log(await reader.ReadToEndAsync());
-        }
+        Mapbox.Geocoding.ReverseGeocodeResource rgr = new Mapbox.Geocoding.ReverseGeocodeResource(old_loc);
+        geocoderTest.Geocode(rgr, s => MyCallback(s));
     }
 
-    private async System.Threading.Tasks.Task grofAsync() {
-        using (var httpClient = new HttpClient())
-        {
-            using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://api.mapbox.com/geocoding/v5/mapbox.places/-73.989,40.733.json?types=place&access_token=pk.eyJ1IjoiZmxlZGVybWF1c2xvY2hlciIsImEiOiJjazlrNWh4b3owMjZpM2lteHhoaDRvcm1iIn0.zBKAX3s9ia8a6IgYsVU2EQ"))
-            {
-                var response = await httpClient.SendAsync(request);
-                HttpContent responseContent = response.Content;
+    private Mapbox.Geocoding.ReverseGeocodeResponse MyCallback(Mapbox.Geocoding.ReverseGeocodeResponse data) {
+        string address = data.Features[2].PlaceName;
 
-                Mapbox.Utils.Vector2d location = GameObject.Find("LocationProvider").GetComponent<LocationProviderFactory>().DefaultLocationProvider.CurrentLocation.LatitudeLongitude;
-                Mapbox.Geocoding.ReverseGeocodeResource hallo = new Mapbox.Geocoding.ReverseGeocodeResource(location);
-                Mapbox.Geocoding.ReverseGeocodeResponse response2 = new Mapbox.Geocoding.ReverseGeocodeResponse();
-                Mapbox.Unity.MapboxConfiguration mc = new MapboxConfiguration();
-                Mapbox.Platform.FileSource fs = new Mapbox.Platform.FileSource(mc.GetMapsSkuToken, "pk.eyJ1IjoiZmxlZGVybWF1c2xvY2hlciIsImEiOiJjazlrNWh4b3owMjZpM2lteHhoaDRvcm1iIn0.zBKAX3s9ia8a6IgYsVU2EQ");
-                var geocoder = new Mapbox.Geocoding.Geocoder(fs);
-                
-
-
-
-                using (var reader = new StreamReader(await responseContent.ReadAsStreamAsync()))
-                {
-                    // Write the output.
-                    Mapbox.Geocoding.GeocodeResponse res = geocoder.Deserialize<Mapbox.Geocoding.ReverseGeocodeResponse>(await reader.ReadToEndAsync());
-                    Debug.Log(res.Features[0].PlaceName);
-                  
-               
-                    
-                }
-            }
+        //Format Address from {City, Region, Country} in {City, Country}
+        char[] temp = address.ToCharArray();
+        StringBuilder citysb = new StringBuilder();
+        int i = 0;
+        while (temp[i] != ',') {
+            citysb.Append(temp[i]);
+            i++;
         }
+        string city = citysb.ToString();
+
+        bool firstCommaDetected = false;
+        bool secondCommaDetected = false;
+        StringBuilder countrysb = new StringBuilder(); 
+
+        i = 0;
+        while (!secondCommaDetected) {
+            if (temp[i] == ',' && firstCommaDetected)
+            {
+                secondCommaDetected = true;
+                i++;
+            }
+
+            else if (temp[i] == ',' && !firstCommaDetected)
+            {
+                firstCommaDetected = true;
+                i++;
+            }
+            else i++;
+        }
+        for (int j = i + 1; j < temp.Length; j++) {
+            countrysb.Append(temp[j]);
+        }
+        string country = countrysb.ToString();
+
+        GameObject.Find("Canvas").GetComponent<GeneralGUI>().locationTagText.SetText(city + ", " + country);
+        return data;
     }
 }

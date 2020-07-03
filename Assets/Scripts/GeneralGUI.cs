@@ -35,6 +35,8 @@ public class GeneralGUI : MonoBehaviour
     private Button changeTypeButton;
     [SerializeField]
     private Button changeNameButton;
+    [SerializeField]
+    public TextMeshProUGUI locationTagText;
 
     private TouchScreenKeyboard keyboard;
     private bool changeName = false;
