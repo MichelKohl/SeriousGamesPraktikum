@@ -3,32 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mapbox.Unity.Location;
 using Mapbox.CheapRulerCs;
-using System.Net.Http;
-using System.IO;
 using Mapbox.Unity;
-using TMPro;
 using System.Text;
-using System.Threading.Tasks;
 
 /// <summary>
 /// This class handles all calculations, that are bounded to the players location.
 /// </summary>
 public class LocationCalculation : MonoBehaviour
-{
+{   
+    /// <summary>
+    /// A bool field which holds the information, if the gps location was recently updated or not.
+    /// </summary>
     private bool locationUpdated = false;
-    double[] old_loc_array;
+
+    /// <summary>
+    /// A Vector2d, which holds the second newest lat,long position of the player provided by the locationProvider.
+    /// </summary>
     public Mapbox.Utils.Vector2d old_loc;
 
-    MapboxConfiguration mcTest;
-    Mapbox.Platform.FileSource fsTest;
-    Mapbox.Geocoding.Geocoder geocoderTest;
+    /// <summary>
+    /// A double array with the length of 2, which holds the second newest lat,long position of the player converted from the Vector2d old_loc.
+    /// </summary>
+    double[] old_loc_array;
+
+    /// <summary>
+    /// The geocoder used for reverse geocoding.
+    /// </summary>
+    Mapbox.Geocoding.Geocoder geocoder;
 
     private void Start()
     {
-        mcTest = new MapboxConfiguration();
-        fsTest = new Mapbox.Platform.FileSource(mcTest.GetMapsSkuToken, "pk.eyJ1IjoiZmxlZGVybWF1c2xvY2hlciIsImEiOiJjazlrNWh4b3owMjZpM2lteHhoaDRvcm1iIn0.zBKAX3s9ia8a6IgYsVU2EQ");
-        geocoderTest = new Mapbox.Geocoding.Geocoder(fsTest);
+        MapboxConfiguration mc = new MapboxConfiguration();
+        Mapbox.Platform.FileSource fs = new Mapbox.Platform.FileSource(mc.GetMapsSkuToken, "pk.eyJ1IjoiZmxlZGVybWF1c2xvY2hlciIsImEiOiJjazlrNWh4b3owMjZpM2lteHhoaDRvcm1iIn0.zBKAX3s9ia8a6IgYsVU2EQ");
+        geocoder = new Mapbox.Geocoding.Geocoder(fs);
         
+        //Update rate of reverse geocoding should be modified
         InvokeRepeating("requestCity", 1f, 10f);
     }
 
@@ -38,7 +47,7 @@ public class LocationCalculation : MonoBehaviour
                && GameObject.Find("LocationProvider").GetComponent<LocationProviderFactory>().DefaultLocationProvider.CurrentLocation.LatitudeLongitude.y != 0)
         {
             old_loc = GameObject.Find("LocationProvider").GetComponent<LocationProviderFactory>().DefaultLocationProvider.CurrentLocation.LatitudeLongitude;
-            old_loc_array = old_loc.ToArray();
+            double[] old_loc_array = old_loc.ToArray();
             locationUpdated = true;
         }
 
@@ -53,13 +62,22 @@ public class LocationCalculation : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This method executes a reverse geocoding by the second newest location od the player. After getting the result, a callback method
+    /// will be called together with the data s.
+    /// </summary>
     private void requestCity()
     {
         Mapbox.Geocoding.ReverseGeocodeResource rgr = new Mapbox.Geocoding.ReverseGeocodeResource(old_loc);
-        geocoderTest.Geocode(rgr, s => MyCallback(s));
+        geocoder.Geocode(rgr, s => requestCityCallback(s));
     }
 
-    private Mapbox.Geocoding.ReverseGeocodeResponse MyCallback(Mapbox.Geocoding.ReverseGeocodeResponse data) {
+    /// <summary>
+    /// This callback method formats the received data.
+    /// </summary>
+    /// <param name="data">the data received from the reverse geocoding</param>
+    /// <returns>The reverse geocode response of the reverse geocode request</returns>
+    private Mapbox.Geocoding.ReverseGeocodeResponse requestCityCallback(Mapbox.Geocoding.ReverseGeocodeResponse data) {
         string address = data.Features[2].PlaceName;
 
         //Format Address from {City, Region, Country} in {City, Country}
