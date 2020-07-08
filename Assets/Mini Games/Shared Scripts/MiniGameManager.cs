@@ -2,15 +2,23 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Collections.Generic;
+using static Achievement;
 
 public class MiniGameManager : MonoBehaviour
 {   // TODO delete all player prefs on app start.
     [SerializeField] protected string gameName;
     [SerializeField] protected TextMeshProUGUI scoreLabel;
+    [SerializeField] protected Achievement[] achievements;
+
+    private Dictionary<string, int> observableInts = new Dictionary<string, int>();
+    private Dictionary<string, float> observableFloats = new Dictionary<string, float>();
+    private Dictionary<string, bool> observableBools = new Dictionary<string, bool>();
 
     protected GameState state;
-    private int score;
     private bool initGameState;
+    public int Score { get => observableInts["score"]; set => observableInts["score"] = value; }
+
     /// <summary>
     /// Initializes a gamestate. Should be implemented by inheriting class.
     /// Is called after a change of game state (used to toggle UI etc.).
@@ -48,7 +56,7 @@ public class MiniGameManager : MonoBehaviour
         initGameState = true;
         // save highscore
         PlayerPrefs.SetInt($"{gameName} Score",
-         Mathf.Max(PlayerPrefs.GetInt($"{gameName} Score", 0), score));
+         Mathf.Max(PlayerPrefs.GetInt($"{gameName} Score", 0), Score));
     }
    /// <summary>
    /// Returns whether current state is "Start Menu".
@@ -89,19 +97,6 @@ public class MiniGameManager : MonoBehaviour
         SceneManager.LoadScene("Scenes/DefaultScreen");
     }
     /// <summary>
-    /// Increases current score.
-    /// </summary>
-    /// <param name="points">Points by which the score is increased.</param>
-    public void IncreaseScoreBy(int points)
-    {
-        score += points;
-    }
-
-    public int GetScore()
-    {
-        return score;
-    }
-    /// <summary>
     /// Coroutine used to make a text blink (by fading in and out).
     /// </summary>
     /// <param name="text">UI text element to make blink</param>
@@ -135,12 +130,126 @@ public class MiniGameManager : MonoBehaviour
         }
     }
 
+    protected int ObservableInt(string name)
+    {
+        return observableInts[name];
+    }
+
+    protected void ObservableInt(string name, int value)
+    {
+        observableInts[name] = value;
+    }
+
+    protected float ObservableFloat(string name)
+    {
+        return observableFloats[name];
+    }
+
+    protected void ObservableFloat(string name, float value)
+    {
+        observableFloats[name] = value;
+    }
+
+    protected bool ObservableBool(string name)
+    {
+        return observableBools[name];
+    }
+
+    protected void ObservableBool(string name, bool value)
+    {
+        observableBools[name] = value;
+    }
+
+    public List<string> GetAllObservablesNames()
+    {
+        List<string> list = new List<string>();
+        foreach (string key in observableInts.Keys)     list.Add($"{key}|integer");
+        foreach (string key in observableFloats.Keys)   list.Add($"{key}|float");
+        foreach (string key in observableBools.Keys)    list.Add($"{key}|boolean");
+        return list;
+    }
+
+    public virtual void InitializeObservables()
+    {
+        Score = 0;
+    }
+
+    private void CheckAchievements()
+    {
+        foreach (Achievement achievement in achievements)
+        {
+            bool achieved = true;
+            foreach (Condition condition in achievement.conditions)
+            {
+                switch (condition.varType)
+                {
+                    case VarType.Integer:
+                        if(!observableInts.ContainsKey(condition.variableName))
+                            Debug.Log($"{condition.variableName} is not an observable integer variable.");
+                        switch (condition.condition)
+                        {
+                            case Conditional.IsLessThan:
+                                achieved = observableInts[condition.variableName] < int.Parse(condition.value);
+                                break;
+                            case Conditional.IsBiggerThan:
+                                achieved = observableInts[condition.variableName] > int.Parse(condition.value);
+                                break;
+                            case Conditional.IsEqual:
+                                achieved = observableInts[condition.variableName] == int.Parse(condition.value);
+                                break;
+                            default:
+                                Debug.Log($"condition ({condition.variableName}) of achievement ({achievement.achievementName}) is inconsistent.");
+                                achieved = false;
+                                break;
+                        }
+                        break;
+                    case VarType.Float:
+                        if (!observableFloats.ContainsKey(condition.variableName))
+                            Debug.Log($"{condition.variableName} is not an observable float variable.");
+                        switch (condition.condition)
+                        {
+                            case Conditional.IsLessThan:
+                                achieved = observableFloats[condition.variableName] < float.Parse(condition.value);
+                                break;
+                            case Conditional.IsBiggerThan:
+                                achieved = observableFloats[condition.variableName] > float.Parse(condition.value);
+                                break;
+                            case Conditional.IsEqual:
+                                achieved = observableFloats[condition.variableName] == float.Parse(condition.value);
+                                break;
+                            default:
+                                Debug.Log($"condition ({condition.variableName}) of achievement ({achievement.achievementName}) is inconsistent.");
+                                achieved = false;
+                                break;
+                        }
+                        break;
+                    case VarType.Boolean:
+                        if (!observableBools.ContainsKey(condition.variableName))
+                            Debug.Log($"{condition.variableName} is not an observable boolean variable.");
+                        switch (condition.condition)
+                        {
+                            case Conditional.Is:
+                                achieved = observableBools[condition.variableName] == bool.Parse(condition.value);
+                                break;
+                            default:
+                                Debug.Log($"condition ({condition.variableName}) of achievement ({achievement.achievementName}) is inconsistent.");
+                                achieved = false;
+                                break;
+                        }
+                        break;
+                }
+                if (!achieved) break;
+            }
+            if (achieved) achievement.Achieved();
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        score = 0;
         state = GameState.Start;
         initGameState = true;
+        InitializeObservables();
     }
 
     // Update is called once per frame
@@ -149,7 +258,8 @@ public class MiniGameManager : MonoBehaviour
         if(initGameState) {
             InitGameState();
             initGameState = false;
-        } else scoreLabel.text = $"{score}";
+        } else scoreLabel.text = $"{Score}";
+        CheckAchievements();
         DoUpdate();
     }
 }

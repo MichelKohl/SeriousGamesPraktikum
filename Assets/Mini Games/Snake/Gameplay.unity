@@ -2459,6 +2459,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameName: Snake
   scoreLabel: {fileID: 1605120316}
+  achievements:
+  - {fileID: 11400000, guid: 3a2f9a5e4631c41358d77c4b2488ecce, type: 2}
   gameOverLabel: {fileID: 819821282}
   startButton: {fileID: 1709094245}
   playAgainButton: {fileID: 561066568}
