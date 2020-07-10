@@ -13,37 +13,28 @@ public class Achievement : ScriptableObject
         " sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.";
     public int reward = 0;
     public Condition[] conditions;
+}
 
+[Serializable]
+public struct Condition
+{
+    public string variableName;
+    public Conditional condition;
+    public string value;
+    public VarType varType;
+}
 
-    public void Achieved()
-    {
-        Debug.Log($"trophy {achievementName} earned");
-        //TODO
-        // mark achievement as achieved in profile file
-        // reward the play with coins
-    }
+public enum Conditional
+{
+    IsLessThan,
+    IsEqual,
+    IsBiggerThan,
+    Is
+}
 
-    [Serializable]
-    public struct Condition
-    {
-        public string variableName;
-        public Conditional condition;
-        public string value;
-        public VarType varType;
-    }
-
-    public enum Conditional
-    {
-        IsLessThan,
-        IsEqual,
-        IsBiggerThan,
-        Is
-    }
-
-    public enum VarType
-    {
-        Boolean,
-        Float,
-        Integer
-    }
+public enum VarType
+{
+    Boolean,
+    Float,
+    Integer
 }

@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     public GameObject GamePopUp;
 
     /// <summary>
-    /// List of mini games that we have playable
+    /// List of playable minigames
     /// </summary>
     public List<MiniGame> miniGames = new List<MiniGame>();
 
@@ -53,13 +53,6 @@ public class GameManager : MonoBehaviour
 
         LoadMiniGames();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     /// <summary>
     /// LoadMiniGames populates a list of the available mini games
     /// which is later used for game pop ups and scene transtitions

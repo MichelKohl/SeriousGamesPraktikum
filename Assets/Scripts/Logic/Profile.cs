@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -43,6 +44,10 @@ public class Profile
     /// The amount of time the player played the game in minutes.
     /// </summary>
     private float totalPlaytime;
+
+    private Dictionary<string, int> highscores;
+
+    private Dictionary<string, (Achievement[] Achievement, bool[] Achieved)> achievements;
 
     public Profile(string name, Profiletype type, bool notifications, bool vibrations) {
         this.name = name;
@@ -110,6 +115,30 @@ public class Profile
         return this.totalPlaytime;
     }
 
+    public void SetHighscore(string gameName, int score)
+    {
+        highscores[gameName] = score;
+    }
+
+    public int GetHighscore(string gameName)
+    {
+        return highscores[gameName];
+    }
+
+    public void SetAchievements(string gameName, Achievement[] achievements, bool[] achieved)
+    {
+        this.achievements[gameName] = (achievements, achieved);
+    }
+
+    public void SetAchieved(string gameName, int index)
+    {
+        achievements[gameName].Achieved[index] = true;
+    }
+
+    public (Achievement[] Achievements, bool[] Achieved) GetAchievements(string gameName)
+    {
+        return achievements[gameName];
+    }
 }
 
 public enum Profiletype {
