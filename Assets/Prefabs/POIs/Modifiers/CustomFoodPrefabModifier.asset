@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7dfb85d33966074ebf2acd2de263474, type: 3}
-  m_Name: NewHeightModifier
+  m_Script: {fileID: 11500000, guid: dd8aacc1880ff504d9531b4d61c86458, type: 3}
+  m_Name: CustomFoodPrefabModifier
   m_EditorClassIdentifier: 
   Active: 1
-  _separateSubmesh: 1
+  _options:
+    prefab: {fileID: 52476687051638636, guid: eaf849857505a894f948cfde2f0e8072, type: 3}
+    scaleDownWithWorld: 1

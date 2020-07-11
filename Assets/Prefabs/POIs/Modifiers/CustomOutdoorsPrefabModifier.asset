@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd8aacc1880ff504d9531b4d61c86458, type: 3}
-  m_Name: NewPrefabModifier
+  m_Name: CustomOutdoorsPrefabModifier
   m_EditorClassIdentifier: 
   Active: 1
   _options:
-    prefab: {fileID: 0}
+    prefab: {fileID: 8437583032803575377, guid: af6f266a8719dba4c9ab362dac9ffaea,
+      type: 3}
     scaleDownWithWorld: 1

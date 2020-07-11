@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05ccea17608e94fb994579409c52fb80, type: 3}
-  m_Name: NewTagModifier 1
+  m_Script: {fileID: 11500000, guid: dd8aacc1880ff504d9531b4d61c86458, type: 3}
+  m_Name: TransitLabel
   m_EditorClassIdentifier: 
   Active: 1
-  _tag: 
+  _options:
+    prefab: {fileID: 2608032727829508943, guid: 726a6c1fe90634e4d888351d86e5de97,
+      type: 3}
+    scaleDownWithWorld: 1
