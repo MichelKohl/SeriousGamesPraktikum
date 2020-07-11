@@ -79,4 +79,9 @@ public class Snake : GameplayObject
         updateFrequency /= acceleration;
         eating = true;
     }
+
+    public void EatSelf()
+    {
+        manager.GameOver();
+    }
 }

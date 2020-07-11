@@ -33,7 +33,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        else INSTANCE = this;
+        else
+        {
+            INSTANCE = this;
+            DontDestroyOnLoad(gameObject);
+        }
         
     }
 
@@ -116,5 +120,23 @@ public class GameManager : MonoBehaviour
         file.Close();
 
         this.profile = profile;
+    }
+
+    private void OnApplicationPause(bool pause)
+    {
+        if (pause && this.profile != null)
+        {
+            this.profile.setPlayTime(this.profile.getPlayTime() + (Time.time / 60));
+            SaveProfile(this.profile);
+        }
+    }
+
+    private void OnApplicationQuit()
+    {
+        if (this.profile != null)
+        {
+            this.profile.setPlayTime(this.profile.getPlayTime() + (Time.time / 60));
+            SaveProfile(this.profile);
+        }
     }
 }

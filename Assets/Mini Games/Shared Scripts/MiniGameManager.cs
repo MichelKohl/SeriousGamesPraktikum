@@ -79,7 +79,7 @@ public class MiniGameManager : MonoBehaviour
     /// </summary>
     public void ResetGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().path);
     }
     /// <summary>
     /// Exits the game and returns to (default screen of) app.

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Mapbox.CheapRulerCs;
+using Mapbox.Unity.Location;
 
 /// <summary>
 /// This class handles all GUI interactions within the default screen.
@@ -22,6 +24,10 @@ public class GeneralGUI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI coinsText;
     [SerializeField]
+    private TextMeshProUGUI totalPlayTimeText;
+    [SerializeField]
+    private TextMeshProUGUI distanceTravelledText;
+    [SerializeField]
     private GameObject notificationsToggle;
     [SerializeField]
     private GameObject vibrationsToggle;
@@ -29,15 +35,20 @@ public class GeneralGUI : MonoBehaviour
     private Button changeTypeButton;
     [SerializeField]
     private Button changeNameButton;
+    [SerializeField]
+    public TextMeshProUGUI locationTagText;
 
     private TouchScreenKeyboard keyboard;
     private bool changeName = false;
+
+    bool locationUpdated = false;
+    double[] old_loc_array;
 
 
     // Start is called before the first frame update
     void Start()
     {
-    
+
     }
 
     // Update is called once per frame
@@ -117,6 +128,12 @@ public class GeneralGUI : MonoBehaviour
             vibrationsToggle.GetComponent<Toggle>().isOn = true;
         }
         else vibrationsToggle.GetComponent<Toggle>().isOn = false;
+
+        int hours = (int)(GameManager.INSTANCE.profile.getPlayTime() + (Time.time / 60)) / 60;
+        int minutes = (int)(GameManager.INSTANCE.profile.getPlayTime() + (Time.time / 60)) % 60;
+        totalPlayTimeText.SetText(hours + " h " + minutes + " m");
+
+        distanceTravelledText.SetText(GameManager.INSTANCE.profile.getDistanceTraveled().ToString("0.000") + " km");
     }
 
     /// <summary>
@@ -127,13 +144,13 @@ public class GeneralGUI : MonoBehaviour
         if (GameManager.INSTANCE.profile.getProfileType() == Profiletype.TOURIST)
         {
             GameManager.INSTANCE.profile.setProfileType(Profiletype.LOCALRESIDENT);
+            profiletypeText.SetText("Local Resident");
         }
         else if (GameManager.INSTANCE.profile.getProfileType() == Profiletype.LOCALRESIDENT)
         {
             GameManager.INSTANCE.profile.setProfileType(Profiletype.TOURIST);
+            profiletypeText.SetText("Tourist");
         }
-
-        setProfileInfo();
     }
 
     /// <summary>
