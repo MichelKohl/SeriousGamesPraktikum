@@ -1,5 +1,5 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MiniGame
 {
@@ -19,7 +19,6 @@ public class MiniGame
     /// Thumbnail of the mini game  
     /// </summary>
     public Sprite thumbnail { get; set; }
-
     #endregion
 
     #region constructor

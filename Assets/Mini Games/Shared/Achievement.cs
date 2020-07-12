@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
+[Serializable]
 public class Achievement : ScriptableObject
 {
     public string achievementName = "Achievement";
-    public Sprite icon;
+    public TrophyType trophyType;
     [Multiline]
     public string description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, \n" +
         "sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,\n" +
@@ -37,4 +37,12 @@ public enum VarType
     Boolean,
     Float,
     Integer
+}
+
+public enum TrophyType
+{
+    Bronze,
+    Silver,
+    Gold,
+    Platinum
 }

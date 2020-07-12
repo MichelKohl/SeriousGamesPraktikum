@@ -1,55 +1,65 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using static Achievement;
 
 public class AchievementManager : MonoBehaviour
 {
     [SerializeField] protected string gameName = "Location Based Game";
     [SerializeField] protected Achievement[] achievements;
     [SerializeField] private float achievUpdateFreq = 1f;
+    [SerializeField] private GameObject achievementPopUp;
 
     protected Dictionary<string, int> observableInts = new Dictionary<string, int>();
     protected Dictionary<string, float> observableFloats = new Dictionary<string, float>();
     protected Dictionary<string, bool> observableBools = new Dictionary<string, bool>();
-    protected GameManager gameManager;
 
     private float updateCounter;
-    private bool[] achieved;
+    private Dictionary<string, bool> isAchieved;
 
     protected virtual void Start()
     {
+        // initializing variables
         updateCounter = 0;
-
-        try
-        {
-            gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-            achieved = gameManager.profile.GetAchievements(gameName).Achieved;
-        }
-        catch (Exception) { }
-        if(achievements == null)
-            achieved = Enumerable.Repeat(false, achievements.Length).ToArray();
-
         InitializeObservables();
+        // initializing achievements information
+        Dictionary<string, (TrophyType trophyType, string description, int reward)> info =
+            new Dictionary<string, (TrophyType trophyType, string description, int reward)>();
+        foreach (Achievement achievement in achievements)
+            info[achievement.achievementName] = (achievement.trophyType, achievement.description, achievement.reward);
+        GameManager.INSTANCE.profile.SetAchievementsInfo(gameName, info);
+        // initializing wether trophies were already earned
+        isAchieved = GameManager.INSTANCE.profile.GetAchieved(gameName);
+        if(isAchieved == null) {
+            isAchieved = new Dictionary<string, bool>();
+            foreach (Achievement achievement in achievements)
+                isAchieved[achievement.achievementName] = false;
+            GameManager.INSTANCE.profile.SetAchievements(gameName, isAchieved);
+        }
     }
 
 
     // Update is called once per frame
     protected virtual void Update()
     {
+        // updating depending on frequency
         if (updateCounter < achievUpdateFreq)
         {
             updateCounter += Time.deltaTime;
             return;
         }
         updateCounter = 0;
-        
-        for (int i = 0; i < achievements.Length; i++)
+        // go through each achievement...
+        foreach (Achievement achievement in achievements)
         {
-            if (this.achieved[i]) continue;
+            if (!isAchieved.ContainsKey(achievement.achievementName))
+            {
+                isAchieved[achievement.achievementName] = false;
+                GameManager.INSTANCE.profile.AddAchievement(gameName, achievement.achievementName);
+            }
+            // ... if trophy already earned move on...
+            if (isAchieved[achievement.achievementName]) continue;
+            // ... else: check achievement conditions and...
             bool achieved = true;
-            foreach (Condition condition in achievements[i].conditions)
+            foreach (Condition condition in achievement.conditions)
             {
                 switch (condition.varType)
                 {
@@ -68,7 +78,7 @@ public class AchievementManager : MonoBehaviour
                                 achieved = observableInts[condition.variableName] == int.Parse(condition.value);
                                 break;
                             default:
-                                Debug.Log($"condition ({condition.variableName}) of achievement ({achievements[i].achievementName}) is inconsistent.");
+                                Debug.Log($"condition ({condition.variableName}) of achievement ({achievement.achievementName}) is inconsistent.");
                                 achieved = false;
                                 break;
                         }
@@ -88,7 +98,7 @@ public class AchievementManager : MonoBehaviour
                                 achieved = observableFloats[condition.variableName] == float.Parse(condition.value);
                                 break;
                             default:
-                                Debug.Log($"condition ({condition.variableName}) of achievement ({achievements[i].achievementName}) is inconsistent.");
+                                Debug.Log($"condition ({condition.variableName}) of achievement ({achievement.achievementName}) is inconsistent.");
                                 achieved = false;
                                 break;
                         }
@@ -102,27 +112,27 @@ public class AchievementManager : MonoBehaviour
                                 achieved = observableBools[condition.variableName] == bool.Parse(condition.value);
                                 break;
                             default:
-                                Debug.Log($"condition ({condition.variableName}) of achievement ({achievements[i].achievementName}) is inconsistent.");
+                                Debug.Log($"condition ({condition.variableName}) of achievement ({achievement.achievementName}) is inconsistent.");
                                 achieved = false;
                                 break;
                         }
                         break;
                 }
-                if (!achieved) break;
-            }
-            this.achieved[i] = achieved;
-            if (achieved)
-            {
-                if (gameManager != null)
-                    gameManager.profile.SetAchieved(gameName, i);
-                AchievementPopUp();
-            }
+                if (!achieved) break;// early break
+            }// ... if all condition are met -> pop up and achievement & save that a trophy was earned.
+            isAchieved[achievement.achievementName] = achieved;
+            if (achieved) AchievementPopUp(achievement);
         }
     }
 
     public virtual void InitializeObservables()
     {
 
+    }
+
+    public Achievement[] GetAllAchievements()
+    {
+        return achievements;
     }
 
     public List<string> GetAllObservablesNames()
@@ -164,8 +174,10 @@ public class AchievementManager : MonoBehaviour
         observableBools[name] = value;
     }
 
-    private void AchievementPopUp()
+    private void AchievementPopUp(Achievement achievement)
     {
+        Debug.Log($"Trophy: {achievement.achievementName} earned.");
+        GameManager.INSTANCE.profile.SetAchieved(gameName, achievement.achievementName);
         //TODO
         // also create a game manager prefab.
     }

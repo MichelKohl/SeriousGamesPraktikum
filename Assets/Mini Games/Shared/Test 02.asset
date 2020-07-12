@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2d6c18ec18d04f2d99e3fc3e88c5966, type: 3}
-  m_Name: Test
+  m_Name: Test 02
   m_EditorClassIdentifier: 
-  achievementName: Snake Eat One
-  icon: {fileID: 0}
+  achievementName: Test02
+  trophyType: 1
   description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, \nsed diam
     nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,\n sed
     diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum."
   reward: 0
   conditions:
   - variableName: score
-    condition: 2
-    value: 100
+    condition: 0
+    value: 0
     varType: 2

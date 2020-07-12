@@ -415,7 +415,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &512766364
 GameObject:
@@ -449,7 +449,7 @@ Transform:
   - {fileID: 1511731872}
   - {fileID: 1278484286}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &546418884
 GameObject:
@@ -1909,8 +1909,8 @@ RectTransform:
   - {fileID: 1843383037}
   - {fileID: 1605120314}
   - {fileID: 561066567}
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 1705010297}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2425,7 +2425,7 @@ GameObject:
   - component: {fileID: 1705010297}
   - component: {fileID: 1705010298}
   m_Layer: 0
-  m_Name: Game Manager
+  m_Name: Mini Game Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2441,9 +2441,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1408768325}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1705010298
 MonoBehaviour:
@@ -2458,9 +2459,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameName: Snake
-  scoreLabel: {fileID: 1605120316}
   achievements:
   - {fileID: 11400000, guid: 3a2f9a5e4631c41358d77c4b2488ecce, type: 2}
+  - {fileID: 11400000, guid: bedcba78742304e4c906c9d9a2f864b7, type: 2}
+  - {fileID: 11400000, guid: c87d6dad9821640c2a2a6c6363431e63, type: 2}
+  achievUpdateFreq: 1
+  achievementPopUp: {fileID: 0}
+  scoreLabel: {fileID: 1605120316}
   gameOverLabel: {fileID: 819821282}
   startButton: {fileID: 1709094245}
   playAgainButton: {fileID: 561066568}

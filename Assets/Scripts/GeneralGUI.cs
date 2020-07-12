@@ -38,6 +38,9 @@ public class GeneralGUI : MonoBehaviour
     [SerializeField]
     public TextMeshProUGUI locationTagText;
 
+    [SerializeField] private GameObject achievementsView;
+    [SerializeField] private AchievementsView scrollView;
+
     private TouchScreenKeyboard keyboard;
     private bool changeName = false;
 
@@ -160,5 +163,16 @@ public class GeneralGUI : MonoBehaviour
     {
         keyboard = TouchScreenKeyboard.Open(GameManager.INSTANCE.profile.getProfileName(), TouchScreenKeyboardType.Default, false);
         changeName = true;
+    }
+
+    public void ChangeToAchievementsView()
+    {
+        achievementsView.gameObject.SetActive(true);
+        scrollView.ChangeToAchievementView();
+    }
+
+    public void AchievementViewBack()
+    {
+        achievementsView.gameObject.SetActive(false);
     }
 }

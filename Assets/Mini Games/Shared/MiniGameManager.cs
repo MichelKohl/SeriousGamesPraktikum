@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 
 public class MiniGameManager : AchievementManager
-{   // TODO delete all player prefs on app start.
+{
     [SerializeField] protected TextMeshProUGUI scoreLabel;
 
     protected GameState state;
@@ -13,7 +13,7 @@ public class MiniGameManager : AchievementManager
 
     public override void InitializeObservables()
     {
-        //base.InitializeObservables();
+        base.InitializeObservables();
         Score = 0;
     }
 
@@ -21,6 +21,9 @@ public class MiniGameManager : AchievementManager
     protected override void Start()
     {
         base.Start();
+
+        PlayerPrefs.DeleteAll();
+
         state = GameState.Start;
         initGameState = true;
     }
@@ -73,7 +76,7 @@ public class MiniGameManager : AchievementManager
         state = GameState.GameOver;
         initGameState = true;
         // save highscore
-        if (gameManager != null) gameManager.profile.SetHighscore(gameName,
+        GameManager.INSTANCE.profile.SetHighscore(gameName,
             Mathf.Max(PlayerPrefs.GetInt($"{gameName} Score", 0), Score));
     }
    /// <summary>

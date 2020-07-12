@@ -3352,7 +3352,7 @@ GameObject:
   - component: {fileID: 1003557173}
   - component: {fileID: 1003557174}
   m_Layer: 0
-  m_Name: Game Manager
+  m_Name: Mini Game Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3385,6 +3385,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameName: Space Invader
+  achievements:
+  - {fileID: 11400000, guid: 3a2f9a5e4631c41358d77c4b2488ecce, type: 2}
+  - {fileID: 11400000, guid: 96aa476605d954059bb330cbeaf17b0f, type: 2}
+  - {fileID: 11400000, guid: bedcba78742304e4c906c9d9a2f864b7, type: 2}
+  - {fileID: 11400000, guid: c87d6dad9821640c2a2a6c6363431e63, type: 2}
+  achievUpdateFreq: 1
+  achievementPopUp: {fileID: 0}
   scoreLabel: {fileID: 1262492364}
   startButton: {fileID: 421103481}
   infoLabel: {fileID: 1745693381}
