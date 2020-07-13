@@ -76,8 +76,9 @@ public class MiniGameManager : AchievementManager
         state = GameState.GameOver;
         initGameState = true;
         // save highscore
-        GameManager.INSTANCE.profile.SetHighscore(gameName,
-            Mathf.Max(PlayerPrefs.GetInt($"{gameName} Score", 0), Score));
+        Profile playerProfile = GameManager.INSTANCE.profile;
+        playerProfile.SetHighscore(gameName,
+            Mathf.Max(playerProfile.GetHighscore(gameName), Score));
     }
    /// <summary>
    /// Returns whether current state is "Start Menu".

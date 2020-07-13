@@ -39,7 +39,9 @@ public class GeneralGUI : MonoBehaviour
     public TextMeshProUGUI locationTagText;
 
     [SerializeField] private GameObject achievementsView;
-    [SerializeField] private AchievementsView scrollView;
+    [SerializeField] private AchievementsView achievementScrollView;
+    [SerializeField] private GameObject highscoreView;
+    [SerializeField] private HighscoreView highscoreScrollView;
 
     private TouchScreenKeyboard keyboard;
     private bool changeName = false;
@@ -168,11 +170,22 @@ public class GeneralGUI : MonoBehaviour
     public void ChangeToAchievementsView()
     {
         achievementsView.gameObject.SetActive(true);
-        scrollView.ChangeToAchievementView();
+        achievementScrollView.ChangeToAchievementView();
     }
 
     public void AchievementViewBack()
     {
         achievementsView.gameObject.SetActive(false);
+    }
+
+    public void ChangeToHighscoresView()
+    {
+        highscoreView.SetActive(true);
+        highscoreScrollView.ChangeToHighscoreView();
+    }
+
+    public  void HighscoreViewBack()
+    {
+        highscoreView.gameObject.SetActive(false);
     }
 }

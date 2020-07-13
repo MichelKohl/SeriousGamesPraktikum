@@ -67,14 +67,13 @@ public class GameManager : MonoBehaviour
                 Resources.Load<Sprite>("Space Invaders")
             )
         );
-        /*
         miniGames.Add(
             new MiniGame(
                 "Snake",
                 "Mini Games/Snake/Gameplay",
                 Resources.Load<Sprite>("Snake")
             )
-        );*/
+        );
     }
 
     /// <summary>

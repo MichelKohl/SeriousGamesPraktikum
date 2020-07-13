@@ -124,7 +124,12 @@ public class Profile
 
     public int GetHighscore(string gameName)
     {
-        return highscoreStorage.highscores[gameName];
+        return highscoreStorage.highscores.ContainsKey(gameName) ? highscoreStorage.highscores[gameName] : 0;
+    }
+
+    public Dictionary<string, int> GetHighscores()
+    {
+        return highscoreStorage.highscores;
     }
 
     public void AddAchievement(string gameName, string achievementName)
