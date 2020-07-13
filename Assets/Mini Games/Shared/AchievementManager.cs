@@ -6,7 +6,7 @@ public class AchievementManager : MonoBehaviour
     [SerializeField] protected string gameName = "Location Based Game";
     [SerializeField] protected Achievement[] achievements;
     [SerializeField] private float achievUpdateFreq = 1f;
-    [SerializeField] private GameObject achievementPopUp;
+    [SerializeField] private AchievementPopUp achievementPopUp;
 
     protected Dictionary<string, int> observableInts = new Dictionary<string, int>();
     protected Dictionary<string, float> observableFloats = new Dictionary<string, float>();
@@ -178,7 +178,7 @@ public class AchievementManager : MonoBehaviour
     {
         Debug.Log($"Trophy: {achievement.achievementName} earned.");
         GameManager.INSTANCE.profile.SetAchieved(gameName, achievement.achievementName);
-        //TODO
-        // also create a game manager prefab.
+        achievementPopUp.gameObject.SetActive(true);
+        achievementPopUp.SetupPopUp(achievement);
     }
 }
