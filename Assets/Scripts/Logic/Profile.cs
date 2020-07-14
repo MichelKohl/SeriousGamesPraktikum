@@ -60,59 +60,78 @@ public class Profile
         this.totalPlaytime = 0;
     }
 
-    public void setProfileName(string name) {
+    public void SetProfileName(string name)
+    {
         this.name = name;
     }
 
-    public string getProfileName() {
+    public string GetProfileName()
+    {
         return this.name;
     }
 
-    public void setProfileType(Profiletype type) {
+    public void SetProfileType(Profiletype type)
+    {
         this.type = type;
     }
 
-    public Profiletype getProfileType() {
+    public Profiletype GetProfileType()
+    {
         return this.type;
     }
 
-    public void setNotificationStatus(bool status) {
+    public void SetNotificationStatus(bool status)
+    {
         this.notifications = status;
     }
 
-    public bool getNotificationStatus() {
+    public bool GetNotificationStatus()
+    {
         return this.notifications;
     }
 
-    public void setVibrationStatus(bool status) {
+    public void SetVibrationStatus(bool status)
+    {
         this.vibrations = status;
     }
 
-    public bool getVibrationsStatus() {
+    public bool GetVibrationsStatus()
+    {
         return this.vibrations;
     }
 
-    public void setCoins(int amount) {
+    public void SetAmount(int amount)
+    {
         this.coins = amount;
     }
 
-    public int getCoins() {
+    public void IncreaseCoinsBy(int amount)
+    {
+        this.coins += amount;
+    }
+
+    public int GetCoins()
+    {
         return this.coins;
     }
 
-    public void setDistanceTraveled(double distance) {
+    public void SetDistanceTraveled(double distance)
+    {
         this.distanceTraveled = distance; 
     }
 
-    public double getDistanceTraveled() {
+    public double GetDistanceTraveled()
+    {
         return this.distanceTraveled;
     }
 
-    public void setPlayTime(float playTime) {
+    public void SetPlayTime(float playTime)
+    {
         this.totalPlaytime = playTime;
     }
 
-    public float getPlayTime() {
+    public float GetPlayTime()
+    {
         return this.totalPlaytime;
     }
 
@@ -170,7 +189,8 @@ public class Profile
     }
 }
 
-public enum Profiletype {
+public enum Profiletype
+{
     NONE = -1,
     LOCALRESIDENT = 0,
     TOURIST = 1

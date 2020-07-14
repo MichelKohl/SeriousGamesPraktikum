@@ -64,7 +64,7 @@ public class GeneralGUI : MonoBehaviour
             if (keyboard.status == TouchScreenKeyboard.Status.Done)
             {
                 changeName = false;
-                GameManager.INSTANCE.profile.setProfileName(keyboard.text);
+                GameManager.INSTANCE.profile.SetProfileName(keyboard.text);
                 setProfileInfo();
             }
         }
@@ -88,15 +88,15 @@ public class GeneralGUI : MonoBehaviour
     {
         if (notificationsToggle.GetComponent<Toggle>().isOn)
         {
-            GameManager.INSTANCE.profile.setNotificationStatus(true);
+            GameManager.INSTANCE.profile.SetNotificationStatus(true);
         }
-        else GameManager.INSTANCE.profile.setNotificationStatus(false);
+        else GameManager.INSTANCE.profile.SetNotificationStatus(false);
 
         if (vibrationsToggle.GetComponent<Toggle>().isOn)
         {
-            GameManager.INSTANCE.profile.setVibrationStatus(true);
+            GameManager.INSTANCE.profile.SetVibrationStatus(true);
         }
-        else GameManager.INSTANCE.profile.setVibrationStatus(false);
+        else GameManager.INSTANCE.profile.SetVibrationStatus(false);
 
         profileView.SetActive(false);
         profileButton.gameObject.SetActive(true);
@@ -109,36 +109,36 @@ public class GeneralGUI : MonoBehaviour
     /// </summary>
     private void setProfileInfo()
     {
-        profilenameText.SetText(GameManager.INSTANCE.profile.getProfileName());
+        profilenameText.SetText(GameManager.INSTANCE.profile.GetProfileName());
 
-        if (GameManager.INSTANCE.profile.getProfileType() == Profiletype.LOCALRESIDENT)
+        if (GameManager.INSTANCE.profile.GetProfileType() == Profiletype.LOCALRESIDENT)
         {
             profiletypeText.SetText("Local Resident");
         }
-        if (GameManager.INSTANCE.profile.getProfileType() == Profiletype.TOURIST)
+        if (GameManager.INSTANCE.profile.GetProfileType() == Profiletype.TOURIST)
         {
             profiletypeText.SetText("Tourist");
         }
 
-        coinsText.SetText(GameManager.INSTANCE.profile.getCoins().ToString());
+        coinsText.SetText(GameManager.INSTANCE.profile.GetCoins().ToString());
 
-        if (GameManager.INSTANCE.profile.getNotificationStatus())
+        if (GameManager.INSTANCE.profile.GetNotificationStatus())
         {
             notificationsToggle.GetComponent<Toggle>().isOn = true;
         }
         else notificationsToggle.GetComponent<Toggle>().isOn = false;
 
-        if (GameManager.INSTANCE.profile.getVibrationsStatus())
+        if (GameManager.INSTANCE.profile.GetVibrationsStatus())
         {
             vibrationsToggle.GetComponent<Toggle>().isOn = true;
         }
         else vibrationsToggle.GetComponent<Toggle>().isOn = false;
 
-        int hours = (int)(GameManager.INSTANCE.profile.getPlayTime() + (Time.time / 60)) / 60;
-        int minutes = (int)(GameManager.INSTANCE.profile.getPlayTime() + (Time.time / 60)) % 60;
+        int hours = (int)(GameManager.INSTANCE.profile.GetPlayTime() + (Time.time / 60)) / 60;
+        int minutes = (int)(GameManager.INSTANCE.profile.GetPlayTime() + (Time.time / 60)) % 60;
         totalPlayTimeText.SetText(hours + " h " + minutes + " m");
 
-        distanceTravelledText.SetText(GameManager.INSTANCE.profile.getDistanceTraveled().ToString("0.000") + " km");
+        distanceTravelledText.SetText(GameManager.INSTANCE.profile.GetDistanceTraveled().ToString("0.000") + " km");
     }
 
     /// <summary>
@@ -146,14 +146,14 @@ public class GeneralGUI : MonoBehaviour
     /// </summary>
     public void changeProfiletype()
     {
-        if (GameManager.INSTANCE.profile.getProfileType() == Profiletype.TOURIST)
+        if (GameManager.INSTANCE.profile.GetProfileType() == Profiletype.TOURIST)
         {
-            GameManager.INSTANCE.profile.setProfileType(Profiletype.LOCALRESIDENT);
+            GameManager.INSTANCE.profile.SetProfileType(Profiletype.LOCALRESIDENT);
             profiletypeText.SetText("Local Resident");
         }
-        else if (GameManager.INSTANCE.profile.getProfileType() == Profiletype.LOCALRESIDENT)
+        else if (GameManager.INSTANCE.profile.GetProfileType() == Profiletype.LOCALRESIDENT)
         {
-            GameManager.INSTANCE.profile.setProfileType(Profiletype.TOURIST);
+            GameManager.INSTANCE.profile.SetProfileType(Profiletype.TOURIST);
             profiletypeText.SetText("Tourist");
         }
     }
@@ -163,7 +163,7 @@ public class GeneralGUI : MonoBehaviour
     /// </summary>
     public void changeProfilename()
     {
-        keyboard = TouchScreenKeyboard.Open(GameManager.INSTANCE.profile.getProfileName(), TouchScreenKeyboardType.Default, false);
+        keyboard = TouchScreenKeyboard.Open(GameManager.INSTANCE.profile.GetProfileName(), TouchScreenKeyboardType.Default, false);
         changeName = true;
     }
 
@@ -184,7 +184,7 @@ public class GeneralGUI : MonoBehaviour
         highscoreScrollView.ChangeToHighscoreView();
     }
 
-    public  void HighscoreViewBack()
+    public void HighscoreViewBack()
     {
         highscoreView.gameObject.SetActive(false);
     }

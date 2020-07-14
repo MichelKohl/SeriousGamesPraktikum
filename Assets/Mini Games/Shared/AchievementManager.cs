@@ -178,6 +178,7 @@ public class AchievementManager : MonoBehaviour
     {
         Debug.Log($"Trophy: {achievement.achievementName} earned.");
         GameManager.INSTANCE.profile.SetAchieved(gameName, achievement.achievementName);
+        GameManager.INSTANCE.profile.IncreaseCoinsBy(achievement.reward);
         achievementPopUp.gameObject.SetActive(true);
         achievementPopUp.SetupPopUp(achievement);
     }

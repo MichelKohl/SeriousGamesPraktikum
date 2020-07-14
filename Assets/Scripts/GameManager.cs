@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour
     {
         if (pause && this.profile != null)
         {
-            this.profile.setPlayTime(this.profile.getPlayTime() + (Time.time / 60));
+            this.profile.SetPlayTime(this.profile.GetPlayTime() + (Time.time / 60));
             SaveProfile(this.profile);
         }
     }
@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour
     {
         if (this.profile != null)
         {
-            this.profile.setPlayTime(this.profile.getPlayTime() + (Time.time / 60));
+            this.profile.SetPlayTime(this.profile.GetPlayTime() + (Time.time / 60));
             SaveProfile(this.profile);
         }
     }

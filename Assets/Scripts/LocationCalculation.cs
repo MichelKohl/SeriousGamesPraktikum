@@ -47,7 +47,7 @@ public class LocationCalculation : MonoBehaviour
             Mapbox.Utils.Vector2d new_loc = GameObject.Find("LocationProvider").GetComponent<LocationProviderFactory>().DefaultLocationProvider.CurrentLocation.LatitudeLongitude;
             double[] new_loc_array = new_loc.ToArray();
             CheapRuler cr = new CheapRuler(old_loc_array[1], CheapRulerUnits.Kilometers);
-            GameManager.INSTANCE.profile.setDistanceTraveled(GameManager.INSTANCE.profile.getDistanceTraveled() + cr.Distance(old_loc_array, new_loc_array));
+            GameManager.INSTANCE.profile.SetDistanceTraveled(GameManager.INSTANCE.profile.GetDistanceTraveled() + cr.Distance(old_loc_array, new_loc_array));
 
             locationUpdated = false;
         }
