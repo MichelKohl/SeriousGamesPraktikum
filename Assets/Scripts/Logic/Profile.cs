@@ -44,6 +44,11 @@ public class Profile
     /// </summary>
     private float totalPlaytime;
 
+    /// <summary>
+    /// The list of characters that already were bought by the player
+    /// </summary>
+    public List<int> charactersBought = new List<int>();
+
     public Profile(string name, Profiletype type, bool notifications, bool vibrations) {
         this.name = name;
         this.type = type;
@@ -52,6 +57,8 @@ public class Profile
         this.coins = 0;
         this.distanceTraveled = 0;
         this.totalPlaytime = 0;
+        this.charactersBought.Add(8); //son is free at the beginning
+        this.charactersBought.Add(0); //daughter is free at the beginning
     }
 
     public void setProfileName(string name) {
