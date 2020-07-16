@@ -20,6 +20,8 @@ public class GeneralGUI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI profiletypeText;
     [SerializeField]
+    private GameObject ProfileCharacterImageButton;
+    [SerializeField]
     private TextMeshProUGUI profilenameText;
     [SerializeField]
     private TextMeshProUGUI coinsText;
@@ -37,6 +39,32 @@ public class GeneralGUI : MonoBehaviour
     private Button changeNameButton;
     [SerializeField]
     public TextMeshProUGUI locationTagText;
+    [SerializeField]
+    private GameObject CharacterSelectionPanel;
+
+    /// <summary>
+    /// The characters, which can be chosen by pressing the button 
+    /// </summary>
+    [SerializeField]
+    private GameObject daughter01Button;
+    [SerializeField]
+    private GameObject father01Button;
+    [SerializeField]
+    private GameObject father02Button;
+    [SerializeField]
+    private GameObject mother01Button;
+    [SerializeField]
+    private GameObject mother02Button;
+    [SerializeField]
+    private GameObject schoolboy01Button;
+    [SerializeField]
+    private GameObject schoolgirl01Button;
+    [SerializeField]
+    private GameObject shopkeeper01Button;
+    [SerializeField]
+    private GameObject son01Button;
+
+
 
     private TouchScreenKeyboard keyboard;
     private bool changeName = false;
@@ -72,6 +100,7 @@ public class GeneralGUI : MonoBehaviour
     {
         setProfileInfo();
 
+        CharacterSelectionPanel.SetActive(false);
         profileView.SetActive(true);
         profileButton.gameObject.SetActive(false);
     }
@@ -93,6 +122,7 @@ public class GeneralGUI : MonoBehaviour
         }
         else GameManager.INSTANCE.profile.setVibrationStatus(false);
 
+        CharacterSelectionPanel.SetActive(false);
         profileView.SetActive(false);
         profileButton.gameObject.SetActive(true);
 
@@ -160,5 +190,28 @@ public class GeneralGUI : MonoBehaviour
     {
         keyboard = TouchScreenKeyboard.Open(GameManager.INSTANCE.profile.getProfileName(), TouchScreenKeyboardType.Default, false);
         changeName = true;
+    }
+
+    public void showCharacterSelectionPanel()
+    {
+        if (!CharacterSelectionPanel.activeSelf)
+            CharacterSelectionPanel.SetActive(true);
+        else CharacterSelectionPanel.SetActive(false);
+    }
+
+    public void selectCharacter(GameObject pressedButton)
+    {
+        ProfileCharacterImageButton.GetComponent<Image>().sprite = pressedButton.GetComponent<Image>().sprite;
+        CharacterSelectionPanel.SetActive(false);
+
+        //disable all character models
+        for (int i = 2; i < GameObject.Find("Player").transform.childCount; i++)
+        {
+            GameObject.Find("Player").transform.GetChild(i).gameObject.SetActive(false);
+        }
+
+        //activate the selected character model by getting the id
+        GameObject.Find("Player").transform.GetChild(pressedButton.GetComponent<CharacterID>().id + 2).gameObject.SetActive(true);
+
     }
 }
