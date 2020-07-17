@@ -66,13 +66,8 @@ public class GeneralGUI : MonoBehaviour
 
     private List<GameObject> characterButtons = new List<GameObject>();
 
-
-
     private TouchScreenKeyboard keyboard;
     private bool changeName = false;
-
-    bool locationUpdated = false;
-    double[] old_loc_array;
 
 
     // Start is called before the first frame update
@@ -88,6 +83,8 @@ public class GeneralGUI : MonoBehaviour
         characterButtons.Add(schoolgirl01Button);
         characterButtons.Add(shopkeeper01Button);
         characterButtons.Add(son01Button);
+
+        GameManager.INSTANCE.LoadCharacter();
     }
 
     // Update is called once per frame
@@ -222,8 +219,12 @@ public class GeneralGUI : MonoBehaviour
             GameObject.Find("Player").transform.GetChild(i).gameObject.SetActive(false);
         }
 
+        GameManager.INSTANCE.profile.selectedCharacterID = pressedButton.GetComponent<CharacterID>().id;
+
         //activate the selected character model by getting the id
-        GameObject.Find("Player").transform.GetChild(pressedButton.GetComponent<CharacterID>().id + 2).gameObject.SetActive(true);
+        GameObject.Find("Player").transform.GetChild(GameManager.INSTANCE.profile.selectedCharacterID + 2).gameObject.SetActive(true);
+
+        GameManager.INSTANCE.SaveProfile(GameManager.INSTANCE.profile);
     }
 
     /// <summary>
@@ -236,13 +237,19 @@ public class GeneralGUI : MonoBehaviour
             foreach (int id in GameManager.INSTANCE.profile.charactersBought)
             {
                 if (go.GetComponent<CharacterID>().id == id)
-                { 
+                {
                     go.GetComponent<Button>().interactable = true;
 
-                    if (go.transform.childCount > 1) {
+                    if (go.transform.childCount > 1)
+                    {
                         go.transform.GetChild(1).gameObject.SetActive(false);
                     }
                 }
+            }
+
+            if (go.GetComponent<CharacterID>().id == GameManager.INSTANCE.profile.selectedCharacterID)
+            {
+                ProfileCharacterImageButton.GetComponent<Image>().sprite = go.GetComponent<Image>().sprite;
             }
         }
     }

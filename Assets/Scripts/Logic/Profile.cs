@@ -45,11 +45,16 @@ public class Profile
     private float totalPlaytime;
 
     /// <summary>
-    /// The list of characters that already were bought by the player
+    /// The list of characters that already were bought by the player.
     /// </summary>
     public List<int> charactersBought = new List<int>();
 
-    public Profile(string name, Profiletype type, bool notifications, bool vibrations) {
+    /// <summary>
+    /// The id of the current selected character.
+    /// </summary>
+    public int selectedCharacterID;
+
+    public Profile(string name, Profiletype type, bool notifications, bool vibrations, int selectedCharacterID) {
         this.name = name;
         this.type = type;
         this.notifications = notifications;
@@ -59,6 +64,7 @@ public class Profile
         this.totalPlaytime = 0;
         this.charactersBought.Add(8); //son is free at the beginning
         this.charactersBought.Add(0); //daughter is free at the beginning
+        this.selectedCharacterID = selectedCharacterID;
     }
 
     public void setProfileName(string name) {
