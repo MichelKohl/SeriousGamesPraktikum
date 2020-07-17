@@ -240,9 +240,9 @@ public class GeneralGUI : MonoBehaviour
                 {
                     go.GetComponent<Button>().interactable = true;
 
-                    if (go.transform.childCount > 1)
+                    if (go.transform.childCount > 0)
                     {
-                        go.transform.GetChild(1).gameObject.SetActive(false);
+                        go.transform.GetChild(0).gameObject.SetActive(false);
                     }
                 }
             }
@@ -256,7 +256,7 @@ public class GeneralGUI : MonoBehaviour
 
     public void buy(GameObject button)
     {
-        int costs = button.transform.GetChild(1).gameObject.GetComponent<Costs>().costs;
+        int costs = button.transform.GetChild(0).gameObject.GetComponent<Costs>().costs;
         GameManager.INSTANCE.profile.setCoins(GameManager.INSTANCE.profile.getCoins() - costs);
         coinsText.SetText(GameManager.INSTANCE.profile.getCoins().ToString());
         button.GetComponent<Button>().interactable = true;
