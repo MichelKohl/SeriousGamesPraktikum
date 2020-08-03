@@ -22,7 +22,9 @@ public class InitialProfileGUI : MonoBehaviour
     [SerializeField]
     private GameObject vibrationToggle;
     [SerializeField]
-    private Button profileImageButton;
+    private GameObject sonButton;
+    [SerializeField]
+    private GameObject daughterButton;
     [SerializeField]
     private Button okButton;
     [SerializeField]
@@ -31,10 +33,16 @@ public class InitialProfileGUI : MonoBehaviour
     private GameObject dialogPanel;
     [SerializeField]
     private Button dialogPanelButton;
+    [SerializeField]
+    private GameObject characterDialogPanel;
+    [SerializeField]
+    private GameObject characterDialogPanelButton;
 
     private Profiletype type = Profiletype.NONE;
     private bool notificationStatus;
     private bool vibrationsStatus;
+
+    private int selectedCharacter = -1;
 
     private TouchScreenKeyboard keyboard;
 
@@ -71,6 +79,11 @@ public class InitialProfileGUI : MonoBehaviour
             dialogPanel.SetActive(true);
             okButton.interactable = false;
         }
+        else if (selectedCharacter < 0)
+        {
+            characterDialogPanel.SetActive(true);
+            okButton.interactable = false;
+        }
         else
         {
             Debug.Log("Profile creation successfull");
@@ -78,7 +91,7 @@ public class InitialProfileGUI : MonoBehaviour
             notificationStatus = notificationToggle.GetComponent<Toggle>().isOn;
             vibrationsStatus = vibrationToggle.GetComponent<Toggle>().isOn;
 
-            Profile profile = new Profile(nameInput.text, type, notificationStatus, vibrationsStatus);
+            Profile profile = new Profile(nameInput.text, type, notificationStatus, vibrationsStatus, selectedCharacter);
             GameManager.INSTANCE.SaveProfile(profile);
             GameManager.INSTANCE.LoadProfile();
             SceneManager.LoadScene("DefaultScreen");
@@ -95,7 +108,29 @@ public class InitialProfileGUI : MonoBehaviour
         okButton.interactable = true;
     }
 
-    public void openKeyboard() {
+    public void characterDialogButtonPressed()
+    {
+        characterDialogPanel.SetActive(false);
+        okButton.interactable = true;
+    }
+
+    public void openKeyboard()
+    {
         keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default);
     }
+
+    public void sonSelected()
+    {
+        selectedCharacter = 8;
+        sonButton.GetComponent<Image>().color = Color.grey;
+        daughterButton.GetComponent<Image>().color = Color.white;
+    }
+
+    public void daughterSelected()
+    {
+        selectedCharacter = 0;
+        sonButton.GetComponent<Image>().color = Color.white;
+        daughterButton.GetComponent<Image>().color = Color.grey;
+    }
+
 }

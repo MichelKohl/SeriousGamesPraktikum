@@ -7,6 +7,13 @@ namespace Mapbox.Unity.MeshGeneration.Modifiers
 	using System.Collections.Generic;
 	using Mapbox.Unity.Map;
 	using System;
+	using Mapbox.Unity.MeshGeneration.Factories;
+	using Mapbox.Unity.Utilities;
+	using Mapbox.VectorTile.Geometry;
+
+	using Mapbox.Utils;
+	using Mapbox.VectorTile.ExtensionMethods;
+	using Mapbox.CheapRulerCs;
 
 	[CreateAssetMenu(menuName = "Mapbox/Modifiers/Prefab Modifier")]
 	public class PrefabModifier : GameObjectModifier
@@ -15,6 +22,7 @@ namespace Mapbox.Unity.MeshGeneration.Modifiers
 		[SerializeField]
 		private SpawnPrefabOptions _options;
 		private List<GameObject> _prefabList = new List<GameObject>();
+		private static Dictionary<string, double[]> pos;
 
 		public override void Initialize()
 		{
@@ -32,6 +40,7 @@ namespace Mapbox.Unity.MeshGeneration.Modifiers
 
 		public override void Run(VectorEntity ve, UnityTile tile)
 		{
+			pos = VectorTileFactory.positionList;
 			if (_options.prefab == null)
 			{
 				return;
@@ -50,9 +59,30 @@ namespace Mapbox.Unity.MeshGeneration.Modifiers
 				_objects.Add(ve.GameObject, go);
 				go.transform.SetParent(ve.GameObject.transform, false);
 			}
-
 			PositionScaleRectTransform(ve, tile, go);
-
+			// Calculate Distance between POIs and delete if too close
+			var rangeBool = true;
+			var geom = ve.Feature.Data.Geometry<float>();
+			var location = ve.Feature.Data.GeometryAsWgs84((ulong)tile.CanonicalTileId.Z, (ulong)tile.CanonicalTileId.X, (ulong)tile.CanonicalTileId.Y)[0][0];
+			var locationDouble = new double[] { location.Lat, location.Lng };
+			var maxDistance = 150.0f;
+			CheapRuler cr = new CheapRuler(locationDouble[1], CheapRulerUnits.Meters);
+			foreach (KeyValuePair<string, double[]> position in pos)
+			{
+				if (cr.Distance(locationDouble, position.Value) < maxDistance)
+				{
+					rangeBool = false;
+					break;
+				}
+			}
+			if (rangeBool && ve.Feature.Data.Id.ToString() != null)
+			{
+				pos.Add(ve.Feature.Data.Id.ToString(), locationDouble);
+			}
+			else
+			{
+				go.Destroy();
+			}
 			if (_options.AllPrefabsInstatiated != null)
 			{
 				_options.AllPrefabsInstatiated(_prefabList);
@@ -69,6 +99,7 @@ namespace Mapbox.Unity.MeshGeneration.Modifiers
 				centroidVector += point;
 			}
 			centroidVector = centroidVector / ve.Feature.Points[0].Count;
+			
 
 			go.name = ve.Feature.Data.Id.ToString();
 

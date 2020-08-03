@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// The profile attached to the game.
     /// </summary>
-    public Profile profile = null;
+    public Profile profile;
 
     /// <summary>
     /// GamePopUp is a reference to the game pop up screen
@@ -36,28 +36,34 @@ public class GameManager : MonoBehaviour
         else
         {
             INSTANCE = this;
+            INSTANCE.profile = null;
             DontDestroyOnLoad(gameObject);
         }
-        
+
+        Debug.Log(Application.persistentDataPath);
+        if (File.Exists(Application.persistentDataPath + "/profileInfo.dat"))
+        {
+            LoadProfile();
+
+            //After the profile has been loaded, set up the latest selected character from the loaded profile
+            LoadCharacter();
+        }
+        else SceneManager.LoadScene("InitialProfileScreen");
+
+        LoadMiniGames();
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(Application.persistentDataPath);
-        if (File.Exists(Application.persistentDataPath + "/profileInfo.dat"))
-        {
-            LoadProfile();
-        }
-        else SceneManager.LoadScene("InitialProfileScreen");
-
-        LoadMiniGames();
+        
     }
     /// <summary>
     /// LoadMiniGames populates a list of the available mini games
     /// which is later used for game pop ups and scene transtitions
     /// </summary>
-    public void LoadMiniGames() 
+    public void LoadMiniGames()
     {
         
         miniGames.Add(
@@ -81,7 +87,7 @@ public class GameManager : MonoBehaviour
     /// mini game list at random and returns it
     /// </summary>
     /// <returns>A MiniGame</returns>
-    public MiniGame GetRandomMiniGame() 
+    public MiniGame GetRandomMiniGame()
     {
         if (miniGames.Count < 1) return null;
 
@@ -89,11 +95,23 @@ public class GameManager : MonoBehaviour
         return miniGames[index];
     }
 
+    public void LoadCharacter()
+    {
+        //first disable all character models
+        for (int i = 2; i < GameObject.Find("Player").transform.childCount; i++)
+        {
+            GameObject.Find("Player").transform.GetChild(i).gameObject.SetActive(false);
+        }
+
+        //then activate the selected character model by getting the id
+        GameObject.Find("Player").transform.GetChild(INSTANCE.profile.selectedCharacterID + 2).gameObject.SetActive(true);
+    }
+
     /// <summary>
     /// This method saves the profile from the initial creation screen view to a file on the device.
     /// </summary>
     /// <param name="profile"></param>
-    public void SaveProfile(Profile profile) 
+    public void SaveProfile(Profile profile)
     {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Open(Application.persistentDataPath + "/profileInfo.dat", FileMode.Create);
@@ -105,19 +123,20 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// This method loads the profile from a file on the device.
     /// </summary>
-    public void LoadProfile() {
+    public void LoadProfile()
+    {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Open(Application.persistentDataPath + "/profileInfo.dat", FileMode.Open);
 
         Profile profile = (Profile)bf.Deserialize(file);
         file.Close();
 
-        this.profile = profile;
+        INSTANCE.profile = profile;
     }
 
     private void OnApplicationPause(bool pause)
     {
-        if (pause && this.profile != null)
+        if (pause && INSTANCE.profile != null)
         {
             this.profile.SetPlayTime(this.profile.GetPlayTime() + (Time.time / 60));
             SaveProfile(this.profile);
@@ -126,7 +145,7 @@ public class GameManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        if (this.profile != null)
+        if (INSTANCE.profile != null)
         {
             this.profile.SetPlayTime(this.profile.GetPlayTime() + (Time.time / 60));
             SaveProfile(this.profile);

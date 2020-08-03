@@ -25,6 +25,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 310f0f809a14948569475d2390e69bb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inRange: 0
+  rangeCollider: {fileID: 0}
 --- !u!1 &3279969402125110757
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +111,7 @@ PrefabInstance:
     - target: {fileID: 224439370673493072, guid: 60a41cfc23d514878814f0d425912eff,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 672
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224439370673493072, guid: 60a41cfc23d514878814f0d425912eff,
         type: 3}
