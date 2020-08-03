@@ -5,6 +5,7 @@ namespace Mapbox.Unity.MeshGeneration.Interfaces
 	using Mapbox.Unity.MeshGeneration.Data;
 	using System;
 	using Mapbox.Unity.Map;
+	using System.Collections.Generic;
 
 	/// <summary>
 	/// Layer visualizers contains sytling logic and processes features

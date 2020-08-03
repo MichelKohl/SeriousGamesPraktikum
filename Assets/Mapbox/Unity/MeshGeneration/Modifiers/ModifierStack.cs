@@ -5,6 +5,7 @@ namespace Mapbox.Unity.MeshGeneration.Modifiers
 	using Mapbox.Unity.MeshGeneration.Data;
 	using Mapbox.Unity.MeshGeneration.Components;
 	using System;
+	using Mapbox.Unity.Map;
 
 	public enum PositionTargetType
 	{
@@ -229,7 +230,6 @@ namespace Mapbox.Unity.MeshGeneration.Modifiers
 					GoModifiers[i].Run(_tempVectorEntity, tile);
 				}
 			}
-
 			return _tempVectorEntity.GameObject;
 		}
 

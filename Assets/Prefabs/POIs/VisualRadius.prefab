@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 2225909980979614052}
   - component: {fileID: 6360839550882902304}
   - component: {fileID: 8201348682940921347}
-  m_Layer: 10
+  - component: {fileID: 2312092717596107819}
+  m_Layer: 2
   m_Name: VisualRadius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,8 +162,22 @@ CapsuleCollider:
   m_GameObject: {fileID: 8498781168101333519}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 40
   m_Height: 89.38
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: -1}
+--- !u!114 &2312092717596107819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8498781168101333519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 310f0f809a14948569475d2390e69bb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inRange: 0
+  rangeCollider: {fileID: 3476743508487716801}

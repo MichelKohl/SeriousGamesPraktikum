@@ -6,6 +6,8 @@ using Mapbox.Unity.MeshGeneration.Interfaces;
 using Mapbox.Map;
 using Mapbox.Unity.Map;
 using System;
+using Mapbox.VectorTile.Geometry;
+using Mapbox.Utils;
 
 namespace Mapbox.Unity.MeshGeneration.Factories
 {
@@ -31,6 +33,7 @@ namespace Mapbox.Unity.MeshGeneration.Factories
 		private VectorLayerProperties _properties;
 		private Dictionary<UnityTile, HashSet<LayerVisualizerBase>> _layerProgress;
 		protected VectorDataFetcher DataFetcher;
+		public static Dictionary<String, double[]> positionList;
 		#endregion
 
 		#region Properties
@@ -180,6 +183,7 @@ namespace Mapbox.Unity.MeshGeneration.Factories
 		{
 			_layerProgress = new Dictionary<UnityTile, HashSet<LayerVisualizerBase>>();
 			_layerBuilder = new Dictionary<string, List<LayerVisualizerBase>>();
+			positionList = new Dictionary<string, double[]>();
 
 			DataFetcher = ScriptableObject.CreateInstance<VectorDataFetcher>();
 			DataFetcher.DataRecieved += OnVectorDataRecieved;

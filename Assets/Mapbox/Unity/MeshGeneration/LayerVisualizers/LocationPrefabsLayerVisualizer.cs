@@ -177,7 +177,6 @@ namespace Mapbox.Unity.MeshGeneration.Interfaces
 			string concatenatedString = "";
 			if (item.findByType == LocationPrefabFindBy.MapboxCategory)
 			{
-
 				List<LocationPrefabCategories> categoriesList = GetSelectedCategoriesList(item.categories);
 				if (categoriesList == null || categoriesList.Count == 0)
 				{
@@ -198,7 +197,6 @@ namespace Mapbox.Unity.MeshGeneration.Interfaces
 							concatenatedString += "," + string.Join(",", stringsList.ToArray());
 						}
 					}
-
 					LayerFilter filter = new LayerFilter(LayerFilterOperationType.Contains)
 					{
 						Key = propertyName,
@@ -222,7 +220,6 @@ namespace Mapbox.Unity.MeshGeneration.Interfaces
 
 			string propertyName = "";
 			item.densityPropertyFromFindByTypeDictionary.TryGetValue(item.findByType, out propertyName);
-
 			if (item.findByType == LocationPrefabFindBy.MapboxCategory || item.findByType == LocationPrefabFindBy.POIName)
 			{
 				LayerFilter filter = new LayerFilter(LayerFilterOperationType.IsLess)

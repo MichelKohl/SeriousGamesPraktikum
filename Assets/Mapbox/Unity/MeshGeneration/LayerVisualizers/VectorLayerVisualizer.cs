@@ -14,6 +14,8 @@ namespace Mapbox.Unity.MeshGeneration.Interfaces
 	using Mapbox.Unity.Utilities;
 	using Mapbox.Unity.MeshGeneration.Filters;
 	using Mapbox.Map;
+	using UnityEngine.UIElements;
+	using Mapbox.Unity.MeshGeneration.Factories;
 
 	public class VectorLayerVisualizerProperties
 	{
@@ -59,10 +61,9 @@ namespace Mapbox.Unity.MeshGeneration.Interfaces
 		protected ModifierStackBase _defaultStack;
 		private HashSet<ulong> _activeIds;
 		private Dictionary<UnityTile, List<ulong>> _idPool; //necessary to keep _activeIds list up to date when unloading tiles
-		private string _key;
+		private string key;
 
 		protected HashSet<ModifierBase> _coreModifiers = new HashSet<ModifierBase>();
-
 		public override string Key
 		{
 			get { return _layerProperties.coreOptions.layerName; }
@@ -533,9 +534,7 @@ namespace Mapbox.Unity.MeshGeneration.Interfaces
 					{
 						yield break;
 					}
-
 					ProcessFeature(i, tile, tempLayerProperties, layer.Extent);
-
 					if (IsCoroutineBucketFull && !(Application.isEditor && !Application.isPlaying))
 					{
 						//Reset bucket..
@@ -549,7 +548,6 @@ namespace Mapbox.Unity.MeshGeneration.Interfaces
 			|| tempLayerProperties.featureProcessingStage == FeatureProcessingStage.Process);
 
 			#endregion
-
 			#region PostProcess
 			// TODO : Clean this up to follow the same pattern.
 			var mergedStack = _defaultStack as MergedModifierStack;
@@ -586,7 +584,6 @@ namespace Mapbox.Unity.MeshGeneration.Interfaces
 				tile,
 				layerProperties.vectorTileLayer.Extent,
 				layerProperties.buildingsWithUniqueIds);
-
 
 			if (IsFeatureEligibleAfterFiltering(feature, tile, layerProperties))
 			{
@@ -655,7 +652,7 @@ namespace Mapbox.Unity.MeshGeneration.Interfaces
 
 			if (feature.Points.Count < 1)
 				return;
-
+			
 			//this will be improved in next version and will probably be replaced by filters
 			var styleSelectorKey = _layerProperties.coreOptions.sublayerName;
 
