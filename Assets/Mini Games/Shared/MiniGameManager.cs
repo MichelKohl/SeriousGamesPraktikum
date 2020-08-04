@@ -3,14 +3,43 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class MiniGameManager : MonoBehaviour
-{   // TODO delete all player prefs on app start.
-    [SerializeField] protected string gameName;
+public class MiniGameManager : AchievementManager
+{
     [SerializeField] protected TextMeshProUGUI scoreLabel;
 
     protected GameState state;
-    private int score;
     private bool initGameState;
+    public int Score { get => observableInts["score"]; set => observableInts["score"] = value; }
+
+    public override void InitializeObservables()
+    {
+        base.InitializeObservables();
+        Score = 0;
+    }
+
+    // Start is called before the first frame update
+    protected override void Start()
+    {
+        base.Start();
+
+        PlayerPrefs.DeleteAll();
+
+        state = GameState.Start;
+        initGameState = true;
+    }
+
+    // Update is called once per frame
+    protected override void Update()
+    {
+        base.Update();
+        if (initGameState)
+        {
+            InitGameState();
+            initGameState = false;
+        }
+        else scoreLabel.text = $"{Score}";
+        DoUpdate();
+    }
     /// <summary>
     /// Initializes a gamestate. Should be implemented by inheriting class.
     /// Is called after a change of game state (used to toggle UI etc.).
@@ -47,8 +76,9 @@ public class MiniGameManager : MonoBehaviour
         state = GameState.GameOver;
         initGameState = true;
         // save highscore
-        PlayerPrefs.SetInt($"{gameName} Score",
-         Mathf.Max(PlayerPrefs.GetInt($"{gameName} Score", 0), score));
+        Profile playerProfile = GameManager.INSTANCE.profile;
+        playerProfile.SetHighscore(gameName,
+            Mathf.Max(playerProfile.GetHighscore(gameName), Score));
     }
    /// <summary>
    /// Returns whether current state is "Start Menu".
@@ -89,19 +119,6 @@ public class MiniGameManager : MonoBehaviour
         SceneManager.LoadScene("Scenes/DefaultScreen");
     }
     /// <summary>
-    /// Increases current score.
-    /// </summary>
-    /// <param name="points">Points by which the score is increased.</param>
-    public void IncreaseScoreBy(int points)
-    {
-        score += points;
-    }
-
-    public int GetScore()
-    {
-        return score;
-    }
-    /// <summary>
     /// Coroutine used to make a text blink (by fading in and out).
     /// </summary>
     /// <param name="text">UI text element to make blink</param>
@@ -128,28 +145,11 @@ public class MiniGameManager : MonoBehaviour
     private IEnumerator FadeOutText(float speed, TextMeshProUGUI text)
     {
         text.color = new Color(text.color.r, text.color.g, text.color.b, 1);
-        while (text.color.a > 0.0f){
+        while (text.color.a > 0.0f)
+        {
             text.color = new Color(text.color.r, text.color.g, text.color.b,
                 text.color.a - (Time.deltaTime * speed));
             yield return null;
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        score = 0;
-        state = GameState.Start;
-        initGameState = true;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(initGameState) {
-            InitGameState();
-            initGameState = false;
-        } else scoreLabel.text = $"{score}";
-        DoUpdate();
     }
 }

@@ -20,7 +20,7 @@ public class SpaceInvaderGameManager : MiniGameManager
             case GameState.Start:
                 blinking = StartCoroutine(FadeBlink(infoLabel));
                 tryAgainButton.gameObject.SetActive(false);
-                IncreaseScoreBy(PlayerPrefs.GetInt("Space Invaders Current Score", 0));
+                Score += PlayerPrefs.GetInt("Space Invaders Current Score", 0);
                 foreach (Transform row in GameObject.Find("Alien Invaders").transform)
                     nrOfEnemies += row.childCount;
                 levelLabel.text = $"Level {PlayerPrefs.GetInt("Space Invaders Level", 1)}";
@@ -46,7 +46,7 @@ public class SpaceInvaderGameManager : MiniGameManager
     {
         if(killCounter == nrOfEnemies)
         {
-            PlayerPrefs.SetInt("Space Invaders Current Score", GetScore());
+            PlayerPrefs.SetInt("Space Invaders Current Score", Score);
             PlayerPrefs.SetInt("Space Invaders Level", PlayerPrefs.GetInt("Space Invaders Level", 1) + 1);
             ResetGame();
         }

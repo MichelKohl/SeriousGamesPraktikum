@@ -9,6 +9,14 @@ public class SnakeGameManager : MiniGameManager
     [SerializeField] private Button playAgainButton;
     [SerializeField] private Joystick joystick;
 
+    public int NrOfTimesTeleported { get => ObservableInt("times teleported"); set => ObservableInt("times teleported", value); }
+
+    public override void InitializeObservables()
+    {
+        base.InitializeObservables();
+        NrOfTimesTeleported = 0;
+    }
+
     protected override void InitGameState()
     {
       switch (state)

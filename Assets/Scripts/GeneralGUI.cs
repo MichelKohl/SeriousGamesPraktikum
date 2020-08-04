@@ -66,6 +66,11 @@ public class GeneralGUI : MonoBehaviour
 
     private List<GameObject> characterButtons = new List<GameObject>();
 
+    [SerializeField] private GameObject achievementsView;
+    [SerializeField] private AchievementsView achievementScrollView;
+    [SerializeField] private GameObject highscoreView;
+    [SerializeField] private HighscoreView highscoreScrollView;
+
     private TouchScreenKeyboard keyboard;
     private bool changeName = false;
 
@@ -268,4 +273,25 @@ public class GeneralGUI : MonoBehaviour
         initCharacterSelection();
     }
 
+    public void ChangeToAchievementsView()
+    {
+        achievementsView.gameObject.SetActive(true);
+        achievementScrollView.ChangeToAchievementView();
+    }
+
+    public void AchievementViewBack()
+    {
+        achievementsView.gameObject.SetActive(false);
+    }
+
+    public void ChangeToHighscoresView()
+    {
+        highscoreView.SetActive(true);
+        highscoreScrollView.ChangeToHighscoreView();
+    }
+
+    public void HighscoreViewBack()
+    {
+        highscoreView.gameObject.SetActive(false);
+    }
 }

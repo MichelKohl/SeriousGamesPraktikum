@@ -26,7 +26,7 @@ public class Food : GameplayObject
     private void OnTriggerEnter2D(Collider2D collider){
         transform.position = GetRandomPosition();
         collider.gameObject.transform.parent.gameObject.GetComponent<Snake>().Eat();
-        manager.IncreaseScoreBy(points);
+        manager.Score += points;
     }
     /// <summary>
     /// Gets a random position for the food object to spawn in.

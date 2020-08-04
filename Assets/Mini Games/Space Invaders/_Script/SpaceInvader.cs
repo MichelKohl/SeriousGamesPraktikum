@@ -56,7 +56,7 @@ public class SpaceInvader : GameplayObject
             case "Projectile":
                 collider.gameObject.GetComponent<Projectile>().Deactivate();
                 transform.Find("Explosion").GetComponent<Explosion>().Explode();
-                manager.IncreaseScoreBy(points);
+                manager.Score += points;
                 ((SpaceInvaderGameManager)manager).IncreaseKillCount();
             break;
             case "Game Over":

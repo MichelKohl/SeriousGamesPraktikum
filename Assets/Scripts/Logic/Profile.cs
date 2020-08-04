@@ -44,6 +44,10 @@ public class Profile
     /// </summary>
     private float totalPlaytime;
 
+    private HighscoreStorage highscoreStorage;
+
+    private AchievementStorage achievementStorage;
+
     /// <summary>
     /// The list of characters that already were bought by the player.
     /// </summary>
@@ -65,6 +69,8 @@ public class Profile
         this.charactersBought.Add(8); //son is free at the beginning
         this.charactersBought.Add(0); //daughter is free at the beginning
         this.selectedCharacterID = selectedCharacterID;
+        highscoreStorage = new HighscoreStorage();
+        achievementStorage = new AchievementStorage();
     }
 
     public void setProfileName(string name) {
@@ -107,6 +113,11 @@ public class Profile
         return this.coins;
     }
 
+    public void IncreaseCoinsBy(int amount)
+    {
+        this.coins += amount;
+    }
+
     public void setDistanceTraveled(double distance) {
         this.distanceTraveled = distance; 
     }
@@ -123,10 +134,82 @@ public class Profile
         return this.totalPlaytime;
     }
 
+public void SetHighscore(string gameName, int score)
+{
+    if (highscoreStorage == null) highscoreStorage = new HighscoreStorage();
+    highscoreStorage.highscores[gameName] = score;
 }
 
+public int GetHighscore(string gameName)
+{
+    return highscoreStorage.highscores.ContainsKey(gameName) ? highscoreStorage.highscores[gameName] : 0;
+}
+
+public Dictionary<string, int> GetHighscores()
+{
+    if (highscoreStorage == null)
+            highscoreStorage = new HighscoreStorage();
+    return highscoreStorage.highscores;
+}
+
+public void AddAchievement(string gameName, string achievementName)
+{
+    if (achievementStorage == null) achievementStorage = new AchievementStorage();
+    achievementStorage.isAchieved[gameName][achievementName] = false;
+}
+
+public void SetAchievements(string gameName, Dictionary<string, bool> isAchieved)
+{
+    if (achievementStorage == null) achievementStorage = new AchievementStorage();
+    achievementStorage.isAchieved[gameName] = isAchieved;
+
+}
+
+public void SetAchievementsInfo(string gameName, Dictionary<string, (TrophyType trophyType, string desription, int reward)> info)
+{
+    achievementStorage.info[gameName] = info;
+}
+
+public void SetAchieved(string gameName, string achievementName)
+{
+    if (achievementStorage == null) achievementStorage = new AchievementStorage();
+    achievementStorage.isAchieved[gameName][achievementName] = true;
+}
+
+public Dictionary<string, bool> GetAchieved(string gameName)
+{
+    if (achievementStorage.isAchieved.ContainsKey(gameName))
+        return achievementStorage.isAchieved[gameName];
+    else
+        return null;
+}
+
+public AchievementStorage GetAchievements()
+{
+    if (achievementStorage == null)
+        achievementStorage = new AchievementStorage();
+    return achievementStorage;
+}
+
+}
 public enum Profiletype {
     NONE = -1,
     LOCALRESIDENT = 0,
     TOURIST = 1
 }
+
+[Serializable]
+public class HighscoreStorage
+{
+    public Dictionary<string, int> highscores = new Dictionary<string, int>();
+}
+
+[Serializable]
+public class AchievementStorage
+{
+    public Dictionary<string, Dictionary<string, bool>> isAchieved = new Dictionary<string, Dictionary<string, bool>>();
+
+    public Dictionary<string, Dictionary<string, (TrophyType trophyType, string description, int reward)>> info =
+        new Dictionary<string, Dictionary<string, (TrophyType trophyType, string description, int reward)>>();
+}
+
