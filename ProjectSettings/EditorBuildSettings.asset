@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Mini Games/Snake/Gameplay.unity
     guid: 89a5421dfcede40898a64d0973fb30e0
+  - enabled: 1
+    path: Assets/Mini Games/Location Based Games/Storytelling Games/Story Game.unity
+    guid: b4d8c9cca47d44b09824dbd174a1f589
   m_configObjects: {}

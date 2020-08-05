@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29934e5012da2457c9a358855c720f61, type: 3}
+  m_Name: Start
+  m_EditorClassIdentifier: 
+  id: 0
+  description: "Sei gegr\xFC\xDFt Champion! Seit Tagen ist unsere Stadt vom Handel
+    abgeschnitten. Unsere Vorr\xE4te reichen kaum noch aus, um uns zu versorgen. 
+    Finde heraus, warum unsere Karawanen verschwinden. Als Belohnung versprechen
+    wir dir dein Gewicht in Gold aufgewogen! Nun Los!"
+  decisions:
+  - description: Zum Banditen Dorf
+    nextSituationID: 1
+    conditionDistance: 5
+  - description: "Zum H\xE4ndler Dorf"
+    nextSituationID: 2
+    conditionDistance: 2

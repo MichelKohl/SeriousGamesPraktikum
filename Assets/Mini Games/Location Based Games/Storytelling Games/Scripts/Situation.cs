@@ -7,6 +7,7 @@ using UnityEngine;
 public class Situation : ScriptableObject
 {
     public int id;
+    [Multiline]
     public string description;
     public DecisionInfo[] decisions;
 }
