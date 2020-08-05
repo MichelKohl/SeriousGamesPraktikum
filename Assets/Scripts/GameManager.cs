@@ -87,6 +87,14 @@ public class GameManager : MonoBehaviour
                 Resources.Load<Sprite>("Snake")
             )
         );
+
+        miniGames.Add(
+            new MiniGame(
+                "Dungeon Crawler",
+                "Mini Games/DungeonCrawler/Gameplay",
+                Resources.Load<Sprite>("DungeonCrawler")
+            )
+        );
     }
 
     /// <summary>
