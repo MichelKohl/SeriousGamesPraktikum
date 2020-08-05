@@ -20,6 +20,8 @@ public class AchievementsView : MonoBehaviour
             GameManager gameManager = GameManager.INSTANCE;
             AchievementStorage storage = gameManager.profile.GetAchievements();
 
+            foreach (Transform child in transform)
+                GameObject.Destroy(child.gameObject);
             foreach (string gameName in storage.isAchieved.Keys)
                 foreach (string achievementName in storage.isAchieved[gameName].Keys)
                 {

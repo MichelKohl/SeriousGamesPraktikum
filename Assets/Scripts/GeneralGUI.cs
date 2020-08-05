@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 using Mapbox.CheapRulerCs;
 using Mapbox.Unity.Location;
 
@@ -247,6 +248,14 @@ public class GeneralGUI : MonoBehaviour
     {
         foreach (GameObject go in characterButtons)
         {
+            if (GameManager.INSTANCE.profile.charactersBought == null)
+            {
+                GameManager.INSTANCE.profile.charactersBought = new List<int>();
+                GameManager.INSTANCE.profile.charactersBought.Add(8); //son is free at the beginning
+                GameManager.INSTANCE.profile.charactersBought.Add(0); //daughter is free at the beginning
+                GameManager.INSTANCE.profile.selectedCharacterID = 0;
+            }   
+                
             foreach (int id in GameManager.INSTANCE.profile.charactersBought)
             {
                 if (go.GetComponent<CharacterID>().id == id)
@@ -319,5 +328,15 @@ public class GeneralGUI : MonoBehaviour
     public void HighscoreViewBack()
     {
         highscoreView.gameObject.SetActive(false);
+    }
+
+    public void PlaySpaceInvaders()
+    {
+        SceneManager.LoadScene(2);
+    }
+
+    public void PlaySnakes()
+    {
+        SceneManager.LoadScene(3);
     }
 }

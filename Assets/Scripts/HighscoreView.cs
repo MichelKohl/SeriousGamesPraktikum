@@ -15,7 +15,8 @@ public class HighscoreView : MonoBehaviour
 
             GameManager gameManager = GameManager.INSTANCE;
             Dictionary<string, int> highscores = gameManager.profile.GetHighscores();
-
+            foreach (Transform child in transform)
+                GameObject.Destroy(child.gameObject);
             // TODO get game icons for highscore view
             foreach (string gameTitle in highscores.Keys)
                 _ = Instantiate(prefab, transform).Init(gameTitle, highscores[gameTitle]);
