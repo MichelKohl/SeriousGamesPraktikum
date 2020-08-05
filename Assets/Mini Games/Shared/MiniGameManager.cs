@@ -79,6 +79,10 @@ public class MiniGameManager : AchievementManager
         Profile playerProfile = GameManager.INSTANCE.profile;
         playerProfile.SetHighscore(gameName,
             Mathf.Max(playerProfile.GetHighscore(gameName), Score));
+        // add earned coins to profile
+        GameManager.INSTANCE.profile.setCoins((int) GameManager.INSTANCE.profile.getCoins() + (Score / 20));
+        // save progress
+        GameManager.INSTANCE.SaveProfile(GameManager.INSTANCE.profile);
     }
    /// <summary>
    /// Returns whether current state is "Start Menu".
@@ -116,6 +120,10 @@ public class MiniGameManager : AchievementManager
     /// </summary>
     public void ExitGame()
     {
+        // add earned coins to profile
+        GameManager.INSTANCE.profile.setCoins((int)GameManager.INSTANCE.profile.getCoins() + (Score / 20));
+        // save progress
+        GameManager.INSTANCE.SaveProfile(GameManager.INSTANCE.profile);
         SceneManager.LoadScene("Scenes/DefaultScreen");
     }
     /// <summary>

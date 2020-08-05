@@ -74,6 +74,8 @@ public class GeneralGUI : MonoBehaviour
     private TouchScreenKeyboard keyboard;
     private bool changeName = false;
 
+    [SerializeField]
+    private GameObject insufficientCoinsTextbox;
 
     // Start is called before the first frame update
     void Start()
@@ -90,6 +92,9 @@ public class GeneralGUI : MonoBehaviour
         characterButtons.Add(son01Button);
 
         GameManager.INSTANCE.LoadCharacter();
+
+        initCharacterSelection();
+        profileButton.image.sprite = ProfileCharacterImageButton.GetComponent<Image>().sprite;
     }
 
     // Update is called once per frame
@@ -229,6 +234,9 @@ public class GeneralGUI : MonoBehaviour
         //activate the selected character model by getting the id
         GameObject.Find("Player").transform.GetChild(GameManager.INSTANCE.profile.selectedCharacterID + 2).gameObject.SetActive(true);
 
+        //update player button
+        profileButton.image.sprite = pressedButton.GetComponent<Image>().sprite;
+
         GameManager.INSTANCE.SaveProfile(GameManager.INSTANCE.profile);
     }
 
@@ -262,6 +270,11 @@ public class GeneralGUI : MonoBehaviour
     public void buy(GameObject button)
     {
         int costs = button.transform.GetChild(0).gameObject.GetComponent<Costs>().costs;
+        if (GameManager.INSTANCE.profile.getCoins() - costs < 0)
+        {
+            StartCoroutine(showTextboxForSeconds(insufficientCoinsTextbox, 3f));
+            return;
+        }
         GameManager.INSTANCE.profile.setCoins(GameManager.INSTANCE.profile.getCoins() - costs);
         coinsText.SetText(GameManager.INSTANCE.profile.getCoins().ToString());
         button.GetComponent<Button>().interactable = true;
@@ -271,6 +284,19 @@ public class GeneralGUI : MonoBehaviour
         GameManager.INSTANCE.SaveProfile(GameManager.INSTANCE.profile);
 
         initCharacterSelection();
+    }
+
+    /// <summary>
+    /// This Coroutine displays a textbox panel for a certain amount of seconds.
+    /// </summary>
+    /// <param name="textbox">the panel that should be displayed</param>
+    /// <param name="sec">the amount of seconds, the panel should be displayed</param>
+    /// <returns></returns>
+    IEnumerator showTextboxForSeconds(GameObject textbox, float sec)
+    {
+        textbox.SetActive(true);
+        yield return new WaitForSeconds(sec);
+        textbox.SetActive(false);
     }
 
     public void ChangeToAchievementsView()
