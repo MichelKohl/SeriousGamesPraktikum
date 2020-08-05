@@ -17,5 +17,4 @@ MonoBehaviour:
   decisions:
   - description: Hello!
     nextSituationID: 0
-    condition:
-      text: hello
+    conditionDistance: 0

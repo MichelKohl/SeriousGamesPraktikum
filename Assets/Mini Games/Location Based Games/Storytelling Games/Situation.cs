@@ -16,7 +16,7 @@ public struct DecisionInfo
 {
     public string description;
     public int nextSituationID;
-    public DecisionCondition condition;
+    public double conditionDistance;
 }
 
 

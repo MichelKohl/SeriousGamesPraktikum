@@ -9,15 +9,15 @@ public class Decision : MonoBehaviour
 
     public string Description { get; private set; }
     public int NextSituationID { get; private set; }
-    public DecisionCondition Condition { get; private set; }
+    public double Condition { get; private set; }
 
-    public Decision Init(string description, int nextSituationID, DecisionCondition condition)
+    public Decision Init(string description, int nextSituationID, double condition)
     {
         Description = description;
         NextSituationID = nextSituationID;
         Condition = condition;
 
-        this.description.text = description;
+        this.description.text = description + $" [{condition} km]";
 
         gameObject.SetActive(true);
         return this;
@@ -25,12 +25,6 @@ public class Decision : MonoBehaviour
 
     public void OnClick()
     {
-        storyManager.ChangeSituation(toID: NextSituationID);
+        storyManager.ChangeSituation(toID: NextSituationID, Condition);
     }
-}
-
-[Serializable]
-public struct DecisionCondition
-{
-    public string text;
 }

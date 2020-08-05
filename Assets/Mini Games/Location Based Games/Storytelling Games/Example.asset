@@ -19,5 +19,4 @@ MonoBehaviour:
   decisions:
   - description: Do Ju-Jutsu
     nextSituationID: 1
-    condition:
-      text: hello
+    conditionDistance: 1
