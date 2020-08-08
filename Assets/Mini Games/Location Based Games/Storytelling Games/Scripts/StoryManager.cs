@@ -11,10 +11,12 @@ public class StoryManager : MonoBehaviour
     [SerializeField] private Decision decisionPrefab;
     [SerializeField] private bool turnOffWalkingRequirement = false;
     [SerializeField] private WalkingText textWhenWalking;
+    [SerializeField] private float skyboxRotationSpeed = 0.2f;
 
     private int currentSituationID = 0;
     private GameManager manager;
     private double distanceToWalk;
+    private Transform camTransform;
 
     public void ChangeSituation(int toID = 0, double distanceToWalk = 0)
     {
@@ -24,13 +26,17 @@ public class StoryManager : MonoBehaviour
 
     void Start()
     {
-        ChangeSituation();
-        distanceToWalk = 0;
         manager = GameManager.INSTANCE;
+        camTransform = Camera.main.transform;
+        distanceToWalk = 0;
+        ChangeSituation();
     }
 
     private void Update()
     {
+        RenderSettings.skybox.SetFloat("_Rotation", Time.time * skyboxRotationSpeed);
+
+
         if (manager == null) manager = GameManager.INSTANCE;
     }
 
@@ -60,5 +66,8 @@ public class StoryManager : MonoBehaviour
         foreach (DecisionInfo info in current.decisions)
             Instantiate(decisionPrefab, decisionsPanel.transform).
                 Init(info.description, info.nextSituationID, info.conditionDistance);
+
+        camTransform.position = current.cameraPosition;
+        camTransform.rotation = Quaternion.Euler(current.cameraRotation);
     }
 }

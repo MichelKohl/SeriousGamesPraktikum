@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29934e5012da2457c9a358855c720f61, type: 3}
   m_Name: Start
   m_EditorClassIdentifier: 
-  id: 0
+  cameraPosition: {x: 57.45, y: 3.18, z: 74.28}
+  cameraRotation: {x: 0, y: 295.085, z: 0}
   description: "Sei gegr\xFC\xDFt Champion! Seit Tagen ist unsere Stadt vom Handel
     abgeschnitten. Unsere Vorr\xE4te reichen kaum noch aus, um uns zu versorgen. 
     Finde heraus, warum unsere Karawanen verschwinden. Als Belohnung versprechen
