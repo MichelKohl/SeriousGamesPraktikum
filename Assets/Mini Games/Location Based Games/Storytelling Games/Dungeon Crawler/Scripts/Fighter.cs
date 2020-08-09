@@ -1,20 +1,27 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Fighter : MonoBehaviour
 {
     // fighter settings
+    [SerializeField] private string fighterName;
     [SerializeField] protected int level = 1;
     [SerializeField] private float maxHealth = 100f;
-    [SerializeField] private int healthRegen = 0;
+    [SerializeField] private float healthRegen = 1f;
     [SerializeField] private float initiative = 7f;
     [SerializeField] private float maxStamina = 100f;
-    [SerializeField] private int staminaRegen = 10;
+    [SerializeField] private float staminaRegen = 2f;
     [SerializeField] private float maxMana = 100f;
-    [SerializeField] private int manaRegen = 10;
+    [SerializeField] private float manaRegen = 2f;
     // UI
-    //[SerializeField] private 
+    [SerializeField] private TextMeshProUGUI nameLabel;
+    [SerializeField] private Image healthBar;
+    [SerializeField] private Image staminaBar;
+    [SerializeField] private Image manaBar;
+    [SerializeField] private Image initiativeBar;
     // max caps for values during fight (can be increased when fighting)
     private float currentMaxHealth;
     private float currentMaxStamina;
@@ -41,6 +48,7 @@ public class Fighter : MonoBehaviour
     protected virtual void Start()
     {
         ResetFighterValues();
+        nameLabel.text = fighterName;
     }
 
     // Update is called once per frame
@@ -50,7 +58,12 @@ public class Fighter : MonoBehaviour
         stamina = Mathf.Min(currentMaxStamina, stamina * staminaRegen);
         mana = Mathf.Min(currentMaxMana, mana * manaRegen);
 
-        if (CanAttack) StartCoroutine(Attacking()); 
+        healthBar.fillAmount = health / currentMaxHealth;
+        staminaBar.fillAmount = stamina / currentMaxStamina;
+        manaBar.fillAmount = mana / currentMaxMana;
+        initiativeBar.fillAmount = timer / (10f - initiative);
+
+        if (CanAttack) { }// StartCoroutine(Attacking()); 
     }
 
     public void ResetFighterValues()

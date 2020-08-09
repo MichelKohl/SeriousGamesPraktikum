@@ -4,6 +4,7 @@ using TMPro;
 
 public class StoryManager : MonoBehaviour
 {
+    [SerializeField] private int startSituationID = 0;
     [SerializeField] private TextMeshProUGUI currentSituation;
     [SerializeField] private DecisionsPanel decisionsPanel;
     [SerializeField] private Situation[] situations;
@@ -28,7 +29,7 @@ public class StoryManager : MonoBehaviour
         manager = GameManager.INSTANCE;
         camTransform = Camera.main.transform;
         distanceToWalk = 0;
-        ChangeSituation();
+        ChangeSituation(startSituationID);
     }
 
     protected virtual void Update()
