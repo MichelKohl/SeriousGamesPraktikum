@@ -35,7 +35,6 @@ public class StoryManager : MonoBehaviour
     {
         RenderSettings.skybox.SetFloat("_Rotation", Time.time * skyboxRotationSpeed);
 
-
         if (manager == null) manager = GameManager.INSTANCE;
     }
 
