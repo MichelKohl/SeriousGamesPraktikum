@@ -30,13 +30,13 @@ public class Item : ScriptableObject
 
 public enum Scaling : int
 {
-    S = 21,
-    A = 12,
-    B = 8,
-    C = 5,
-    D = 3,
-    E = 2,
-    F = 1
+    S = 13,
+    A = 8,
+    B = 5,
+    C = 3,
+    D = 2,
+    E = 1,
+    F = 0
 }
 
 public enum Status

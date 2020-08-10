@@ -77,7 +77,7 @@ public class StoryManager : MonoBehaviour
 
         foreach (Transform child in decisionsPanel.transform)
             GameObject.Destroy(child.gameObject);
-        foreach (NextPoint info in current.decisions)
+        foreach (NextPoint info in current.options)
             Instantiate(decisionPrefab, decisionsPanel.transform).
                 Init(info.description, info.nextSituationID, info.conditionDistance);
 

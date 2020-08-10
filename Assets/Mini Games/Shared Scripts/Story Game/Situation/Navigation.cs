@@ -7,7 +7,5 @@ using System;
 [Serializable]
 public class Navigation : Situation
 {
-    public Vector3 camPosition;
-    public Vector3 camRotation;
-    public NextPoint[] decisions;
+    public NextPoint[] options;
 }

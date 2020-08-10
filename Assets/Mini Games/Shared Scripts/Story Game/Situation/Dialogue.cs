@@ -7,5 +7,8 @@ using System;
 [Serializable]
 public class Dialogue : Situation
 {
-
+    public DialogueOption[] options;
+    public Fighter[] enemies;
+    public Vector3[] enemyPosition;
+    public Vector3[] enemyRotation;
 }

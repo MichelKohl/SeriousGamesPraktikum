@@ -7,6 +7,7 @@ using System;
 [Serializable]
 public class Armor : Item
 {
+    public ArmorType type;
     private int resistance;
     public float initiativeModifier;
     public float healthModifier;
@@ -30,4 +31,13 @@ public class Armor : Item
     {
         return IsCritical(luck);
     }
+}
+
+public enum ArmorType
+{
+    Head,
+    Arms,
+    Body,
+    Legs,
+    Ring
 }

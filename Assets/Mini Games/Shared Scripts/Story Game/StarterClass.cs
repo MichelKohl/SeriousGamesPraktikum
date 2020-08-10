@@ -16,7 +16,12 @@ public class StarterClass : ScriptableObject
     public int faith;       // -> effectiveness of faith spells & mana regen
     public int luck;        // -> chance of critical hits & effects (stun, bleed, poison etc.) and chance of evading an attack
     //starter equipment
-    public Weapon[] weapons;        // at most two
-    public Armor[] equipment;       // at most five
-    public Consumable[] consumables;// no limited amounts 
+    public Armor headArmor;
+    public Armor armsArmor;
+    public Armor bodyArmor;
+    public Armor legsArmor;
+    public Armor ring;
+    public Weapon leftWeapon;
+    public Weapon rightWeapon;
+    public Consumable[] consumables;
 }

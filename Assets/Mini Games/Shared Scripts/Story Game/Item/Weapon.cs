@@ -13,9 +13,8 @@ public class Weapon : Item
     private bool bleed = false;
     private bool poison = false;
     private bool stun = false;
-    private bool healPoison = false;
 
-    public float GetDamage(int strength, int dexterity, int intelligence, int faith, int luck, int accuracy)
+    public float GetDamage(int strength, int dexterity, int intelligence, int faith, int luck, int accuracy, float attackModifier)
     {
         int scalingFactor = 0;
         scalingFactor += strength *     (int) strengthScaling;
@@ -24,19 +23,17 @@ public class Weapon : Item
         scalingFactor += faith *        (int) faithScaling;
         scalingFactor += luck *         (int) luckScaling;
         bool isCritical = IsCritical(luck);
-        return IsAccurate(accuracy) && !isCritical ? (float) damage * scalingFactor * (isCritical ? criticalModifier : 1f) : 0;
+        return IsAccurate(accuracy) && !isCritical ? damage * attackModifier * scalingFactor * (isCritical ? criticalModifier : 1f) : 0;
     }
 
-    public bool HasStatus()
+    public void ApplyStatus(Fighter target, int luck)
     {
-        return bleed || poison || stun || healPoison;
-    }
-
-    public void ApplyStatus(Fighter target, int luck, bool bleedOverride = false, bool poisonOverride = false, bool stunOverride = false)
-    {
-        if (IsCritical(luck) && (bleed || bleedOverride))   target.currentStatus.Add(Status.Bleed);
-        if (IsCritical(luck) && (poison || poisonOverride)) target.currentStatus.Add(Status.Poison);
-        if (IsCritical(luck) && (stun || stunOverride))     target.currentStatus.Add(Status.Stun);
-        if (healPoison) target.HealPoison();
+        int nrOfStatusApplied = 1 + (luck * (int)luckScaling / 100);
+        for(int i = 0; i < nrOfStatusApplied; i++)
+        {
+            if(bleed)                   target.currentStatus.Add(Status.Bleed);
+            if(poison)                  target.currentStatus.Add(Status.Poison);
+            if(stun && IsCritical(luck))target.currentStatus.Add(Status.Stun);
+        }
     }
 }

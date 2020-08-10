@@ -18,11 +18,11 @@ public class Fighter : MonoBehaviour
     [SerializeField] private float maxMana = 100f;
     [SerializeField] private float manaRegen = 2f;
     // character stats
-    public int strength;    // -> one and two handed weapons & stamina regen
-    public int dexterity;   // -> one handed weapons (especially daggers) & initiative
-    public int intelligence;// -> effectiveness of magic spells & mana regen
-    public int faith;       // -> effectiveness of faith spells & mana regen
-    public int luck;        // -> chance of critical hits & effects (stun, bleed, poison etc.) and chance of evading an attack
+    public int strength = 1;    // -> one and two handed weapons & stamina regen
+    public int dexterity = 1;   // -> one handed weapons (especially daggers) & initiative
+    public int intelligence = 1;// -> effectiveness of magic spells & mana regen
+    public int faith = 1;       // -> effectiveness of faith spells & mana regen
+    public int luck = 1;        // -> chance of critical hits & effects (stun, bleed, poison etc.) and chance of evading an attack
     // UI
     [SerializeField] private TextMeshProUGUI nameLabel;
     [SerializeField] private TextMeshProUGUI levelLabel;
@@ -40,8 +40,12 @@ public class Fighter : MonoBehaviour
     private float health;
     private float stamina;
     private float mana;
+    private float currentHealthRegen;
+    private float currentStaminaRegen;
+    private float currentManaRegen;
     private float accuracy;
     private float timer;
+    private float poisonTimer;
     // returns whether fighter can attack now (depending on initiative)
     protected bool CanAttack { get {
             timer += Time.deltaTime;
@@ -64,16 +68,41 @@ public class Fighter : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        health = Mathf.Min(currentMaxHealth, health * healthRegen);
-        stamina = Mathf.Min(currentMaxStamina, stamina * staminaRegen);
-        mana = Mathf.Min(currentMaxMana, mana * manaRegen);
+        health = Mathf.Min(currentMaxHealth, health * currentHealthRegen);
+        stamina = Mathf.Min(currentMaxStamina, stamina * currentStaminaRegen);
+        mana = Mathf.Min(currentMaxMana, mana * currentManaRegen);
 
         healthBar.fillAmount = health / currentMaxHealth;
         staminaBar.fillAmount = stamina / currentMaxStamina;
         manaBar.fillAmount = mana / currentMaxMana;
         initiativeBar.fillAmount = timer / (10f - initiative);
 
-        //TODO apply status effects depending on current status
+        // apply status effects depending on current status
+        foreach (Status status in currentStatus)
+            switch (status)
+            {
+                case Status.Poison:
+                    if(poisonTimer >= 5f)
+                    {
+                        DecreaseBy(health, 2);
+                        DecreaseBy(stamina, 2);
+                        DecreaseBy(mana, 2);
+                    }
+                    break;
+                case Status.Stun:
+                    timer = 0;
+                    DecreaseBy(mana, 50);
+                    DecreaseBy(stamina, 50);
+                    break;
+                case Status.Bleed:
+                    DecreaseBy(health, 5);
+                    DecreaseBy(mana, 5);
+                    DecreaseBy(stamina, 5);
+                    break;
+            }
+        poisonTimer = poisonTimer >= 5f ? 0 : poisonTimer + Time.deltaTime;
+        currentStatus.RemoveAll(status => status == Status.Bleed);
+
         if (CanAttack) { }// StartCoroutine(Attacking()); 
     }
 
@@ -88,6 +117,9 @@ public class Fighter : MonoBehaviour
         currentInitiative = initiative;
         accuracy = 1f;
         timer = 0f;
+        currentHealthRegen = healthRegen;
+        currentStaminaRegen = staminaRegen;
+        currentManaRegen = manaRegen;
         IsAttacking = false;
     }
 
@@ -101,6 +133,11 @@ public class Fighter : MonoBehaviour
         IncreaseBy(health, percent);
     }
 
+    public void IncreaseHealthRegenBy(int percent)
+    {
+        IncreaseBy(currentHealthRegen, percent);
+    }
+
     public void IncreaseMaxStaminaBy(int percent, bool persistent = false)
     {
         IncreaseBy(persistent ? maxStamina : currentMaxStamina, percent);
@@ -111,6 +148,11 @@ public class Fighter : MonoBehaviour
         IncreaseBy(stamina, percent);
     }
 
+    public void IncreaseStaminaRegenBy(int percent)
+    {
+        IncreaseBy(currentStaminaRegen, percent);
+    }
+
     public void IncreaseMaxManaBy(int percent, bool persistent = false)
     {
         IncreaseBy(persistent ? maxMana : currentMaxMana, percent);
@@ -119,6 +161,11 @@ public class Fighter : MonoBehaviour
     public void IncreaseManaBy(int percent)
     {
         IncreaseBy(mana, percent);
+    }
+
+    public void IncreaseManaRegenBy(int percent)
+    {
+        IncreaseBy(currentManaRegen, percent);
     }
 
     public void IncreaseInitiativeBy(int percent, bool persistent = false)
@@ -141,6 +188,11 @@ public class Fighter : MonoBehaviour
         health -= value;
     }
 
+    public void DecreaseHealthRegenBy(int percent)
+    {
+        DecreaseBy(currentHealthRegen, percent);
+    }
+
     public void DecreaseMaxStaminaBy(int percent)
     {
         DecreaseBy(currentMaxStamina, percent);
@@ -149,6 +201,11 @@ public class Fighter : MonoBehaviour
     public void DecreaseStaminaBy(float value)
     {
         stamina -= value;
+    }
+
+    public void DecreaseStaminaRegenBy(int percent)
+    {
+        DecreaseBy(currentStaminaRegen, percent);
     }
 
     public void DecreaseMaxManaBy(int percent)
@@ -161,6 +218,11 @@ public class Fighter : MonoBehaviour
         mana -= value;
     }
 
+    public void DecreaseManaRegenBy(int percent)
+    {
+        DecreaseBy(currentManaRegen, percent);
+    }
+
     public void DecreaseInitiativeBy(int percent)
     {
         DecreaseBy(currentInitiative, percent);
@@ -169,11 +231,6 @@ public class Fighter : MonoBehaviour
     public void DecreaseAccuracyBy(int percent)
     {
         DecreaseBy(accuracy, percent);
-    }
-
-    public void HealPoison()
-    {
-        currentStatus.RemoveAll(status => status == Status.Poison);
     }
 
     protected virtual IEnumerator Attacking()
