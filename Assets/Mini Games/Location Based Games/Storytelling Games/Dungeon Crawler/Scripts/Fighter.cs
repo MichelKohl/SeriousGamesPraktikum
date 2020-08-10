@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 
 public class Fighter : MonoBehaviour
 {
@@ -16,6 +17,12 @@ public class Fighter : MonoBehaviour
     [SerializeField] private float staminaRegen = 2f;
     [SerializeField] private float maxMana = 100f;
     [SerializeField] private float manaRegen = 2f;
+    // character stats
+    public int strength;    // -> one and two handed weapons & stamina regen
+    public int dexterity;   // -> one handed weapons (especially daggers) & initiative
+    public int intelligence;// -> effectiveness of magic spells & mana regen
+    public int faith;       // -> effectiveness of faith spells & mana regen
+    public int luck;        // -> chance of critical hits & effects (stun, bleed, poison etc.) and chance of evading an attack
     // UI
     [SerializeField] private TextMeshProUGUI nameLabel;
     [SerializeField] private TextMeshProUGUI levelLabel;
@@ -28,6 +35,7 @@ public class Fighter : MonoBehaviour
     private float currentMaxStamina;
     private float currentMaxMana;
     private float currentInitiative;
+    public List<Status> currentStatus;
     // current figher values
     private float health;
     private float stamina;
@@ -42,14 +50,15 @@ public class Fighter : MonoBehaviour
     // returns whether figher is attacking right now
     public bool IsAttacking { get; private set; }
     // 
-    private Action<float, int> IncreaseBy = (value, percent) => value *= 1f + (percent / 100);
-    private Action<float, int> DecreaseBy = (value, percent) => value *= 1f - (percent / 100);
+    protected Action<float, int> IncreaseBy = (value, percent) => value *= 1f + (percent / 100);
+    protected Action<float, int> DecreaseBy = (value, percent) => value *= 1f - (percent / 100);
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
         ResetFighterValues();
         nameLabel.text = fighterName;
+        currentStatus = new List<Status>();
     }
 
     // Update is called once per frame
@@ -64,6 +73,7 @@ public class Fighter : MonoBehaviour
         manaBar.fillAmount = mana / currentMaxMana;
         initiativeBar.fillAmount = timer / (10f - initiative);
 
+        //TODO apply status effects depending on current status
         if (CanAttack) { }// StartCoroutine(Attacking()); 
     }
 
@@ -77,6 +87,7 @@ public class Fighter : MonoBehaviour
         currentMaxMana = maxMana;
         currentInitiative = initiative;
         accuracy = 1f;
+        timer = 0f;
         IsAttacking = false;
     }
 
@@ -158,6 +169,11 @@ public class Fighter : MonoBehaviour
     public void DecreaseAccuracyBy(int percent)
     {
         DecreaseBy(accuracy, percent);
+    }
+
+    public void HealPoison()
+    {
+        currentStatus.RemoveAll(status => status == Status.Poison);
     }
 
     protected virtual IEnumerator Attacking()

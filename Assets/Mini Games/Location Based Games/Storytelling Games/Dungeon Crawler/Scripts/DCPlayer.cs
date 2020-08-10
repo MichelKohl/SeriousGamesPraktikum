@@ -5,9 +5,12 @@ using UnityEngine;
 public class DCPlayer : Fighter
 {
     [SerializeField] private float xpForNextLvlUp = 100f;
-    [SerializeField] private float nextXpMultiplier = 2.1f;
+    [SerializeField] private float nextXpMultiplier = 1.5f;
 
     private float currentXP = 0f;
+
+    // TODO equipment
+
 
     protected override void Start()
     {
