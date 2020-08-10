@@ -18,6 +18,7 @@ public class Fighter : MonoBehaviour
     [SerializeField] private float manaRegen = 2f;
     // UI
     [SerializeField] private TextMeshProUGUI nameLabel;
+    [SerializeField] private TextMeshProUGUI levelLabel;
     [SerializeField] private Image healthBar;
     [SerializeField] private Image staminaBar;
     [SerializeField] private Image manaBar;

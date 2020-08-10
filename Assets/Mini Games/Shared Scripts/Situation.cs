@@ -20,26 +20,3 @@ public class NextPoint : DecisionInfo
 {
     public double conditionDistance;
 }
-
-[CreateAssetMenu(menuName = "Situation/Navigation")]
-[Serializable]
-public class Navigation : Situation
-{
-    public Vector3 camPosition;
-    public Vector3 camRotation;
-    public NextPoint[] decisions;
-}
-
-[CreateAssetMenu(menuName = "Situation/Battle")]
-[Serializable]
-public class Battle : Situation
-{
-
-}
-
-[CreateAssetMenu(menuName = "Situation/Dialogue")]
-[Serializable]
-public class Dialogue : Situation
-{
-
-}

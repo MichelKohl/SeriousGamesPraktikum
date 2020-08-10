@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5209a272026e849a6b269392eebfbdee, type: 3}
   m_Name: Village
   m_EditorClassIdentifier: 
-  cameraPosition: {x: 0, y: 0, z: 0}
-  cameraRotation: {x: 0, y: 0, z: 0}
   description: Goblins attacked us! Please Help!
-  decisions: []
   camPosition: {x: 57.45, y: 3, z: 74.28}
   camRotation: {x: 0, y: 295.085, z: 0}
+  decisions: []
