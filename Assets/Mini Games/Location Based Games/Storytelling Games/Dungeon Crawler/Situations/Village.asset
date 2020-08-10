@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29934e5012da2457c9a358855c720f61, type: 3}
+  m_Script: {fileID: 11500000, guid: 5209a272026e849a6b269392eebfbdee, type: 3}
   m_Name: Village
   m_EditorClassIdentifier: 
-  cameraPosition: {x: 57.45, y: 3, z: 74.28}
-  cameraRotation: {x: 0, y: 295.085, z: 0}
+  cameraPosition: {x: 0, y: 0, z: 0}
+  cameraRotation: {x: 0, y: 0, z: 0}
   description: Goblins attacked us! Please Help!
   decisions: []
+  camPosition: {x: 57.45, y: 3, z: 74.28}
+  camRotation: {x: 0, y: 295.085, z: 0}

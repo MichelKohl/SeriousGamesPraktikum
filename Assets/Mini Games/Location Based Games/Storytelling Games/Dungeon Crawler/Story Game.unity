@@ -1336,7 +1336,7 @@ PrefabInstance:
     - target: {fileID: 5272908335332635635, guid: b83b7669ffa7a49d49ddcbd97ac90f6e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00012207031
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5272908335332635635, guid: b83b7669ffa7a49d49ddcbd97ac90f6e,
         type: 3}
@@ -2456,9 +2456,9 @@ MonoBehaviour:
   currentSituation: {fileID: 939122773}
   decisionsPanel: {fileID: 1343262054}
   situations:
-  - {fileID: 11400000, guid: 0d4118b1831474293b88c8cecede2d35, type: 2}
-  - {fileID: 11400000, guid: ff3512b14d00f429b96497c87b680a8e, type: 2}
-  - {fileID: 11400000, guid: 6830ac07db7394194a1830c9f3d9fdbc, type: 2}
+  - {fileID: 11400000, guid: 31a8dd45a9ee741b295b6ed32a2e5ded, type: 2}
+  - {fileID: 11400000, guid: d7f5b6b9814f749a195daa1e2a55ff15, type: 2}
+  - {fileID: 11400000, guid: ba9b25396384046349e1e7833b50f820, type: 2}
   decisionPrefab: {fileID: 1029842237}
   turnOffWalkingRequirement: 1
   textWhenWalking: {fileID: 35032541}

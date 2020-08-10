@@ -20,8 +20,23 @@ public class StoryManager : MonoBehaviour
 
     public void ChangeSituation(int toID = 0, double distanceToWalk = 0)
     {
-        Debug.Log($"Change to {toID}");
-        StartCoroutine(WaitTillDistanceWalked(toID, distanceToWalk));
+        Situation situation = situations[toID];
+
+        if(situation is Navigation)
+        {
+            Debug.Log($"Change to {toID}");
+            StartCoroutine(WaitTillDistanceWalked(toID, distanceToWalk));
+        }
+        /*
+        if(situation is Dialogue)
+        {
+
+        }
+        if(situation is Battle)
+        {
+
+        }
+        */
     }
 
     protected virtual void Start()
@@ -57,16 +72,16 @@ public class StoryManager : MonoBehaviour
             currentSituation.gameObject.SetActive(true);
         }
         currentSituationID = id;
-        Situation current = situations[currentSituationID];
+        Navigation current = situations[currentSituationID] as Navigation;
         currentSituation.text = current.description;
 
         foreach (Transform child in decisionsPanel.transform)
             GameObject.Destroy(child.gameObject);
-        foreach (DecisionInfo info in current.decisions)
+        foreach (NextPoint info in current.decisions)
             Instantiate(decisionPrefab, decisionsPanel.transform).
                 Init(info.description, info.nextSituationID, info.conditionDistance);
 
-        camTransform.position = current.cameraPosition;
-        camTransform.rotation = Quaternion.Euler(current.cameraRotation);
+        camTransform.position = current.camPosition;
+        camTransform.rotation = Quaternion.Euler(current.camRotation);
     }
 }
