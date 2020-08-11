@@ -20,6 +20,7 @@ public class DCPlayer : Fighter
     [SerializeField] private Armor ring;
     [SerializeField] private Weapon leftWeapon;
     [SerializeField] private Weapon rightWeapon;
+    [SerializeField] private Light spotlight;
 
  
     protected override void Start()
@@ -45,5 +46,10 @@ public class DCPlayer : Fighter
     protected override IEnumerator Attacking()
     {
         yield return null;
+    }
+
+    public void ActivateSpotlight(bool turnOn)
+    {
+        //spotlight.gameObject.SetActive(turnOn);
     }
 }

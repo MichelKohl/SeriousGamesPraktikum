@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 using TMPro;
 using System.Collections.Generic;
 
@@ -30,6 +31,10 @@ public class Fighter : MonoBehaviour
     [SerializeField] private Image staminaBar;
     [SerializeField] private Image manaBar;
     [SerializeField] private Image initiativeBar;
+    // for battle
+    [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private Transform attackPosition;
+    [SerializeField] private Animator animator;
     // max caps for values during fight (can be increased when fighting)
     private float currentMaxHealth;
     private float currentMaxStamina;
@@ -46,16 +51,14 @@ public class Fighter : MonoBehaviour
     private float accuracy;
     private float timer;
     private float poisonTimer;
-    // returns whether fighter can attack now (depending on initiative)
-    protected bool CanAttack { get {
-            timer += Time.deltaTime;
-            if (timer >= (10f - initiative)) { timer = 0; return true; }
-            else return false; } }
-    // returns whether figher is attacking right now
-    public bool IsAttacking { get; private set; }
-    // 
+
     protected Action<float, int> IncreaseBy = (value, percent) => value *= 1f + (percent / 100);
     protected Action<float, int> DecreaseBy = (value, percent) => value *= 1f - (percent / 100);
+
+    public bool fighting = false;
+    private bool addedToAttackQueue = false;
+    private BattleManager battleManager;
+    private Vector3 enemyAttackPosition;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -63,11 +66,16 @@ public class Fighter : MonoBehaviour
         ResetFighterValues();
         nameLabel.text = fighterName;
         currentStatus = new List<Status>();
+        battleManager = GameObject.Find("Story Manager").GetComponent<BattleManager>();
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
+        if (!fighting) return;
+
+        timer += Time.deltaTime;
+
         health = Mathf.Min(currentMaxHealth, health * currentHealthRegen);
         stamina = Mathf.Min(currentMaxStamina, stamina * currentStaminaRegen);
         mana = Mathf.Min(currentMaxMana, mana * currentManaRegen);
@@ -103,7 +111,11 @@ public class Fighter : MonoBehaviour
         poisonTimer = poisonTimer >= 5f ? 0 : poisonTimer + Time.deltaTime;
         currentStatus.RemoveAll(status => status == Status.Bleed);
 
-        if (CanAttack) { }// StartCoroutine(Attacking()); 
+        if (!addedToAttackQueue && timer >= 10f - initiative)
+        {
+            addedToAttackQueue = true;
+            battleManager.AddToAttackQueue(this);
+        }
     }
 
     public void ResetFighterValues()
@@ -120,7 +132,11 @@ public class Fighter : MonoBehaviour
         currentHealthRegen = healthRegen;
         currentStaminaRegen = staminaRegen;
         currentManaRegen = manaRegen;
-        IsAttacking = false;
+    }
+
+    public string GetName()
+    {
+        return fighterName;
     }
 
     public void IncreaseMaxHealthBy(int percent, bool persistent = false)
@@ -233,17 +249,45 @@ public class Fighter : MonoBehaviour
         DecreaseBy(accuracy, percent);
     }
 
+    public void SetEnemyAttackPosition(Vector3 position)
+    {
+        enemyAttackPosition = position;
+    }
+
+    public Vector3 GetAttackPosition()
+    {
+        return attackPosition.position;
+    }
+
+    public bool IsDead()
+    {
+        return health <= 0;
+    }
+
+    public void Attack()
+    {
+        Debug.Log($"{fighterName} is attacking...");
+        if (enemyAttackPosition == null)
+        {
+            Debug.Log($"ERROR: enemy attack position of {fighterName}");
+            return;
+        }
+        animator.SetBool("run", true);
+        agent.SetDestination(enemyAttackPosition);
+        agent.enabled = true;
+    }
+
+    public bool StatsCheckOut(int strength, int dexterity, int intelligence, int faith, int luck)
+    {
+        return this.strength >= strength && this.dexterity >= dexterity && this.intelligence >= intelligence && this.faith >= faith && this.luck >= luck;
+    }
+
     protected virtual IEnumerator Attacking()
     {
-        // wait until no one is attacking...
-        // while(othersAttacking) yield return null;
-
-        // start attack
-        IsAttacking = true;
-
         yield return null;
 
-        IsAttacking = false;
-        // end attack
+        battleManager.SendAttackDone();
+        addedToAttackQueue = false;
+        timer = 0;
     }
 }

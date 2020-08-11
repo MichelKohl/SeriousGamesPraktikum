@@ -99,6 +99,36 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &2326403860489058148
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2965027913645830782}
+  m_Layer: 0
+  m_Name: Attack Positiion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2965027913645830782
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2326403860489058148}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 15}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4837562920561098992}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1371061014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,12 +150,44 @@ MonoBehaviour:
   staminaRegen: 2
   maxMana: 100
   manaRegen: 1
+  strength: 1
+  dexterity: 1
+  intelligence: 1
+  faith: 1
+  luck: 1
   nameLabel: {fileID: 6266829516384541300}
   levelLabel: {fileID: 5467116676349831621}
   healthBar: {fileID: 9082291471644383140}
   staminaBar: {fileID: 8340844021873395695}
   manaBar: {fileID: 166746551666701725}
   initiativeBar: {fileID: 6980980156159618100}
+  agent: {fileID: 211497220429582460}
+  attackPosition: {fileID: 2965027913645830782}
+  animator: {fileID: 4837562920553414810}
+  currentStatus: 
+  fighting: 0
+--- !u!195 &211497220429582460
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4837562920560809168}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &4837562920560890918
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -133,6 +195,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 170734, guid: f4864ffb159f30048a3bdafeae646afb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 180470, guid: f4864ffb159f30048a3bdafeae646afb, type: 3}
       propertyPath: m_Name
       value: Wolf
@@ -193,6 +259,38 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 19870732, guid: f4864ffb159f30048a3bdafeae646afb, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19870732, guid: f4864ffb159f30048a3bdafeae646afb, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19870732, guid: f4864ffb159f30048a3bdafeae646afb, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19870732, guid: f4864ffb159f30048a3bdafeae646afb, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19870734, guid: f4864ffb159f30048a3bdafeae646afb, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19870734, guid: f4864ffb159f30048a3bdafeae646afb, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19870734, guid: f4864ffb159f30048a3bdafeae646afb, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19870734, guid: f4864ffb159f30048a3bdafeae646afb, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4864ffb159f30048a3bdafeae646afb, type: 3}
 --- !u!1 &4837562920560809168 stripped
@@ -204,6 +302,12 @@ GameObject:
 --- !u!4 &4837562920561098992 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 480470, guid: f4864ffb159f30048a3bdafeae646afb,
+    type: 3}
+  m_PrefabInstance: {fileID: 4837562920560890918}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &4837562920553414810 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9573564, guid: f4864ffb159f30048a3bdafeae646afb,
     type: 3}
   m_PrefabInstance: {fileID: 4837562920560890918}
   m_PrefabAsset: {fileID: 0}
@@ -387,7 +491,7 @@ PrefabInstance:
     - target: {fileID: 4406981288367199262, guid: 12678e1cf5d4e42e2b1db202370e6999,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -16
+      value: -14
       objectReference: {fileID: 0}
     - target: {fileID: 4406981288367199263, guid: 12678e1cf5d4e42e2b1db202370e6999,
         type: 3}

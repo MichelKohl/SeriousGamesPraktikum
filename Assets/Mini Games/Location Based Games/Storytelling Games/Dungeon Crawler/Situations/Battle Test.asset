@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0f8ad97bc0ae4352b3c1e638b5c1f39, type: 3}
+  m_Name: Battle Test
+  m_EditorClassIdentifier: 
+  camPosition: {x: 184.68, y: 3.45, z: 73.13}
+  camRotation: {x: 0, y: 92.908, z: 0}
+  description: A Wolf is in front of you.
+  options:
+  - description: Fight
+    nextSituationID: 0
+    strRequirement: 0
+    dexRequirement: 0
+    intRequirement: 0
+    fthRequirement: 0
+    lckRequirement: 0
+    startBattle: 1
+  - description: Flee
+    nextSituationID: 0
+    strRequirement: 0
+    dexRequirement: 0
+    intRequirement: 0
+    fthRequirement: 0
+    lckRequirement: 0
+    startBattle: 0
+  talker: []
+  dialogue: []
+  enemies:
+  - {fileID: 1371061014, guid: 57665b2c1f6534f8baf7e29b39bdc18b, type: 3}
+  enemyPosition:
+  - {x: 195.02, y: 0.01350594, z: 72.49}
+  enemyRotation:
+  - {x: 0, y: -88.374, z: 0}
