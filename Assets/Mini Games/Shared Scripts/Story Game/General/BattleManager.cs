@@ -36,6 +36,7 @@ public class BattleManager : MonoBehaviour
         if(!someoneIsAttacking && attackQueue.Count > 0)
         {
             Fighter fighter = attackQueue.Dequeue();
+            Debug.Log($"battlemanager: {fighter.GetName()} will be attacking.");
             if (!fighter.IsDead())
             {
                 someoneIsAttacking = true;

@@ -421,6 +421,8 @@ MonoBehaviour:
   initiativeBar: {fileID: 733920472088878382}
   agent: {fileID: 0}
   attackPosition: {fileID: 3020927336663408120}
+  animator: {fileID: 0}
+  meleeFighter: 1
   currentStatus: 
   fighting: 0
   xpForNextLvlUp: 100
@@ -955,9 +957,9 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 5
-  m_Range: 5.8639336
-  m_SpotAngle: 36.237247
+  m_Intensity: 4
+  m_Range: 8
+  m_SpotAngle: 37
   m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:

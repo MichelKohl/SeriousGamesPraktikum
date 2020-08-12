@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fighterName: Clone
+  type: 5
   level: 1
   maxHealth: 100
   healthRegen: 1
@@ -120,12 +121,22 @@ MonoBehaviour:
   staminaRegen: 2
   maxMana: 100
   manaRegen: 2
+  strength: 1
+  dexterity: 1
+  intelligence: 1
+  faith: 1
+  luck: 1
   nameLabel: {fileID: 8987147361693429579}
   levelLabel: {fileID: 7034512063391718650}
   healthBar: {fileID: 6073743103216820891}
   staminaBar: {fileID: 6449193866954257104}
   manaBar: {fileID: 2887060042094641314}
   initiativeBar: {fileID: 5377841810585032971}
+  agent: {fileID: 0}
+  attackPosition: {fileID: 0}
+  animator: {fileID: 0}
+  currentStatus: 
+  fighting: 0
 --- !u!1001 &7593907957702895028
 PrefabInstance:
   m_ObjectHideFlags: 0

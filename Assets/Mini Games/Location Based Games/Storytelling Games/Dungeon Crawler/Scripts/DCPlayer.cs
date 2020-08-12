@@ -45,6 +45,7 @@ public class DCPlayer : Fighter
 
     protected override IEnumerator Attacking()
     {
+        EndAttack();
         yield return null;
     }
 

@@ -35,6 +35,8 @@ public class Fighter : MonoBehaviour
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Transform attackPosition;
     [SerializeField] private Animator animator;
+    [SerializeField] protected bool meleeFighter = true;
+    [SerializeField] private bool notARunner = false;
     // max caps for values during fight (can be increased when fighting)
     private float currentMaxHealth;
     private float currentMaxStamina;
@@ -73,6 +75,12 @@ public class Fighter : MonoBehaviour
     protected virtual void Update()
     {
         if (!fighting) return;
+
+        if (!meleeFighter)
+        {
+            animator.SetBool("combat", true);
+            animator.SetBool("idle", false);
+        }
 
         timer += Time.deltaTime;
 
@@ -272,9 +280,7 @@ public class Fighter : MonoBehaviour
             Debug.Log($"ERROR: enemy attack position of {fighterName}");
             return;
         }
-        animator.SetBool("run", true);
-        agent.SetDestination(enemyAttackPosition);
-        agent.enabled = true;
+        else StartCoroutine(Attacking());
     }
 
     public bool StatsCheckOut(int strength, int dexterity, int intelligence, int faith, int luck)
@@ -284,10 +290,65 @@ public class Fighter : MonoBehaviour
 
     protected virtual IEnumerator Attacking()
     {
-        yield return null;
+        Debug.Log($"starting attack coroutine of {fighterName}");
 
+        if (meleeFighter)
+        {
+            animator.SetBool(notARunner ? "walk" : "run", true);
+            Vector3 startPos = transform.position;
+            Quaternion startRot = transform.rotation;
+            agent.SetDestination(enemyAttackPosition);
+
+            yield return new WaitUntil(() => agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0);
+
+            animator.SetBool(notARunner ? "walk" : "run", false);
+
+            yield return new WaitUntil(() => animator.GetCurrentAnimatorClipInfo(0)[0].clip.name != "run");
+
+            animator.SetTrigger("doAttack");
+
+            yield return new WaitUntil(() => animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains("attack"));
+            yield return new WaitUntil(() => !animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains("attack"));
+
+            agent.SetDestination(startPos);
+            animator.SetBool(notARunner ? "walk" : "run", true);
+
+            yield return new WaitUntil(() => agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0);
+
+            animator.SetBool("run", false);
+            animator.SetBool("walk", true);
+
+            while (transform.rotation != startRot)
+            {
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, startRot, 10f);
+                yield return null;
+            }
+
+            animator.SetBool("walk", false);
+        } else
+        {
+            animator.SetTrigger("doAttack");
+            yield return new WaitUntil(() => animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains("attack"));
+            yield return new WaitUntil(() => !animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains("attack"));
+        }
+        
+        EndAttack();
+    }
+
+    protected void EndAttack()
+    {
         battleManager.SendAttackDone();
         addedToAttackQueue = false;
         timer = 0;
     }
+}
+
+public enum FighterType
+{
+    Player,
+    Wolf,
+    Goblin,
+    Hobgoblin,
+    Troll,
+    Wizard
 }
