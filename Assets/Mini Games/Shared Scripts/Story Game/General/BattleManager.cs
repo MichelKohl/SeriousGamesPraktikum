@@ -25,6 +25,7 @@ public class BattleManager : MonoBehaviour
         if (pause)
         {
             player.fighting = false;
+            if (enemies == null) return;
             foreach (Fighter enemy in enemies)
                 enemy.fighting = false;
         } else
