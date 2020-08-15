@@ -94,6 +94,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
+  - m_Name: random
+    m_Type: 1
+    m_DefaultFloat: -1
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -143,6 +149,12 @@ AnimatorStateTransition:
   - m_ConditionMode: 4
     m_ConditionEvent: movement speed
     m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: random
+    m_EventTreshold: -0.001
+  - m_ConditionMode: 4
+    m_ConditionEvent: random
+    m_EventTreshold: 0.5001
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6523246511873202202}
   m_Solo: 0
@@ -307,6 +319,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 4
     m_ConditionEvent: movement speed
     m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: random
+    m_EventTreshold: 0.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3023116090064154088}
   m_Solo: 0
