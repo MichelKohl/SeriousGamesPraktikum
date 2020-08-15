@@ -14,6 +14,7 @@ namespace Mapbox.Unity.MeshGeneration.Modifiers
 	using Mapbox.Utils;
 	using Mapbox.VectorTile.ExtensionMethods;
 	using Mapbox.CheapRulerCs;
+	using System.Linq;
 
 	[CreateAssetMenu(menuName = "Mapbox/Modifiers/Prefab Modifier")]
 	public class PrefabModifier : GameObjectModifier
@@ -23,6 +24,7 @@ namespace Mapbox.Unity.MeshGeneration.Modifiers
 		private SpawnPrefabOptions _options;
 		private List<GameObject> _prefabList = new List<GameObject>();
 		private static Dictionary<string, double[]> pos;
+		private static Dictionary<string, Dictionary<string, object>> typeDict;
 
 		public override void Initialize()
 		{
@@ -40,7 +42,8 @@ namespace Mapbox.Unity.MeshGeneration.Modifiers
 
 		public override void Run(VectorEntity ve, UnityTile tile)
 		{
-			pos = VectorTileFactory.positionList;
+			pos = GameManager.poiLocaitonList;
+			typeDict = GameManager.poiTypeList;
 			if (_options.prefab == null)
 			{
 				return;
@@ -77,7 +80,8 @@ namespace Mapbox.Unity.MeshGeneration.Modifiers
 			}
 			if (rangeBool && ve.Feature.Data.Id.ToString() != null)
 			{
-				pos.Add(ve.Feature.Data.Id.ToString(), locationDouble);
+				pos.Add(ve.GameObject.name.ToString(), locationDouble);
+				typeDict.Add(ve.GameObject.name.ToString(), ve.Feature.Properties);
 			}
 			else
 			{
@@ -130,14 +134,25 @@ namespace Mapbox.Unity.MeshGeneration.Modifiers
 
 		public override void Clear()
 		{
+			pos = GameManager.poiLocaitonList;
+			typeDict = GameManager.poiTypeList;
 			base.Clear();
 			foreach (var gameObject in _objects.Values)
 			{
+				if (pos.ContainsKey(gameObject.name.ToString()))
+				{
+					pos.Remove(gameObject.name.ToString());
+				}
 				gameObject.Destroy();
+
 			}
 
 			foreach (var gameObject in _prefabList)
 			{
+				if (pos.ContainsKey(gameObject.name.ToString()))
+				{
+					pos.Remove(gameObject.name.ToString());
+				}
 				gameObject.Destroy();
 			}
 		}

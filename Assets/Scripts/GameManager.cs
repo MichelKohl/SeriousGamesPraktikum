@@ -4,6 +4,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Mapbox.Unity.MeshGeneration.Data;
 
 public class GameManager : MonoBehaviour
 {
@@ -26,6 +27,9 @@ public class GameManager : MonoBehaviour
     /// List of mini games that we have playable
     /// </summary>
     public List<MiniGame> miniGames = new List<MiniGame>();
+
+    public static Dictionary<string, double[]> poiLocaitonList = new Dictionary<string, double[]>();
+    public static Dictionary<string, Dictionary<string, object>> poiTypeList = new Dictionary<string, Dictionary<string, object>>();
 
     private void Awake()
     {
