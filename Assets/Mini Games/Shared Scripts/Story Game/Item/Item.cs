@@ -27,23 +27,3 @@ public class Item : ScriptableObject
         return UnityEngine.Random.Range(0, 1f) <= accuracy;
     }
 }
-
-public enum Scaling : int
-{
-    S = 13,
-    A = 8,
-    B = 5,
-    C = 3,
-    D = 2,
-    E = 1,
-    F = 0
-}
-
-public enum Status
-{
-    Poison,
-    Stun,
-    Bleed,
-    HealPoison,
-    None
-}

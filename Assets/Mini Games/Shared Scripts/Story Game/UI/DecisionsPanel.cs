@@ -1,8 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DecisionsPanel : MonoBehaviour
 {
-
+    public void Flush()
+    {
+        foreach (Transform child in transform)
+            GameObject.Destroy(child.gameObject);
+    }
 }

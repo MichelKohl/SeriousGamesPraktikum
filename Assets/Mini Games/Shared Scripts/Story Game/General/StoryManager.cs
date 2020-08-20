@@ -4,7 +4,9 @@ using TMPro;
 
 public class StoryManager : MonoBehaviour
 {
-    [SerializeField] private Fighter player;
+    [SerializeField] private Cam cam;
+    [SerializeField] private StarterClass starter;
+    [SerializeField] private Lifebar playerLifebar;
     [SerializeField] private int startSituationID = 0;
     [SerializeField] private TextMeshProUGUI currentSituation;
     [SerializeField] private DecisionsPanel decisionsPanel;
@@ -14,10 +16,10 @@ public class StoryManager : MonoBehaviour
     [SerializeField] private WalkingText textWhenWalking;
     [SerializeField] private float skyboxRotationSpeed = 0.2f;
 
+    private DCPlayer player;
     private int currentSituationID = 0;
     private GameManager manager;
     private BattleManager battleManager;
-    private Transform camTransform;
 
     public void ChangeSituation(int toID = 0, double distanceToWalk = 0, bool startBattle = false)
     {
@@ -32,7 +34,11 @@ public class StoryManager : MonoBehaviour
     {
         manager = GameManager.INSTANCE;
         battleManager = GetComponent<BattleManager>();
-        camTransform = Camera.main.transform;
+        player = starter.Init(transform.parent, transform.position, transform.rotation);
+        playerLifebar.SetFighter(player);
+        player.SetLifebar(playerLifebar);
+        player.gameObject.SetActive(false);
+
         ChangeSituation(startSituationID);
     }
 
@@ -67,8 +73,7 @@ public class StoryManager : MonoBehaviour
             currentSituation.gameObject.SetActive(true);
         }
         // flush current options
-        foreach (Transform child in decisionsPanel.transform)
-            GameObject.Destroy(child.gameObject);
+        decisionsPanel.Flush();
         // set new id for current situation
         currentSituationID = id;
         Situation current = situations[currentSituationID];
@@ -98,7 +103,12 @@ public class StoryManager : MonoBehaviour
         //TODO: disable and enable assets to save on computation
         // change to new situation
         Debug.Log($"change to situation with id: [{currentSituationID}]");
-        camTransform.position = current.camPosition;
-        camTransform.rotation = Quaternion.Euler(current.camRotation);
+        cam.transform.position = current.camPosition;
+        cam.transform.rotation = Quaternion.Euler(current.camRotation);
+    }
+
+    public DCPlayer GetPlayerCharacter()
+    {
+        return player;
     }
 }

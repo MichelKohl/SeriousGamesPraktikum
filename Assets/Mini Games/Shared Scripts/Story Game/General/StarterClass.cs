@@ -2,26 +2,28 @@
 using System;
 
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName ="StarterClass")]
 [Serializable]
 public class StarterClass : ScriptableObject
 {
-    // class name and starter level
-    public string className;
     public int level;
+    public DCPlayer model;
     // character stats
-    public int strength;    // -> one and two handed weapons & stamina regen
-    public int dexterity;   // -> one handed weapons (especially daggers) & initiative
-    public int intelligence;// -> effectiveness of magic spells & mana regen
-    public int faith;       // -> effectiveness of faith spells & mana regen
-    public int luck;        // -> chance of critical hits & effects (stun, bleed, poison etc.) and chance of evading an attack
+    public int strength = 1;    // -> one and two handed weapons & stamina regen
+    public int dexterity = 1;   // -> one handed weapons (especially daggers) & initiative
+    public int intelligence = 1;// -> effectiveness of magic spells & mana regen
+    public int faith = 1;       // -> effectiveness of faith spells & mana regen
+    public int luck = 1;        // -> chance of critical hits & effects (stun, bleed, poison etc.) and chance of evading an attack
+
+    // all attacks
+    public Move[] attacks;
+    public bool[] unlocked;
+
     //starter equipment
-    public Armor headArmor;
-    public Armor armsArmor;
-    public Armor bodyArmor;
-    public Armor legsArmor;
-    public Armor ring;
-    public Weapon leftWeapon;
-    public Weapon rightWeapon;
     public Consumable[] consumables;
+
+    public DCPlayer Init(Transform parent, Vector3 position, Quaternion rotation)
+    {
+        return Instantiate(model, position, rotation, parent).Init(this);
+    }
 }

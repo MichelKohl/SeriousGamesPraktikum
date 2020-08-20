@@ -1,14 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BattleManager : MonoBehaviour
 {
-    [SerializeField] private DCPlayer player;
+    [SerializeField] private StoryManager manager;
+    [SerializeField] private Cam cam;
     [SerializeField] private bool pause;
+    [SerializeField] private TextMeshProUGUI descripition;
+    [SerializeField] private DecisionsPanel attackOptionsPanel;
+    [SerializeField] private AttackOption attackOptionPrefab;
+
+    private DCPlayer player;
 
     public bool BattleOver { get; private set; }
-    private List<Fighter> enemies;
+    private List<Enemy> enemies;
     private Queue<Fighter> attackQueue;
     private bool someoneIsAttacking = false;
     // Start is called before the first frame update
@@ -21,35 +28,49 @@ public class BattleManager : MonoBehaviour
     void Update()
     {
         if (attackQueue == null) attackQueue = new Queue<Fighter>();
+        if (player == null) player = manager.GetPlayerCharacter();
 
         if (pause)
         {
             player.fighting = false;
             if (enemies == null) return;
-            foreach (Fighter enemy in enemies)
+            foreach (Enemy enemy in enemies)
                 enemy.fighting = false;
         } else
         {
             player.fighting = true;
-            foreach (Fighter enemy in enemies)
+            foreach (Enemy enemy in enemies)
                 enemy.fighting = true;
         }
         if(!someoneIsAttacking && attackQueue.Count > 0)
         {
             Fighter fighter = attackQueue.Dequeue();
-            Debug.Log($"battlemanager: {fighter.GetName()} will be attacking.");
+            Debug.Log($"battlemanager: {fighter.name} will be attacking.");
             if (!fighter.IsDead())
             {
                 someoneIsAttacking = true;
-                fighter.Attack();
+                if (fighter == player)
+                {
+                    attackOptionsPanel.Flush();
+                    foreach (Move attack in player.GetAvailableMoves())
+                        Instantiate(attackOptionPrefab, attackOptionsPanel.transform).
+                            Init(attack, descripition, player);
+                    player.Attack();
+                }
+                else fighter.Attack();
             }
         }
         if (AllEnemiesDead())
         {
             pause = true;
             BattleOver = true;
-            player.ActivateSpotlight(false);
+            cam.ChangeToFirstPerson();
+
+            foreach (Enemy enemy in enemies)
+                enemy.ShowLifebar(false);
+            player.ShowLifebar(false);
         }
+        // TODO: if player dead -> game over
     }
 
     public void StartBattle()
@@ -58,24 +79,28 @@ public class BattleManager : MonoBehaviour
         Debug.Log($"enemy count: {enemies.Count}");
         BattleOver = false;
         pause = false;
-        player.ActivateSpotlight(true);
-        foreach(Fighter enemy in enemies)
+        foreach(Enemy enemy in enemies)
         {
-            enemy.SetEnemyAttackPosition(player.GetAttackPosition());
+            enemy.SetPlayerPosition(player.GetAttackPosition());
+            enemy.ShowLifebar(true);
         }
+        cam.ChangeToThirdPerson();
+        player.ShowLifebar(true);
+        descripition.text = "";
+        attackOptionsPanel.Flush();
     }
 
-    public void AddEnemy(Fighter enemy)
+    public void AddEnemy(Enemy enemy)
     {
-        if (enemies == null) enemies = new List<Fighter>();
-        Debug.Log($"adding {enemy.GetName()} to the list of enemies.");
+        if (enemies == null) enemies = new List<Enemy>();
+        Debug.Log($"adding {enemy.name} to the list of enemies.");
         enemies.Add(enemy);
         Debug.Log($"enemy count: {enemies.Count}");
     }
 
-    public void AddEnemies(Fighter[] enemies)
+    public void AddEnemies(Enemy[] enemies)
     {
-        foreach (Fighter enemy in enemies)
+        foreach (Enemy enemy in enemies)
             this.enemies.Add(enemy);
     }
 

@@ -112,7 +112,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fighterName: Clone
-  type: 5
   level: 1
   maxHealth: 100
   healthRegen: 1
@@ -121,20 +120,17 @@ MonoBehaviour:
   staminaRegen: 2
   maxMana: 100
   manaRegen: 2
+  lifebar: {fileID: 739829236406532396}
   strength: 1
   dexterity: 1
   intelligence: 1
   faith: 1
   luck: 1
-  nameLabel: {fileID: 8987147361693429579}
-  levelLabel: {fileID: 7034512063391718650}
-  healthBar: {fileID: 6073743103216820891}
-  staminaBar: {fileID: 6449193866954257104}
-  manaBar: {fileID: 2887060042094641314}
-  initiativeBar: {fileID: 5377841810585032971}
   agent: {fileID: 0}
   attackPosition: {fileID: 0}
   animator: {fileID: 0}
+  meleeFighter: 1
+  notARunner: 0
   currentStatus: 
   fighting: 0
 --- !u!1001 &7593907957702895028
@@ -147,6 +143,10 @@ PrefabInstance:
     - target: {fileID: 1000012226140144, guid: 11db918338e063f4b86b6024c791e5a8, type: 3}
       propertyPath: m_Name
       value: Wizard Clone Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012226140144, guid: 11db918338e063f4b86b6024c791e5a8, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4000010723399292, guid: 11db918338e063f4b86b6024c791e5a8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -393,6 +393,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lifebar
       objectReference: {fileID: 0}
+    - target: {fileID: 4406981288367199263, guid: 12678e1cf5d4e42e2b1db202370e6999,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7144571343533074030, guid: 12678e1cf5d4e42e2b1db202370e6999,
+        type: 3}
+      propertyPath: fighter
+      value: 
+      objectReference: {fileID: 1441480250}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12678e1cf5d4e42e2b1db202370e6999, type: 3}
 --- !u!224 &6073743103635180380 stripped
@@ -401,75 +411,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 7593907958271762242}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5377841810585032971 stripped
+--- !u!114 &739829236406532396 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2576927257442829897, guid: 12678e1cf5d4e42e2b1db202370e6999,
+  m_CorrespondingSourceObject: {fileID: 7144571343533074030, guid: 12678e1cf5d4e42e2b1db202370e6999,
     type: 3}
   m_PrefabInstance: {fileID: 7593907958271762242}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6073743103216820891 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4406981287982366169, guid: 12678e1cf5d4e42e2b1db202370e6999,
-    type: 3}
-  m_PrefabInstance: {fileID: 7593907958271762242}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6449193866954257104 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3522616086747114898, guid: 12678e1cf5d4e42e2b1db202370e6999,
-    type: 3}
-  m_PrefabInstance: {fileID: 7593907958271762242}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2887060042094641314 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4715865578844872672, guid: 12678e1cf5d4e42e2b1db202370e6999,
-    type: 3}
-  m_PrefabInstance: {fileID: 7593907958271762242}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7034512063391718650 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 647780016891167672, guid: 12678e1cf5d4e42e2b1db202370e6999,
-    type: 3}
-  m_PrefabInstance: {fileID: 7593907958271762242}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8987147361693429579 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1574634675700215817, guid: 12678e1cf5d4e42e2b1db202370e6999,
-    type: 3}
-  m_PrefabInstance: {fileID: 7593907958271762242}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Script: {fileID: 11500000, guid: 44f31f4548550411a9548f33fa4db33e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Cam : MonoBehaviour
 {
+    [SerializeField] private StoryManager manager;
+    [SerializeField] private Transform playerCharacterTransform;
     [SerializeField] private Transform thirdPersonCam;
     [SerializeField] private float moveStep = 1f;
     [SerializeField] private float moveDelta = 0.001f;
     [SerializeField] private float rotateStep = 1f;
     [SerializeField] private float rotateDelta = 0.001f;
+
+    private DCPlayer player;
 
     private Vector3 firstPersonPos;
     private Quaternion firstPersonQuat;
@@ -31,6 +35,8 @@ public class Cam : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1)) ChangeToFirstPerson();
         if (Input.GetKeyDown(KeyCode.Alpha3)) ChangeToThirdPerson();
 
+        if (player == null) player = manager.GetPlayerCharacter();
+
         if (!positionSet)
         {
             transform.position = Vector3.MoveTowards(transform.position, moveToPosition, moveStep);
@@ -41,6 +47,7 @@ public class Cam : MonoBehaviour
             {
                 positionSet = true;
                 firstPerson = !firstPerson;
+                player.gameObject.SetActive(!firstPerson);
             }
 
         }
@@ -64,6 +71,9 @@ public class Cam : MonoBehaviour
             moveToPosition = thirdPersonCam.position;
             rotateToRotation = thirdPersonCam.rotation;
             positionSet = false;
+            player.transform.position = playerCharacterTransform.position;
+            player.transform.rotation = playerCharacterTransform.rotation;
+            player.gameObject.SetActive(true);
         }
     }
 

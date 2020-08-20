@@ -9,7 +9,6 @@ using System.Collections.Generic;
 public class Fighter : MonoBehaviour
 {
     // fighter settings
-    [SerializeField] private string fighterName;
     [SerializeField] protected int level = 1;
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float healthRegen = 1f;
@@ -18,25 +17,12 @@ public class Fighter : MonoBehaviour
     [SerializeField] private float staminaRegen = 2f;
     [SerializeField] private float maxMana = 100f;
     [SerializeField] private float manaRegen = 2f;
-    // character stats
-    public int strength = 1;    // -> one and two handed weapons & stamina regen
-    public int dexterity = 1;   // -> one handed weapons (especially daggers) & initiative
-    public int intelligence = 1;// -> effectiveness of magic spells & mana regen
-    public int faith = 1;       // -> effectiveness of faith spells & mana regen
-    public int luck = 1;        // -> chance of critical hits & effects (stun, bleed, poison etc.) and chance of evading an attack
-    // UI
-    [SerializeField] private TextMeshProUGUI nameLabel;
-    [SerializeField] private TextMeshProUGUI levelLabel;
-    [SerializeField] private Image healthBar;
-    [SerializeField] private Image staminaBar;
-    [SerializeField] private Image manaBar;
-    [SerializeField] private Image initiativeBar;
+    [SerializeField] private Lifebar lifebar;
     // for battle
-    [SerializeField] private NavMeshAgent agent;
+    [SerializeField] protected NavMeshAgent agent;
     [SerializeField] private Transform attackPosition;
-    [SerializeField] private Animator animator;
-    [SerializeField] protected bool meleeFighter = true;
-    [SerializeField] private bool notARunner = false;
+    [SerializeField] protected Animator animator;
+    [SerializeField] protected Move[] moves;
     // max caps for values during fight (can be increased when fighting)
     private float currentMaxHealth;
     private float currentMaxStamina;
@@ -44,9 +30,9 @@ public class Fighter : MonoBehaviour
     private float currentInitiative;
     public List<Status> currentStatus;
     // current figher values
-    private float health;
-    private float stamina;
-    private float mana;
+    protected float health;
+    protected float stamina;
+    protected float mana;
     private float currentHealthRegen;
     private float currentStaminaRegen;
     private float currentManaRegen;
@@ -60,13 +46,12 @@ public class Fighter : MonoBehaviour
     public bool fighting = false;
     private bool addedToAttackQueue = false;
     private BattleManager battleManager;
-    private Vector3 enemyAttackPosition;
+    protected bool walkingForward = true;
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
         ResetFighterValues();
-        nameLabel.text = fighterName;
         currentStatus = new List<Status>();
         battleManager = GameObject.Find("Story Manager").GetComponent<BattleManager>();
     }
@@ -76,22 +61,14 @@ public class Fighter : MonoBehaviour
     {
         if (!fighting) return;
 
-        if (!meleeFighter)
-        {
-            animator.SetBool("combat", true);
-            animator.SetBool("idle", false);
-        }
+        animator.SetFloat("movementSpeed", (walkingForward ? 1 : -1) * Vector3.Distance(agent.velocity, Vector3.zero));
+        animator.SetFloat("health", health);
 
         timer += Time.deltaTime;
 
         health = Mathf.Min(currentMaxHealth, health * currentHealthRegen);
         stamina = Mathf.Min(currentMaxStamina, stamina * currentStaminaRegen);
         mana = Mathf.Min(currentMaxMana, mana * currentManaRegen);
-
-        healthBar.fillAmount = health / currentMaxHealth;
-        staminaBar.fillAmount = stamina / currentMaxStamina;
-        manaBar.fillAmount = mana / currentMaxMana;
-        initiativeBar.fillAmount = timer / (10f - initiative);
 
         // apply status effects depending on current status
         foreach (Status status in currentStatus)
@@ -124,6 +101,8 @@ public class Fighter : MonoBehaviour
             addedToAttackQueue = true;
             battleManager.AddToAttackQueue(this);
         }
+
+
     }
 
     public void ResetFighterValues()
@@ -142,9 +121,29 @@ public class Fighter : MonoBehaviour
         currentManaRegen = manaRegen;
     }
 
-    public string GetName()
+    public int GetLevel()
     {
-        return fighterName;
+        return level;
+    }
+
+    public float GetHealthRatio()
+    {
+        return health / currentMaxHealth;
+    }
+
+    public float GetStaminaRatio()
+    {
+        return stamina / currentMaxStamina;
+    }
+
+    public float GetManaRatio()
+    {
+        return mana / currentMaxMana;
+    }
+
+    public float GetInitiativeRatio()
+    {
+        return timer / (10f - initiative);
     }
 
     public void IncreaseMaxHealthBy(int percent, bool persistent = false)
@@ -257,14 +256,19 @@ public class Fighter : MonoBehaviour
         DecreaseBy(accuracy, percent);
     }
 
-    public void SetEnemyAttackPosition(Vector3 position)
+    public Transform GetAttackPosition()
     {
-        enemyAttackPosition = position;
+        return attackPosition;
     }
 
-    public Vector3 GetAttackPosition()
+    public void ShowLifebar(bool show)
     {
-        return attackPosition.position;
+        lifebar.gameObject.SetActive(show);
+    }
+
+    public void SetLifebar(Lifebar lifebar)
+    {
+        this.lifebar = lifebar;
     }
 
     public bool IsDead()
@@ -274,81 +278,28 @@ public class Fighter : MonoBehaviour
 
     public void Attack()
     {
-        Debug.Log($"{fighterName} is attacking...");
-        if (enemyAttackPosition == null)
-        {
-            Debug.Log($"ERROR: enemy attack position of {fighterName}");
-            return;
-        }
-        else StartCoroutine(Attacking());
-    }
-
-    public bool StatsCheckOut(int strength, int dexterity, int intelligence, int faith, int luck)
-    {
-        return this.strength >= strength && this.dexterity >= dexterity && this.intelligence >= intelligence && this.faith >= faith && this.luck >= luck;
+        Debug.Log($"{name} is attacking...");
+        StartCoroutine(Attacking());
     }
 
     protected virtual IEnumerator Attacking()
     {
-        Debug.Log($"starting attack coroutine of {fighterName}");
-
-        if (meleeFighter)
-        {
-            animator.SetBool(notARunner ? "walk" : "run", true);
-            Vector3 startPos = transform.position;
-            Quaternion startRot = transform.rotation;
-            agent.SetDestination(enemyAttackPosition);
-
-            yield return new WaitUntil(() => agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0);
-
-            animator.SetBool(notARunner ? "walk" : "run", false);
-
-            yield return new WaitUntil(() => animator.GetCurrentAnimatorClipInfo(0)[0].clip.name != "run");
-
-            animator.SetTrigger("doAttack");
-
-            yield return new WaitUntil(() => animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains("attack"));
-            yield return new WaitUntil(() => !animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains("attack"));
-
-            agent.SetDestination(startPos);
-            animator.SetBool(notARunner ? "walk" : "run", true);
-
-            yield return new WaitUntil(() => agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0);
-
-            animator.SetBool("run", false);
-            animator.SetBool("walk", true);
-
-            while (transform.rotation != startRot)
-            {
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, startRot, 10f);
-                yield return null;
-            }
-
-            animator.SetBool("walk", false);
-        } else
-        {
-            animator.SetTrigger("doAttack");
-            yield return new WaitUntil(() => animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains("attack"));
-            yield return new WaitUntil(() => !animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains("attack"));
-        }
-        
-        EndAttack();
-    }
-
-    protected void EndAttack()
-    {
+        // end attack
         battleManager.SendAttackDone();
         addedToAttackQueue = false;
         timer = 0;
+        yield return null;
     }
-}
 
-public enum FighterType
-{
-    Player,
-    Wolf,
-    Goblin,
-    Hobgoblin,
-    Troll,
-    Wizard
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (!collision.collider.CompareTag(transform.tag) && collision.collider.isTrigger)
+            animator.SetTrigger("hit");
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag(transform.tag))
+            animator.SetTrigger("hit");
+    }
 }

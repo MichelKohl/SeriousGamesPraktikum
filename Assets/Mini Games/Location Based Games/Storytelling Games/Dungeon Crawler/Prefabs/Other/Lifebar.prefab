@@ -848,7 +848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6509434, g: 0.6509434, b: 0.6509434, a: 1}
+  m_Color: {r: 0.05660379, g: 0.05660379, b: 0.05660379, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -875,6 +875,7 @@ GameObject:
   - component: {fileID: 4406981288367199262}
   - component: {fileID: 4406981288367199256}
   - component: {fileID: 4406981288367199257}
+  - component: {fileID: 7144571343533074030}
   m_Layer: 5
   m_Name: Lifebar
   m_TagString: Untagged
@@ -942,6 +943,25 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7144571343533074030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4406981288367199263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f31f4548550411a9548f33fa4db33e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fighter: {fileID: 0}
+  nameLabel: {fileID: 1574634675700215817}
+  levelLabel: {fileID: 647780016891167672}
+  healthBar: {fileID: 4406981287982366169}
+  staminaBar: {fileID: 3522616086747114898}
+  manaBar: {fileID: 4715865578844872672}
+  initiative: {fileID: 2576927257442829897}
 --- !u!1 &8312583985206720746
 GameObject:
   m_ObjectHideFlags: 0

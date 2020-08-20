@@ -27,7 +27,7 @@ MonoBehaviour:
   talker: []
   dialogue: []
   enemies:
-  - {fileID: 1371061014, guid: 57665b2c1f6534f8baf7e29b39bdc18b, type: 3}
+  - {fileID: 3816733659319154455, guid: 57665b2c1f6534f8baf7e29b39bdc18b, type: 3}
   enemyDialogue: []
   enemyPosition:
   - {x: 195.02, y: 0, z: 72.49}
