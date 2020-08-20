@@ -5,7 +5,7 @@ using System;
 
 [CreateAssetMenu(menuName = "Attack/Player Attack")]
 [Serializable]
-public class PlayerAttack : Move
+public class PlayerAttack : Attack
 {
     public int levelRequirement = 1;
     public Scaling STR = Scaling.F;

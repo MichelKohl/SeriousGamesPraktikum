@@ -142,7 +142,21 @@ Transform:
   m_Father: {fileID: 7131299143411572677}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1158763741
+--- !u!136 &2301951166188687465
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7131299143411887011}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 5.0400934
+  m_Height: 28.623089
+  m_Direction: 1
+  m_Center: {x: 0, y: 14.118097, z: 0}
+--- !u!114 &5469584985690719054
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,10 +165,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7131299143411887011}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 384c88e2a02e0441593156625248934b, type: 3}
+  m_Script: {fileID: 11500000, guid: 64cb35859e107450eb0b110b7a655187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fighterName: Trollololo
   level: 1
   maxHealth: 100
   healthRegen: 1
@@ -164,18 +177,15 @@ MonoBehaviour:
   maxMana: 100
   manaRegen: 2
   lifebar: {fileID: 131144254077341579}
-  strength: 1
-  dexterity: 1
-  intelligence: 1
-  faith: 1
-  luck: 1
   agent: {fileID: 6645196782672818916}
   attackPosition: {fileID: 4645118123793814442}
+  attackPositionOffset: 3
   animator: {fileID: 7131299143419394715}
-  meleeFighter: 1
-  notARunner: 1
+  moves:
+  - {fileID: 11400000, guid: 9eb4ddc9d9fd1421195e25d80525069a, type: 2}
+  hitboxes:
+  - {fileID: 3201825340833692654}
   currentStatus: 
-  fighting: 0
 --- !u!195 &6645196782672818916
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -290,6 +300,50 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &8013454459021207493
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1944985643692210406}
+  - component: {fileID: 3201825340833692654}
+  m_Layer: 0
+  m_Name: Hitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1944985643692210406
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8013454459021207493}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7131299143411572703}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3201825340833692654
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8013454459021207493}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 3, z: 13}
+  m_Center: {x: 0, y: -0, z: 11}
 --- !u!1001 &7131299143261383141
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -486,7 +540,7 @@ PrefabInstance:
         type: 3}
       propertyPath: fighter
       value: 
-      objectReference: {fileID: 1158763741}
+      objectReference: {fileID: 5469584985690719054}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12678e1cf5d4e42e2b1db202370e6999, type: 3}
 --- !u!224 &6908461254009945595 stripped
@@ -582,7 +636,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 13743910, guid: 2e6391b851bd6104aa35c25d824e40b1, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 13743914, guid: 2e6391b851bd6104aa35c25d824e40b1, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 13543920, guid: 2e6391b851bd6104aa35c25d824e40b1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2e6391b851bd6104aa35c25d824e40b1, type: 3}
 --- !u!1 &7131299143411887011 stripped
 GameObject:
@@ -599,6 +662,12 @@ Transform:
 --- !u!95 &7131299143419394715 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 9543920, guid: 2e6391b851bd6104aa35c25d824e40b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 7131299143412013675}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7131299143411572703 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 443828, guid: 2e6391b851bd6104aa35c25d824e40b1,
     type: 3}
   m_PrefabInstance: {fileID: 7131299143412013675}
   m_PrefabAsset: {fileID: 0}

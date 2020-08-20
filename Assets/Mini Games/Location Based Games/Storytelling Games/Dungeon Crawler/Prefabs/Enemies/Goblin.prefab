@@ -204,7 +204,21 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &909553642
+--- !u!136 &7238802145696882336
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5325757052683132970}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 2.2192078
+  m_Height: 15.573487
+  m_Direction: 1
+  m_Center: {x: 0, y: 7.286744, z: 0}
+--- !u!114 &4746678528496236267
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -213,10 +227,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5325757052683132970}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 384c88e2a02e0441593156625248934b, type: 3}
+  m_Script: {fileID: 11500000, guid: 64cb35859e107450eb0b110b7a655187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fighterName: Goblin
   level: 1
   maxHealth: 100
   healthRegen: 1
@@ -226,18 +239,15 @@ MonoBehaviour:
   maxMana: 100
   manaRegen: 2
   lifebar: {fileID: 3084541445801515714}
-  strength: 1
-  dexterity: 1
-  intelligence: 1
-  faith: 1
-  luck: 1
   agent: {fileID: 5280656509000622126}
   attackPosition: {fileID: 824640237967110786}
+  attackPositionOffset: 0
   animator: {fileID: 5325757052690513184}
-  meleeFighter: 1
-  notARunner: 0
+  moves:
+  - {fileID: 11400000, guid: 9eb4ddc9d9fd1421195e25d80525069a, type: 2}
+  hitboxes:
+  - {fileID: 2884882143790789788}
   currentStatus: 
-  fighting: 0
 --- !u!195 &5280656509000622126
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -260,6 +270,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!135 &2884882143790789788
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5325757052683105126}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5424629273214384690
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,7 +307,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5424629273214384690}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalPosition: {x: 0, y: 0, z: 17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5325757052682819530}
@@ -361,7 +384,8 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 13593012, guid: be3cbaf02f5437e4a8956b882b64ad92, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: be3cbaf02f5437e4a8956b882b64ad92, type: 3}
 --- !u!1 &5325757052683132970 stripped
 GameObject:
@@ -378,6 +402,12 @@ Transform:
 --- !u!95 &5325757052690513184 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 9531154, guid: be3cbaf02f5437e4a8956b882b64ad92,
+    type: 3}
+  m_PrefabInstance: {fileID: 5325757052683244082}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5325757052683105126 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 155988, guid: be3cbaf02f5437e4a8956b882b64ad92,
     type: 3}
   m_PrefabInstance: {fileID: 5325757052683244082}
   m_PrefabAsset: {fileID: 0}
@@ -577,7 +607,7 @@ PrefabInstance:
         type: 3}
       propertyPath: fighter
       value: 
-      objectReference: {fileID: 909553642}
+      objectReference: {fileID: 4746678528496236267}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12678e1cf5d4e42e2b1db202370e6999, type: 3}
 --- !u!224 &8412827403405682866 stripped

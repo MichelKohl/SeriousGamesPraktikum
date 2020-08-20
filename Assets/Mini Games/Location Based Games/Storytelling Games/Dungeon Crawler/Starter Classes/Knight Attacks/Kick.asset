@@ -12,15 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: Kick
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
-  attackName: Kick
   animationName: kick
-  damage: 10
   healthCost: 0
   staminaCost: 10
   manaCost: 0
+  healthBenfit: 0
+  staminaBenefit: 0
+  manaBenefit: 0
   particleEffects: []
   particleDelay: []
   particleSpawnPositions: 
+  damage: 10
+  hitboxID: 1
   levelRequirement: 1
   STR: 3
   DEX: 3

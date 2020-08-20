@@ -5,8 +5,6 @@ using UnityEngine.AI;
 
 public class Enemy : Fighter
 {
-    [SerializeField] protected GameObject hitboxes;
-
     private Transform playerTransform;
 
     public void SetPlayerPosition(Transform playerTransform)
@@ -25,35 +23,40 @@ public class Enemy : Fighter
 
     protected override IEnumerator Attacking()
     {
-        
+
+        isAttacking = true;
         List<Move> availableAttacks = GetAvailableMoves();
         if(availableAttacks.Count > 0)
         {
             //choose random attack
-            Move currentAttack = availableAttacks[Random.Range(0, availableAttacks.Count)];
+            currentMove = availableAttacks[Random.Range(0, availableAttacks.Count)];
             Vector3 startPos = transform.position;
             Quaternion startRot = transform.rotation;
 
-            if(!(currentAttack is EnemySpell))
+            bool isMelee = currentMove is EnemyAttack && !(currentMove is EnemySpell);
+
+            if(isMelee)
             {
                 agent.SetDestination(playerTransform.position);
-                yield return new WaitUntil(() => agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0);
+                agent.stoppingDistance = attackPositionOffset;
+                yield return new WaitUntil(() => agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance <= attackPositionOffset);
             }
 
-            animator.SetTrigger(currentAttack.animationName);
-            if (currentAttack is EnemyAttack)
+            animator.SetTrigger(currentMove.animationName);
+            if (isMelee)
             {
-                if ((currentAttack as EnemyAttack).hitboxDelay > 0)
-                    StartCoroutine(HandleHitbox(currentAttack as EnemyAttack));
-            } else hitboxes.SetActive(true);
+                if ((currentMove as EnemyAttack).hitboxDelay > 0)
+                    StartCoroutine(HandleHitbox(currentMove as EnemyAttack));
+                else hitboxes[(currentMove as EnemyAttack).hitboxID].enabled = true;
+            }
+            yield return new WaitUntil(() => animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains(currentMove.animationName));
+            yield return new WaitUntil(() => !animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains(currentMove.animationName));
 
-            yield return new WaitUntil(() => animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains(currentAttack.animationName));
-            yield return new WaitUntil(() => !animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains(currentAttack.animationName));
-            hitboxes.SetActive(false);
-
-            if(!(currentAttack is EnemySpell))
+            if(isMelee)
             {
                 agent.SetDestination(startPos);
+                agent.stoppingDistance = 0f;
+                hitboxes[(currentMove as EnemyAttack).hitboxID].enabled = false;
                 yield return new WaitUntil(() => agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0);
 
                 while (transform.rotation != startRot)
@@ -69,6 +72,6 @@ public class Enemy : Fighter
     private IEnumerator HandleHitbox(EnemyAttack attack)
     {
         yield return new WaitForSeconds(attack.hitboxDelay);
-        hitboxes.SetActive(true);
+        hitboxes[attack.hitboxID].enabled = true;
     }
 }

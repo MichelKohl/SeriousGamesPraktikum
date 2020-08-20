@@ -1685,7 +1685,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1442095082306990392}
-  - component: {fileID: 5756115757205870744}
+  - component: {fileID: 8984812347353660304}
   m_Layer: 0
   m_Name: Hitbox
   m_TagString: Untagged
@@ -1700,15 +1700,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6298216896932033480}
-  m_LocalRotation: {x: 0.0005643502, y: 0.12810028, z: 0.000067696354, w: 0.9917611}
-  m_LocalPosition: {x: 0.08346645, y: -0.019269297, z: 0.34102046}
+  m_LocalRotation: {x: 0.5619348, y: 0.5456635, z: 0.44927114, w: 0.429693}
+  m_LocalPosition: {x: 0.51999956, y: 0.0064096507, z: 0.24303927}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 701761856197159538}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 14.72, z: 0}
---- !u!65 &5756115757205870744
-BoxCollider:
+  m_LocalEulerAnglesHint: {x: -0.423, y: 103.123, z: 92.019005}
+--- !u!136 &8984812347353660304
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1717,9 +1717,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.040415317
+  m_Height: 0.9927518
+  m_Direction: 1
+  m_Center: {x: -0.02734167, y: -0.0036244655, z: -0.43223998}
 --- !u!1 &6308010747195270446
 GameObject:
   m_ObjectHideFlags: 0
@@ -2510,7 +2511,7 @@ GameObject:
   - component: {fileID: 714235797106889393}
   - component: {fileID: 714235797106889394}
   - component: {fileID: 3012878626925102580}
-  - component: {fileID: 544601765446653119}
+  - component: {fileID: 2361520687634475277}
   m_Layer: 0
   m_Name: Knight
   m_TagString: Player
@@ -2602,11 +2603,13 @@ MonoBehaviour:
   lifebar: {fileID: 0}
   agent: {fileID: 714235797106889394}
   attackPosition: {fileID: 1249687306858592731}
+  attackPositionOffset: 0
   animator: {fileID: 714235797106889393}
-  hitboxes: {fileID: 0}
   moves: []
+  hitboxes:
+  - {fileID: 8984812347353660304}
+  - {fileID: 5797038031725013805}
   currentStatus: 
-  fighting: 0
   strength: 1
   dexterity: 1
   intelligence: 1
@@ -2615,8 +2618,8 @@ MonoBehaviour:
   xpForNextLvlUp: 100
   nextXpMultiplier: 1.5
   spotlight: {fileID: 0}
---- !u!135 &544601765446653119
-SphereCollider:
+--- !u!136 &2361520687634475277
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2625,9 +2628,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Radius: 0.30516636
+  m_Height: 2.1550694
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.07092, z: 0}
 --- !u!1 &9131011852565996539
 GameObject:
   m_ObjectHideFlags: 0

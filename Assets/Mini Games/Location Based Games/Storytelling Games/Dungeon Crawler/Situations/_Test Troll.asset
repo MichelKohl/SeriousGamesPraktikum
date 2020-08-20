@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f8ad97bc0ae4352b3c1e638b5c1f39, type: 3}
   m_Name: _Test Troll
   m_EditorClassIdentifier: 
-  camPosition: {x: 184.68, y: 0, z: 73.13}
+  camPosition: {x: 184.68, y: 4, z: 73.13}
   camRotation: {x: 0, y: 90, z: 0}
   description: 
   options:
@@ -27,7 +27,7 @@ MonoBehaviour:
   talker: []
   dialogue: []
   enemies:
-  - {fileID: 1158763741, guid: 2c83233e70e4b4c00a37cfbda2237f67, type: 3}
+  - {fileID: 5469584985690719054, guid: 2c83233e70e4b4c00a37cfbda2237f67, type: 3}
   enemyDialogue: []
   enemyPosition:
   - {x: 200, y: 0, z: 72.43}

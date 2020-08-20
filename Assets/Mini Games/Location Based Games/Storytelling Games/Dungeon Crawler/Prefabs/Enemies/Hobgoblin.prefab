@@ -112,7 +112,65 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2a0b43401675444cae663e86101cb66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &782461962
+--- !u!1 &856744122007574689
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8890153988469907373}
+  - component: {fileID: 4600979832859111100}
+  m_Layer: 0
+  m_Name: Hitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8890153988469907373
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856744122007574689}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.49, y: 1, z: 4.24}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3567733460760046007}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &4600979832859111100
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856744122007574689}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.1019168
+  m_Center: {x: -0.8980841, y: -0.00000021625044, z: 0.00000002413665}
+--- !u!136 &5154855815022857596
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3567733460760344019}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 2.7129617
+  m_Height: 20.871262
+  m_Direction: 1
+  m_Center: {x: 0, y: 9.935631, z: 0}
+--- !u!114 &2301715145561556678
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,10 +179,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3567733460760344019}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 384c88e2a02e0441593156625248934b, type: 3}
+  m_Script: {fileID: 11500000, guid: 64cb35859e107450eb0b110b7a655187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fighterName: Hobgoblin
   level: 1
   maxHealth: 100
   healthRegen: 1
@@ -134,18 +191,15 @@ MonoBehaviour:
   maxMana: 100
   manaRegen: 2
   lifebar: {fileID: 5955376530505221013}
-  strength: 1
-  dexterity: 1
-  intelligence: 1
-  faith: 1
-  luck: 1
   agent: {fileID: 3897104130456361072}
   attackPosition: {fileID: 4116516515513013843}
+  attackPositionOffset: 1.5
   animator: {fileID: 3567733460753041239}
-  meleeFighter: 1
-  notARunner: 0
+  moves:
+  - {fileID: 11400000, guid: 9eb4ddc9d9fd1421195e25d80525069a, type: 2}
+  hitboxes:
+  - {fileID: 4600979832859111100}
   currentStatus: 
-  fighting: 0
 --- !u!195 &3897104130456361072
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -351,15 +405,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 465622, guid: b7f1dfc4e01f4a645a02f3816571583e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.25
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 465622, guid: b7f1dfc4e01f4a645a02f3816571583e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.25
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 465622, guid: b7f1dfc4e01f4a645a02f3816571583e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.25
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 19834720, guid: b7f1dfc4e01f4a645a02f3816571583e, type: 3}
       propertyPath: InitialModule.startSizeY.minMaxState
@@ -369,7 +423,8 @@ PrefabInstance:
       propertyPath: InitialModule.startSizeZ.minMaxState
       value: 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 13565622, guid: b7f1dfc4e01f4a645a02f3816571583e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b7f1dfc4e01f4a645a02f3816571583e, type: 3}
 --- !u!1 &3567733460760344019 stripped
 GameObject:
@@ -386,6 +441,12 @@ Transform:
 --- !u!95 &3567733460753041239 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 9598066, guid: b7f1dfc4e01f4a645a02f3816571583e,
+    type: 3}
+  m_PrefabInstance: {fileID: 3567733460760507173}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3567733460760046007 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 465554, guid: b7f1dfc4e01f4a645a02f3816571583e,
     type: 3}
   m_PrefabInstance: {fileID: 3567733460760507173}
   m_PrefabAsset: {fileID: 0}
@@ -585,7 +646,7 @@ PrefabInstance:
         type: 3}
       propertyPath: fighter
       value: 
-      objectReference: {fileID: 782461962}
+      objectReference: {fileID: 2301715145561556678}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12678e1cf5d4e42e2b1db202370e6999, type: 3}
 --- !u!224 &912995490539549157 stripped

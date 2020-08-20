@@ -234,7 +234,7 @@ Transform:
   m_Father: {fileID: 5464889428405914131}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1898448038
+--- !u!114 &496783800356677502
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -243,10 +243,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5465847706381653795}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 384c88e2a02e0441593156625248934b, type: 3}
+  m_Script: {fileID: 11500000, guid: 64cb35859e107450eb0b110b7a655187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fighterName: Evil Wizard
   level: 1
   maxHealth: 100
   healthRegen: 1
@@ -256,18 +255,14 @@ MonoBehaviour:
   maxMana: 100
   manaRegen: 2
   lifebar: {fileID: 2954229202011626296}
-  strength: 1
-  dexterity: 1
-  intelligence: 1
-  faith: 1
-  luck: 1
   agent: {fileID: 5777768706737212032}
   attackPosition: {fileID: 3819669574667101468}
+  attackPositionOffset: 0
   animator: {fileID: 5370709714385665427}
-  meleeFighter: 0
-  notARunner: 0
+  moves:
+  - {fileID: 0}
+  hitboxes: []
   currentStatus: 
-  fighting: 0
 --- !u!195 &5777768706737212032
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -290,6 +285,20 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &4192710659180942105
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5465847706381653795}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 5.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 3.8, z: 0.6}
 --- !u!1001 &5465428236152634710
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -486,7 +495,7 @@ PrefabInstance:
         type: 3}
       propertyPath: fighter
       value: 
-      objectReference: {fileID: 1898448038}
+      objectReference: {fileID: 0}
     - target: {fileID: 7144571343533074030, guid: 12678e1cf5d4e42e2b1db202370e6999,
         type: 3}
       propertyPath: m_Enabled

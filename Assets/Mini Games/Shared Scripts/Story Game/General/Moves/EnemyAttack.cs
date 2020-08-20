@@ -5,7 +5,7 @@ using System;
 
 [CreateAssetMenu(menuName = "Attack/Enemy Attack")]
 [Serializable]
-public class EnemyAttack : Move
+public class EnemyAttack : Attack
 {
     public float levelMultiplier = 1f;// changes damage depending on level
     public float hitboxDelay = 0f;

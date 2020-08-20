@@ -21,8 +21,10 @@ public class Fighter : MonoBehaviour
     // for battle
     [SerializeField] protected NavMeshAgent agent;
     [SerializeField] private Transform attackPosition;
+    [SerializeField] protected float attackPositionOffset = 0f;
     [SerializeField] protected Animator animator;
     [SerializeField] protected Move[] moves;
+    [SerializeField] protected Collider[] hitboxes;
     // max caps for values during fight (can be increased when fighting)
     private float currentMaxHealth;
     private float currentMaxStamina;
@@ -43,10 +45,13 @@ public class Fighter : MonoBehaviour
     protected Action<float, int> IncreaseBy = (value, percent) => value *= 1f + (percent / 100);
     protected Action<float, int> DecreaseBy = (value, percent) => value *= 1f - (percent / 100);
 
-    public bool fighting = false;
+    protected bool fighting = false;
+    public bool IsFighting { get => fighting; set => fighting = value; }
+    protected bool isAttacking = false;
     private bool addedToAttackQueue = false;
     private BattleManager battleManager;
     protected bool walkingForward = true;
+    protected Move currentMove;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -119,6 +124,8 @@ public class Fighter : MonoBehaviour
         currentHealthRegen = healthRegen;
         currentStaminaRegen = staminaRegen;
         currentManaRegen = manaRegen;
+        foreach (Collider hitbox in hitboxes)
+            hitbox.enabled = false;
     }
 
     public int GetLevel()
@@ -288,18 +295,28 @@ public class Fighter : MonoBehaviour
         battleManager.SendAttackDone();
         addedToAttackQueue = false;
         timer = 0;
+        isAttacking = false;
         yield return null;
-    }
-
-    public void OnCollisionEnter(Collision collision)
-    {
-        if (!collision.collider.CompareTag(transform.tag) && collision.collider.isTrigger)
-            animator.SetTrigger("hit");
     }
 
     public void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag(transform.tag))
+        if (!other.CompareTag(transform.tag) && !isAttacking)
             animator.SetTrigger("hit");
     }
+    /*
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (!collision.collider.CompareTag(transform.tag))
+        {
+            try
+            {
+                if (!(currentMove as Attack).multipleHits)
+                    foreach (Collider hitbox in hitboxes)
+                        hitbox.enabled = false;
+            }
+            catch (NullReferenceException) { }
+        }
+    }
+    */
 }

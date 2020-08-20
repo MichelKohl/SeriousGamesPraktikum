@@ -282,9 +282,10 @@ MonoBehaviour:
   animator: {fileID: 4837562920553414810}
   moves:
   - {fileID: 11400000, guid: 6297e6b8f32054390a1b583b9bab6aff, type: 2}
+  hitboxes:
+  - {fileID: 3291919099827304750}
   currentStatus: 
   fighting: 0
-  hitboxes: {fileID: 7350515712610276013}
 --- !u!1 &5893342507145416644
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,7 +363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7260394279543390394
 Transform:
   m_ObjectHideFlags: 0

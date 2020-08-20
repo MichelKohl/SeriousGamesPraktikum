@@ -22,5 +22,8 @@ MonoBehaviour:
   particleEffects: []
   particleDelay: []
   particleSpawnPositions: 
+  damage: 10
+  hitboxID: 0
+  multipleHits: 0
   levelMultiplier: 1
   hitboxDelay: 0.5

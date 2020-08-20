@@ -2578,7 +2578,7 @@ MonoBehaviour:
   cam: {fileID: 1478741717}
   starter: {fileID: 11400000, guid: 612a0de546ff748eaab915b67f952871, type: 2}
   playerLifebar: {fileID: 1718281471}
-  startSituationID: 2
+  startSituationID: 5
   currentSituation: {fileID: 939122773}
   decisionsPanel: {fileID: 1343262054}
   situations:

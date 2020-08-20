@@ -32,15 +32,15 @@ public class BattleManager : MonoBehaviour
 
         if (pause)
         {
-            player.fighting = false;
+            player.IsFighting = false;
             if (enemies == null) return;
             foreach (Enemy enemy in enemies)
-                enemy.fighting = false;
+                enemy.IsFighting = false;
         } else
         {
-            player.fighting = true;
+            player.IsFighting = true;
             foreach (Enemy enemy in enemies)
-                enemy.fighting = true;
+                enemy.IsFighting = true;
         }
         if(!someoneIsAttacking && attackQueue.Count > 0)
         {
@@ -86,6 +86,7 @@ public class BattleManager : MonoBehaviour
         }
         cam.ChangeToThirdPerson();
         player.ShowLifebar(true);
+        player.DrawWeapon();
         descripition.text = "";
         attackOptionsPanel.Flush();
     }

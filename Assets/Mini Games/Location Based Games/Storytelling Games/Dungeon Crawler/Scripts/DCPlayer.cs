@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -25,7 +26,6 @@ public class DCPlayer : Fighter
     [SerializeField] private Light spotlight;
 
     private Fighter currentTarget;
-    private Move currentMove;
 
     private bool attackChosen = false;
 
@@ -68,21 +68,24 @@ public class DCPlayer : Fighter
 
     protected override IEnumerator Attacking()
     {
+        isAttacking = true;
         Vector3 startPos = transform.position;
         Quaternion startRot = transform.rotation;
 
         yield return new WaitUntil(() => attackChosen);
         yield return new WaitUntil(() => TargetChosen());
 
-        bool isMelee = !(currentMove is PlayerSpell);
+        bool isMelee = currentMove is PlayerAttack && !(currentMove is PlayerSpell);
 
         if (isMelee) 
         {
             walkingForward = true;
             agent.SetDestination(currentTarget.GetAttackPosition().position);
-            yield return new WaitUntil(() => agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0);
+            yield return new WaitUntil(() => agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance <= attackPositionOffset);
+            hitboxes[(currentMove as PlayerAttack).hitboxID].enabled = true;
         }
         animator.SetTrigger(name: currentMove.animationName);
+
         yield return new WaitUntil(() => animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains(currentMove.animationName));
         yield return new WaitUntil(() => !animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains(currentMove.animationName));
 
@@ -91,6 +94,8 @@ public class DCPlayer : Fighter
             walkingForward = false;
             agent.updateRotation = false;
             agent.SetDestination(startPos);
+            agent.stoppingDistance = 0f;
+            hitboxes[(currentMove as PlayerAttack).hitboxID].enabled = false;
             yield return new WaitUntil(() => agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0);
             agent.updateRotation = true;
             transform.rotation = startRot;
@@ -170,5 +175,14 @@ public class DCPlayer : Fighter
     public string GetPlayerName()
     {
         return playerName;
+    }
+
+    public void DrawWeapon()
+    {
+        try
+        {
+            animator.SetTrigger("draw weapon");
+        }
+        catch (Exception) { }
     }
 }
