@@ -2576,7 +2576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 1478741717}
-  starter: {fileID: 11400000, guid: 612a0de546ff748eaab915b67f952871, type: 2}
+  starter: {fileID: 11400000, guid: c919e2cb340c84235ba4dae2512b004e, type: 2}
   playerLifebar: {fileID: 1718281471}
   startSituationID: 5
   currentSituation: {fileID: 939122773}

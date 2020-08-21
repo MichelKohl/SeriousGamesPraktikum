@@ -2,11 +2,11 @@
 using System;
 
 
-[CreateAssetMenu(menuName ="StarterClass")]
+[CreateAssetMenu(menuName ="Player/Starter Class")]
 [Serializable]
 public class StarterClass : ScriptableObject
 {
-    public int level;
+    public int level = 1;
     public DCPlayer model;
     // character stats
     public int strength = 1;    // -> one and two handed weapons & stamina regen

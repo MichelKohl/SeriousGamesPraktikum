@@ -184,7 +184,7 @@ MonoBehaviour:
   moves:
   - {fileID: 11400000, guid: 9eb4ddc9d9fd1421195e25d80525069a, type: 2}
   hitboxes:
-  - {fileID: 3201825340833692654}
+  - {fileID: 2580945812445045334}
   currentStatus: 
 --- !u!195 &6645196782672818916
 NavMeshAgent:
@@ -309,7 +309,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1944985643692210406}
-  - component: {fileID: 3201825340833692654}
+  - component: {fileID: 2580945812445045334}
   m_Layer: 0
   m_Name: Hitbox
   m_TagString: Untagged
@@ -324,15 +324,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8013454459021207493}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -10.62, y: 13.99, z: 16.72}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7131299143411572703}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3201825340833692654
-BoxCollider:
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!136 &2580945812445045334
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -341,9 +341,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3, y: 3, z: 13}
-  m_Center: {x: 0, y: -0, z: 11}
+  m_Radius: 7.176483
+  m_Height: 21.002125
+  m_Direction: 1
+  m_Center: {x: 9.914705, y: -3.4039872, z: 10.218927}
 --- !u!1001 &7131299143261383141
 PrefabInstance:
   m_ObjectHideFlags: 0

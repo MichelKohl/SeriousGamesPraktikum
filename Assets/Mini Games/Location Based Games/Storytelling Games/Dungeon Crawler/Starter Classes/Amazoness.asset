@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf59a91a8e439419f8c6cf719dcc572d, type: 3}
+  m_Name: Amazoness
+  m_EditorClassIdentifier: 
+  level: 1
+  model: {fileID: 6080220891173060524, guid: 770f302b9427c4c8f84587913c7b2f6a, type: 3}
+  strength: 1
+  dexterity: 1
+  intelligence: 1
+  faith: 1
+  luck: 1
+  attacks:
+  - {fileID: 11400000, guid: a9c383922f8154c60a9db47106e4e7b2, type: 2}
+  - {fileID: 11400000, guid: 5023d99c6021843d1bd37066b466f439, type: 2}
+  - {fileID: 11400000, guid: cf6a7fdd562c24cd39f1c7e096292481, type: 2}
+  - {fileID: 11400000, guid: 5565da75d48434cf9a1336fafa940dfc, type: 2}
+  - {fileID: 11400000, guid: 0a7c1290068394e94a3dd18e104b7578, type: 2}
+  - {fileID: 11400000, guid: a04540dae19204d198f821cf43cce616, type: 2}
+  - {fileID: 11400000, guid: 2ef0f46a403ef4e54a99c8e31b72e452, type: 2}
+  unlocked: 01010101010101
+  consumables: []

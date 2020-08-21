@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7af3c25836908433c9cca936ee48bcfb, type: 3}
-  m_Name: Kick
+  m_Name: Slash
   m_EditorClassIdentifier: 
-  animationName: kick
+  animationName: slash
   healthCost: 0
-  staminaCost: 10
+  staminaCost: 0
   manaCost: 0
   healthBenfit: 0
   staminaBenefit: 0
@@ -27,7 +27,7 @@ MonoBehaviour:
   INT: 0
   FTH: 0
   LCK: 0
-  damage: 10
+  damage: 0
   levelRequirement: 1
-  hitboxID: 1
+  hitboxID: 0
   multipleHits: 0

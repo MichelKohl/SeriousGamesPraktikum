@@ -81,6 +81,7 @@ public class DCPlayer : Fighter
         {
             walkingForward = true;
             agent.SetDestination(currentTarget.GetAttackPosition().position);
+            agent.stoppingDistance = attackPositionOffset;
             yield return new WaitUntil(() => agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance <= attackPositionOffset);
             hitboxes[(currentMove as PlayerAttack).hitboxID].enabled = true;
         }
