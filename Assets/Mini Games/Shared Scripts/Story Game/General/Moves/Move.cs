@@ -17,7 +17,7 @@ public class Move : ScriptableObject
 
     public ParticleSystem[] particleEffects;
     public float[] particleDelay;
-    public ParticleSpawnPosition[] particleSpawnPositions;
+    public Transform[] particleSpawnPositions;
 }
 
 public enum Scaling : int
@@ -38,17 +38,6 @@ public enum Status
     Bleed,
     HealPoison,
     None
-}
-
-public enum ParticleSpawnPosition
-{
-    None,
-    LeftHand,
-    RightHand,
-    LeftFoot,
-    RightFoot,
-    Chest,
-    Weapon
 }
 
 public enum SpellType

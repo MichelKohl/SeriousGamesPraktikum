@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-[CreateAssetMenu(menuName = "Attack/Enemy Attack")]
+[CreateAssetMenu(menuName = "Enemy/Attack")]
 [Serializable]
-public class EnemyAttack : Attack
+public class EnemyAttack : EnemyMove
 {
-    public float levelMultiplier = 1f;// changes damage depending on level
+    public float damage = 0f;
     public float hitboxDelay = 0f;
+    public int hitboxID = 0;
+    public bool multipleHits = false;
 }

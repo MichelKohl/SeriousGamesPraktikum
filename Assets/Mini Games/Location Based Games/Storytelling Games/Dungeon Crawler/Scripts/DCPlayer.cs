@@ -101,6 +101,7 @@ public class DCPlayer : Fighter
             transform.rotation = startRot;
         }
 
+        attackChosen = false;
         yield return base.Attacking();
     }
 
@@ -112,6 +113,7 @@ public class DCPlayer : Fighter
 
     private bool TargetChosen()
     {
+        if (currentMove is PlayerSelfBuff) return true;
         if (Application.isEditor)
         {
             if (Input.GetMouseButtonDown(0))
