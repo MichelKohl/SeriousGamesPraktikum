@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7af3c25836908433c9cca936ee48bcfb, type: 3}
-  m_Name: Kick (Broken)
+  m_Name: Upward Slash
   m_EditorClassIdentifier: 
-  animationName: broken kick
+  animationName: upward slash
   healthCost: 0
   staminaCost: 0
   manaCost: 0
@@ -29,5 +29,5 @@ MonoBehaviour:
   LCK: 0
   damage: 0
   levelRequirement: 1
-  hitboxID: 2
+  hitboxID: 0
   multipleHits: 0

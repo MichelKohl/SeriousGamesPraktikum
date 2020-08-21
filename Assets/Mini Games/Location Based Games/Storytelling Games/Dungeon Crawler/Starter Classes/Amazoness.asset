@@ -21,11 +21,10 @@ MonoBehaviour:
   luck: 1
   attacks:
   - {fileID: 11400000, guid: a9c383922f8154c60a9db47106e4e7b2, type: 2}
-  - {fileID: 11400000, guid: 5023d99c6021843d1bd37066b466f439, type: 2}
+  - {fileID: 11400000, guid: 2ef0f46a403ef4e54a99c8e31b72e452, type: 2}
   - {fileID: 11400000, guid: cf6a7fdd562c24cd39f1c7e096292481, type: 2}
   - {fileID: 11400000, guid: 5565da75d48434cf9a1336fafa940dfc, type: 2}
   - {fileID: 11400000, guid: 0a7c1290068394e94a3dd18e104b7578, type: 2}
   - {fileID: 11400000, guid: a04540dae19204d198f821cf43cce616, type: 2}
-  - {fileID: 11400000, guid: 2ef0f46a403ef4e54a99c8e31b72e452, type: 2}
-  unlocked: 01010101010101
+  unlocked: 010101010101
   consumables: []

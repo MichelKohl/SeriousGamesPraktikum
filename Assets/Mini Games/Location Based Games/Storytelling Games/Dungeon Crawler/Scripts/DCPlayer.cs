@@ -87,8 +87,11 @@ public class DCPlayer : Fighter
         }
         animator.SetTrigger(name: currentMove.animationName);
 
+        Debug.Log("first block");
         yield return new WaitUntil(() => animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains(currentMove.animationName));
+        Debug.Log("second block");
         yield return new WaitUntil(() => !animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains(currentMove.animationName));
+
 
         if (isMelee)
         {

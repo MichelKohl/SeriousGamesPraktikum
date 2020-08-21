@@ -422,7 +422,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: start battle
+  - m_Name: draw weapon
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -587,7 +587,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: two attack combe
+  m_Name: two attack combo
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -619,7 +619,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: 148d5f3b5920943b4a6eb30a4e5b92a7,
       type: 3}
-    m_Threshold: -0.2
+    m_Threshold: -3
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -628,7 +628,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: bc2b1b299b22945d885c369cea3a1119,
       type: 3}
-    m_Threshold: -0.1
+    m_Threshold: -1.5
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -646,7 +646,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: 40bda9877ea3a459cbf8556e788e1655,
       type: 3}
-    m_Threshold: 0.1
+    m_Threshold: 1.5
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -655,7 +655,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: 88d94a7a8b6a54bedbb1d0cf2c2ca1c4,
       type: 3}
-    m_Threshold: 0.2
+    m_Threshold: 3
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -663,8 +663,8 @@ BlendTree:
     m_Mirror: 0
   m_BlendParameter: movementSpeed
   m_BlendParameterY: Blend
-  m_MinThreshold: -0.2
-  m_MaxThreshold: 0.2
+  m_MinThreshold: -3
+  m_MaxThreshold: 3
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
@@ -753,7 +753,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: start battle
+    m_ConditionEvent: draw weapon
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6967462778986781650}
