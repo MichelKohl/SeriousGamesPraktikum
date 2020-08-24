@@ -9,25 +9,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7af3c25836908433c9cca936ee48bcfb, type: 3}
+  m_Script: {fileID: 11500000, guid: d673ef5ad3ac94565b88ed5cf83c9546, type: 3}
   m_Name: Upward Slash
   m_EditorClassIdentifier: 
   animationName: upward slash
   healthCost: 0
-  staminaCost: 0
+  staminaCost: 20
   manaCost: 0
-  healthBenfit: 0
-  staminaBenefit: 0
-  manaBenefit: 0
   particleEffects: []
   particleDelay: []
   particleSpawnPositions: []
-  STR: 0
-  DEX: 0
+  levelRequirement: 1
+  STR: 5
+  DEX: 5
   INT: 0
   FTH: 0
-  LCK: 0
-  damage: 0
-  levelRequirement: 1
-  hitboxID: 0
+  LCK: 2
+  healthDamage: 30
+  staminaDamage: 0
+  manaDamage: 0
+  status: 4
+  timesStatusApplied: 0
+  statusProbability: 0
   multipleHits: 0
+  hitboxID: 0
+  hitParticles: {fileID: 3165635681705289858, guid: 153a3ad63d1db48d0bea5fd3b21bbd29,
+    type: 3}

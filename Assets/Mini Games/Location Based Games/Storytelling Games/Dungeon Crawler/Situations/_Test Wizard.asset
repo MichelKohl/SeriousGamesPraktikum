@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f8ad97bc0ae4352b3c1e638b5c1f39, type: 3}
   m_Name: _Test Wizard
   m_EditorClassIdentifier: 
-  camPosition: {x: 184.68, y: 0, z: 73.13}
+  camPosition: {x: 184.68, y: 4, z: 73.13}
   camRotation: {x: 0, y: 90, z: 0}
   description: 
   options:
   - description: Fight
-    nextSituationID: 0
+    nextSituationID: 7
     strRequirement: 0
     dexRequirement: 0
     intRequirement: 0

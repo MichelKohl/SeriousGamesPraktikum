@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5209a272026e849a6b269392eebfbdee, type: 3}
   m_Name: Camp
   m_EditorClassIdentifier: 
-  camPosition: {x: 82.5, y: 3.45, z: 124.97}
+  camPosition: {x: 82.5, y: 4, z: 124.97}
   camRotation: {x: 0, y: 250.197, z: 0}
   description: Your are alone in the woods. Suddenly you hear a scream.
-  isBattle: 0
-  enemies: []
-  enemyPosition: []
-  enemyRotation: []
   options:
   - description: run towards scream
     nextSituationID: 1
+    strRequirement: 0
+    dexRequirement: 0
+    intRequirement: 0
+    fthRequirement: 0
+    lckRequirement: 0
     conditionDistance: 1

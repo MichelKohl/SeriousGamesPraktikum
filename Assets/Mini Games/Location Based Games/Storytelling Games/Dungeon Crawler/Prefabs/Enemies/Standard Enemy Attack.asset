@@ -14,16 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationName: attack
   healthCost: 0
-  staminaCost: 10
+  staminaCost: 20
   manaCost: 0
-  healthBenfit: 0
-  staminaBenefit: 0
-  manaBenefit: 0
   particleEffects: []
   particleDelay: []
-  particleSpawnPositions: 
-  damage: 10
+  particleSpawnPositions: []
+  levelMultiplier: 1
+  healthDamage: 20
+  staminaDamage: 0
+  manaDamage: 0
+  hitboxDelay: 0
   hitboxID: 0
   multipleHits: 0
-  levelMultiplier: 1
-  hitboxDelay: 0
+  status: 4
+  statusProbability: 0
+  timesStatusApplied: 0

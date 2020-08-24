@@ -126,7 +126,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: upward spell cast
+    m_ConditionEvent: upward cast
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1763588913149733771}
@@ -763,7 +763,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: upward spell cast
+  - m_Name: upward cast
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0

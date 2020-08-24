@@ -7,9 +7,10 @@ public class Cam : MonoBehaviour
     [SerializeField] private StoryManager manager;
     [SerializeField] private Transform playerCharacterTransform;
     [SerializeField] private Transform thirdPersonCam;
-    [SerializeField] private float moveStep = 1f;
+    [SerializeField] private Transform deathCam;
+    [SerializeField] private float moveStep = 2f;
     [SerializeField] private float moveDelta = 0.001f;
-    [SerializeField] private float rotateStep = 1f;
+    [SerializeField] private float rotateStep = 2f;
     [SerializeField] private float rotateDelta = 0.001f;
 
     private DCPlayer player;
@@ -21,6 +22,7 @@ public class Cam : MonoBehaviour
     private Quaternion rotateToRotation;
     private bool positionSet = true;
     private bool firstPerson = true;
+    private bool death = false;
 
     private void Start()
     {
@@ -47,7 +49,7 @@ public class Cam : MonoBehaviour
             {
                 positionSet = true;
                 firstPerson = !firstPerson;
-                player.gameObject.SetActive(!firstPerson);
+                if(!death) player.gameObject.SetActive(!firstPerson);
             }
 
         }
@@ -74,6 +76,17 @@ public class Cam : MonoBehaviour
             player.transform.position = playerCharacterTransform.position;
             player.transform.rotation = playerCharacterTransform.rotation;
             player.gameObject.SetActive(true);
+        }
+    }
+
+    public void ChangeToDeathCam()
+    {
+        if (positionSet && !firstPerson)
+        {
+            positionSet = false;
+            death = true;
+            moveToPosition = deathCam.position;
+            rotateToRotation = deathCam.rotation;
         }
     }
 

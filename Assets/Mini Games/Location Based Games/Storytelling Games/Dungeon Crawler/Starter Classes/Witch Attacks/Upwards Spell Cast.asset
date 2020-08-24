@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d9eccb9fa75141e8b81bfcfa6755566, type: 3}
   m_Name: Upwards Spell Cast
   m_EditorClassIdentifier: 
-  animationName: upwards spell cast
+  animationName: upward cast
   healthCost: 0
   staminaCost: 0
   manaCost: 0

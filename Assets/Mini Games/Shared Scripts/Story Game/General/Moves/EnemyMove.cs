@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class EnemyMove : Move
 {
-    public float levelMultiplier = 1f;// changes damage depending on level
+    public float levelMultiplier = 0f;// changes damage depending on level
 }

@@ -7,5 +7,9 @@ using System;
 [Serializable]
 public class EnemySelfBuff : EnemyMove
 {
+    public float healthBenefit;
+    public float staminaBenefit;
+    public float manaBenefit;
+
     public Consumable consumable;
 }

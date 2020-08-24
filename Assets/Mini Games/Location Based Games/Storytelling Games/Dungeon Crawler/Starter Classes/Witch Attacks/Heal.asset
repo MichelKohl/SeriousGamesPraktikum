@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 556877816b8cf4eea8195ee379579f07, type: 3}
   m_Name: Heal
   m_EditorClassIdentifier: 
-  animationName: 
+  animationName: heal
   healthCost: 0
   staminaCost: 0
   manaCost: 0

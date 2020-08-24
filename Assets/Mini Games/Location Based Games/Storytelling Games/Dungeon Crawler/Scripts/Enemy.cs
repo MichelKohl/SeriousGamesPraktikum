@@ -30,6 +30,7 @@ public class Enemy : Fighter
         {
             //choose random attack
             currentMove = availableAttacks[Random.Range(0, availableAttacks.Count)];
+            battleManager.CurrentMove = currentMove;
             Vector3 startPos = transform.position;
             Quaternion startRot = transform.rotation;
 
@@ -50,6 +51,7 @@ public class Enemy : Fighter
                 else hitboxes[(currentMove as EnemyAttack).hitboxID].enabled = true;
             }
             yield return new WaitUntil(() => animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains(currentMove.animationName));
+            PayForAttack();
             yield return new WaitUntil(() => !animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains(currentMove.animationName));
 
             if(isMelee)
@@ -73,5 +75,30 @@ public class Enemy : Fighter
     {
         yield return new WaitForSeconds(attack.hitboxDelay);
         hitboxes[attack.hitboxID].enabled = true;
+    }
+
+    protected override void DoOnHit()
+    {
+        PlayerMelee currentPlayerMove = battleManager.CurrentMove as PlayerMelee;
+
+        if (currentPlayerMove != null)
+            StartCoroutine(PlayHitParticles(battleManager.GetPlayerHitboxTransform(currentPlayerMove.hitboxID).position,
+                currentPlayerMove.hitParticles));
+    }
+
+    public override (float healthDamage, float staminaDamage, float manaDamage, List<Status> status) CalculateDamage()
+    {
+        return currentMove is EnemyAttack && accuracy >= Random.Range(0, 1f) ?
+            (currentMove as EnemyAttack).GetAttackInfo(level) :
+            base.CalculateDamage();
+    }
+
+    private IEnumerator PlayHitParticles(Vector3 location, ParticleSystem particles)
+    {
+        ParticleSystem hitParticles = Instantiate(particles, location, transform.rotation, transform);
+        hitParticles.gameObject.SetActive(true);
+        hitParticles.Play();
+        yield return new WaitUntil(() => !hitParticles.isPlaying);
+        Destroy(hitParticles);
     }
 }

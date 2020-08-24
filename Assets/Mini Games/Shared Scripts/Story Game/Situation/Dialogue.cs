@@ -8,7 +8,7 @@ using System;
 public class Dialogue : Situation
 {
     public DialogueOption[] options;
-    public Fighter[] talker;
+    public GameObject[] talker;
     public string[] dialogue;
     public Enemy[] enemies;
     public string[] enemyDialogue;

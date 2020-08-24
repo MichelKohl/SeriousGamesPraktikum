@@ -19,14 +19,5 @@ MonoBehaviour:
   intelligence: 1
   faith: 1
   luck: 1
-  attacks:
-  - {fileID: 11400000, guid: 9c4910a55c9224459a531b347fa384bc, type: 2}
-  - {fileID: 11400000, guid: f6aa048f2aa224f17a49697abbc22087, type: 2}
-  - {fileID: 11400000, guid: 90c6db6a03905484e98ed3651a6e3d3d, type: 2}
-  - {fileID: 11400000, guid: cdfed3076c74b4ccbb0908341199098b, type: 2}
-  - {fileID: 11400000, guid: 36bce1847f7aa495b801f56cad0b9f5f, type: 2}
-  - {fileID: 11400000, guid: cd33499330a8e4e399c4592432e36e12, type: 2}
-  - {fileID: 11400000, guid: 81fc8fba6ffef4c2894c296dee8b132b, type: 2}
-  - {fileID: 11400000, guid: 833e8bc0fc34f4d378f22b9ad5df74c6, type: 2}
   unlocked: 0101010101010101
   consumables: []

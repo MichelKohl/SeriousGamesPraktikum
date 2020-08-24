@@ -39,7 +39,6 @@ public class DCPlayer : Fighter
         intelligence =      starter.intelligence;
         faith =             starter.faith;
         luck =              starter.luck;
-        moves =           starter.attacks;
         unlocked =          starter.unlocked;
 
         foreach (Consumable consumable in starter.consumables)
@@ -75,7 +74,9 @@ public class DCPlayer : Fighter
         yield return new WaitUntil(() => attackChosen);
         yield return new WaitUntil(() => TargetChosen());
 
-        bool isMelee = currentMove is PlayerAttack && !(currentMove is PlayerSpell);
+        battleManager.CurrentMove = currentMove;
+
+        bool isMelee = currentMove is PlayerMelee;
 
         if (isMelee) 
         {
@@ -83,13 +84,13 @@ public class DCPlayer : Fighter
             agent.SetDestination(currentTarget.GetAttackPosition().position);
             agent.stoppingDistance = attackPositionOffset;
             yield return new WaitUntil(() => agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance <= attackPositionOffset);
-            hitboxes[(currentMove as PlayerAttack).hitboxID].enabled = true;
+            hitboxes[(currentMove as PlayerMelee).hitboxID].enabled = true;
         }
         animator.SetTrigger(name: currentMove.animationName);
 
-        Debug.Log("first block");
+    
         yield return new WaitUntil(() => animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains(currentMove.animationName));
-        Debug.Log("second block");
+        PayForAttack();
         yield return new WaitUntil(() => !animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains(currentMove.animationName));
 
 
@@ -99,7 +100,7 @@ public class DCPlayer : Fighter
             agent.updateRotation = false;
             agent.SetDestination(startPos);
             agent.stoppingDistance = 0f;
-            hitboxes[(currentMove as PlayerAttack).hitboxID].enabled = false;
+            hitboxes[(currentMove as PlayerMelee).hitboxID].enabled = false;
             yield return new WaitUntil(() => agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0);
             agent.updateRotation = true;
             transform.rotation = startRot;
@@ -126,7 +127,7 @@ public class DCPlayer : Fighter
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out hit))
                 {
-                    Debug.Log(hit.transform.tag);
+                    //Debug.Log(hit.transform.tag);
                     if (hit.transform.CompareTag("Enemy"))
                     {
                         currentTarget = hit.transform.gameObject.GetComponent<Fighter>();
@@ -138,7 +139,6 @@ public class DCPlayer : Fighter
         }
         else
         {
-            Debug.Log($"touch count: {Input.touchCount}");
             for (int i = 0; i < Input.touchCount; ++i)
             {
                 if (Input.GetTouch(i).phase == TouchPhase.Began)
@@ -147,7 +147,6 @@ public class DCPlayer : Fighter
                     Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(i).position);
                     if (Physics.Raycast(ray, out hit))
                     {
-                        Debug.Log(hit.transform.tag);
                         if (hit.transform.CompareTag("Enemy"))
                         {
                             currentTarget = hit.transform.gameObject.GetComponent<Fighter>();
@@ -190,5 +189,19 @@ public class DCPlayer : Fighter
             animator.SetTrigger("draw weapon");
         }
         catch (Exception) { }
+    }
+
+    public override (float healthDamage, float staminaDamage, float manaDamage, List<Status> status) CalculateDamage()
+    {
+        return currentMove is PlayerAttack && accuracy >= UnityEngine.Random.Range(0, 1f) ?
+            (currentMove as PlayerAttack).GetAttackInfo(strength, dexterity, intelligence, faith, luck) :
+            base.CalculateDamage();
+    }
+
+    public override void ResetFighterValues()
+    {
+        base.ResetFighterValues();
+        currentStaminaRegen = (float) (strength + dexterity) / 4;
+        currentManaRegen = (float) (intelligence + faith) / 4;
     }
 }

@@ -28,5 +28,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 91cdfa5d914ec4a7da91ef47fe428d7f, type: 2}
   - {fileID: 11400000, guid: 3224baa3f42384915b12640c27e36b94, type: 2}
   - {fileID: 11400000, guid: e8d00488baaa14701bb9b047a8f3b273, type: 2}
-  unlocked: 0101010101010101
+  - {fileID: 11400000, guid: 5188c0c0afdda4e0aa29bff8f32b8b87, type: 2}
+  unlocked: 010101010101010101
   consumables: []

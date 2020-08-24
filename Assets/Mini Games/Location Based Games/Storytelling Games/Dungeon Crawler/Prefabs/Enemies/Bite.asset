@@ -16,14 +16,16 @@ MonoBehaviour:
   healthCost: 0
   staminaCost: 10
   manaCost: 0
-  healthBenfit: 0
-  staminaBenefit: 0
-  manaBenefit: 0
   particleEffects: []
   particleDelay: []
-  particleSpawnPositions: 
-  damage: 10
+  particleSpawnPositions: []
+  levelMultiplier: 1
+  healthDamage: 100
+  staminaDamage: 0
+  manaDamage: 0
+  hitboxDelay: 0.5
   hitboxID: 0
   multipleHits: 0
-  levelMultiplier: 1
-  hitboxDelay: 0.5
+  status: 4
+  statusProbability: 0
+  timesStatusApplied: 0

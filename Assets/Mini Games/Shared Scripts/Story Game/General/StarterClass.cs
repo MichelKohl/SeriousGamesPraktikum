@@ -16,7 +16,6 @@ public class StarterClass : ScriptableObject
     public int luck = 1;        // -> chance of critical hits & effects (stun, bleed, poison etc.) and chance of evading an attack
 
     // all attacks
-    public Move[] attacks;
     public bool[] unlocked;
 
     //starter equipment

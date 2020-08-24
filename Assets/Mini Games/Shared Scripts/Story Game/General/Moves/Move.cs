@@ -11,10 +11,6 @@ public class Move : ScriptableObject
     public float staminaCost = 0f;
     public float manaCost = 0f;
 
-    public float healthBenfit = 0f;
-    public float staminaBenefit = 0f;
-    public float manaBenefit = 0f;
-
     public ParticleSystem[] particleEffects;
     public float[] particleDelay;
     public Transform[] particleSpawnPositions;
@@ -44,7 +40,5 @@ public enum SpellType
 {
     Single,
     Multiple,
-    Areal,
-    SelfBuff,
-    Heal
+    Areal
 }

@@ -620,13 +620,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 598229673}
-  m_LocalRotation: {x: 0.087127715, y: -0.025277874, z: 0.0022115284, w: 0.9958739}
+  m_LocalRotation: {x: 0.08712591, y: -0.026077311, z: 0.0022814702, w: 0.9958533}
   m_LocalPosition: {x: 0.336, y: 3, z: -6.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1830796239}
   m_Father: {fileID: 1478741719}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 10, y: -2.908, z: 0}
+  m_LocalEulerAnglesHint: {x: 10, y: -3, z: 0}
 --- !u!1001 &605003258
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2366,6 +2367,7 @@ MonoBehaviour:
   manager: {fileID: 1585297039}
   playerCharacterTransform: {fileID: 629151979}
   thirdPersonCam: {fileID: 598229674}
+  deathCam: {fileID: 1830796239}
   moveStep: 1
   moveDelta: 0.001
   rotateStep: 1
@@ -2421,7 +2423,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1478741716}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 185.45, y: 4, z: 73.18}
+  m_LocalPosition: {x: 184.68, y: 4, z: 73.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 23827251}
@@ -2578,7 +2580,7 @@ MonoBehaviour:
   cam: {fileID: 1478741717}
   starter: {fileID: 11400000, guid: 31117bd4827fb463eb161fa9ccba449f, type: 2}
   playerLifebar: {fileID: 1718281471}
-  startSituationID: 5
+  startSituationID: 2
   currentSituation: {fileID: 939122773}
   decisionsPanel: {fileID: 1343262054}
   situations:
@@ -2589,6 +2591,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 775553d9c696548da97b3e2b5d4816e7, type: 2}
   - {fileID: 11400000, guid: ddca5d22f7d3649d68a5d37822fddc76, type: 2}
   - {fileID: 11400000, guid: d5e6951e1e27a4449ba50f4bd54b06ce, type: 2}
+  - {fileID: 11400000, guid: 91411d2046de64fae8d3273509d39588, type: 2}
   decisionPrefab: {fileID: 9151792647379436557}
   turnOffWalkingRequirement: 1
   textWhenWalking: {fileID: 35032541}
@@ -2626,6 +2629,14 @@ MonoBehaviour:
   attackOptionsPanel: {fileID: 1343262054}
   attackOptionPrefab: {fileID: 1327070834815722695, guid: fd61b9456ad564ee595121c94c0471fd,
     type: 3}
+  particlesOnHit:
+  - {fileID: 1637663880425986105, guid: 087a9e46e4d4b48f5bd7bbc76407b33e, type: 3}
+  - {fileID: 3165635681705289858, guid: 153a3ad63d1db48d0bea5fd3b21bbd29, type: 3}
+  - {fileID: 8936593356714374820, guid: b2e3a86f10d854e57a0f70d18ce0acc3, type: 3}
+  damageThreshForParticles:
+  - 0
+  - 100
+  - 500
 --- !u!1 &1659500884
 GameObject:
   m_ObjectHideFlags: 0
@@ -2868,6 +2879,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2045439238}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1830796238
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1830796239}
+  m_Layer: 0
+  m_Name: Death Cam Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1830796239
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830796238}
+  m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
+  m_LocalPosition: {x: 0, y: 1, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 598229674}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
 --- !u!1 &1897383331
 GameObject:
   m_ObjectHideFlags: 0

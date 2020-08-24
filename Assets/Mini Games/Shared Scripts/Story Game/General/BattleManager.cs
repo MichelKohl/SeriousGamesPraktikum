@@ -2,22 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class BattleManager : MonoBehaviour
 {
+    public static readonly int maxSkillLevel = 20;
     [SerializeField] private StoryManager manager;
     [SerializeField] private Cam cam;
     [SerializeField] private bool pause;
     [SerializeField] private TextMeshProUGUI descripition;
     [SerializeField] private DecisionsPanel attackOptionsPanel;
     [SerializeField] private AttackOption attackOptionPrefab;
+    [SerializeField] private ParticleSystem[] particlesOnHit;
+    [SerializeField] private float[] damageThreshForParticles;
 
     private DCPlayer player;
 
     public bool BattleOver { get; private set; }
     private List<Enemy> enemies;
     private Queue<Fighter> attackQueue;
+    private Move currentMove;
     private bool someoneIsAttacking = false;
+    private bool someoneGotHit = false;
+    private Fighter currentAttacker;
+
+    public bool SomeoneGotHit { get => someoneGotHit; set => someoneGotHit = value; }
+    public Move CurrentMove { get => currentMove; set => currentMove = value; }
     // Start is called before the first frame update
     void Start()
     {
@@ -42,14 +52,15 @@ public class BattleManager : MonoBehaviour
             foreach (Enemy enemy in enemies)
                 enemy.IsFighting = true;
         }
-        if(!someoneIsAttacking && attackQueue.Count > 0)
+        if(!someoneIsAttacking && attackQueue.Count > 0 && !BattleOver)
         {
-            Fighter fighter = attackQueue.Dequeue();
-            Debug.Log($"battlemanager: {fighter.name} will be attacking.");
-            if (!fighter.IsDead())
+            currentAttacker = attackQueue.Dequeue();
+            //Debug.Log($"battlemanager: {currentAttacker.name} will be attacking.");
+            if (!currentAttacker.IsDead())
             {
                 someoneIsAttacking = true;
-                if (fighter == player)
+                someoneGotHit = false;
+                if (currentAttacker == player)
                 {
                     attackOptionsPanel.Flush();
                     foreach (Move attack in player.GetAvailableMoves())
@@ -57,46 +68,46 @@ public class BattleManager : MonoBehaviour
                             Init(attack, descripition, player);
                     player.Attack();
                 }
-                else fighter.Attack();
+                else currentAttacker.Attack();
             }
         }
         if (AllEnemiesDead())
         {
-            pause = true;
-            BattleOver = true;
             cam.ChangeToFirstPerson();
-
-            foreach (Enemy enemy in enemies)
-                enemy.ShowLifebar(false);
-            player.ShowLifebar(false);
+            HandleBattleOver();
+            pause = true;
         }
-        // TODO: if player dead -> game over
+        if (player != null && player.IsDead())
+        {
+            StartCoroutine(DoDeathCam(1.5f));
+        }
     }
 
     public void StartBattle()
     {
-        Debug.Log("battle starts...");
-        Debug.Log($"enemy count: {enemies.Count}");
+        //Debug.Log("battle starts...");
+        //Debug.Log($"enemy count: {enemies.Count}");
         BattleOver = false;
         pause = false;
         foreach(Enemy enemy in enemies)
         {
             enemy.SetPlayerPosition(player.GetAttackPosition());
-            enemy.ShowLifebar(true);
+            enemy.ShowBattleUI(true);
         }
         cam.ChangeToThirdPerson();
-        player.ShowLifebar(true);
+        player.ShowBattleUI(true);
         player.DrawWeapon();
         descripition.text = "";
         attackOptionsPanel.Flush();
+        someoneGotHit = false;
     }
 
     public void AddEnemy(Enemy enemy)
     {
         if (enemies == null) enemies = new List<Enemy>();
-        Debug.Log($"adding {enemy.name} to the list of enemies.");
+        //Debug.Log($"adding {enemy.name} to the list of enemies.");
         enemies.Add(enemy);
-        Debug.Log($"enemy count: {enemies.Count}");
+        //Debug.Log($"enemy count: {enemies.Count}");
     }
 
     public void AddEnemies(Enemy[] enemies)
@@ -120,10 +131,45 @@ public class BattleManager : MonoBehaviour
         someoneIsAttacking = false;
     }
 
+    public bool CurrentMoveDoesMultipleHits()
+    {
+        PlayerAttack pa = currentMove as PlayerAttack;
+        return pa != null && pa.multipleHits;
+    }
+
     private bool AllEnemiesDead()
     {
         foreach (Fighter enemy in enemies)
             if (!enemy.IsDead()) return false;
         return true;
+    }
+
+    public (float healthDamage, float staminaDamage, float manaDamage, List<Status> status) GetDamage()
+    {
+        return currentAttacker.CalculateDamage();
+    }
+
+    public Transform GetPlayerHitboxTransform(int id)
+    {
+        return player.GetCollider(id).transform;
+    }
+
+    private void HandleBattleOver()
+    {
+        BattleOver = true;
+        foreach (Enemy enemy in enemies)
+        {
+            enemy.ShowBattleUI(false);
+            //enemy.IsFighting = false;
+        }
+        player.ShowBattleUI(false);
+    }
+
+    private IEnumerator DoDeathCam(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        cam.ChangeToDeathCam();
+        descripition.text = "you dead.";
+        HandleBattleOver();
     }
 }

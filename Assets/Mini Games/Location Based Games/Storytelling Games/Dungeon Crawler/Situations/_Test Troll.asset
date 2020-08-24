@@ -17,7 +17,7 @@ MonoBehaviour:
   description: 
   options:
   - description: Fight
-    nextSituationID: 0
+    nextSituationID: 7
     strRequirement: 0
     dexRequirement: 0
     intRequirement: 0
