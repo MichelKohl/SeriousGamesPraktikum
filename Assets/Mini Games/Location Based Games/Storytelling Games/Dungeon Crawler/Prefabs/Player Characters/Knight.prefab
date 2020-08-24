@@ -2859,6 +2859,11 @@ MonoBehaviour:
   lifebar: {fileID: 0}
   damageLabel: {fileID: 5931792620460411164}
   damageLabelVerticalMove: 2
+  toggleableObjects:
+  - {fileID: 5205412436310588219}
+  - {fileID: 4043834456607019482}
+  - {fileID: 5728219107612951110}
+  - {fileID: 6723034932783947511}
   agent: {fileID: 714235797106889394}
   attackPosition: {fileID: 1249687306858592731}
   attackPositionOffset: 0

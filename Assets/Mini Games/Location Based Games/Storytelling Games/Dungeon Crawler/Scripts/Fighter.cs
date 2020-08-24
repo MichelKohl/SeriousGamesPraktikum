@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Animations;
+using UnityEditor;
 
 public class Fighter : MonoBehaviour
 {
@@ -94,32 +96,33 @@ public class Fighter : MonoBehaviour
             health = Mathf.Min(currentMaxHealth, health + currentHealthRegen * Time.deltaTime);
             stamina = Mathf.Min(currentMaxStamina, stamina + currentStaminaRegen * Time.deltaTime);
             mana = Mathf.Min(currentMaxMana, mana + currentManaRegen * Time.deltaTime);
+
+            // apply status effects depending on current status
+            foreach (Status status in currentStatus)
+                switch (status)
+                {
+                    case Status.Poison:
+                        if (poisonTimer >= 5f)
+                        {
+                            DecreaseBy(health, 2);
+                            DecreaseBy(stamina, 2);
+                            DecreaseBy(mana, 2);
+                        }
+                        break;
+                    case Status.Stun:
+                        timer = 0;
+                        DecreaseBy(mana, 50);
+                        DecreaseBy(stamina, 50);
+                        break;
+                    case Status.Bleed:
+                        DecreaseBy(health, 5);
+                        DecreaseBy(mana, 5);
+                        DecreaseBy(stamina, 5);
+                        break;
+                }
+            poisonTimer = poisonTimer >= 5f ? 0 : poisonTimer + Time.deltaTime;
+            currentStatus.RemoveAll(status => status == Status.Bleed);
         }
-        // apply status effects depending on current status
-        foreach (Status status in currentStatus)
-            switch (status)
-            {
-                case Status.Poison:
-                    if(poisonTimer >= 5f)
-                    {
-                        DecreaseBy(health, 2);
-                        DecreaseBy(stamina, 2);
-                        DecreaseBy(mana, 2);
-                    }
-                    break;
-                case Status.Stun:
-                    timer = 0;
-                    DecreaseBy(mana, 50);
-                    DecreaseBy(stamina, 50);
-                    break;
-                case Status.Bleed:
-                    DecreaseBy(health, 5);
-                    DecreaseBy(mana, 5);
-                    DecreaseBy(stamina, 5);
-                    break;
-            }
-        poisonTimer = poisonTimer >= 5f ? 0 : poisonTimer + Time.deltaTime;
-        currentStatus.RemoveAll(status => status == Status.Bleed);
 
         if (!addedToAttackQueue && timer >= 10f - initiative)
         {

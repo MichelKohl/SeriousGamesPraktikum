@@ -5,7 +5,8 @@ using TMPro;
 public class StoryManager : MonoBehaviour
 {
     [SerializeField] private Cam cam;
-    [SerializeField] private StarterClass starter;
+    [SerializeField] private StarterClass[] starterClasses;
+    [SerializeField] private DCPlayer[] starterModels;
     [SerializeField] private Lifebar playerLifebar;
     [SerializeField] private int startSituationID = 0;
     [SerializeField] private TextMeshProUGUI currentSituation;
@@ -20,6 +21,7 @@ public class StoryManager : MonoBehaviour
     private int currentSituationID = 0;
     private GameManager manager;
     private BattleManager battleManager;
+    private bool characterChosen = false;// must be set to true when loading a saved game state.
 
     public void ChangeSituation(int toID = 0, double distanceToWalk = 0, bool startBattle = false)
     {
@@ -34,11 +36,6 @@ public class StoryManager : MonoBehaviour
     {
         manager = GameManager.INSTANCE;
         battleManager = GetComponent<BattleManager>();
-        player = starter.Init(transform.parent, transform.position, transform.rotation);
-        playerLifebar.SetFighter(player);
-        player.SetLifebar(playerLifebar);
-        player.gameObject.SetActive(false);
-
         ChangeSituation(startSituationID);
     }
 
@@ -78,8 +75,21 @@ public class StoryManager : MonoBehaviour
         currentSituationID = id;
         Situation current = situations[currentSituationID];
         currentSituation.text = current.description;
-        // create new options;
-        if (current is Navigation)
+      
+        if (!characterChosen && !(current is CharacterSelection))
+        {
+            for (int i = 0; i < starterModels.Length; i++)
+            {
+                if (starterModels[i].isActiveAndEnabled)
+                    player = starterClasses[i].Init(transform.parent, Vector3.zero, Quaternion.identity);
+                Destroy(starterModels[i].gameObject);
+            }
+            playerLifebar.SetFighter(player);
+            player.SetLifebar(playerLifebar);
+            player.gameObject.SetActive(false);
+            characterChosen = true;
+        }
+        if (!(current is CharacterSelection) && current is Navigation)
             foreach (NextPoint info in (current as Navigation).options)
                 if (player.StatsCheckOut(info.strRequirement, info.dexRequirement,
                     info.intRequirement, info.fthRequirement, info.lckRequirement))
@@ -98,8 +108,16 @@ public class StoryManager : MonoBehaviour
                 battleManager.AddEnemy(Instantiate(dialogue.enemies[i], dialogue.enemyPosition[i],
                     Quaternion.Euler(dialogue.enemyRotation[i])));
         }
-                
-            
+        if(current is CharacterSelection)
+        {
+            CharacterSelection charSel = current as CharacterSelection;
+            for(int i = 0; i < starterModels.Length; i++)
+                starterModels[i].gameObject.SetActive(i == charSel.classID);
+            foreach (NextPoint info in (current as Navigation).options)
+                Instantiate(decisionPrefab, decisionsPanel.transform).
+                    Init(info.description, info.nextSituationID, info.conditionDistance);
+            //TODO show stats of selected character
+        }
         //TODO: disable and enable assets to save on computation
         // change to new situation
         Debug.Log($"change to situation with id: [{currentSituationID}]");

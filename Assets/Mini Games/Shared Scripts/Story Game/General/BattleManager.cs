@@ -14,7 +14,6 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private DecisionsPanel attackOptionsPanel;
     [SerializeField] private AttackOption attackOptionPrefab;
     [SerializeField] private ParticleSystem[] particlesOnHit;
-    [SerializeField] private float[] damageThreshForParticles;
 
     private DCPlayer player;
 
@@ -39,6 +38,7 @@ public class BattleManager : MonoBehaviour
     {
         if (attackQueue == null) attackQueue = new Queue<Fighter>();
         if (player == null) player = manager.GetPlayerCharacter();
+        if (player == null) return;
 
         if (pause)
         {

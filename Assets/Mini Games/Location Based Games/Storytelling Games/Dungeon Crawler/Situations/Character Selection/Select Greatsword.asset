@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e10022bfabc074592aeeb474f70e2995, type: 3}
+  m_Name: Select Greatsword
+  m_EditorClassIdentifier: 
+  camPosition: {x: 84.23, y: 4.25, z: 129.12}
+  camRotation: {x: 0, y: 232.454, z: 0}
+  description: 'Very strong, but not fast. '
+  options:
+  - description: Choose
+    nextSituationID: 2
+    strRequirement: 0
+    dexRequirement: 0
+    intRequirement: 0
+    fthRequirement: 0
+    lckRequirement: 0
+    conditionDistance: 0
+  - description: The Knight
+    nextSituationID: 8
+    strRequirement: 0
+    dexRequirement: 0
+    intRequirement: 0
+    fthRequirement: 0
+    lckRequirement: 0
+    conditionDistance: 0
+  - description: The Berserker
+    nextSituationID: 9
+    strRequirement: 0
+    dexRequirement: 0
+    intRequirement: 0
+    fthRequirement: 0
+    lckRequirement: 0
+    conditionDistance: 0
+  - description: The Witch
+    nextSituationID: 11
+    strRequirement: 0
+    dexRequirement: 0
+    intRequirement: 0
+    fthRequirement: 0
+    lckRequirement: 0
+    conditionDistance: 0
+  classID: 2
