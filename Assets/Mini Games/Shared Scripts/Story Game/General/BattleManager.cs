@@ -52,6 +52,7 @@ public class BattleManager : MonoBehaviour
             foreach (Enemy enemy in enemies)
                 enemy.IsFighting = true;
         }
+
         if(!someoneIsAttacking && attackQueue.Count > 0 && !BattleOver)
         {
             currentAttacker = attackQueue.Dequeue();
@@ -60,17 +61,25 @@ public class BattleManager : MonoBehaviour
             {
                 someoneIsAttacking = true;
                 someoneGotHit = false;
+
                 if (currentAttacker == player)
                 {
                     attackOptionsPanel.Flush();
                     foreach (Move attack in player.GetAvailableMoves())
                         Instantiate(attackOptionPrefab, attackOptionsPanel.transform).
                             Init(attack, descripition, player);
+                    foreach (Enemy enemy in enemies)
+                        enemy.PauseInitiativeTimer(true);
                     player.Attack();
                 }
-                else currentAttacker.Attack();
+                else
+                {
+                    player.PauseInitiativeTimer(true);
+                    currentAttacker.Attack();
+                }
             }
         }
+
         if (AllEnemiesDead())
         {
             cam.ChangeToFirstPerson();
@@ -129,6 +138,9 @@ public class BattleManager : MonoBehaviour
     public void SendAttackDone()
     {
         someoneIsAttacking = false;
+        player.PauseInitiativeTimer(false);
+        foreach (Enemy enemy in enemies)
+            enemy.PauseInitiativeTimer(false);
     }
 
     public bool CurrentMoveDoesMultipleHits()

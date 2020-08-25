@@ -12,7 +12,6 @@ public class SpellProjectile : MonoBehaviour
     public void LockOnTarget(Transform targetTransform)
     {
         this.targetTransform = targetTransform;
-        //transform.forward = Vector3.Normalize(targetTransform.position - transform.position);
     }
 
     // Update is called once per frame
@@ -32,10 +31,12 @@ public class SpellProjectile : MonoBehaviour
         //TODO do explosion
         if(explosion != null)
         {
-            // start explosion
-            // yield return new WaitUntil(() => exposion.done);
+            ParticleSystem newExplosion = Instantiate(explosion, transform.position, Quaternion.identity, transform.parent);
+            transform.position -= new Vector3(0, -100, 0);
+            newExplosion.Play();
+            yield return new WaitForSeconds(newExplosion.main.duration);
+            Destroy(newExplosion.gameObject);
         }
-        yield return null;
         Destroy(gameObject);
     }
 }

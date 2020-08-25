@@ -2849,7 +2849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 1
-  maxHealth: 100
+  maxHealth: 150
   healthRegen: 1
   initiative: 7
   maxStamina: 100

@@ -126,21 +126,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 1
-  maxHealth: 100
+  maxHealth: 110
   healthRegen: 1
   initiative: 7
-  maxStamina: 100
+  maxStamina: 130
   staminaRegen: 2
-  maxMana: 100
+  maxMana: 110
   manaRegen: 2
   lifebar: {fileID: 0}
   damageLabel: {fileID: 2548594302355849396}
   damageLabelVerticalMove: 2
-  toggleableObjects:
-  - {fileID: 4011658656768497286}
-  - {fileID: 8628167684062988118}
-  - {fileID: 2004150120275515437}
-  - {fileID: 2508350729088229042}
   agent: {fileID: 2034928325357936583}
   attackPosition: {fileID: 7029304825298329389}
   attackPositionOffset: 3
@@ -156,6 +151,7 @@ MonoBehaviour:
   - {fileID: 1084282782563912327}
   - {fileID: 4430770688576589028}
   - {fileID: 6196920045616887888}
+  spellSpawnTransforms: []
   currentStatus: 
   strength: 1
   dexterity: 1

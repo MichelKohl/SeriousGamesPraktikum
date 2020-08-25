@@ -272,13 +272,14 @@ MonoBehaviour:
   level: 1
   maxHealth: 100
   healthRegen: 1
-  initiative: 7
+  initiative: 1
   maxStamina: 100
   staminaRegen: 2
   maxMana: 100
   manaRegen: 2
   lifebar: {fileID: 2307219668163513363}
   damageLabel: {fileID: 7266068961098546741}
+  damageLabelVerticalMove: 2
   agent: {fileID: 211497220429582460}
   attackPosition: {fileID: 2965027913645830782}
   attackPositionOffset: 0
@@ -287,6 +288,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6297e6b8f32054390a1b583b9bab6aff, type: 2}
   hitboxes:
   - {fileID: 3291919099827304750}
+  spellSpawnTransforms: []
   currentStatus: 
 --- !u!1 &5893342507145416644
 GameObject:

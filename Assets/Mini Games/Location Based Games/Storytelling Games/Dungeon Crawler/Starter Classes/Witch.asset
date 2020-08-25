@@ -12,22 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf59a91a8e439419f8c6cf719dcc572d, type: 3}
   m_Name: Witch
   m_EditorClassIdentifier: 
-  level: 1
+  level: 4
   model: {fileID: 4699959695491232519, guid: 91beda5a4042e4dffab17519b7da2274, type: 3}
   strength: 1
-  dexterity: 1
-  intelligence: 1
-  faith: 1
-  luck: 1
-  attacks:
-  - {fileID: 11400000, guid: 03476476d73e34675af98e29382837c4, type: 2}
-  - {fileID: 11400000, guid: 93018cb5b38f44e06b140bd9708f9741, type: 2}
-  - {fileID: 11400000, guid: 2245c795396de42db954e1cb830ba3c1, type: 2}
-  - {fileID: 11400000, guid: 57edcc31a242a4d14a2b044ac9345cfb, type: 2}
-  - {fileID: 11400000, guid: 9a3272917ff5a4aa98ac7ba198f5f6b7, type: 2}
-  - {fileID: 11400000, guid: 91cdfa5d914ec4a7da91ef47fe428d7f, type: 2}
-  - {fileID: 11400000, guid: 3224baa3f42384915b12640c27e36b94, type: 2}
-  - {fileID: 11400000, guid: e8d00488baaa14701bb9b047a8f3b273, type: 2}
-  - {fileID: 11400000, guid: 5188c0c0afdda4e0aa29bff8f32b8b87, type: 2}
+  dexterity: 5
+  intelligence: 5
+  faith: 4
+  luck: 3
   unlocked: 010101010101010101
   consumables: []

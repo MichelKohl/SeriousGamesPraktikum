@@ -1767,14 +1767,11 @@ MonoBehaviour:
   initiative: 7
   maxStamina: 100
   staminaRegen: 2
-  maxMana: 100
+  maxMana: 150
   manaRegen: 2
   lifebar: {fileID: 0}
   damageLabel: {fileID: 6146255843676402058}
   damageLabelVerticalMove: 2
-  toggleableObjects:
-  - {fileID: 441240542490061392}
-  - {fileID: 398006958289530558}
   agent: {fileID: 6868678443250590299}
   attackPosition: {fileID: 5165807757274836346}
   attackPositionOffset: 0
@@ -1790,6 +1787,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3224baa3f42384915b12640c27e36b94, type: 2}
   - {fileID: 11400000, guid: e8d00488baaa14701bb9b047a8f3b273, type: 2}
   hitboxes: []
+  spellSpawnTransforms: []
   currentStatus: 
   strength: 1
   dexterity: 1

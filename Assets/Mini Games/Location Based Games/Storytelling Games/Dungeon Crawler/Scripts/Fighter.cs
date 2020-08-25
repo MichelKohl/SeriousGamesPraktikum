@@ -33,7 +33,7 @@ public class Fighter : MonoBehaviour
     private float currentMaxHealth;
     private float currentMaxStamina;
     private float currentMaxMana;
-    private float currentInitiative;
+    protected float currentInitiative;
     public List<Status> currentStatus;
     // current figher values
     protected float health = 1f;
@@ -43,6 +43,7 @@ public class Fighter : MonoBehaviour
     protected float currentStaminaRegen;
     protected float currentManaRegen;
     protected float accuracy;
+    private bool timerOnPause = false;
     private float timer;
     private float poisonTimer;
     private float damageLabelTimer;
@@ -83,7 +84,7 @@ public class Fighter : MonoBehaviour
         animator.SetFloat("movementSpeed", (walkingForward ? 1 : -1) * Vector3.Distance(agent.velocity, Vector3.zero));
         animator.SetFloat("health", health);
 
-        timer += Time.deltaTime;
+        if(!timerOnPause) timer += Time.deltaTime * currentInitiative;
         damageLabelTimer += Time.deltaTime;
 
         if (damageLabel.gameObject.activeSelf)
@@ -125,7 +126,7 @@ public class Fighter : MonoBehaviour
             currentStatus.RemoveAll(status => status == Status.Bleed);
         }
 
-        if (!addedToAttackQueue && timer >= 10f - initiative)
+        if (!addedToAttackQueue && timer >= 10f)
         {
             addedToAttackQueue = true;
             battleManager.AddToAttackQueue(this);
@@ -177,7 +178,7 @@ public class Fighter : MonoBehaviour
 
     public float GetInitiativeRatio()
     {
-        return timer / (10f - initiative);
+        return Mathf.Min(timer / 10f, 1f);
     }
 
     public void IncreaseMaxHealthBy(int percent, bool persistent = false)
@@ -373,5 +374,10 @@ public class Fighter : MonoBehaviour
     public Collider GetCollider(int withID)
     {
         return hitboxes[withID];
+    }
+
+    public void PauseInitiativeTimer(bool pause)
+    {
+        timerOnPause = pause;
     }
 }

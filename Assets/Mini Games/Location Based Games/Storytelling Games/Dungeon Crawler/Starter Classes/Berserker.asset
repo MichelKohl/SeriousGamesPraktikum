@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf59a91a8e439419f8c6cf719dcc572d, type: 3}
   m_Name: Berserker
   m_EditorClassIdentifier: 
-  level: 1
+  level: 2
   model: {fileID: 8248900739046808943, guid: 10572c9f30a1b433094dd3d263ab8f88, type: 3}
-  strength: 1
-  dexterity: 1
+  strength: 3
+  dexterity: 6
   intelligence: 1
   faith: 1
-  luck: 1
+  luck: 4
   unlocked: 0101010101010101
   consumables: []

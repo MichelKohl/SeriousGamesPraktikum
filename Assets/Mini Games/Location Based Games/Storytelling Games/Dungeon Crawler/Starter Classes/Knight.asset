@@ -14,18 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 1
   model: {fileID: 3012878626925102580, guid: e6b6f5003b3e8480d82a4a6c6ddebe08, type: 3}
-  strength: 1
-  dexterity: 1
-  intelligence: 1
-  faith: 1
-  luck: 1
-  attacks:
-  - {fileID: 11400000, guid: 71bbf2f3406584a9088e5c6cb826851c, type: 2}
-  - {fileID: 11400000, guid: 2a07f598425074d279f578870e94bd08, type: 2}
-  - {fileID: 11400000, guid: 52cb8161b0e304f2a94610e18b47df7b, type: 2}
-  - {fileID: 11400000, guid: 0bc5c55d582774b689ec06cc1defce19, type: 2}
-  - {fileID: 11400000, guid: c1fd9f3dd210b4064ab121fe30267c77, type: 2}
-  - {fileID: 11400000, guid: c94260389ac304e6dabd75a66e880309, type: 2}
-  - {fileID: 11400000, guid: 7673eef59e75b490aa98df20b4fcd4da, type: 2}
+  strength: 3
+  dexterity: 3
+  intelligence: 3
+  faith: 3
+  luck: 3
   unlocked: 01010101010101
   consumables: []

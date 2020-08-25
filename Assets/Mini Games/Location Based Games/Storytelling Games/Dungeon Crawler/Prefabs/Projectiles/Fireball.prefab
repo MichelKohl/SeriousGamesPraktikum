@@ -164,6 +164,12 @@ PrefabInstance:
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 6157212955296022650, guid: a27a781607ee88444b948f4a54b69343,
+        type: 3}
+      propertyPath: explosion
+      value: 
+      objectReference: {fileID: 8778432572059818021, guid: 1573c1d401c4640f79731db810a0a51c,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a27a781607ee88444b948f4a54b69343, type: 3}
 --- !u!1 &1011570930156858653 stripped

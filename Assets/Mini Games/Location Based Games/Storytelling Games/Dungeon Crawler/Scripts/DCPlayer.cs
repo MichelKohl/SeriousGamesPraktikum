@@ -214,7 +214,8 @@ public class DCPlayer : Fighter
     public override void ResetFighterValues()
     {
         base.ResetFighterValues();
-        currentStaminaRegen = (float) (strength + dexterity) / 4;
-        currentManaRegen = (float) (intelligence + faith) / 4;
+        currentStaminaRegen = (float) (strength + dexterity) / 2;
+        currentManaRegen = (float) (intelligence + faith) / 2;
+        currentInitiative = (float) dexterity / 2;
     }
 }

@@ -32,6 +32,6 @@ MonoBehaviour:
   timesStatusApplied: 0
   statusProbability: 0
   multipleHits: 0
-  hitboxID: 0
+  hitboxID: 1
   hitParticles: {fileID: 1637663880425986105, guid: 087a9e46e4d4b48f5bd7bbc76407b33e,
     type: 3}
