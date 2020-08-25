@@ -28,6 +28,7 @@ public class Fighter : MonoBehaviour
     [SerializeField] protected Animator animator;
     [SerializeField] protected Move[] moves;
     [SerializeField] protected Collider[] hitboxes;
+    [SerializeField] protected Transform[] spellSpawnTransforms;
     // max caps for values during fight (can be increased when fighting)
     private float currentMaxHealth;
     private float currentMaxStamina;
@@ -349,6 +350,10 @@ public class Fighter : MonoBehaviour
 
             if (battleManager.CurrentMove is PlayerMelee)
                 DoOnHit();
+
+            SpellProjectile projectile = other.gameObject.GetComponent<SpellProjectile>();
+            if (projectile != null)
+                projectile.DoExplosion();
         }
             
     }

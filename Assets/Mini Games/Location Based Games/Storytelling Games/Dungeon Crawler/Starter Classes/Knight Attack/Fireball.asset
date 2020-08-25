@@ -33,5 +33,7 @@ MonoBehaviour:
   statusProbability: 0
   multipleHits: 0
   type: 0
-  projectile: {fileID: 0}
+  projectile: {fileID: 6591865682487913415, guid: b0a7944237d8240e68485175849dd3e8,
+    type: 3}
   delay: 0
+  spawnTransformID: 0

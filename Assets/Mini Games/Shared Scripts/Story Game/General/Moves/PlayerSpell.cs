@@ -8,6 +8,7 @@ public class PlayerSpell : PlayerAttack
     public SpellType type;
     public SpellProjectile projectile;
     public float delay;
+    public int spawnTransformID;
 }
 
 

@@ -76,36 +76,49 @@ public class DCPlayer : Fighter
 
         battleManager.CurrentMove = currentMove;
 
-        bool isMelee = currentMove is PlayerMelee;
+        PlayerMelee melee = currentMove as PlayerMelee;
+        PlayerSpell spell = currentMove as PlayerSpell;
+        SpellProjectile projectile = null;
 
-        if (isMelee) 
+        if (melee != null) 
         {
             walkingForward = true;
             agent.SetDestination(currentTarget.GetAttackPosition().position);
             agent.stoppingDistance = attackPositionOffset;
             yield return new WaitUntil(() => agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance <= attackPositionOffset);
-            hitboxes[(currentMove as PlayerMelee).hitboxID].enabled = true;
+            hitboxes[melee.hitboxID].enabled = true;
         }
-        animator.SetTrigger(name: currentMove.animationName);
 
-    
+
+
+        animator.SetTrigger(name: currentMove.animationName);
         yield return new WaitUntil(() => animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains(currentMove.animationName));
         PayForAttack();
+
+        if (spell != null)
+        {
+            Debug.Log("attack is a spell");
+            yield return new WaitForSeconds(spell.delay);
+            projectile = Instantiate(spell.projectile, spellSpawnTransforms[spell.spawnTransformID].position,
+                Quaternion.identity, transform);
+            projectile.LockOnTarget(currentTarget.transform);
+        }
         yield return new WaitUntil(() => !animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains(currentMove.animationName));
 
 
-        if (isMelee)
+        if (melee != null)
         {
             walkingForward = false;
             agent.updateRotation = false;
             agent.SetDestination(startPos);
             agent.stoppingDistance = 0f;
-            hitboxes[(currentMove as PlayerMelee).hitboxID].enabled = false;
+            hitboxes[melee.hitboxID].enabled = false;
             yield return new WaitUntil(() => agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0);
             agent.updateRotation = true;
             transform.rotation = startRot;
         }
 
+        yield return new WaitUntil(() => projectile == null);
         attackChosen = false;
         yield return base.Attacking();
     }

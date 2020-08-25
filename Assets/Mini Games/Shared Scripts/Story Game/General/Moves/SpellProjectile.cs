@@ -12,17 +12,17 @@ public class SpellProjectile : MonoBehaviour
     public void LockOnTarget(Transform targetTransform)
     {
         this.targetTransform = targetTransform;
+        //transform.forward = Vector3.Normalize(targetTransform.position - transform.position);
     }
 
     // Update is called once per frame
     void Update()
     {
         if (targetTransform != null)
-            transform.Translate(Vector3.Normalize(targetTransform.position - transform.position)
-                * Time.deltaTime * speed);
+            transform.Translate((targetTransform.position - transform.position) * Time.deltaTime * speed);
     }
 
-    public void OnCollisionEnter(Collision collision)
+    public void DoExplosion()
     {
         StartCoroutine(Explode());
     }
