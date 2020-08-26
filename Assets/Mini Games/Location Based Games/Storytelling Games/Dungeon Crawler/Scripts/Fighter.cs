@@ -19,7 +19,7 @@ public class Fighter : MonoBehaviour
     [SerializeField] private float maxMana = 100f;
     [SerializeField] private float manaRegen = 0f;
     [SerializeField] private Lifebar lifebar;
-    [SerializeField] private TextMeshProUGUI damageLabel;
+    [SerializeField] private DamageNumber damageNumbers;
     [SerializeField] private float damageLabelVerticalMove = 2f;
     // for battle
     [SerializeField] protected NavMeshAgent agent;
@@ -29,12 +29,14 @@ public class Fighter : MonoBehaviour
     [SerializeField] protected Move[] moves;
     [SerializeField] protected Collider[] hitboxes;
     [SerializeField] protected Transform[] spellSpawnTransforms;
+    [SerializeField] protected float poisonDamageRecieved = 3f;
+    [SerializeField] protected float bleedDamageRecieved = 6f;
     // max caps for values during fight (can be increased when fighting)
     private float currentMaxHealth;
     private float currentMaxStamina;
     private float currentMaxMana;
     protected float currentInitiative;
-    public List<Status> currentStatus;
+    private List<Status> currentStatus;
     // current figher values
     protected float health = 1f;
     protected float stamina;
@@ -46,9 +48,6 @@ public class Fighter : MonoBehaviour
     private bool timerOnPause = false;
     private float timer;
     private float poisonTimer;
-    private float damageLabelTimer;
-    private Vector3 damageLabelTargetPosition;
-    private Vector3 damageLabelStartPosition;
 
     protected Action<float, int> IncreaseBy = (value, percent) => value *= 1f + (percent / 100);
     protected Action<float, int> DecreaseBy = (value, percent) => value *= 1f - (percent / 100);
@@ -85,13 +84,6 @@ public class Fighter : MonoBehaviour
         animator.SetFloat("health", health);
 
         if(!timerOnPause) timer += Time.deltaTime * currentInitiative;
-        damageLabelTimer += Time.deltaTime;
-
-        if (damageLabel.gameObject.activeSelf)
-            damageLabel.rectTransform.position = Vector3.MoveTowards(damageLabel.rectTransform.position,
-                damageLabelTargetPosition, 0.1f);
-        if (damageLabelTimer > 1f)
-            damageLabel.gameObject.SetActive(false);
 
         if (!addedToAttackQueue)
         {
@@ -99,40 +91,44 @@ public class Fighter : MonoBehaviour
             stamina = Mathf.Min(currentMaxStamina, stamina + currentStaminaRegen * Time.deltaTime);
             mana = Mathf.Min(currentMaxMana, mana + currentManaRegen * Time.deltaTime);
 
-            // apply status effects depending on current status
-            foreach (Status status in currentStatus)
-                switch (status)
-                {
-                    case Status.Poison:
-                        if (poisonTimer >= 5f)
-                        {
-                            DecreaseBy(health, 2);
-                            DecreaseBy(stamina, 2);
-                            DecreaseBy(mana, 2);
-                        }
-                        break;
-                    case Status.Stun:
-                        timer = 0;
-                        DecreaseBy(mana, 50);
-                        DecreaseBy(stamina, 50);
-                        break;
-                    case Status.Bleed:
-                        DecreaseBy(health, 5);
-                        DecreaseBy(mana, 5);
-                        DecreaseBy(stamina, 5);
-                        break;
-                }
-            poisonTimer = poisonTimer >= 5f ? 0 : poisonTimer + Time.deltaTime;
-            currentStatus.RemoveAll(status => status == Status.Bleed);
+            if (timer >= 10f)
+            {
+                addedToAttackQueue = true;
+                battleManager.AddToAttackQueue(this);
+            }
+
+            if (!battleManager.SomeoneAttacking())
+            {
+                // apply status effects depending on current status
+                float poisonDamage = 0f;
+                float bleedDamage = 0f;
+
+                foreach (Status status in currentStatus)
+                    switch (status)
+                    {
+                        case Status.Poison:
+                            if (poisonTimer >= 2f)
+                                poisonDamage += poisonDamageRecieved;
+                            break;
+                        case Status.Stun:
+                            timer = 0;
+                            mana -= 50f;
+                            stamina -= 50f;
+                            mana = Mathf.Max(0f, mana);
+                            stamina = Mathf.Max(0f, stamina);
+                            damageNumbers.Stunned();
+                            break;
+                        case Status.Bleed:
+                            bleedDamage += bleedDamageRecieved;
+                            break;
+                    }
+                currentStatus.RemoveAll(status => status == Status.Bleed || status == Status.Stun);
+                poisonTimer = poisonTimer >= 2f ? 0 : poisonTimer + Time.deltaTime;
+                if (poisonDamage > 0)   damageNumbers.PoisonBy(poisonDamage);
+                if (bleedDamage > 0)    damageNumbers.BleedBy(bleedDamage);
+                health -= poisonDamage + bleedDamage;
+            }
         }
-
-        if (!addedToAttackQueue && timer >= 10f)
-        {
-            addedToAttackQueue = true;
-            battleManager.AddToAttackQueue(this);
-        }
-
-
     }
 
     public virtual void ResetFighterValues()
@@ -146,12 +142,9 @@ public class Fighter : MonoBehaviour
         currentInitiative = initiative;
         accuracy = 1f;
         timer = 0f;
-        damageLabelTimer = 0f;
         currentHealthRegen = healthRegen;
         currentStaminaRegen = staminaRegen;
         currentManaRegen = manaRegen;
-        damageLabelStartPosition = damageLabel.rectTransform.position;
-        damageLabelTargetPosition = damageLabel.rectTransform.position + new Vector3(0, damageLabelVerticalMove, 0);
         foreach (Collider hitbox in hitboxes)
             hitbox.enabled = false;
     }
@@ -181,116 +174,6 @@ public class Fighter : MonoBehaviour
         return Mathf.Min(timer / 10f, 1f);
     }
 
-    public void IncreaseMaxHealthBy(int percent, bool persistent = false)
-    {
-        IncreaseBy(persistent ? maxHealth : currentMaxHealth, percent);
-    }
-
-    public void IncreaseHealthBy(int percent)
-    {
-        IncreaseBy(health, percent);
-    }
-
-    public void IncreaseHealthRegenBy(int percent)
-    {
-        IncreaseBy(currentHealthRegen, percent);
-    }
-
-    public void IncreaseMaxStaminaBy(int percent, bool persistent = false)
-    {
-        IncreaseBy(persistent ? maxStamina : currentMaxStamina, percent);
-    }
-
-    public void IncreaseStaminaBy(int percent)
-    {
-        IncreaseBy(stamina, percent);
-    }
-
-    public void IncreaseStaminaRegenBy(int percent)
-    {
-        IncreaseBy(currentStaminaRegen, percent);
-    }
-
-    public void IncreaseMaxManaBy(int percent, bool persistent = false)
-    {
-        IncreaseBy(persistent ? maxMana : currentMaxMana, percent);
-    }
-
-    public void IncreaseManaBy(int percent)
-    {
-        IncreaseBy(mana, percent);
-    }
-
-    public void IncreaseManaRegenBy(int percent)
-    {
-        IncreaseBy(currentManaRegen, percent);
-    }
-
-    public void IncreaseInitiativeBy(int percent, bool persistent = false)
-    {
-        IncreaseBy(persistent ? initiative : currentInitiative, percent);
-    }
-
-    public void IncreaseAccuracyBy(int percent)
-    {
-        IncreaseBy(accuracy, percent);
-    }
-
-    public void DecreaseMaxHealthBy(int percent)
-    {
-        DecreaseBy(currentMaxHealth, percent);
-    }
-
-    public void DecreaseHealthBy(float value)
-    {
-        health -= value;
-    }
-
-    public void DecreaseHealthRegenBy(int percent)
-    {
-        DecreaseBy(currentHealthRegen, percent);
-    }
-
-    public void DecreaseMaxStaminaBy(int percent)
-    {
-        DecreaseBy(currentMaxStamina, percent);
-    }
-
-    public void DecreaseStaminaBy(float value)
-    {
-        stamina -= value;
-    }
-
-    public void DecreaseStaminaRegenBy(int percent)
-    {
-        DecreaseBy(currentStaminaRegen, percent);
-    }
-
-    public void DecreaseMaxManaBy(int percent)
-    {
-        DecreaseBy(currentMaxMana, percent);
-    }
-
-    public void DecreaseManaBy(float value)
-    {
-        mana -= value;
-    }
-
-    public void DecreaseManaRegenBy(int percent)
-    {
-        DecreaseBy(currentManaRegen, percent);
-    }
-
-    public void DecreaseInitiativeBy(int percent)
-    {
-        DecreaseBy(currentInitiative, percent);
-    }
-
-    public void DecreaseAccuracyBy(int percent)
-    {
-        DecreaseBy(accuracy, percent);
-    }
-
     public Transform GetAttackPosition()
     {
         return attackPosition;
@@ -299,7 +182,7 @@ public class Fighter : MonoBehaviour
     public void ShowBattleUI(bool show)
     {
         lifebar.gameObject.SetActive(show);
-        damageLabel.gameObject.SetActive(show);
+        damageNumbers.gameObject.SetActive(show);
     }
 
     public void SetLifebar(Lifebar lifebar)
@@ -340,14 +223,11 @@ public class Fighter : MonoBehaviour
             animator.SetTrigger("hit");
             battleManager.SomeoneGotHit = true;
             (float healthDamage, float staminaDamage, float manaDamage, List<Status> status) = battleManager.GetDamage();
-            damageLabel.gameObject.SetActive(true);
-            damageLabel.rectTransform.position = damageLabelStartPosition;
-            damageLabel.text = $"{Mathf.RoundToInt(healthDamage)}";
-            damageLabelTimer = 0;
+            damageNumbers.DamageBy(Mathf.RoundToInt(healthDamage));
             health -= healthDamage;
             stamina -= staminaDamage;
             mana -= manaDamage;
-            foreach (Status s in status) status.Add(s);
+            foreach (Status s in status) currentStatus.Add(s);
 
             if (battleManager.CurrentMove is PlayerMelee)
                 DoOnHit();

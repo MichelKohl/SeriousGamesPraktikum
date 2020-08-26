@@ -20,6 +20,7 @@ public class Consumable : Item
     private int accuracyModifier;
     private Status status = Status.None;
 
+    /*
     public IEnumerator ApplyEffect(Fighter target, int strength, int dexterity, int intelligence, int faith, int luck)
     {
         // apply instant effects
@@ -73,5 +74,5 @@ public class Consumable : Item
         target.DecreaseManaRegenBy(manaRegenModifier * scalingFactor);
         target.DecreaseStaminaBy(staminaModifier * scalingFactor);
         target.DecreaseStaminaRegenBy(staminaRegenModifier * scalingFactor);
-    }
+    }*/
 }

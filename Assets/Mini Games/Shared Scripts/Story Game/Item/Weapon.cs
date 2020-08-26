@@ -25,15 +25,4 @@ public class Weapon : Item
         bool isCritical = IsCritical(luck);
         return IsAccurate(accuracy) && !isCritical ? damage * attackModifier * scalingFactor * (isCritical ? criticalModifier : 1f) : 0;
     }
-
-    public void ApplyStatus(Fighter target, int luck)
-    {
-        int nrOfStatusApplied = 1 + (luck * (int)luckScaling / 100);
-        for(int i = 0; i < nrOfStatusApplied; i++)
-        {
-            if(bleed)                   target.currentStatus.Add(Status.Bleed);
-            if(poison)                  target.currentStatus.Add(Status.Poison);
-            if(stun && IsCritical(luck))target.currentStatus.Add(Status.Stun);
-        }
-    }
 }

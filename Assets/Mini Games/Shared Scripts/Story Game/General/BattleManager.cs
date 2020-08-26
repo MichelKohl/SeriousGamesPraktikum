@@ -184,4 +184,9 @@ public class BattleManager : MonoBehaviour
         descripition.text = "you dead.";
         HandleBattleOver();
     }
+
+    public bool SomeoneAttacking()
+    {
+        return someoneIsAttacking;
+    }
 }

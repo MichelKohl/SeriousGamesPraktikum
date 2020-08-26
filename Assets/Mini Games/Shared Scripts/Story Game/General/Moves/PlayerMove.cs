@@ -5,9 +5,9 @@ using UnityEngine;
 public class PlayerMove : Move
 {
     public int levelRequirement = 1;
-    public Scaling STR = Scaling.F;
-    public Scaling DEX = Scaling.F;
-    public Scaling INT = Scaling.F;
-    public Scaling FTH = Scaling.F;
-    public Scaling LCK = Scaling.F;
+    public Scaling STR = Scaling.E;
+    public Scaling DEX = Scaling.E;
+    public Scaling INT = Scaling.E;
+    public Scaling FTH = Scaling.E;
+    public Scaling LCK = Scaling.E;
 }

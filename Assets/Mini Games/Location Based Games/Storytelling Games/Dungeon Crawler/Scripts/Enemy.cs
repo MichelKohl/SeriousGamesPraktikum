@@ -98,7 +98,7 @@ public class Enemy : Fighter
         ParticleSystem hitParticles = Instantiate(particles, location, transform.rotation, transform);
         hitParticles.gameObject.SetActive(true);
         hitParticles.Play();
-        yield return new WaitUntil(() => !hitParticles.isPlaying);
-        Destroy(hitParticles);
+        yield return new WaitForSeconds(hitParticles.main.duration);
+        Destroy(hitParticles.gameObject);
     }
 }
