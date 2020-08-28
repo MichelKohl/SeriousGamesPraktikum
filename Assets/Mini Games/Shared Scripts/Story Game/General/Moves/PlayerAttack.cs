@@ -13,22 +13,29 @@ public class PlayerAttack : PlayerMove
     public float statusProbability = 0f;
     public bool multipleHits = false;
 
-    public (float healthDamage, float staminaDamage, float manaDamage, List<Status> statuses) GetAttackInfo(int STR, int DEX, int INT, int FTH, int LCK)
+    public (float healthDamage, float staminaDamage, float manaDamage, List<Status> statuses) GetAttackInfo(int STR, int DEX, int INT, int FTH, int LCK, List<Perk> perks)
     {
-        float luck = ((float)this.LCK * LCK) / (float)Scaling.S;
-        Debug.Log($"luck: {luck}");
-        float scaling = Random.Range(0.9f, 1.1f) + ((float)this.STR * STR + (float)this.DEX * DEX +
-            (float)this.INT * INT + (float)this.FTH * FTH + (float)this.LCK * LCK) /
+        (Scaling[] scalings, float damageMultiplier, float critMultiplier,
+            float statusProbability, List<Status> statuses) = Perk.ApplyAttackPerks(perks, this);
+        Scaling newSTR = scalings[0];
+        Scaling newDEX = scalings[1];
+        Scaling newINT = scalings[2];
+        Scaling newFTH = scalings[3];
+        Scaling newLCK = scalings[4];
+
+        float luck = (float)newLCK * LCK / (BattleManager.maxSkillLevel / (float)Scaling.C * (float)Scaling.D);
+        float scaling = Random.Range(0.9f, 1.1f) + ((float)newSTR * STR + (float)newDEX * DEX +
+            (float)newINT * INT + (float)newFTH * FTH + (float)newLCK * LCK) /
             (BattleManager.maxSkillLevel * (float) Scaling.C * 4);
         
-        List<Status> statuses = new List<Status>();
         if(status != Status.None)
         {
-            float statusProbability = this.statusProbability + luck;
+            statusProbability += luck;
             for (int i = 0; i < timesStatusApplied; i++)
                 if (statusProbability > Random.Range(0f, 1f))
                     statuses.Add(status);
         }
+        scaling *= damageMultiplier;
         scaling *= luck > Random.Range(0, 1f) ? critMultiplier : 1f;
         return (healthDamage * scaling, staminaDamage * scaling, manaDamage * scaling, statuses);
     }

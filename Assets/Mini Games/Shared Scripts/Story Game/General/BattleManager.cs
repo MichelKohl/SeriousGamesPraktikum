@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System;
 
 public class BattleManager : MonoBehaviour
 {
@@ -20,13 +19,11 @@ public class BattleManager : MonoBehaviour
     public bool BattleOver { get; private set; }
     private List<Enemy> enemies;
     private Queue<Fighter> attackQueue;
-    private Move currentMove;
     private bool someoneIsAttacking = false;
-    private bool someoneGotHit = false;
     private Fighter currentAttacker;
 
-    public bool SomeoneGotHit { get => someoneGotHit; set => someoneGotHit = value; }
-    public Move CurrentMove { get => currentMove; set => currentMove = value; }
+    public bool SomeoneGotHit { get; set; } = false;
+    public Move CurrentMove { get; set; }
     // Start is called before the first frame update
     void Start()
     {
@@ -60,7 +57,7 @@ public class BattleManager : MonoBehaviour
             if (!currentAttacker.IsDead())
             {
                 someoneIsAttacking = true;
-                someoneGotHit = false;
+                SomeoneGotHit = false;
 
                 if (currentAttacker == player)
                 {
@@ -94,8 +91,6 @@ public class BattleManager : MonoBehaviour
 
     public void StartBattle()
     {
-        //Debug.Log("battle starts...");
-        //Debug.Log($"enemy count: {enemies.Count}");
         BattleOver = false;
         pause = false;
         foreach(Enemy enemy in enemies)
@@ -108,15 +103,13 @@ public class BattleManager : MonoBehaviour
         player.DrawWeapon();
         descripition.text = "";
         attackOptionsPanel.Flush();
-        someoneGotHit = false;
+        SomeoneGotHit = false;
     }
 
     public void AddEnemy(Enemy enemy)
     {
         if (enemies == null) enemies = new List<Enemy>();
-        //Debug.Log($"adding {enemy.name} to the list of enemies.");
         enemies.Add(enemy);
-        //Debug.Log($"enemy count: {enemies.Count}");
     }
 
     public void AddEnemies(Enemy[] enemies)
@@ -145,7 +138,7 @@ public class BattleManager : MonoBehaviour
 
     public bool CurrentMoveDoesMultipleHits()
     {
-        PlayerAttack pa = currentMove as PlayerAttack;
+        PlayerAttack pa = CurrentMove as PlayerAttack;
         return pa != null && pa.multipleHits;
     }
 

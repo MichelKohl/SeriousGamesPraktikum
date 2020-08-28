@@ -18,15 +18,19 @@ public class EnemyAttack : EnemyMove
     public float statusProbability = 0f;
     public int timesStatusApplied = 0;
 
-    public (float healthDamage, float staminaDamage, float manaDamage, List<Status> statuses) GetAttackInfo(int level)
+    public (float healthDamage, float staminaDamage, float manaDamage, List<Status> statuses) GetAttackInfo(int level, List<Perk> perks)
     {
-        float scaling = 1f + level * levelMultiplier * UnityEngine.Random.Range(0.8f, 1f);
+        (float damageMultiplier, float statusProbability,
+            List<Status> statuses) = Perk.ApplyAttackPerks(perks, this);
+
+        float scaling = 1f + level * levelMultiplier * UnityEngine.Random.Range(0.9f, 1.1f);
         float statusScaling = statusProbability * scaling;
-        List<Status> statuses = new List<Status>();
+
         if(status != Status.None)
             for (int i = 0; i < timesStatusApplied; i++)
                 if (statusScaling > UnityEngine.Random.Range(0f, 1f))
                     statuses.Add(status);
+        scaling *= damageMultiplier;
         return (healthDamage * scaling, staminaDamage * scaling, manaDamage * scaling, statuses);
     }
 }

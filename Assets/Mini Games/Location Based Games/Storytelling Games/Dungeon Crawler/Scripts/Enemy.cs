@@ -16,7 +16,7 @@ public class Enemy : Fighter
     {
         List<Move> attacks = new List<Move>();
         foreach (Move attack in this.moves)
-            if (attack.staminaCost < stamina && attack.manaCost < mana)
+            if (attributes.CanPay(attack.healthCost, attack.staminaCost, attack.manaCost))
                 attacks.Add(attack);
         return attacks;
     }
@@ -35,6 +35,7 @@ public class Enemy : Fighter
             Quaternion startRot = transform.rotation;
 
             bool isMelee = currentMove is EnemyAttack && !(currentMove is EnemySpell);
+            EnemySelfBuff selfBuff = currentMove as EnemySelfBuff;
 
             if(isMelee)
             {
@@ -52,6 +53,10 @@ public class Enemy : Fighter
             }
             yield return new WaitUntil(() => animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains(currentMove.animationName));
             PayForAttack();
+
+            if (selfBuff != null)
+                perks.Add(selfBuff.buff);
+
             yield return new WaitUntil(() => !animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains(currentMove.animationName));
 
             if(isMelee)
@@ -88,8 +93,8 @@ public class Enemy : Fighter
 
     public override (float healthDamage, float staminaDamage, float manaDamage, List<Status> status) CalculateDamage()
     {
-        return currentMove is EnemyAttack && accuracy >= Random.Range(0, 1f) ?
-            (currentMove as EnemyAttack).GetAttackInfo(level) :
+        return currentMove is EnemyAttack && attributes.Accuracy >= Random.Range(0, 1f) ?
+            (currentMove as EnemyAttack).GetAttackInfo(level, perks) :
             base.CalculateDamage();
     }
 

@@ -1058,6 +1058,7 @@ MonoBehaviour:
   staminaRegen: 1
   maxMana: 100
   manaRegen: 0
+  startPerks: []
   lifebar: {fileID: 0}
   damageNumbers: {fileID: 1873214595387892414}
   damageLabelVerticalMove: 1.5
@@ -1078,6 +1079,8 @@ MonoBehaviour:
   - {fileID: 263350086516600524}
   - {fileID: 629105257034218654}
   spellSpawnTransforms: []
+  poisonDamageRecieved: 3
+  bleedDamageRecieved: 6
   strength: 1
   dexterity: 1
   intelligence: 1

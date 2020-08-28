@@ -2694,7 +2694,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 1
   maxHealth: 150
-  healthRegen: 1
+  healthRegen: 0
   initiative: 7
   maxStamina: 100
   staminaRegen: 2
@@ -2720,6 +2720,8 @@ MonoBehaviour:
   - {fileID: 5797038031725013805}
   spellSpawnTransforms:
   - {fileID: 5192600653181215775}
+  poisonDamageRecieved: 3
+  bleedDamageRecieved: 6
   strength: 1
   dexterity: 1
   intelligence: 1

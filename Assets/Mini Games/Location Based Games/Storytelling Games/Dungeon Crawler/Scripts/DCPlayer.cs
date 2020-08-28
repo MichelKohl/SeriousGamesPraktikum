@@ -21,6 +21,12 @@ public class DCPlayer : Fighter
     private string playerName = "";
     private float currentXP = 0f;
 
+
+    private Dictionary<PlayerAttack, (Scaling[] scalings, float damageMultiplier,
+        float critMultiplier, float statusProbability, List<Status> statuses)> attackToInfoDict = new Dictionary<PlayerAttack,
+            (Scaling[] scalings, float damageMultiplier, float critMultiplier, float statusProbability, List<Status> statuses)>();
+
+
     // TODO equipment
     private List<Consumable> consumables;
     [SerializeField] private Light spotlight;
@@ -76,8 +82,9 @@ public class DCPlayer : Fighter
 
         battleManager.CurrentMove = currentMove;
 
-        PlayerMelee melee = currentMove as PlayerMelee;
-        PlayerSpell spell = currentMove as PlayerSpell;
+        PlayerMelee melee =         currentMove as PlayerMelee;
+        PlayerSpell spell =         currentMove as PlayerSpell;
+        PlayerSelfBuff selfBuff =   currentMove as PlayerSelfBuff;
         SpellProjectile projectile = null;
 
         if (melee != null) 
@@ -89,11 +96,13 @@ public class DCPlayer : Fighter
             hitboxes[melee.hitboxID].enabled = true;
         }
 
-
-
         animator.SetTrigger(name: currentMove.animationName);
+
         yield return new WaitUntil(() => animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains(currentMove.animationName));
         PayForAttack();
+
+        if (selfBuff != null)
+            perks.Add(selfBuff.buff);
 
         if (spell != null)
         {
@@ -104,7 +113,6 @@ public class DCPlayer : Fighter
             projectile.LockOnTarget(currentTarget.transform);
         }
         yield return new WaitUntil(() => !animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains(currentMove.animationName));
-
 
         if (melee != null)
         {
@@ -183,8 +191,7 @@ public class DCPlayer : Fighter
         for (int i = 0; i < moves.Length; i++)
         {
             Move attack = moves[i];
-            if (unlocked[i] && attack.staminaCost <= stamina &&
-                attack.manaCost <= mana)
+            if (unlocked[i] && attributes.CanPay(attack.healthCost, attack.staminaCost, attack.manaCost))
                 available.Add(attack);
         }
         return available;
@@ -206,16 +213,15 @@ public class DCPlayer : Fighter
 
     public override (float healthDamage, float staminaDamage, float manaDamage, List<Status> status) CalculateDamage()
     {
-        return currentMove is PlayerAttack && accuracy >= UnityEngine.Random.Range(0, 1f) ?
-            (currentMove as PlayerAttack).GetAttackInfo(strength, dexterity, intelligence, faith, luck) :
+        return currentMove is PlayerAttack && attributes.Accuracy >= UnityEngine.Random.Range(0, 1f) ?
+            (currentMove as PlayerAttack).GetAttackInfo(strength, dexterity, intelligence, faith, luck, perks) :
             base.CalculateDamage();
     }
 
     public override void ResetFighterValues()
     {
         base.ResetFighterValues();
-        currentStaminaRegen = (float) (strength + dexterity) / 2;
-        currentManaRegen = (float) (intelligence + faith) / 2;
-        currentInitiative = (float) dexterity / 2;
+        attributes.Init((float)(strength + dexterity) / 2,
+            (float)(intelligence + faith) / 2, (float)dexterity / 2);
     }
 }
