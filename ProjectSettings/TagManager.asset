@@ -8,6 +8,7 @@ TagManager:
   - Projectile
   - Enemy Projectile
   - GamePopUp
+  - POI
   layers:
   - Default
   - TransparentFX
@@ -17,8 +18,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - ScreenCollider
+  - Indicator
   - 
   - 
   - 

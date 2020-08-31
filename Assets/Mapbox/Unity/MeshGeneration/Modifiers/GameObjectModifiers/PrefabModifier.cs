@@ -72,20 +72,29 @@ namespace Mapbox.Unity.MeshGeneration.Modifiers
 			CheapRuler cr = new CheapRuler(locationDouble[1], CheapRulerUnits.Meters);
 			foreach (KeyValuePair<string, double[]> position in pos)
 			{
-				if (cr.Distance(locationDouble, position.Value) < maxDistance)
+				if (cr.Distance(locationDouble, position.Value) < maxDistance && !pos.ContainsKey(ve.GameObject.name.ToString()))
 				{
 					rangeBool = false;
 					break;
 				}
 			}
-			if (rangeBool && ve.Feature.Data.Id.ToString() != null)
+			if (rangeBool && ve.Feature.Data.Id.ToString() != null && !pos.ContainsKey(ve.GameObject.name.ToString()))
 			{
 				pos.Add(ve.GameObject.name.ToString(), locationDouble);
 				typeDict.Add(ve.GameObject.name.ToString(), ve.Feature.Properties);
 			}
 			else
 			{
-				go.Destroy();
+				if (!pos.ContainsKey(ve.GameObject.name.ToString()))
+				{
+					go.SetActive(false);
+				}
+				else
+				{
+					go.SetActive(true);
+				}
+				//go.Destroy();
+				
 			}
 			if (_options.AllPrefabsInstatiated != null)
 			{
@@ -142,9 +151,10 @@ namespace Mapbox.Unity.MeshGeneration.Modifiers
 				if (pos.ContainsKey(gameObject.name.ToString()))
 				{
 					pos.Remove(gameObject.name.ToString());
+					typeDict.Remove(gameObject.name.ToString());
 				}
 				gameObject.Destroy();
-
+				
 			}
 
 			foreach (var gameObject in _prefabList)
@@ -152,6 +162,7 @@ namespace Mapbox.Unity.MeshGeneration.Modifiers
 				if (pos.ContainsKey(gameObject.name.ToString()))
 				{
 					pos.Remove(gameObject.name.ToString());
+					typeDict.Remove(gameObject.name.ToString());
 				}
 				gameObject.Destroy();
 			}

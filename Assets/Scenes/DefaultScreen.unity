@@ -1741,6 +1741,60 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+--- !u!1 &410901590
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 410901592}
+  - component: {fileID: 410901591}
+  m_Layer: 0
+  m_Name: ScreenCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &410901591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410901590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28acd20fd6d072544ba5a0afbd35097c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodIndicator: {fileID: 1175835146330399290, guid: c3ac33b2d0acb0f468d2486ac20e0021,
+    type: 3}
+  parkIndicator: {fileID: 363039835670969055, guid: bd09299cc33ad104ba0e9f60f344509f,
+    type: 3}
+  transportIndicator: {fileID: 3023700493476822050, guid: 4548ca5170c0a144791df0770a010f7c,
+    type: 3}
+  artsIndicator: {fileID: 979278910122984669, guid: d8dbec0bc5ffec64a9b05a2126818e08,
+    type: 3}
+  defaultIndicator: {fileID: 5241947166769568545, guid: 3516abef178987c4190db07b999b173a,
+    type: 3}
+  screenCollider: {fileID: 410901590}
+--- !u!4 &410901592
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410901590}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -18.665564, y: 58.1957, z: -74.21118}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &447449746 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5858054719185490320, guid: b113f4b5f92c60047bbffbcf42b47f86,
@@ -9800,7 +9854,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _locationLogFile
       value: 
-      objectReference: {fileID: 4900000, guid: bda91b0c7820c474cbd4baf67170df2d, type: 3}
+      objectReference: {fileID: 4900000, guid: 5e6bb7224cef35c4788a4817b1c9778d, type: 3}
     - target: {fileID: 114330636339840990, guid: 35ce2bb4caba9434db5e656796b632b1,
         type: 3}
       propertyPath: _measurements
