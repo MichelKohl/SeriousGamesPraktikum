@@ -42,6 +42,10 @@ public class GeneralGUI : MonoBehaviour
     public TextMeshProUGUI locationTagText;
     [SerializeField]
     private GameObject CharacterSelectionPanel;
+    [SerializeField]
+    private GameObject treasureMessagePanel;
+    [SerializeField]
+    private TextMeshProUGUI treasureMessageText;
 
     /// <summary>
     /// The characters, which can be chosen by pressing the button 
@@ -254,8 +258,8 @@ public class GeneralGUI : MonoBehaviour
                 GameManager.INSTANCE.profile.charactersBought.Add(8); //son is free at the beginning
                 GameManager.INSTANCE.profile.charactersBought.Add(0); //daughter is free at the beginning
                 GameManager.INSTANCE.profile.selectedCharacterID = 0;
-            }   
-                
+            }
+
             foreach (int id in GameManager.INSTANCE.profile.charactersBought)
             {
                 if (go.GetComponent<CharacterID>().id == id)
@@ -338,5 +342,11 @@ public class GeneralGUI : MonoBehaviour
     public void PlaySnakes()
     {
         SceneManager.LoadScene(3);
+    }
+
+    public void ShowTreasureMessageDialog(string message)
+    {
+        treasureMessageText.SetText(message);
+        StartCoroutine(showTextboxForSeconds(treasureMessagePanel, 3));
     }
 }

@@ -9,6 +9,7 @@ TagManager:
   - Enemy Projectile
   - GamePopUp
   - POI
+  - Treasure
   layers:
   - Default
   - TransparentFX
