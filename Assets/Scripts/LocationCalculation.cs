@@ -34,11 +34,11 @@ public class LocationCalculation : MonoBehaviour
     private void Start()
     {
         MapboxConfiguration mc = new MapboxConfiguration();
-        Mapbox.Platform.FileSource fs = new Mapbox.Platform.FileSource(mc.GetMapsSkuToken, "pk.eyJ1IjoiZmxlZGVybWF1c2xvY2hlciIsImEiOiJjazlrNWh4b3owMjZpM2lteHhoaDRvcm1iIn0.zBKAX3s9ia8a6IgYsVU2EQ");
+        Mapbox.Platform.FileSource fs = new Mapbox.Platform.FileSource(mc.GetMapsSkuToken, "pk.eyJ1IjoibWljaGVsa29obCIsImEiOiJjazlrNWFnZ3gwOTFnM2Vuc3ZjMnR6OW41In0.-7gMg1G2xOMe46pw_b7qqA");
         geocoder = new Mapbox.Geocoding.Geocoder(fs);
         
         //Update rate of reverse geocoding should be modified
-        InvokeRepeating("requestCity", 1f, 10f);
+        //InvokeRepeating("requestCity", 1f, 600f);
     }
 
     private void Update()
