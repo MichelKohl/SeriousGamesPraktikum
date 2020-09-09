@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
+
+/// <summary>
+/// class to draw circle for the visual radius of POI radius
+/// </summary>
 public class DrawCircle : MonoBehaviour
 {
     [Range(0,50)]
@@ -24,6 +28,9 @@ public class DrawCircle : MonoBehaviour
         CreatePoints ();
     }
 
+    /// <summary>
+    /// creates the points of the circle
+    /// </summary>
     void CreatePoints ()
     {
         float x;

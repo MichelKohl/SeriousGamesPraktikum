@@ -18,6 +18,9 @@ public class WalkTowardsLocation : MonoBehaviour
     [SerializeField] 
     private float distanceMultiplier = 0.2f;
 
+    /// <summary>
+    /// Checks distance to location object and triggers the player character moving to the object
+    /// </summary>
     void Update()
     {
         var distFactor = 1.0f;

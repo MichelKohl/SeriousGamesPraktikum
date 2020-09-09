@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
+/// <summary>
+/// class to create indicators for point of interests which are in proximity to player but are offscreen
+/// </summary>
 public class CreatePOIIndicator : MonoBehaviour
 {
     private Dictionary<string, double[]> poiList;
@@ -48,7 +51,7 @@ public class CreatePOIIndicator : MonoBehaviour
             edge.size = new Vector3(1f, 50f, Vector3.Distance(points[i], points[i + 1]));
         }
 
-        // create indicators for offscreen pois
+        // create indicators for offscreen pois using collision points of raycasts from pois to edge of screen
         foreach (string poiName in poiList.Keys)
         {
             string[] splitArray = poiName.Split(char.Parse("-"));

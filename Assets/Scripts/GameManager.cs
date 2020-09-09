@@ -28,6 +28,9 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public List<MiniGame> miniGames = new List<MiniGame>();
 
+    /// <summary>
+    /// dictionaries containing information about POIs currently spawned
+    /// </summary>
     public static Dictionary<string, double[]> poiLocaitonList = new Dictionary<string, double[]>();
     public static Dictionary<string, Dictionary<string, object>> poiTypeList = new Dictionary<string, Dictionary<string, object>>();
 

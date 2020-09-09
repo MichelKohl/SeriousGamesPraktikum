@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// class to enable game pop up if player is in range of POI
+/// </summary>
 public class ShowGamePopUp : MonoBehaviour
 {
     public bool inRange = false;
