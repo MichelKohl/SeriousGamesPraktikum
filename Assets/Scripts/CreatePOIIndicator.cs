@@ -55,7 +55,7 @@ public class CreatePOIIndicator : MonoBehaviour
             string category = splitArray[0].Trim();
             string name = splitArray[1].Trim();
             
-            if (GameObject.Find(name))
+            if (GameObject.Find(name) && !category.Contains("Treasures"))
             {
                 GameObject go = GameObject.Find(name);
                 int layerMask = 1 << 8;

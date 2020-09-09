@@ -70,14 +70,39 @@ namespace Mapbox.Unity.MeshGeneration.Modifiers
 			var locationDouble = new double[] { location.Lat, location.Lng };
 			var maxDistance = 150.0f;
 			CheapRuler cr = new CheapRuler(locationDouble[1], CheapRulerUnits.Meters);
-			foreach (KeyValuePair<string, double[]> position in pos)
+			// If spawned object is treasure only check distance to other treasures
+			if (ve.GameObject.name.Contains("Treasures"))
 			{
-				if (cr.Distance(locationDouble, position.Value) < maxDistance && !pos.ContainsKey(ve.GameObject.name.ToString()))
+				foreach (KeyValuePair<string, double[]> position in pos)
 				{
-					rangeBool = false;
-					break;
+					if (position.Key.Contains("Treasures"))
+					{
+						if (cr.Distance(locationDouble, position.Value) < maxDistance && !pos.ContainsKey(ve.GameObject.name.ToString()))
+						{
+							rangeBool = false;
+							break;
+						}
+					}
+					
 				}
 			}
+			// for POIs check only distance to POIs and not to treasures
+			else
+			{
+				foreach (KeyValuePair<string, double[]> position in pos)
+				{
+					if (!position.Key.Contains("Treasures"))
+					{
+						if (cr.Distance(locationDouble, position.Value) < maxDistance && !pos.ContainsKey(ve.GameObject.name.ToString()))
+						{
+							rangeBool = false;
+							break;
+						}
+					}
+					
+				}
+			}
+			// Add spawned POIs and treasures to dictionaries
 			if (rangeBool && ve.Feature.Data.Id.ToString() != null && !pos.ContainsKey(ve.GameObject.name.ToString()))
 			{
 				pos.Add(ve.GameObject.name.ToString(), locationDouble);
@@ -93,7 +118,6 @@ namespace Mapbox.Unity.MeshGeneration.Modifiers
 				{
 					go.SetActive(true);
 				}
-				//go.Destroy();
 				
 			}
 			if (_options.AllPrefabsInstatiated != null)
