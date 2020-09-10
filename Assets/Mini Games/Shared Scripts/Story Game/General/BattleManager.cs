@@ -9,10 +9,11 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private StoryManager manager;
     [SerializeField] private Cam cam;
     [SerializeField] private bool pause;
-    [SerializeField] private TextMeshProUGUI descripition;
-    [SerializeField] private DecisionsPanel attackOptionsPanel;
+    [SerializeField] private TextMeshProUGUI description;
+    [SerializeField] private ScrollPanel attackOptionsPanel;
     [SerializeField] private AttackOption attackOptionPrefab;
     [SerializeField] private ParticleSystem[] particlesOnHit;
+    [SerializeField] private GameObject mainMenuButton;
 
     private DCPlayer player;
 
@@ -21,6 +22,7 @@ public class BattleManager : MonoBehaviour
     private Queue<Fighter> attackQueue;
     private bool someoneIsAttacking = false;
     private Fighter currentAttacker;
+    private int numberOfDeadEnemies = 0;
 
     public bool SomeoneGotHit { get; set; } = false;
     public Move CurrentMove { get; set; }
@@ -43,28 +45,43 @@ public class BattleManager : MonoBehaviour
             if (enemies == null) return;
             foreach (Enemy enemy in enemies)
                 enemy.IsFighting = false;
-        } else
+        }
+        else
         {
             player.IsFighting = true;
             foreach (Enemy enemy in enemies)
                 enemy.IsFighting = true;
         }
 
+        if (AllEnemiesDead() && !someoneIsAttacking)
+        {
+            cam.ChangeToFirstPerson();
+            pause = true;
+        }
+        if (AllEnemiesDead() && !someoneIsAttacking && cam.PositionSet)
+        {
+            HandleBattleOver();
+            pause = true;
+        }
+        if (player != null && player.IsDead())
+        {
+            StartCoroutine(DoDeathCam(1.5f));
+        }
+
         if(!someoneIsAttacking && attackQueue.Count > 0 && !BattleOver)
         {
             currentAttacker = attackQueue.Dequeue();
-            //Debug.Log($"battlemanager: {currentAttacker.name} will be attacking.");
             if (!currentAttacker.IsDead())
             {
-                someoneIsAttacking = true;
                 SomeoneGotHit = false;
+                someoneIsAttacking = true;
 
                 if (currentAttacker == player)
                 {
                     attackOptionsPanel.Flush();
-                    foreach (Move attack in player.GetAvailableMoves())
+                    foreach (PlayerMove attack in player.GetAvailableMoves())
                         Instantiate(attackOptionPrefab, attackOptionsPanel.transform).
-                            Init(attack, descripition, player);
+                            Init(attack, description, player);
                     foreach (Enemy enemy in enemies)
                         enemy.PauseInitiativeTimer(true);
                     player.Attack();
@@ -76,34 +93,29 @@ public class BattleManager : MonoBehaviour
                 }
             }
         }
-
-        if (AllEnemiesDead())
-        {
-            cam.ChangeToFirstPerson();
-            HandleBattleOver();
-            pause = true;
-        }
-        if (player != null && player.IsDead())
-        {
-            StartCoroutine(DoDeathCam(1.5f));
-        }
     }
 
     public void StartBattle()
     {
         BattleOver = false;
         pause = false;
+        enemies.RemoveAll(enemy => enemy == null);
         foreach(Enemy enemy in enemies)
         {
-            enemy.SetPlayerPosition(player.GetAttackPosition());
+            enemy.SetPlayerPosition(player);
             enemy.ShowBattleUI(true);
+            if (enemy.name.Contains("Evil Wizard"))
+                enemy.GetComponent<Animator>().SetTrigger("start battle");
         }
         cam.ChangeToThirdPerson();
+        player.ResetFighterValues();
         player.ShowBattleUI(true);
         player.DrawWeapon();
-        descripition.text = "";
+        description.text = "";
         attackOptionsPanel.Flush();
         SomeoneGotHit = false;
+        numberOfDeadEnemies = 0;
+        mainMenuButton.SetActive(false);
     }
 
     public void AddEnemy(Enemy enemy)
@@ -134,6 +146,16 @@ public class BattleManager : MonoBehaviour
         player.PauseInitiativeTimer(false);
         foreach (Enemy enemy in enemies)
             enemy.PauseInitiativeTimer(false);
+        description.text = "";
+    }
+
+    public void SendEnemyDeadSignal(Fighter fighter)
+    {
+        Enemy enemy = fighter as Enemy;
+        if (enemy == null) return;
+        numberOfDeadEnemies++;
+        manager.DestroyOnSituationChange(fighter.gameObject);
+        player.GiveXP(enemy.GetXP());
     }
 
     public bool CurrentMoveDoesMultipleHits()
@@ -144,12 +166,11 @@ public class BattleManager : MonoBehaviour
 
     private bool AllEnemiesDead()
     {
-        foreach (Fighter enemy in enemies)
-            if (!enemy.IsDead()) return false;
-        return true;
+        return enemies.Count == numberOfDeadEnemies;
     }
 
-    public (float healthDamage, float staminaDamage, float manaDamage, List<Status> status) GetDamage()
+    public (float healthDamage, float staminaDamage, float manaDamage, List<Status> status, float statusProbability, float luck)
+        GetDamage()
     {
         return currentAttacker.CalculateDamage();
     }
@@ -162,6 +183,7 @@ public class BattleManager : MonoBehaviour
     private void HandleBattleOver()
     {
         BattleOver = true;
+        mainMenuButton.SetActive(true);
         foreach (Enemy enemy in enemies)
         {
             enemy.ShowBattleUI(false);
@@ -174,12 +196,22 @@ public class BattleManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         cam.ChangeToDeathCam();
-        descripition.text = "you dead.";
+        description.text = "you dead.";
         HandleBattleOver();
     }
 
     public bool SomeoneAttacking()
     {
         return someoneIsAttacking;
+    }
+
+    public List<Enemy> GetEnemies()
+    {
+        return enemies;
+    }
+
+    public void WriteInDescription()
+    {
+        description.text = (currentAttacker is DCPlayer ? "You" : currentAttacker.name.Split('(')[0]) + $" used {CurrentMove.name}";
     }
 }

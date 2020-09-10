@@ -12,6 +12,7 @@ public class AttackPerk : Perk
     public float damageMultiplier = 0;
     public float enemyDamageMultiplier = 0;
     public float critMultiplier = 0;
+
     public int changeSTR = 0;
     public int changeDEX = 0;
     public int changeINT = 0;

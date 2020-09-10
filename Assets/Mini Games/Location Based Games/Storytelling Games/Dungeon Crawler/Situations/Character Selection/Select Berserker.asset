@@ -12,40 +12,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e10022bfabc074592aeeb474f70e2995, type: 3}
   m_Name: Select Berserker
   m_EditorClassIdentifier: 
+  chapterID: 0
   camPosition: {x: 84.23, y: 4.25, z: 129.12}
   camRotation: {x: 0, y: 232.454, z: 0}
-  description: Strong and fast warrior. Too dumb for spells, though.
+  spotlightRange: 20
+  description: Strong and fast.
   options:
   - description: Choose
+    nextSituationID: 0
+    strRequirement: 0
+    dexRequirement: 0
+    intRequirement: 0
+    fthRequirement: 0
+    lckRequirement: 0
+    changeChapter: 1
+    nextChapter: 1
+    startSituation: 0
+    conditionDistance: 0
+  - description: The Knight
+    nextSituationID: 0
+    strRequirement: 0
+    dexRequirement: 0
+    intRequirement: 0
+    fthRequirement: 0
+    lckRequirement: 0
+    changeChapter: 0
+    nextChapter: 0
+    startSituation: 0
+    conditionDistance: 0
+  - description: The Greatsword
     nextSituationID: 2
     strRequirement: 0
     dexRequirement: 0
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
-    conditionDistance: 0
-  - description: The Knight
-    nextSituationID: 8
-    strRequirement: 0
-    dexRequirement: 0
-    intRequirement: 0
-    fthRequirement: 0
-    lckRequirement: 0
-    conditionDistance: 0
-  - description: The Greatsword
-    nextSituationID: 10
-    strRequirement: 0
-    dexRequirement: 0
-    intRequirement: 0
-    fthRequirement: 0
-    lckRequirement: 0
+    changeChapter: 0
+    nextChapter: 0
+    startSituation: 0
     conditionDistance: 0
   - description: The Witch
-    nextSituationID: 11
+    nextSituationID: 3
     strRequirement: 0
     dexRequirement: 0
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    changeChapter: 0
+    nextChapter: 0
+    startSituation: 0
     conditionDistance: 0
   classID: 1

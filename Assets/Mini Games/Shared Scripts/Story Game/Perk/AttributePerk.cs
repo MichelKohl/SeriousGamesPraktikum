@@ -20,4 +20,7 @@ public class AttributePerk : Perk
     public float maxManaMultiplier = 1f;
     public float initiativeMultiplier = 1f;
     public float accuracyMultiplier = 1f;
+    public float manaConsumption = 1f;
+    public float staminaConsumption = 1f;
+    public float probOfBlockMultiplier = 1f;
 }

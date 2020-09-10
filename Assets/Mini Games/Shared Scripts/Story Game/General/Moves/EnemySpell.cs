@@ -8,6 +8,7 @@ using System;
 public class EnemySpell : EnemyAttack
 {
     public SpellType type;
-    public SpellProjectile projectile;
-    public float delay;
+    public SpellProjectile[] projectile;
+    public float[] delay;
+    public int spawnTransformID;
 }

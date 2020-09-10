@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5209a272026e849a6b269392eebfbdee, type: 3}
+  m_Name: _After Battle Test
+  m_EditorClassIdentifier: 
+  camPosition: {x: 184.68, y: 4, z: 73.13}
+  camRotation: {x: 0, y: 90, z: 0}
+  spotlightRange: 128
+  flushDeadEnemies: 0
+  description: 
+  options:
+  - description: Fight Wolf
+    nextSituationID: 1
+    strRequirement: 0
+    dexRequirement: 0
+    intRequirement: 0
+    fthRequirement: 0
+    lckRequirement: 0
+    changeChapter: 0
+    nextChapter: 0
+    startSituation: 0
+    conditionDistance: 0
+  - description: Fight Goblin
+    nextSituationID: 2
+    strRequirement: 0
+    dexRequirement: 0
+    intRequirement: 0
+    fthRequirement: 0
+    lckRequirement: 0
+    changeChapter: 0
+    nextChapter: 0
+    startSituation: 0
+    conditionDistance: 0
+  - description: Fight Hobgoblin
+    nextSituationID: 3
+    strRequirement: 0
+    dexRequirement: 0
+    intRequirement: 0
+    fthRequirement: 0
+    lckRequirement: 0
+    changeChapter: 0
+    nextChapter: 0
+    startSituation: 0
+    conditionDistance: 0
+  - description: Fight Troll
+    nextSituationID: 4
+    strRequirement: 0
+    dexRequirement: 0
+    intRequirement: 0
+    fthRequirement: 0
+    lckRequirement: 0
+    changeChapter: 0
+    nextChapter: 0
+    startSituation: 0
+    conditionDistance: 0
+  - description: Fight Evil Wizard
+    nextSituationID: 5
+    strRequirement: 0
+    dexRequirement: 0
+    intRequirement: 0
+    fthRequirement: 0
+    lckRequirement: 0
+    changeChapter: 0
+    nextChapter: 0
+    startSituation: 0
+    conditionDistance: 0

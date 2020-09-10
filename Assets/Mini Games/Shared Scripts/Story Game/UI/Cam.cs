@@ -5,6 +5,7 @@ using UnityEngine;
 public class Cam : MonoBehaviour
 {
     [SerializeField] private StoryManager manager;
+    [SerializeField] private Light spotlight;
     [SerializeField] private Transform playerCharacterTransform;
     [SerializeField] private Transform thirdPersonCam;
     [SerializeField] private Transform deathCam;
@@ -23,6 +24,8 @@ public class Cam : MonoBehaviour
     private bool positionSet = true;
     private bool firstPerson = true;
     private bool death = false;
+    public bool PositionSet { get => positionSet; }
+
 
     private void Start()
     {
@@ -54,6 +57,19 @@ public class Cam : MonoBehaviour
 
         }
         
+    }
+
+    public void SetSpotlightRange(float range)
+    {
+        spotlight.range = range;
+    }
+
+    public void UpdateCamPositionAndRotation(Vector3 position, Quaternion rotation)
+    {
+        transform.position = position;
+        transform.rotation = rotation;
+        firstPersonPos = position;
+        firstPersonQuat = rotation;
     }
 
     public void ChangeToFirstPerson()

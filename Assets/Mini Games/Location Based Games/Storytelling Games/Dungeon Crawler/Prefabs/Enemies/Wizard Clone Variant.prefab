@@ -111,7 +111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 384c88e2a02e0441593156625248934b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fighterName: Clone
   level: 1
   maxHealth: 100
   healthRegen: 1
@@ -120,19 +119,21 @@ MonoBehaviour:
   staminaRegen: 2
   maxMana: 100
   manaRegen: 2
+  startPerks: []
   lifebar: {fileID: 739829236406532396}
-  strength: 1
-  dexterity: 1
-  intelligence: 1
-  faith: 1
-  luck: 1
+  damageNumbers: {fileID: 0}
+  damageLabelVerticalMove: 2
   agent: {fileID: 0}
   attackPosition: {fileID: 0}
+  attackPositionOffset: 0
   animator: {fileID: 0}
-  meleeFighter: 1
-  notARunner: 0
-  currentStatus: 
-  fighting: 0
+  moves: []
+  hitboxes: []
+  spellSpawnTransforms: []
+  poisonDamageRecieved: 3
+  bleedDamageRecieved: 6
+  bleedFX: {fileID: 0}
+  poisonFX: {fileID: 0}
 --- !u!1001 &7593907957702895028
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -140,6 +141,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1000010595572928, guid: 11db918338e063f4b86b6024c791e5a8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1000012226140144, guid: 11db918338e063f4b86b6024c791e5a8, type: 3}
       propertyPath: m_Name
       value: Wizard Clone Variant

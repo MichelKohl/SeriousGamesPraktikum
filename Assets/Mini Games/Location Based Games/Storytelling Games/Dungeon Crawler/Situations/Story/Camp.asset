@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camPosition: {x: 83.74, y: 3.95, z: 126.18}
   camRotation: {x: 0, y: 253.482, z: 0}
-  description: Your are alone in the woods. Suddenly you hear a scream.
+  spotlightRange: 20
+  flushDeadEnemies: 0
+  description: 'Your are alone in the woods.
+
+    Suddenly you hear a scream.'
   options:
   - description: run towards scream
     nextSituationID: 1
@@ -23,4 +27,7 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    changeChapter: 0
+    nextChapter: 0
+    startSituation: 0
     conditionDistance: 1

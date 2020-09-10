@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camPosition: {x: 184.68, y: 4, z: 73.13}
   camRotation: {x: 0, y: 90, z: 0}
+  spotlightRange: 128
+  flushDeadEnemies: 1
   description: 
   options:
   - description: Fight
-    nextSituationID: 7
+    nextSituationID: 0
     strRequirement: 0
     dexRequirement: 0
     intRequirement: 0

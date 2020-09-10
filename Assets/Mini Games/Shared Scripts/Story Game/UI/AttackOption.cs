@@ -8,10 +8,10 @@ public class AttackOption : MonoBehaviour
     [SerializeField] private TextMeshProUGUI buttonDescription;
 
     private DCPlayer player;
-    private Move attack;
+    private PlayerMove attack;
     private TextMeshProUGUI description;
 
-    public void Init(Move attack, TextMeshProUGUI description, DCPlayer player)
+    public void Init(PlayerMove attack, TextMeshProUGUI description, DCPlayer player)
     {
         this.player = player;
         this.attack = attack;
@@ -22,6 +22,9 @@ public class AttackOption : MonoBehaviour
     public void OnClick()
     {
         player.SetCurrentAttack(attack);
-        description.text = $"Use {attack.name} on:";
+        if (attack is PlayerMelee || (attack is PlayerSpell && (attack as PlayerSpell).type != SpellType.Areal))
+            description.text = $"Use {attack.name} on:";
+        else
+            description.text = $"You used {attack.name}";
     }
 }

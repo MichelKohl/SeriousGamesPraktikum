@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpellProjectile : MonoBehaviour
@@ -12,23 +11,25 @@ public class SpellProjectile : MonoBehaviour
     public void LockOnTarget(Transform targetTransform)
     {
         this.targetTransform = targetTransform;
+        transform.forward = Vector3.Normalize(targetTransform.position - transform.position);
     }
 
     // Update is called once per frame
     void Update()
     {
         if (targetTransform != null)
-            transform.Translate((targetTransform.position - transform.position) * Time.deltaTime * speed);
+            transform.position = Vector3.MoveTowards(transform.position, targetTransform.position, speed);
+        else Debug.Log("target is null.");
     }
 
-    public void DoExplosion()
+    public void DoExplosion(float delay = 0)
     {
-        StartCoroutine(Explode());
+        StartCoroutine(Explode(delay));
     }
 
-    public IEnumerator Explode()
+    private IEnumerator Explode(float delay)
     {
-        //TODO do explosion
+        yield return new WaitForSeconds(delay);
         if(explosion != null)
         {
             ParticleSystem newExplosion = Instantiate(explosion, transform.position, Quaternion.identity, transform.parent);
@@ -39,4 +40,5 @@ public class SpellProjectile : MonoBehaviour
         }
         Destroy(gameObject);
     }
+
 }

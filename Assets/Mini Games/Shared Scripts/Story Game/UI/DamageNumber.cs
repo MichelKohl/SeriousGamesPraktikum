@@ -5,11 +5,12 @@ using TMPro;
 
 public class DamageNumber : MonoBehaviour
 {
-    [SerializeField] float speed = 0.1f;
+    [SerializeField] float speed = 0.05f;
     [SerializeField] float moveUpBy = 2.5f;
     [SerializeField] TextMeshProUGUI damage;
     [SerializeField] TextMeshProUGUI poisonDamage;
     [SerializeField] TextMeshProUGUI bleedDamage;
+    [SerializeField] TextMeshProUGUI burnDamage;
     [SerializeField] TextMeshProUGUI stunned;
 
     private Vector3 damageStartPosition;
@@ -18,13 +19,20 @@ public class DamageNumber : MonoBehaviour
     private Vector3 poisonEndPosition;
     private Vector3 bleedStartPosition;
     private Vector3 bleedEndPosition;
+    private Vector3 burnStartPosition;
+    private Vector3 burnEndPosition;
     private Vector3 stunStartPosition;
     private Vector3 stunEndPosition;
 
-    public void DamageBy(float damage)
+    public void DamageBy(int damage, bool add = true)
     {
-        this.damage.gameObject.SetActive(true);
-        this.damage.text = $"{ damage }";
+        if (this.damage.gameObject.activeSelf)
+            this.damage.text = $"{ Mathf.Abs(damage + (add ? 1 : -1 ) * int.Parse(this.damage.text))}";
+        else
+        {
+            this.damage.gameObject.SetActive(true);
+            this.damage.text = $"{ damage }";
+        }
     }
 
     public void PoisonBy(float damage)
@@ -37,6 +45,12 @@ public class DamageNumber : MonoBehaviour
     {
         bleedDamage.gameObject.SetActive(true);
         bleedDamage.text = $"{damage}";
+    }
+
+    public void BurnBy(float damage)
+    {
+        burnDamage.gameObject.SetActive(true);
+        burnDamage.text = $"{damage}";
     }
 
     public void Stunned()
@@ -52,6 +66,8 @@ public class DamageNumber : MonoBehaviour
         poisonEndPosition = poisonDamage.rectTransform.position +   new Vector3(0, moveUpBy, 0);
         bleedStartPosition = bleedDamage.rectTransform.position;
         bleedEndPosition = bleedDamage.rectTransform.position +     new Vector3(0, moveUpBy, 0);
+        burnStartPosition = burnDamage.rectTransform.position;
+        burnEndPosition = burnDamage.rectTransform.position + new Vector3(0, moveUpBy, 0); 
         stunStartPosition = stunned.rectTransform.position;
         stunEndPosition = stunned.rectTransform.position + new Vector3(0, moveUpBy, 0);
     }
@@ -86,13 +102,22 @@ public class DamageNumber : MonoBehaviour
                 bleedDamage.rectTransform.position = bleedStartPosition;
             }
         }
+        if (burnDamage.gameObject.activeSelf)
+        {
+            burnDamage.rectTransform.position = Vector3.MoveTowards(burnDamage.rectTransform.position, burnEndPosition, speed);
+            if (burnDamage.rectTransform.position == burnEndPosition)
+            {
+                burnDamage.gameObject.SetActive(false);
+                burnDamage.rectTransform.position = burnStartPosition;
+            }
+        }
         if (stunned.gameObject.activeSelf)
         {
             stunned.rectTransform.position = Vector3.MoveTowards(stunned.rectTransform.position, stunEndPosition, speed);
             if (stunned.rectTransform.position == stunEndPosition)
             {
                 stunned.gameObject.SetActive(false);
-                stunned.rectTransform.position = bleedStartPosition;
+                stunned.rectTransform.position = stunStartPosition;
             }
         }
     }

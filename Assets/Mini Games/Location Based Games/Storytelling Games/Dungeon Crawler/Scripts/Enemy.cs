@@ -5,11 +5,12 @@ using UnityEngine.AI;
 
 public class Enemy : Fighter
 {
-    private Transform playerTransform;
+    [SerializeField] private int XP;
+    private DCPlayer player;
 
-    public void SetPlayerPosition(Transform playerTransform)
+    public void SetPlayerPosition(DCPlayer player)
     {
-        this.playerTransform = playerTransform;
+        this.player = player;
     }
 
     private List<Move> GetAvailableMoves()
@@ -34,36 +35,52 @@ public class Enemy : Fighter
             Vector3 startPos = transform.position;
             Quaternion startRot = transform.rotation;
 
-            bool isMelee = currentMove is EnemyAttack && !(currentMove is EnemySpell);
+            EnemyMelee melee = currentMove as EnemyMelee;
             EnemySelfBuff selfBuff = currentMove as EnemySelfBuff;
+            EnemySpell spell = currentMove as EnemySpell;
+            SpellProjectile projectile = null;
 
-            if(isMelee)
+            if(melee)
             {
-                agent.SetDestination(playerTransform.position);
+                agent.SetDestination(player.GetAttackPosition().position);
                 agent.stoppingDistance = attackPositionOffset;
                 yield return new WaitUntil(() => agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance <= attackPositionOffset);
             }
 
             animator.SetTrigger(currentMove.animationName);
-            if (isMelee)
+            if (melee)
             {
-                if ((currentMove as EnemyAttack).hitboxDelay > 0)
-                    StartCoroutine(HandleHitbox(currentMove as EnemyAttack));
-                else hitboxes[(currentMove as EnemyAttack).hitboxID].enabled = true;
+                if (melee.hitboxDelay > 0)
+                    StartCoroutine(HandleHitbox(melee));
+                else hitboxes[melee.hitboxID].enabled = true;
             }
             yield return new WaitUntil(() => animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains(currentMove.animationName));
             PayForAttack();
+
+            if(spell != null)
+            {
+                transform.rotation = Quaternion.Lerp(transform.rotation,
+                    Quaternion.LookRotation(player.transform.position - transform.position),
+                        Time.deltaTime);
+                for (int i = 0; i < spell.projectile.Length; i++)
+                {
+                    yield return new WaitForSeconds(spell.delay[i]);
+                    projectile = Instantiate(spell.projectile[i], spellSpawnTransforms[spell.spawnTransformID].position,
+                    transform.rotation, transform);
+                    projectile.LockOnTarget(player.GetProjectileTarget());
+                }
+            }
 
             if (selfBuff != null)
                 perks.Add(selfBuff.buff);
 
             yield return new WaitUntil(() => !animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains(currentMove.animationName));
 
-            if(isMelee)
+            if(melee != null)
             {
                 agent.SetDestination(startPos);
                 agent.stoppingDistance = 0f;
-                hitboxes[(currentMove as EnemyAttack).hitboxID].enabled = false;
+                hitboxes[melee.hitboxID].enabled = false;
                 yield return new WaitUntil(() => agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0);
 
                 while (transform.rotation != startRot)
@@ -72,26 +89,30 @@ public class Enemy : Fighter
                     yield return null;
                 }
             }
+            yield return new WaitUntil(() => projectile == null);
         }
         yield return base.Attacking();
     }
 
-    private IEnumerator HandleHitbox(EnemyAttack attack)
+    private IEnumerator HandleHitbox(EnemyMelee melee)
     {
-        yield return new WaitForSeconds(attack.hitboxDelay);
-        hitboxes[attack.hitboxID].enabled = true;
+        yield return new WaitForSeconds(melee.hitboxDelay);
+        hitboxes[melee.hitboxID].enabled = true;
     }
 
-    protected override void DoOnHit()
+    protected override float DoOnHit()
     {
-        PlayerMelee currentPlayerMove = battleManager.CurrentMove as PlayerMelee;
+        _ = base.DoOnHit();
 
+        PlayerMelee currentPlayerMove = battleManager.CurrentMove as PlayerMelee;
         if (currentPlayerMove != null)
             StartCoroutine(PlayHitParticles(battleManager.GetPlayerHitboxTransform(currentPlayerMove.hitboxID).position,
                 currentPlayerMove.hitParticles));
+        return 0;
     }
 
-    public override (float healthDamage, float staminaDamage, float manaDamage, List<Status> status) CalculateDamage()
+    public override (float healthDamage, float staminaDamage, float manaDamage, List<Status> status, float statusProbability, float luck)
+        CalculateDamage()
     {
         return currentMove is EnemyAttack && attributes.Accuracy >= Random.Range(0, 1f) ?
             (currentMove as EnemyAttack).GetAttackInfo(level, perks) :
@@ -105,5 +126,10 @@ public class Enemy : Fighter
         hitParticles.Play();
         yield return new WaitForSeconds(hitParticles.main.duration);
         Destroy(hitParticles.gameObject);
+    }
+
+    public int GetXP()
+    {
+        return XP;
     }
 }

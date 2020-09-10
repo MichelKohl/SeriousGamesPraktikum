@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camPosition: {x: 184.68, y: 4, z: 73.13}
   camRotation: {x: 0, y: 90, z: 0}
+  spotlightRange: 128
+  flushDeadEnemies: 1
   description: 
   options:
   - description: Fight
-    nextSituationID: 7
+    nextSituationID: 0
     strRequirement: 0
     dexRequirement: 0
     intRequirement: 0
@@ -27,7 +29,7 @@ MonoBehaviour:
   talker: []
   dialogue: []
   enemies:
-  - {fileID: 1898448038, guid: d850e2cea34704677b7d771f583884d3, type: 3}
+  - {fileID: 496783800356677502, guid: d850e2cea34704677b7d771f583884d3, type: 3}
   enemyDialogue: []
   enemyPosition:
   - {x: 195.33, y: 0, z: 72.57}

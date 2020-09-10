@@ -6,6 +6,8 @@ public class Situation : ScriptableObject
 {
     public Vector3 camPosition;
     public Vector3 camRotation;
+    public float spotlightRange = 20f;
+    public bool flushDeadEnemies = false;
     [Multiline]
     public string description;
 }
@@ -25,6 +27,9 @@ public class DecisionInfo
 [Serializable]
 public class NextPoint : DecisionInfo
 {
+    public bool changeChapter = false;
+    public int nextChapter;
+    public int startSituation;
     public double conditionDistance;
 }
 

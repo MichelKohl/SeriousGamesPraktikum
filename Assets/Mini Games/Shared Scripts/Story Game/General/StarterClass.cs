@@ -18,9 +18,6 @@ public class StarterClass : ScriptableObject
     // all attacks
     public bool[] unlocked;
 
-    //starter equipment
-    public Consumable[] consumables;
-
     public DCPlayer Init(Transform parent, Vector3 position, Quaternion rotation)
     {
         return Instantiate(model, position, rotation, parent).Init(this);

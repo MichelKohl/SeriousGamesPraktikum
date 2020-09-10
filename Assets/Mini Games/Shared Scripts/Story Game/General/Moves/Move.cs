@@ -13,7 +13,12 @@ public class Move : ScriptableObject
 
     public ParticleSystem[] particleEffects;
     public float[] particleDelay;
-    public Transform[] particleSpawnPositions;
+    public float[] particleDuration;
+    public int[] particleSpawnPositionID;
+    public bool[] releaseOnInit;
+
+
+    
 }
 
 public enum Scaling : int
@@ -23,8 +28,7 @@ public enum Scaling : int
     B = 5,
     C = 3,
     D = 2,
-    E = 1,
-    F = 0
+    E = 1
 }
 
 public enum Status
@@ -32,6 +36,7 @@ public enum Status
     Poison,
     Stun,
     Bleed,
+    Burn,
     HealPoison,
     None
 }

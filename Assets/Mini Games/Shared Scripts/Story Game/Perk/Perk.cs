@@ -5,10 +5,14 @@ public class Perk : ScriptableObject
 {
     [Multiline]
     public string descritption;
+    public int levelRequirement = 0;
+    public int skillPointCost = 0;
     public bool permanent = false;//    true    => do not remove perk from players perk list after battle. 
     public bool temporary = false;//    true    => remove perk from list after some time has passed (->duration). 
-    public float duration = 0f;
-
+    public int duration = 0;
+    public ParticleSystem buffParticles;
+    public int particleSpawnPositionID = 0;
+    public float particleSpawnDelay = 0;
     
     public static (Scaling[] scalings, float damageMultiplier, float critMultiplier, float statusProbability, List<Status> statuses)
         ApplyAttackPerks(List<Perk> perks, PlayerAttack playerAttack)
@@ -98,8 +102,6 @@ public class Perk : ScriptableObject
     {
         switch (scaling)
         {
-            case Scaling.F:
-                return Scaling.E;
             case Scaling.E:
                 return Scaling.D;
             case Scaling.D:
@@ -117,8 +119,6 @@ public class Perk : ScriptableObject
     {
         switch (scaling)
         {
-            case Scaling.D:
-                return Scaling.E;
             case Scaling.C:
                 return Scaling.D;
             case Scaling.B:
@@ -128,7 +128,7 @@ public class Perk : ScriptableObject
             case Scaling.S:
                 return Scaling.A;
             default:
-                return Scaling.F;
+                return Scaling.E;
         }
     }
 }
