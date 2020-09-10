@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d4fb65e00ef43fd82440ecd5d5ebd1, type: 3}
+  m_Name: Heal
+  m_EditorClassIdentifier: 
+  descritption: Heals by 1 HP/sec for 2 rounds.
+  levelRequirement: 0
+  skillPointCost: 0
+  permanent: 0
+  temporary: 1
+  duration: 2
+  buffParticles: {fileID: 7194401218927962429, guid: 3fd3857d31b7e4396bb58cff09c27f7c,
+    type: 3}
+  particleSpawnPositionID: 0
+  particleSpawnDelay: 0.8
+  addSTR: 0
+  addDEX: 0
+  addINT: 0
+  addFTH: 0
+  addLCK: 0
+  addHealthRegen: 1
+  addStaminaRegen: 0
+  addManaRegen: 0
+  maxHealthMultiplier: 1
+  maxStaminaMultiplier: 1
+  maxManaMultiplier: 1
+  initiativeMultiplier: 1
+  accuracyMultiplier: 1
+  manaConsumption: 1
+  staminaConsumption: 1

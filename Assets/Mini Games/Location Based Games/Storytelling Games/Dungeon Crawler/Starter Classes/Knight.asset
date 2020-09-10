@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf59a91a8e439419f8c6cf719dcc572d, type: 3}
+  m_Name: Knight
+  m_EditorClassIdentifier: 
+  level: 1
+  model: {fileID: 3012878626925102580, guid: e6b6f5003b3e8480d82a4a6c6ddebe08, type: 3}
+  strength: 3
+  dexterity: 3
+  intelligence: 3
+  faith: 3
+  luck: 3
+  unlocked: 01010001010101

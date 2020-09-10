@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 556877816b8cf4eea8195ee379579f07, type: 3}
+  m_Name: Heal
+  m_EditorClassIdentifier: 
+  animationName: heal
+  healthCost: 0
+  staminaCost: 0
+  manaCost: 0
+  particleEffects:
+  - {fileID: 2294133937055182598, guid: bd090b859ee3844d2b989673331d7409, type: 3}
+  particleDelay:
+  - 0.75
+  particleDuration:
+  - 1
+  particleSpawnPositionID: 02000000
+  releaseOnInit: 01
+  levelRequirement: 1
+  skillPointCost: 1
+  STR: 1
+  DEX: 1
+  INT: 2
+  FTH: 3
+  LCK: 1
+  probOfBlock: 0
+  buff: {fileID: 11400000, guid: 9383c21b9fb5f45a88a5b3fadb1c3830, type: 2}
