@@ -278,7 +278,8 @@ public class Fighter : MonoBehaviour
     public IEnumerator PlayParticles(float delay, ParticleSystem particles, Transform origin, float duration = 0, bool releaseOnInit = false)
     {
         yield return new WaitForSeconds(delay);
-        ParticleSystem vfx = Instantiate(particles, origin.position, particles.transform.rotation, releaseOnInit ? transform : origin);
+        ParticleSystem vfx = Instantiate(particles, origin.position, Quaternion.Euler(particles.transform.eulerAngles.x,
+            transform.eulerAngles.y, particles.transform.eulerAngles.z), releaseOnInit ? transform : origin);
         vfx.Play();
         removeOnInit.Add(vfx.gameObject);
         yield return new WaitForSeconds(duration == 0 ? vfx.main.duration : duration);
