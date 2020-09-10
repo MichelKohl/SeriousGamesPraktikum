@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 using Mapbox.CheapRulerCs;
 using Mapbox.Unity.Location;
 
@@ -41,6 +42,10 @@ public class GeneralGUI : MonoBehaviour
     public TextMeshProUGUI locationTagText;
     [SerializeField]
     private GameObject CharacterSelectionPanel;
+    [SerializeField]
+    private GameObject treasureMessagePanel;
+    [SerializeField]
+    private TextMeshProUGUI treasureMessageText;
 
     /// <summary>
     /// The characters, which can be chosen by pressing the button 
@@ -66,9 +71,16 @@ public class GeneralGUI : MonoBehaviour
 
     private List<GameObject> characterButtons = new List<GameObject>();
 
+    [SerializeField] private GameObject achievementsView;
+    [SerializeField] private AchievementsView achievementScrollView;
+    [SerializeField] private GameObject highscoreView;
+    [SerializeField] private HighscoreView highscoreScrollView;
+
     private TouchScreenKeyboard keyboard;
     private bool changeName = false;
 
+    [SerializeField]
+    private GameObject insufficientCoinsTextbox;
 
     // Start is called before the first frame update
     void Start()
@@ -85,6 +97,9 @@ public class GeneralGUI : MonoBehaviour
         characterButtons.Add(son01Button);
 
         GameManager.INSTANCE.LoadCharacter();
+
+        initCharacterSelection();
+        profileButton.image.sprite = ProfileCharacterImageButton.GetComponent<Image>().sprite;
     }
 
     // Update is called once per frame
@@ -224,6 +239,9 @@ public class GeneralGUI : MonoBehaviour
         //activate the selected character model by getting the id
         GameObject.Find("Player").transform.GetChild(GameManager.INSTANCE.profile.selectedCharacterID + 2).gameObject.SetActive(true);
 
+        //update player button
+        profileButton.image.sprite = pressedButton.GetComponent<Image>().sprite;
+
         GameManager.INSTANCE.SaveProfile(GameManager.INSTANCE.profile);
     }
 
@@ -234,6 +252,14 @@ public class GeneralGUI : MonoBehaviour
     {
         foreach (GameObject go in characterButtons)
         {
+            if (GameManager.INSTANCE.profile.charactersBought == null)
+            {
+                GameManager.INSTANCE.profile.charactersBought = new List<int>();
+                GameManager.INSTANCE.profile.charactersBought.Add(8); //son is free at the beginning
+                GameManager.INSTANCE.profile.charactersBought.Add(0); //daughter is free at the beginning
+                GameManager.INSTANCE.profile.selectedCharacterID = 0;
+            }
+
             foreach (int id in GameManager.INSTANCE.profile.charactersBought)
             {
                 if (go.GetComponent<CharacterID>().id == id)
@@ -257,6 +283,11 @@ public class GeneralGUI : MonoBehaviour
     public void buy(GameObject button)
     {
         int costs = button.transform.GetChild(0).gameObject.GetComponent<Costs>().costs;
+        if (GameManager.INSTANCE.profile.getCoins() - costs < 0)
+        {
+            StartCoroutine(showTextboxForSeconds(insufficientCoinsTextbox, 3f));
+            return;
+        }
         GameManager.INSTANCE.profile.setCoins(GameManager.INSTANCE.profile.getCoins() - costs);
         coinsText.SetText(GameManager.INSTANCE.profile.getCoins().ToString());
         button.GetComponent<Button>().interactable = true;
@@ -268,4 +299,54 @@ public class GeneralGUI : MonoBehaviour
         initCharacterSelection();
     }
 
+    /// <summary>
+    /// This Coroutine displays a textbox panel for a certain amount of seconds.
+    /// </summary>
+    /// <param name="textbox">the panel that should be displayed</param>
+    /// <param name="sec">the amount of seconds, the panel should be displayed</param>
+    /// <returns></returns>
+    IEnumerator showTextboxForSeconds(GameObject textbox, float sec)
+    {
+        textbox.SetActive(true);
+        yield return new WaitForSeconds(sec);
+        textbox.SetActive(false);
+    }
+
+    public void ChangeToAchievementsView()
+    {
+        achievementsView.gameObject.SetActive(true);
+        achievementScrollView.ChangeToAchievementView();
+    }
+
+    public void AchievementViewBack()
+    {
+        achievementsView.gameObject.SetActive(false);
+    }
+
+    public void ChangeToHighscoresView()
+    {
+        highscoreView.SetActive(true);
+        highscoreScrollView.ChangeToHighscoreView();
+    }
+
+    public void HighscoreViewBack()
+    {
+        highscoreView.gameObject.SetActive(false);
+    }
+
+    public void PlaySpaceInvaders()
+    {
+        SceneManager.LoadScene(2);
+    }
+
+    public void PlaySnakes()
+    {
+        SceneManager.LoadScene(3);
+    }
+
+    public void ShowTreasureMessageDialog(string message)
+    {
+        treasureMessageText.SetText(message);
+        StartCoroutine(showTextboxForSeconds(treasureMessagePanel, 3));
+    }
 }

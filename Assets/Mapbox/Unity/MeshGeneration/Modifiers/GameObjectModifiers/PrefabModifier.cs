@@ -14,6 +14,7 @@ namespace Mapbox.Unity.MeshGeneration.Modifiers
 	using Mapbox.Utils;
 	using Mapbox.VectorTile.ExtensionMethods;
 	using Mapbox.CheapRulerCs;
+	using System.Linq;
 
 	[CreateAssetMenu(menuName = "Mapbox/Modifiers/Prefab Modifier")]
 	public class PrefabModifier : GameObjectModifier
@@ -23,6 +24,7 @@ namespace Mapbox.Unity.MeshGeneration.Modifiers
 		private SpawnPrefabOptions _options;
 		private List<GameObject> _prefabList = new List<GameObject>();
 		private static Dictionary<string, double[]> pos;
+		private static Dictionary<string, Dictionary<string, object>> typeDict;
 
 		public override void Initialize()
 		{
@@ -40,7 +42,8 @@ namespace Mapbox.Unity.MeshGeneration.Modifiers
 
 		public override void Run(VectorEntity ve, UnityTile tile)
 		{
-			pos = VectorTileFactory.positionList;
+			pos = GameManager.poiLocaitonList;
+			typeDict = GameManager.poiTypeList;
 			if (_options.prefab == null)
 			{
 				return;
@@ -67,21 +70,55 @@ namespace Mapbox.Unity.MeshGeneration.Modifiers
 			var locationDouble = new double[] { location.Lat, location.Lng };
 			var maxDistance = 150.0f;
 			CheapRuler cr = new CheapRuler(locationDouble[1], CheapRulerUnits.Meters);
-			foreach (KeyValuePair<string, double[]> position in pos)
+			// If spawned object is treasure only check distance to other treasures
+			if (ve.GameObject.name.Contains("Treasures"))
 			{
-				if (cr.Distance(locationDouble, position.Value) < maxDistance)
+				foreach (KeyValuePair<string, double[]> position in pos)
 				{
-					rangeBool = false;
-					break;
+					if (position.Key.Contains("Treasures"))
+					{
+						if (cr.Distance(locationDouble, position.Value) < maxDistance && !pos.ContainsKey(ve.GameObject.name.ToString()))
+						{
+							rangeBool = false;
+							break;
+						}
+					}
+					
 				}
 			}
-			if (rangeBool && ve.Feature.Data.Id.ToString() != null)
+			// for POIs check only distance to POIs and not to treasures
+			else
 			{
-				pos.Add(ve.Feature.Data.Id.ToString(), locationDouble);
+				foreach (KeyValuePair<string, double[]> position in pos)
+				{
+					if (!position.Key.Contains("Treasures"))
+					{
+						if (cr.Distance(locationDouble, position.Value) < maxDistance && !pos.ContainsKey(ve.GameObject.name.ToString()))
+						{
+							rangeBool = false;
+							break;
+						}
+					}
+					
+				}
+			}
+			// Add spawned POIs and treasures to dictionaries
+			if (rangeBool && ve.Feature.Data.Id.ToString() != null && !pos.ContainsKey(ve.GameObject.name.ToString()))
+			{
+				pos.Add(ve.GameObject.name.ToString(), locationDouble);
+				typeDict.Add(ve.GameObject.name.ToString(), ve.Feature.Properties);
 			}
 			else
 			{
-				go.Destroy();
+				if (!pos.ContainsKey(ve.GameObject.name.ToString()))
+				{
+					go.SetActive(false);
+				}
+				else
+				{
+					go.SetActive(true);
+				}
+				
 			}
 			if (_options.AllPrefabsInstatiated != null)
 			{
@@ -130,14 +167,27 @@ namespace Mapbox.Unity.MeshGeneration.Modifiers
 
 		public override void Clear()
 		{
+			pos = GameManager.poiLocaitonList;
+			typeDict = GameManager.poiTypeList;
 			base.Clear();
 			foreach (var gameObject in _objects.Values)
 			{
+				if (pos.ContainsKey(gameObject.name.ToString()))
+				{
+					pos.Remove(gameObject.name.ToString());
+					typeDict.Remove(gameObject.name.ToString());
+				}
 				gameObject.Destroy();
+				
 			}
 
 			foreach (var gameObject in _prefabList)
 			{
+				if (pos.ContainsKey(gameObject.name.ToString()))
+				{
+					pos.Remove(gameObject.name.ToString());
+					typeDict.Remove(gameObject.name.ToString());
+				}
 				gameObject.Destroy();
 			}
 		}

@@ -18,20 +18,29 @@ public class WalkTowardsLocation : MonoBehaviour
     [SerializeField] 
     private float distanceMultiplier = 0.2f;
 
+    /// <summary>
+    /// Checks distance to location object and triggers the player character moving to the object
+    /// </summary>
     void Update()
     {
         var distFactor = 1.0f;
-        LocationObjectPos = new Vector3(wayPoint.transform.position.x, transform.position.y, wayPoint.transform.position.z);
+        LocationObjectPos = new Vector3(wayPoint.transform.position.x, wayPoint.transform.position.y, wayPoint.transform.position.z);
         if (Vector3.Distance(LocationObjectPos, transform.position) > 0.1f)
         {
-            AnimationController.SetBool("Walk", true);
+            if (!AnimationController.GetBool("Walk") && Vector3.Distance(LocationObjectPos, transform.position) > 0.2f)
+            {
+                AnimationController.SetBool("Walk", true);
+            }     
             distFactor =Math.Max(1.0f, Vector3.Distance(LocationObjectPos, transform.position) * distanceMultiplier);
             transform.position = Vector3.MoveTowards(transform.position, LocationObjectPos, distFactor * walkSpeed * Time.deltaTime);
         }
         else
         {
-            AnimationController.SetBool("Walk", false);
+            if (AnimationController.GetBool("Walk"))
+            {
+                AnimationController.SetBool("Walk", false);
+            }           
         }
-
+        
     }
 }

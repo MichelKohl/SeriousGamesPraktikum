@@ -51,6 +51,11 @@ ExportedObj/
 # Unity3D generated file on crash reports
 sysinfo.txt
 
+# for merging: game dist tracking
+.DS_Store
+Assets/.DS_Store
+ProjectSettings/TagManager.asset
+
 # Builds
 *.apk
 *.unitypackage

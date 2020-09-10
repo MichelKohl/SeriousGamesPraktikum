@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// class to play a walking animation for the player
+/// </summary>
 public class PlayWalkingAnimation : MonoBehaviour
 {
     [SerializeField] private Animator AnimationController;
@@ -10,7 +13,9 @@ public class PlayWalkingAnimation : MonoBehaviour
     private GameObject player = null;
     private Vector3 lastPosition;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Start is called before the first frame update. Invokes repeating function to trigger walking animation
+    /// </summary>
     void Start()
     {
         if (player == null)

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8771834564788617724}
   m_Layer: 0
   m_Name: TransportPoi
-  m_TagString: Untagged
+  m_TagString: POI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,6 +47,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _text: {fileID: 6153496693924559376}
   _background: {fileID: 6153099785949462224}
+--- !u!114 &622297217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5995842809227063820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 045ba896fcb7caa4d9b40e64ea55df60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  script: {fileID: 491467569345055784}
 --- !u!1001 &2793427166304053251
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54,6 +67,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8754715650089108185}
     m_Modifications:
+    - target: {fileID: 2312092717596107819, guid: 2705960bd251c2443a4d06d3f1dd1c88,
+        type: 3}
+      propertyPath: inRange
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3476743508487716801, guid: 2705960bd251c2443a4d06d3f1dd1c88,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -164,8 +182,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: VisualRadius
       objectReference: {fileID: 0}
+    - target: {fileID: 8498781168101333519, guid: 2705960bd251c2443a4d06d3f1dd1c88,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2705960bd251c2443a4d06d3f1dd1c88, type: 3}
+--- !u!1 &5995842809227063820 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8498781168101333519, guid: 2705960bd251c2443a4d06d3f1dd1c88,
+    type: 3}
+  m_PrefabInstance: {fileID: 2793427166304053251}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1656164651394963394 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3476743508487716801, guid: 2705960bd251c2443a4d06d3f1dd1c88,
@@ -178,7 +207,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 2793427166304053251}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 5995842809227063820}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 310f0f809a14948569475d2390e69bb6, type: 3}
@@ -363,7 +392,8 @@ PrefabInstance:
       propertyPath: script
       value: 
       objectReference: {fileID: 491467569345055784}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8356336604440220909, guid: 22150daba6e8b47b69fd30f00b9c56cd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 22150daba6e8b47b69fd30f00b9c56cd, type: 3}
 --- !u!224 &6335983772729291600 stripped
 RectTransform:

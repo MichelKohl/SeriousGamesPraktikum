@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1435350438270637690}
   m_Layer: 0
   m_Name: ArtsAndEntertainmentPOI
-  m_TagString: Untagged
+  m_TagString: POI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,6 +47,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _text: {fileID: 1332118327037384409}
   _background: {fileID: 1329463760961548549}
+--- !u!114 &4884473705825646446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1987571084300830269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 045ba896fcb7caa4d9b40e64ea55df60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  script: {fileID: 5652806143541917721}
 --- !u!1001 &1435350437677959425
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -213,7 +226,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2312092717596107819, guid: 2705960bd251c2443a4d06d3f1dd1c88,
         type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4454167376244687560, guid: 29d1abf5ba6514d81a7974353f130ca8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 29d1abf5ba6514d81a7974353f130ca8, type: 3}
 --- !u!224 &1220674944026027877 stripped
 RectTransform:
@@ -364,9 +378,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2705960bd251c2443a4d06d3f1dd1c88, type: 3}
+--- !u!1 &1987571084300830269 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8498781168101333519, guid: 2705960bd251c2443a4d06d3f1dd1c88,
+    type: 3}
+  m_PrefabInstance: {fileID: 7954756824146861106}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6799070821520073715 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3476743508487716801, guid: 2705960bd251c2443a4d06d3f1dd1c88,
     type: 3}
   m_PrefabInstance: {fileID: 7954756824146861106}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5652806143541917721 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2312092717596107819, guid: 2705960bd251c2443a4d06d3f1dd1c88,
+    type: 3}
+  m_PrefabInstance: {fileID: 7954756824146861106}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1987571084300830269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 310f0f809a14948569475d2390e69bb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
