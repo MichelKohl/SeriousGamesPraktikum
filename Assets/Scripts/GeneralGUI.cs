@@ -344,6 +344,11 @@ public class GeneralGUI : MonoBehaviour
         SceneManager.LoadScene(3);
     }
 
+    public void PlayStoryGame()
+    {
+        SceneManager.LoadScene(4);
+    }
+
     public void ShowTreasureMessageDialog(string message)
     {
         treasureMessageText.SetText(message);
