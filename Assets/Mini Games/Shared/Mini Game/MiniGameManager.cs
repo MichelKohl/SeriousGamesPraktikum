@@ -80,7 +80,7 @@ public class MiniGameManager : AchievementManager
         playerProfile.SetHighscore(gameName,
             Mathf.Max(playerProfile.GetHighscore(gameName), Score));
         // add earned coins to profile
-        GameManager.INSTANCE.profile.setCoins((int) GameManager.INSTANCE.profile.getCoins() + (Score / 20));
+        GameManager.INSTANCE.profile.SetCoins((int) GameManager.INSTANCE.profile.GetCoins() + (Score / 20));
         // save progress
         GameManager.INSTANCE.SaveProfile(GameManager.INSTANCE.profile);
     }
@@ -121,7 +121,7 @@ public class MiniGameManager : AchievementManager
     public void ExitGame()
     {
         // add earned coins to profile
-        GameManager.INSTANCE.profile.setCoins((int)GameManager.INSTANCE.profile.getCoins() + (Score / 20));
+        GameManager.INSTANCE.profile.SetCoins((int)GameManager.INSTANCE.profile.GetCoins() + (Score / 20));
         // save progress
         GameManager.INSTANCE.SaveProfile(GameManager.INSTANCE.profile);
         SceneManager.LoadScene("Scenes/DefaultScreen");

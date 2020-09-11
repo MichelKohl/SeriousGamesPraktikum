@@ -4,14 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-using Mapbox.CheapRulerCs;
-using Mapbox.Unity.Location;
 
 /// <summary>
 /// This class handles all GUI interactions within the default screen.
 /// </summary>
 public class GeneralGUI : MonoBehaviour
 {
+    /// <summary>
+    /// All different kinds of GUI Elements of the profile view
+    /// </summary>
     [SerializeField]
     private Button profileButton;
     [SerializeField]
@@ -98,7 +99,7 @@ public class GeneralGUI : MonoBehaviour
 
         GameManager.INSTANCE.LoadCharacter();
 
-        initCharacterSelection();
+        InitCharacterSelection();
         profileButton.image.sprite = ProfileCharacterImageButton.GetComponent<Image>().sprite;
     }
 
@@ -110,8 +111,8 @@ public class GeneralGUI : MonoBehaviour
             if (keyboard.status == TouchScreenKeyboard.Status.Done)
             {
                 changeName = false;
-                GameManager.INSTANCE.profile.setProfileName(keyboard.text);
-                setProfileInfo();
+                GameManager.INSTANCE.profile.SetProfileName(keyboard.text);
+                SetProfileInfo();
             }
         }
     }
@@ -119,10 +120,10 @@ public class GeneralGUI : MonoBehaviour
     /// <summary>
     /// This method will make the profile view visible and will set up all necessary informations.
     /// </summary>
-    public void showProfileView()
+    public void ShowProfileView()
     {
-        initCharacterSelection();
-        setProfileInfo();
+        InitCharacterSelection();
+        SetProfileInfo();
 
         CharacterSelectionPanel.SetActive(false);
         profileView.SetActive(true);
@@ -132,19 +133,19 @@ public class GeneralGUI : MonoBehaviour
     /// <summary>
     /// This method will make the profile view invisible by return to default screen view. It will also save setting changes that were made.
     /// </summary>
-    public void backToDefaultView()
+    public void BackToDefaultView()
     {
         if (notificationsToggle.GetComponent<Toggle>().isOn)
         {
-            GameManager.INSTANCE.profile.setNotificationStatus(true);
+            GameManager.INSTANCE.profile.SetNotificationStatus(true);
         }
-        else GameManager.INSTANCE.profile.setNotificationStatus(false);
+        else GameManager.INSTANCE.profile.SetNotificationStatus(false);
 
         if (vibrationsToggle.GetComponent<Toggle>().isOn)
         {
-            GameManager.INSTANCE.profile.setVibrationStatus(true);
+            GameManager.INSTANCE.profile.SetVibrationStatus(true);
         }
-        else GameManager.INSTANCE.profile.setVibrationStatus(false);
+        else GameManager.INSTANCE.profile.SetVibrationStatus(false);
 
         CharacterSelectionPanel.SetActive(false);
         profileView.SetActive(false);
@@ -156,53 +157,53 @@ public class GeneralGUI : MonoBehaviour
     /// <summary>
     /// This method sets up all profile informations by requesting them from the saved profile.
     /// </summary>
-    private void setProfileInfo()
+    private void SetProfileInfo()
     {
-        profilenameText.SetText(GameManager.INSTANCE.profile.getProfileName());
+        profilenameText.SetText(GameManager.INSTANCE.profile.GetProfileName());
 
-        if (GameManager.INSTANCE.profile.getProfileType() == Profiletype.LOCALRESIDENT)
+        if (GameManager.INSTANCE.profile.GetProfileType() == Profiletype.LOCALRESIDENT)
         {
             profiletypeText.SetText("Local Resident");
         }
-        if (GameManager.INSTANCE.profile.getProfileType() == Profiletype.TOURIST)
+        if (GameManager.INSTANCE.profile.GetProfileType() == Profiletype.TOURIST)
         {
             profiletypeText.SetText("Tourist");
         }
 
-        coinsText.SetText(GameManager.INSTANCE.profile.getCoins().ToString());
+        coinsText.SetText(GameManager.INSTANCE.profile.GetCoins().ToString());
 
-        if (GameManager.INSTANCE.profile.getNotificationStatus())
+        if (GameManager.INSTANCE.profile.GetNotificationStatus())
         {
             notificationsToggle.GetComponent<Toggle>().isOn = true;
         }
         else notificationsToggle.GetComponent<Toggle>().isOn = false;
 
-        if (GameManager.INSTANCE.profile.getVibrationsStatus())
+        if (GameManager.INSTANCE.profile.GetVibrationsStatus())
         {
             vibrationsToggle.GetComponent<Toggle>().isOn = true;
         }
         else vibrationsToggle.GetComponent<Toggle>().isOn = false;
 
-        int hours = (int)(GameManager.INSTANCE.profile.getPlayTime() + (Time.time / 60)) / 60;
-        int minutes = (int)(GameManager.INSTANCE.profile.getPlayTime() + (Time.time / 60)) % 60;
+        int hours = (int)(GameManager.INSTANCE.profile.GetPlayTime() + (Time.time / 60)) / 60;
+        int minutes = (int)(GameManager.INSTANCE.profile.GetPlayTime() + (Time.time / 60)) % 60;
         totalPlayTimeText.SetText(hours + " h " + minutes + " m");
 
-        distanceTravelledText.SetText(GameManager.INSTANCE.profile.getDistanceTraveled().ToString("0.000") + " km");
+        distanceTravelledText.SetText(GameManager.INSTANCE.profile.GetDistanceTraveled().ToString("0.000") + " km");
     }
 
     /// <summary>
     /// This method will be invoked, if the player changes the current profile type.
     /// </summary>
-    public void changeProfiletype()
+    public void ChangeProfiletype()
     {
-        if (GameManager.INSTANCE.profile.getProfileType() == Profiletype.TOURIST)
+        if (GameManager.INSTANCE.profile.GetProfileType() == Profiletype.TOURIST)
         {
-            GameManager.INSTANCE.profile.setProfileType(Profiletype.LOCALRESIDENT);
+            GameManager.INSTANCE.profile.SetProfileType(Profiletype.LOCALRESIDENT);
             profiletypeText.SetText("Local Resident");
         }
-        else if (GameManager.INSTANCE.profile.getProfileType() == Profiletype.LOCALRESIDENT)
+        else if (GameManager.INSTANCE.profile.GetProfileType() == Profiletype.LOCALRESIDENT)
         {
-            GameManager.INSTANCE.profile.setProfileType(Profiletype.TOURIST);
+            GameManager.INSTANCE.profile.SetProfileType(Profiletype.TOURIST);
             profiletypeText.SetText("Tourist");
         }
     }
@@ -210,20 +211,27 @@ public class GeneralGUI : MonoBehaviour
     /// <summary>
     /// This method will be invoked, if the player presses the button for changing the profile name.
     /// </summary>
-    public void changeProfilename()
+    public void ChangeProfilename()
     {
-        keyboard = TouchScreenKeyboard.Open(GameManager.INSTANCE.profile.getProfileName(), TouchScreenKeyboardType.Default, false);
+        keyboard = TouchScreenKeyboard.Open(GameManager.INSTANCE.profile.GetProfileName(), TouchScreenKeyboardType.Default, false);
         changeName = true;
     }
 
-    public void showCharacterSelectionPanel()
+    /// <summary>
+    /// This method displays the panel, where the player can see all available and buyable characters.
+    /// </summary>
+    public void ShowCharacterSelectionPanel()
     {
         if (!CharacterSelectionPanel.activeSelf)
             CharacterSelectionPanel.SetActive(true);
         else CharacterSelectionPanel.SetActive(false);
     }
 
-    public void selectCharacter(GameObject pressedButton)
+    /// <summary>
+    /// This method will be invoked, if the player selects a different character.
+    /// </summary>
+    /// <param name="pressedButton">The character button on which the player pressed</param>
+    public void SelectCharacter(GameObject pressedButton)
     {
         ProfileCharacterImageButton.GetComponent<Image>().sprite = pressedButton.GetComponent<Image>().sprite;
         CharacterSelectionPanel.SetActive(false);
@@ -248,7 +256,7 @@ public class GeneralGUI : MonoBehaviour
     /// <summary>
     /// This method initaliazes the characters.
     /// </summary>
-    public void initCharacterSelection()
+    public void InitCharacterSelection()
     {
         foreach (GameObject go in characterButtons)
         {
@@ -280,23 +288,27 @@ public class GeneralGUI : MonoBehaviour
         }
     }
 
-    public void buy(GameObject button)
+    /// <summary>
+    /// This method handles all character buyings.
+    /// </summary>
+    /// <param name="button">The buy button of a character, which was pressed by the player</param>
+    public void Buy(GameObject button)
     {
         int costs = button.transform.GetChild(0).gameObject.GetComponent<Costs>().costs;
-        if (GameManager.INSTANCE.profile.getCoins() - costs < 0)
+        if (GameManager.INSTANCE.profile.GetCoins() - costs < 0)
         {
-            StartCoroutine(showTextboxForSeconds(insufficientCoinsTextbox, 3f));
+            StartCoroutine(ShowTextboxForSeconds(insufficientCoinsTextbox, 3f));
             return;
         }
-        GameManager.INSTANCE.profile.setCoins(GameManager.INSTANCE.profile.getCoins() - costs);
-        coinsText.SetText(GameManager.INSTANCE.profile.getCoins().ToString());
+        GameManager.INSTANCE.profile.SetCoins(GameManager.INSTANCE.profile.GetCoins() - costs);
+        coinsText.SetText(GameManager.INSTANCE.profile.GetCoins().ToString());
         button.GetComponent<Button>().interactable = true;
 
         GameManager.INSTANCE.profile.charactersBought.Add(button.GetComponent<CharacterID>().id);
 
         GameManager.INSTANCE.SaveProfile(GameManager.INSTANCE.profile);
 
-        initCharacterSelection();
+        InitCharacterSelection();
     }
 
     /// <summary>
@@ -305,35 +317,50 @@ public class GeneralGUI : MonoBehaviour
     /// <param name="textbox">the panel that should be displayed</param>
     /// <param name="sec">the amount of seconds, the panel should be displayed</param>
     /// <returns></returns>
-    IEnumerator showTextboxForSeconds(GameObject textbox, float sec)
+    IEnumerator ShowTextboxForSeconds(GameObject textbox, float sec)
     {
         textbox.SetActive(true);
         yield return new WaitForSeconds(sec);
         textbox.SetActive(false);
     }
 
+    /// <summary>
+    /// This method shows the achievements view
+    /// </summary>
     public void ChangeToAchievementsView()
     {
         achievementsView.gameObject.SetActive(true);
         achievementScrollView.ChangeToAchievementView();
     }
 
+    /// <summary>
+    /// This method returns from the achievements view
+    /// </summary>
     public void AchievementViewBack()
     {
         achievementsView.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// This method shows the highscores view
+    /// </summary>
     public void ChangeToHighscoresView()
     {
         highscoreView.SetActive(true);
         highscoreScrollView.ChangeToHighscoreView();
     }
 
+    /// <summary>
+    /// This method returns from the highscore views
+    /// </summary>
     public void HighscoreViewBack()
     {
         highscoreView.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// Scene switches of different scenes
+    /// </summary>
     public void PlaySpaceInvaders()
     {
         SceneManager.LoadScene(2);
@@ -349,9 +376,14 @@ public class GeneralGUI : MonoBehaviour
         SceneManager.LoadScene(4);
     }
 
+    /// <summary>
+    /// This method will be invoked, if the player collects a treasure. It shows how many coins the player collected
+    /// from the treasure he clicked on.
+    /// </summary>
+    /// <param name="message">The amount of coins in the treasure</param>
     public void ShowTreasureMessageDialog(string message)
     {
         treasureMessageText.SetText(message);
-        StartCoroutine(showTextboxForSeconds(treasureMessagePanel, 3));
+        StartCoroutine(ShowTextboxForSeconds(treasureMessagePanel, 3));
     }
 }

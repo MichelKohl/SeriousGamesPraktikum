@@ -36,9 +36,11 @@ public class LocationCalculation : MonoBehaviour
         MapboxConfiguration mc = new MapboxConfiguration();
         Mapbox.Platform.FileSource fs = new Mapbox.Platform.FileSource(mc.GetMapsSkuToken, "pk.eyJ1IjoibWljaGVsa29obCIsImEiOiJjazlrNWFnZ3gwOTFnM2Vuc3ZjMnR6OW41In0.-7gMg1G2xOMe46pw_b7qqA");
         geocoder = new Mapbox.Geocoding.Geocoder(fs);
-        
-        //Update rate of reverse geocoding should be modified
-        //InvokeRepeating("requestCity", 1f, 600f);
+
+        //Reverse Geocoding sets the location tag of the profile view.
+        //Note that Mapbox offers 100,000 request per month for free
+        //Such a reverse geocoding request will be done on every start of the app and every 6 Minutes 
+        //InvokeRepeating("RequestCity", 1f, 600f);
     }
 
     private void Update()
@@ -56,7 +58,7 @@ public class LocationCalculation : MonoBehaviour
             Mapbox.Utils.Vector2d new_loc = GameObject.Find("LocationProvider").GetComponent<LocationProviderFactory>().DefaultLocationProvider.CurrentLocation.LatitudeLongitude;
             double[] new_loc_array = new_loc.ToArray();
             CheapRuler cr = new CheapRuler(old_loc_array[1], CheapRulerUnits.Kilometers);
-            GameManager.INSTANCE.profile.setDistanceTraveled(GameManager.INSTANCE.profile.getDistanceTraveled() + cr.Distance(old_loc_array, new_loc_array));
+            GameManager.INSTANCE.profile.SetDistanceTraveled(GameManager.INSTANCE.profile.GetDistanceTraveled() + cr.Distance(old_loc_array, new_loc_array));
 
             locationUpdated = false;
         }
@@ -66,10 +68,10 @@ public class LocationCalculation : MonoBehaviour
     /// This method executes a reverse geocoding by the second newest location od the player. After getting the result, a callback method
     /// will be called together with the data s.
     /// </summary>
-    private void requestCity()
+    private void RequestCity()
     {
         Mapbox.Geocoding.ReverseGeocodeResource rgr = new Mapbox.Geocoding.ReverseGeocodeResource(old_loc);
-        geocoder.Geocode(rgr, s => requestCityCallback(s));
+        geocoder.Geocode(rgr, s => RequestCityCallback(s));
     }
 
     /// <summary>
@@ -77,7 +79,7 @@ public class LocationCalculation : MonoBehaviour
     /// </summary>
     /// <param name="data">the data received from the reverse geocoding</param>
     /// <returns>The reverse geocode response of the reverse geocode request</returns>
-    private Mapbox.Geocoding.ReverseGeocodeResponse requestCityCallback(Mapbox.Geocoding.ReverseGeocodeResponse data) {
+    private Mapbox.Geocoding.ReverseGeocodeResponse RequestCityCallback(Mapbox.Geocoding.ReverseGeocodeResponse data) {
         string address = data.Features[2].PlaceName;
 
         //Format Address from {City, Region, Country} in {City, Country}

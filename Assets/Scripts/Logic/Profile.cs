@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 /// <summary>
 /// This class represents a valid profile of the game.
@@ -43,9 +41,15 @@ public class Profile
     /// The amount of time the player played the game in minutes.
     /// </summary>
     private float totalPlaytime;
-
+    
+    /// <summary>
+    /// A storage for all minigame highscores reached by the player
+    /// </summary>
     private HighscoreStorage highscoreStorage;
 
+    /// <summary>
+    /// A storage for all achievements achieved by the player
+    /// </summary>
     private AchievementStorage achievementStorage;
 
     /// <summary>
@@ -73,43 +77,43 @@ public class Profile
         achievementStorage = new AchievementStorage();
     }
 
-    public void setProfileName(string name) {
+    public void SetProfileName(string name) {
         this.name = name;
     }
 
-    public string getProfileName() {
+    public string GetProfileName() {
         return this.name;
     }
 
-    public void setProfileType(Profiletype type) {
+    public void SetProfileType(Profiletype type) {
         this.type = type;
     }
 
-    public Profiletype getProfileType() {
+    public Profiletype GetProfileType() {
         return this.type;
     }
 
-    public void setNotificationStatus(bool status) {
+    public void SetNotificationStatus(bool status) {
         this.notifications = status;
     }
 
-    public bool getNotificationStatus() {
+    public bool GetNotificationStatus() {
         return this.notifications;
     }
 
-    public void setVibrationStatus(bool status) {
+    public void SetVibrationStatus(bool status) {
         this.vibrations = status;
     }
 
-    public bool getVibrationsStatus() {
+    public bool GetVibrationsStatus() {
         return this.vibrations;
     }
 
-    public void setCoins(int amount) {
+    public void SetCoins(int amount) {
         this.coins = amount;
     }
 
-    public int getCoins() {
+    public int GetCoins() {
         return this.coins;
     }
 
@@ -118,19 +122,19 @@ public class Profile
         this.coins += amount;
     }
 
-    public void setDistanceTraveled(double distance) {
+    public void SetDistanceTraveled(double distance) {
         this.distanceTraveled = distance; 
     }
 
-    public double getDistanceTraveled() {
+    public double GetDistanceTraveled() {
         return this.distanceTraveled;
     }
 
-    public void setPlayTime(float playTime) {
+    public void SetPlayTime(float playTime) {
         this.totalPlaytime = playTime;
     }
 
-    public float getPlayTime() {
+    public float GetPlayTime() {
         return this.totalPlaytime;
     }
 

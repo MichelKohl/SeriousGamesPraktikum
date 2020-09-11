@@ -1,11 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Mapbox.Unity.MeshGeneration.Data;
 
+/// <summary>
+/// This class manages all main events of the game.
+/// </summary>
 public class GameManager : MonoBehaviour
 {
     /// <summary>
@@ -117,6 +118,9 @@ public class GameManager : MonoBehaviour
         return miniGames[index];
     }
 
+    /// <summary>
+    /// This method loads the selected character.
+    /// </summary>
     public void LoadCharacter()
     {
         //first disable all character models
@@ -160,7 +164,7 @@ public class GameManager : MonoBehaviour
     {
         if (pause && INSTANCE.profile != null)
         {
-            INSTANCE.profile.setPlayTime(INSTANCE.profile.getPlayTime() + (Time.time / 60));
+            INSTANCE.profile.SetPlayTime(INSTANCE.profile.GetPlayTime() + (Time.time / 60));
             SaveProfile(INSTANCE.profile);
         }
     }
@@ -169,7 +173,7 @@ public class GameManager : MonoBehaviour
     {
         if (INSTANCE.profile != null)
         {
-            INSTANCE.profile.setPlayTime(INSTANCE.profile.getPlayTime() + (Time.time / 60));
+            INSTANCE.profile.SetPlayTime(INSTANCE.profile.GetPlayTime() + (Time.time / 60));
             SaveProfile(INSTANCE.profile);
         }
     }

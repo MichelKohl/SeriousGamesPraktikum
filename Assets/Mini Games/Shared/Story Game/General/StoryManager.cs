@@ -72,7 +72,7 @@ public class StoryManager : MonoBehaviour
             currentSituation.gameObject.SetActive(false);
 
             if(!startSet && manager != null)
-                textWhenWalking.SetStart(manager.profile.getDistanceTraveled(), distanceToWalk);
+                textWhenWalking.SetStart(manager.profile.GetDistanceTraveled(), distanceToWalk);
 
             while (distanceToWalk - textWhenWalking.Distance <= 0 && !turnOffWalkingRequirement)
                 yield return null;

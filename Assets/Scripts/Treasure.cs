@@ -1,14 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
+﻿using UnityEngine;
 
+/// <summary>
+/// This class handles the behaviour of treasures.
+/// </summary>
 public class Treasure : MonoBehaviour
 {
+    /// <summary>
+    /// The rotation speed of the treasures
+    /// </summary>
     [SerializeField]
     private float rotationSpeed = 50f;
-    public float forceStrength = 10f;
+    
+    /// <summary>
+    /// The amount of coins that are inside of the treasure
+    /// </summary>
     public int coins = 0;
+
+    /// <summary>
+    /// The instance of the generalGUI script
+    /// </summary>
     private GeneralGUI generalGUI;
 
     // Start is called before the first frame update
@@ -20,6 +30,8 @@ public class Treasure : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        //Use a random value between 1 and 5 for the coins inside of the treasure
         coins = Random.Range(1, 6);
         generalGUI = GameObject.Find("Canvas").GetComponent<GeneralGUI>();
     }
@@ -36,7 +48,7 @@ public class Treasure : MonoBehaviour
         CanClickOnTreasure ccot = ring.GetComponent<CanClickOnTreasure>();
         if (ccot.inRange)
         {
-            GameManager.INSTANCE.profile.setCoins(GameManager.INSTANCE.profile.getCoins() + this.coins);
+            GameManager.INSTANCE.profile.SetCoins(GameManager.INSTANCE.profile.GetCoins() + this.coins);
             string message = "+" + this.coins + " Coins";
             generalGUI.ShowTreasureMessageDialog(message);
             Destroy(this.gameObject);

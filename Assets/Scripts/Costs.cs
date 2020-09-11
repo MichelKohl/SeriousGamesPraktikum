@@ -1,10 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// This class sets up the marketplace texts of the buttons for buying new characters.
+/// </summary>
 public class Costs : MonoBehaviour
 {
+    /// <summary>
+    /// The costs for buying the new character
+    /// </summary>
     [SerializeField]
     public int costs;
 

@@ -9,7 +9,7 @@ public class WalkingText : MonoBehaviour
     private double distanceToWalk;
     private TextMeshProUGUI text;
 
-    public double Distance { get => GameManager.INSTANCE == null ? double.PositiveInfinity : GameManager.INSTANCE.profile.getDistanceTraveled() - startDistance; }
+    public double Distance { get => GameManager.INSTANCE == null ? double.PositiveInfinity : GameManager.INSTANCE.profile.GetDistanceTraveled() - startDistance; }
 
     // Start is called before the first frame update
     void Start()

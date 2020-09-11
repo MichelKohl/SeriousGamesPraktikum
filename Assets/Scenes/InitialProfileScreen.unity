@@ -1737,7 +1737,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1929669108}
-        m_MethodName: okButtonPressed
+        m_MethodName: OkButtonPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1952,7 +1952,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1929669108}
-        m_MethodName: touristButtonPressed
+        m_MethodName: TouristButtonPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2357,7 +2357,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1929669108}
-        m_MethodName: localResidentButtonPressed
+        m_MethodName: LocalResidentButtonPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3553,7 +3553,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1929669108}
-        m_MethodName: daughterSelected
+        m_MethodName: DaughterSelected
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4225,7 +4225,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1929669108}
-        m_MethodName: sonSelected
+        m_MethodName: SonSelected
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
