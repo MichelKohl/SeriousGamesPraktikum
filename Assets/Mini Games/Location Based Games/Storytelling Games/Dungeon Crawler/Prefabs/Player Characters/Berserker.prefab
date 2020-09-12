@@ -987,7 +987,7 @@ Transform:
   m_GameObject: {fileID: 2037019458362432528}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
   m_Children:
   - {fileID: 6979030378878746702}
   - {fileID: 8956046908495949557}
@@ -1089,6 +1089,7 @@ MonoBehaviour:
   poisonFX: {fileID: 4773001518935119339}
   burnFX: {fileID: 5586868672902618363}
   projectileTarget: {fileID: 1845489839953025014}
+  baseProbabilityOfBlock: 0
   testAttacks: 0
   hurtbox: {fileID: 7414448146763636680}
   strength: 1
@@ -3423,17 +3424,17 @@ PrefabInstance:
     - target: {fileID: 6087599340782701135, guid: 22c5012fb75a949be8e30bf55282aa83,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0054334165
+      value: -0.132
       objectReference: {fileID: 0}
     - target: {fileID: 6087599340782701135, guid: 22c5012fb75a949be8e30bf55282aa83,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.09664242
+      value: 0.191
       objectReference: {fileID: 0}
     - target: {fileID: 6087599340782701135, guid: 22c5012fb75a949be8e30bf55282aa83,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.081991896
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: 6087599340782701135, guid: 22c5012fb75a949be8e30bf55282aa83,
         type: 3}
@@ -3505,6 +3506,16 @@ PrefabInstance:
         type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6401024628393168243, guid: 92c8726cdc4f848c5a5e3e07a3d51775,
+        type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6401024628393168243, guid: 92c8726cdc4f848c5a5e3e07a3d51775,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6513432079498096727, guid: 92c8726cdc4f848c5a5e3e07a3d51775,
         type: 3}
@@ -3595,7 +3606,7 @@ PrefabInstance:
     - target: {fileID: 121551442978780454, guid: 062c023fb6f1c45a38ae618ce638534c,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 121551442978780454, guid: 062c023fb6f1c45a38ae618ce638534c,
         type: 3}

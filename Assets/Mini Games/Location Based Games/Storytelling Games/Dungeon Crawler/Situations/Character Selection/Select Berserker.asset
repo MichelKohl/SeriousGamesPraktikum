@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e10022bfabc074592aeeb474f70e2995, type: 3}
   m_Name: Select Berserker
   m_EditorClassIdentifier: 
-  chapterID: 0
-  camPosition: {x: 84.23, y: 4.25, z: 129.12}
+  camPosition: {x: 84.23, y: 4, z: 129.12}
   camRotation: {x: 0, y: 232.454, z: 0}
   spotlightRange: 20
+  flushDeadEnemies: 0
   description: Strong and fast.
   options:
   - description: Choose

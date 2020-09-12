@@ -213,6 +213,7 @@ MonoBehaviour:
   poisonFX: {fileID: 2348767298361908169}
   burnFX: {fileID: 1206657792332251868}
   projectileTarget: {fileID: 3567733460760045971}
+  baseProbabilityOfBlock: 0
   testAttacks: 0
   XP: 0
 --- !u!195 &3897104130456361072
@@ -369,12 +370,12 @@ PrefabInstance:
     - target: {fileID: 121551442978780454, guid: 062c023fb6f1c45a38ae618ce638534c,
         type: 3}
       propertyPath: InitialModule.startSize.minScalar
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 121551442978780454, guid: 062c023fb6f1c45a38ae618ce638534c,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 121551442978780454, guid: 062c023fb6f1c45a38ae618ce638534c,
         type: 3}
@@ -533,15 +534,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 465622, guid: b7f1dfc4e01f4a645a02f3816571583e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.2
+      value: 0.14
       objectReference: {fileID: 0}
     - target: {fileID: 465622, guid: b7f1dfc4e01f4a645a02f3816571583e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.2
+      value: 0.14
       objectReference: {fileID: 0}
     - target: {fileID: 465622, guid: b7f1dfc4e01f4a645a02f3816571583e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.2
+      value: 0.14
       objectReference: {fileID: 0}
     - target: {fileID: 19834720, guid: b7f1dfc4e01f4a645a02f3816571583e, type: 3}
       propertyPath: InitialModule.startSizeY.minMaxState
@@ -824,17 +825,17 @@ PrefabInstance:
     - target: {fileID: 6087599340782701135, guid: 22c5012fb75a949be8e30bf55282aa83,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.1762731
+      value: -1.8
       objectReference: {fileID: 0}
     - target: {fileID: 6087599340782701135, guid: 22c5012fb75a949be8e30bf55282aa83,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.128543
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 6087599340782701135, guid: 22c5012fb75a949be8e30bf55282aa83,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6087599340782701135, guid: 22c5012fb75a949be8e30bf55282aa83,
         type: 3}
@@ -1043,6 +1044,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3567733460760045971}
     m_Modifications:
+    - target: {fileID: 6401024628393168243, guid: 92c8726cdc4f848c5a5e3e07a3d51775,
+        type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6513432079498096727, guid: 92c8726cdc4f848c5a5e3e07a3d51775,
         type: 3}
       propertyPath: m_LocalPosition.x
