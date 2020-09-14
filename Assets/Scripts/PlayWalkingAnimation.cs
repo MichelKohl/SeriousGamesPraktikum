@@ -23,13 +23,13 @@ public class PlayWalkingAnimation : MonoBehaviour
             player = GameObject.FindGameObjectsWithTag("Player")[0];
             lastPosition = player.transform.position;
         }
-        InvokeRepeating("checkWalk", InitalWaitForWalking, UpdateWalking);
+        InvokeRepeating("CheckWalk", InitalWaitForWalking, UpdateWalking);
     }
 
     /// <summary>
     /// Checks if the player location has changed to trigger the walking animation
     /// </summary>
-    void checkWalk()
+    void CheckWalk()
     {
         if (Vector3.Distance(lastPosition, player.transform.position) > Vector3.kEpsilon)
         {

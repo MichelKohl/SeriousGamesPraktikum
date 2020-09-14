@@ -24,10 +24,10 @@ public class CreatePOIIndicator : MonoBehaviour
         // Calculate the planes from the main camera's view frustum
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
 
-        Vector3 point1 = planePlaneIntersection(planes[0], planes[2]);
-        Vector3 point2 = planePlaneIntersection(planes[0], planes[3]);
-        Vector3 point3 = planePlaneIntersection(planes[1], planes[3]);
-        Vector3 point4 = planePlaneIntersection(planes[1], planes[2]);
+        Vector3 point1 = PlanePlaneIntersection(planes[0], planes[2]);
+        Vector3 point2 = PlanePlaneIntersection(planes[0], planes[3]);
+        Vector3 point3 = PlanePlaneIntersection(planes[1], planes[3]);
+        Vector3 point4 = PlanePlaneIntersection(planes[1], planes[2]);
         Vector3[] points = new Vector3[] { point1, point2, point3, point4, point1 };
 
         // Create colliders at the edge of screen
@@ -162,7 +162,7 @@ public class CreatePOIIndicator : MonoBehaviour
     /// <param name="plane1"></param>
     /// <param name="plane2"></param>
     /// <returns></returns>
-    Vector3 planePlaneIntersection(Plane plane1, Plane plane2)
+    Vector3 PlanePlaneIntersection(Plane plane1, Plane plane2)
     {
         Vector3 intersection = Vector3.zero;
         Vector3 linePoint = Vector3.zero;
