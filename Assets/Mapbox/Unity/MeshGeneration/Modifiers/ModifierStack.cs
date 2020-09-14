@@ -6,6 +6,7 @@ namespace Mapbox.Unity.MeshGeneration.Modifiers
 	using Mapbox.Unity.MeshGeneration.Components;
 	using System;
 	using Mapbox.Unity.Map;
+	using UnityEngine.UI;
 
 	public enum PositionTargetType
 	{
@@ -121,7 +122,6 @@ namespace Mapbox.Unity.MeshGeneration.Modifiers
 		{
 			_counter = feature.Points.Count;
 			_secondCounter = 0;
-
 			if (moveFeaturePositionTo != PositionTargetType.TileCenter)
 			{
 				_tempPoint = Constants.Math.Vector3Zero;

@@ -3,7 +3,20 @@ guid: 28acd20fd6d072544ba5a0afbd35097c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - foodIndicator: {fileID: 1175835146330399290, guid: c3ac33b2d0acb0f468d2486ac20e0021,
+      type: 3}
+  - parkIndicator: {fileID: 363039835670969055, guid: bd09299cc33ad104ba0e9f60f344509f,
+      type: 3}
+  - transportIndicator: {fileID: 3023700493476822050, guid: 4548ca5170c0a144791df0770a010f7c,
+      type: 3}
+  - artsIndicator: {fileID: 979278910122984669, guid: d8dbec0bc5ffec64a9b05a2126818e08,
+      type: 3}
+  - defaultIndicator: {fileID: 5241947166769568545, guid: 3516abef178987c4190db07b999b173a,
+      type: 3}
+  - screenCollider: {instanceID: 0}
+  - txtBox: {instanceID: 0}
+  - txtBox2: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

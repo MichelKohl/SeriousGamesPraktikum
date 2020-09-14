@@ -16,6 +16,9 @@ namespace Mapbox.Unity.MeshGeneration.Interfaces
 	using Mapbox.Map;
 	using UnityEngine.UIElements;
 	using Mapbox.Unity.MeshGeneration.Factories;
+	// used for real world location calculation
+	using Mapbox.VectorTile.ExtensionMethods;
+	using Mapbox.CheapRulerCs;
 
 	public class VectorLayerVisualizerProperties
 	{
@@ -29,6 +32,9 @@ namespace Mapbox.Unity.MeshGeneration.Interfaces
 
 	public class VectorLayerVisualizer : LayerVisualizerBase
 	{
+		private static Dictionary<string, double[]> pos;
+		private static Dictionary<string, Dictionary<string, object>> typeDict;
+
 		VectorSubLayerProperties _layerProperties;
 		public override VectorSubLayerProperties SubLayerProperties
 		{
@@ -647,6 +653,9 @@ namespace Mapbox.Unity.MeshGeneration.Interfaces
 
 		protected void Build(VectorFeatureUnity feature, UnityTile tile, GameObject parent)
 		{
+			pos = GameManager.poiLocaitonList;
+			typeDict = GameManager.poiTypeList;
+
 			if (feature.Properties.ContainsKey("extrude") && !Convert.ToBoolean(feature.Properties["extrude"]))
 				return;
 
@@ -655,6 +664,56 @@ namespace Mapbox.Unity.MeshGeneration.Interfaces
 			
 			//this will be improved in next version and will probably be replaced by filters
 			var styleSelectorKey = _layerProperties.coreOptions.sublayerName;
+
+			if (styleSelectorKey != "Buildings")
+			{
+				// Calculate Distance between POIs and do not spawn if too close to other POIs
+				var rangeBool = true;
+				var geom = feature.Data.Geometry<float>();
+				var location = feature.Data.GeometryAsWgs84((ulong)tile.CanonicalTileId.Z, (ulong)tile.CanonicalTileId.X, (ulong)tile.CanonicalTileId.Y)[0][0];
+				var locationDouble = new double[] { location.Lat, location.Lng };
+				var maxDistance = 150.0f;
+				CheapRuler cr = new CheapRuler(locationDouble[1], CheapRulerUnits.Meters);
+				// If spawned object is treasure only check distance to other treasures
+				if (styleSelectorKey == "Treasures")
+				{
+					foreach (KeyValuePair<string, double[]> position in pos)
+					{
+						if (position.Key.Contains("Treasures"))
+						{
+							if (cr.Distance(locationDouble, position.Value) < maxDistance && !pos.ContainsKey(styleSelectorKey + " - " + feature.Data.Id.ToString()))
+							{
+								rangeBool = false;
+								return;
+							}
+						}
+
+					}
+				}
+				// for POIs check only distance to POIs and not to treasures
+				else
+				{
+					foreach (KeyValuePair<string, double[]> position in pos)
+					{
+						if (!position.Key.Contains("Treasures"))
+						{
+							if (cr.Distance(locationDouble, position.Value) < maxDistance && !pos.ContainsKey(styleSelectorKey + " - " + feature.Data.Id.ToString()))
+							{
+								rangeBool = false;
+								return;
+							}
+						}
+
+					}
+				}
+				
+				// Add spawned POIs and treasures to dictionaries
+				if (rangeBool && feature.Data.Id.ToString() != null && !pos.ContainsKey(styleSelectorKey + " - " + feature.Data.Id.ToString()))
+				{
+					pos.Add(styleSelectorKey + " - " + feature.Data.Id.ToString(), locationDouble);
+					typeDict.Add(styleSelectorKey + " - " + feature.Data.Id.ToString(), feature.Properties);
+				}
+			}
 
 			var meshData = new MeshData();
 			meshData.TileRect = tile.Rect;
@@ -697,6 +756,28 @@ namespace Mapbox.Unity.MeshGeneration.Interfaces
 			{
 				foreach (var item in _idPool[tile])
 				{
+					// remove pois from all dictionaries and delete offscreen indicators
+					var removePoi = false;
+					var removePoiKey = "";
+					foreach (var poiKey in pos.Keys)
+					{
+						if (poiKey.Contains(item.ToString()))
+						{
+							removePoi = true;
+							removePoiKey = poiKey;
+							break;
+						}
+					}
+					if (removePoi)
+					{
+						pos.Remove(removePoiKey);
+						typeDict.Remove(removePoiKey);
+						if (GameObject.Find("ind" + item.ToString()))
+						{
+							Destroy(GameObject.Find("ind" + item.ToString()));
+						}
+					}
+					
 					_activeIds.Remove(item);
 				}
 				_idPool[tile].Clear();

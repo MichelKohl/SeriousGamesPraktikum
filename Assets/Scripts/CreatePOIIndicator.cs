@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// class to create indicators for point of interests which are in proximity to player but are offscreen
@@ -38,7 +39,7 @@ public class CreatePOIIndicator : MonoBehaviour
             if (GameObject.Find("Edge" + i) == null)
             {
                 edge = new GameObject("Edge" + i).AddComponent<BoxCollider>();
-                GameObject.Find("Edge" + i).layer = 8;
+                GameObject.Find("Edge" + i).layer = 9;
                 GameObject.Find("Edge" + i).transform.parent = screenCollider.transform;
             }
             else
@@ -57,16 +58,16 @@ public class CreatePOIIndicator : MonoBehaviour
             string[] splitArray = poiName.Split(char.Parse("-"));
             string category = splitArray[0].Trim();
             string name = splitArray[1].Trim();
-            
             if (GameObject.Find(name) && !category.Contains("Treasures"))
             {
                 GameObject go = GameObject.Find(name);
-                int layerMask = 1 << 8;
+                int layerMask = 1 << 9;
                 RaycastHit hit;
                 GameObject player = GameObject.FindGameObjectWithTag("Player");
                 Vector3 direction = (player.transform.position - go.transform.position).normalized;
                 if (Physics.Raycast(go.transform.position, transform.TransformDirection(direction), out hit, Mathf.Infinity, layerMask))
                 {
+                    
                     if (!ContainsPoint(points, go.transform.position))
                     {
                         Debug.DrawRay(go.transform.position, transform.TransformDirection(direction) * hit.distance, Color.red);
