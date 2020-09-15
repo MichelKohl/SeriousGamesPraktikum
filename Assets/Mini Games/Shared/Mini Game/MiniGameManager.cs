@@ -22,7 +22,7 @@ public class MiniGameManager : AchievementManager
     {
         base.Start();
 
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
 
         state = GameState.Start;
         initGameState = true;
@@ -124,6 +124,7 @@ public class MiniGameManager : AchievementManager
         GameManager.INSTANCE.profile.SetCoins((int)GameManager.INSTANCE.profile.GetCoins() + (Score / 20));
         // save progress
         GameManager.INSTANCE.SaveProfile(GameManager.INSTANCE.profile);
+        PlayerPrefs.DeleteAll();
         SceneManager.LoadScene("Scenes/DefaultScreen");
     }
     /// <summary>
