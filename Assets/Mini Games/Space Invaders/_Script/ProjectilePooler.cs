@@ -17,6 +17,34 @@ public class ProjectilePooler : MonoBehaviour
     public void ActivateProjectile(Transform shooter = null)
     {
         if(shooter != null) shooterTransform = shooter;
+
+        Quaternion rotation;
+        Projectile newProjectile;
+
+        if(pooler.Count == 0)
+        {
+            rotation = isEnemyPooler ? Quaternion.Euler(0, 0, 180) : shooterTransform.rotation;
+            newProjectile = Instantiate(prefab, shooterTransform.position, rotation, transform);
+            newProjectile.Init(this);
+            newProjectile.Activate(shooterTransform.position);
+            pooler.Add(newProjectile);
+            return;
+        }
+        foreach (Projectile projectile in pooler)
+        {
+            if (!projectile.gameObject.activeSelf)
+            {
+                projectile.gameObject.SetActive(true);
+                projectile.Activate(shooterTransform.position);
+                return;
+            }
+        }
+        rotation = isEnemyPooler ? Quaternion.Euler(0, 0, 180) : shooterTransform.rotation;
+        newProjectile = Instantiate(prefab, shooterTransform.position, rotation, transform);
+        newProjectile.Init(this);
+        newProjectile.Activate(shooterTransform.position);
+        pooler.Add(newProjectile);
+        /*
         try
         {
             Projectile projectile = pooler[0];
@@ -34,7 +62,7 @@ public class ProjectilePooler : MonoBehaviour
             Projectile newProjectile = Instantiate(prefab, shooterTransform.position, rotation, transform);
             newProjectile.Init(this);
             newProjectile.Activate(shooterTransform.position);
-        }
+        }*/
     }
     /// <summary>
     /// Adds a projectile to pool of deactivated projectiles.

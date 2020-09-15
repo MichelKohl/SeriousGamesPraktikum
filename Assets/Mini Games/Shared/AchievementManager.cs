@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+
 public class AchievementManager : MonoBehaviour
 {
     [SerializeField] protected string gameName = "Location Based Game";
