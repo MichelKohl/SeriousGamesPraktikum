@@ -40,7 +40,7 @@ public class LocationCalculation : MonoBehaviour
         //Reverse Geocoding sets the location tag of the profile view.
         //Note that Mapbox offers 100,000 request per month for free
         //Such a reverse geocoding request will be done on every start of the app and every 6 Minutes 
-        InvokeRepeating("RequestCity", 1f, 600f);
+        InvokeRepeating("RequestCity", 3f, 600f);
     }
 
     private void Update()
