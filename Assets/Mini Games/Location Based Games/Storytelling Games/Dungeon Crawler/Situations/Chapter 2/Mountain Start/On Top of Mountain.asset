@@ -16,7 +16,10 @@ MonoBehaviour:
   camRotation: {x: 43.568, y: 270.761, z: 0}
   spotlightRange: 20
   flushDeadEnemies: 0
+  important: 0
   description: "You see the goblin camp. \nTwo goblins are leaving."
+  activateGameObject: 01000000020000000300000004000000050000000600000000000000
+  deactivateGameObject: 
   options:
   - description: Sneak By Them
     nextSituationID: 1
@@ -25,6 +28,8 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     changeChapter: 0
     nextChapter: 0
     startSituation: 0
@@ -36,6 +41,8 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     changeChapter: 0
     nextChapter: 0
     startSituation: 0
@@ -47,6 +54,8 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     changeChapter: 0
     nextChapter: 0
     startSituation: 0

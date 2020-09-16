@@ -16,7 +16,10 @@ MonoBehaviour:
   camRotation: {x: 0, y: 250.228, z: 0}
   spotlightRange: 20
   flushDeadEnemies: 0
+  important: 0
   description: You successfully sneaked by.
+  activateGameObject: 
+  deactivateGameObject: 06000000
   options:
   - description: Enter Camp
     nextSituationID: 3
@@ -25,6 +28,8 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     changeChapter: 0
     nextChapter: 0
     startSituation: 0

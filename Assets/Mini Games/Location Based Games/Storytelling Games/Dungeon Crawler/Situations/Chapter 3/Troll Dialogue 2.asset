@@ -15,8 +15,11 @@ MonoBehaviour:
   camPosition: {x: 0, y: 0, z: 0}
   camRotation: {x: 0, y: 0, z: 0}
   spotlightRange: 20
-  flushDeadEnemies: 0
+  flushDeadEnemies: 1
+  important: 0
   description: We not stupid! You stupid!
+  activateGameObject: 
+  deactivateGameObject: 
   dialogueStart: 0
   options:
   - description: Fight
@@ -26,6 +29,8 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     startBattle: 1
   enemies: []
   enemyPosition: []

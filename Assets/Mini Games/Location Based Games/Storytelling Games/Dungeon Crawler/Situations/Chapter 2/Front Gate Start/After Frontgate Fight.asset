@@ -16,28 +16,39 @@ MonoBehaviour:
   camRotation: {x: 0, y: 89.87701, z: 0}
   spotlightRange: 20
   flushDeadEnemies: 0
+  important: 0
   description: 'You defeated the guard, but alerted
 
     the rest of the goblins.'
+  activateGameObject: 
+  deactivateGameObject: 
   options:
-  - description: Go to camp center (truth)
+  - description: Go to camp center
     nextSituationID: 9
     strRequirement: 0
     dexRequirement: 0
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers:
+    - chapter: 2
+      situation: 16
     changeChapter: 0
     nextChapter: 0
     startSituation: 0
     conditionDistance: 0
-  - description: Go to camp center (lie)
+  - description: Go to camp center
     nextSituationID: 8
     strRequirement: 0
     dexRequirement: 0
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks:
+    - chapter: 2
+      situation: 16
+    enablers: []
     changeChapter: 0
     nextChapter: 0
     startSituation: 0
@@ -49,6 +60,8 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     changeChapter: 0
     nextChapter: 0
     startSituation: 0
@@ -60,6 +73,8 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     changeChapter: 0
     nextChapter: 0
     startSituation: 0

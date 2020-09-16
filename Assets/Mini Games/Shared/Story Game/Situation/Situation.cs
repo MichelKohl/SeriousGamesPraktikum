@@ -32,16 +32,12 @@ public class DecisionInfo
 
     public bool IsBlocked(List<PlotPoint> playerPath)
     {
-        try
-        {
-            foreach (PlotPoint block in blocks)
-                if (playerPath.Contains(block))
-                    return true;
-            foreach (PlotPoint enabler in enablers)
-                if (!playerPath.Contains(enabler))
-                    return true;
-        }
-        catch (NullReferenceException) { }
+        foreach (PlotPoint block in blocks)
+            if (playerPath.Contains(block))
+                return true;
+        foreach (PlotPoint enabler in enablers)
+            if (!playerPath.Contains(enabler))
+                return true;
         return false;
     }
 }

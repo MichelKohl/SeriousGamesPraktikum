@@ -16,7 +16,10 @@ MonoBehaviour:
   camRotation: {x: 0, y: 0, z: 0}
   spotlightRange: 20
   flushDeadEnemies: 0
+  important: 0
   description: What about?
+  activateGameObject: 
+  deactivateGameObject: 
   dialogueStart: 0
   options:
   - description: The things you stole.
@@ -26,6 +29,10 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks:
+    - chapter: 2
+      situation: 16
+    enablers: []
     startBattle: 0
   - description: The reason, why you raiding.
     nextSituationID: 19
@@ -34,22 +41,34 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks:
+    - chapter: 2
+      situation: 15
+    enablers: []
     startBattle: 0
-  - description: The things you stole (truth -> goblin)
+  - description: The things you stole
     nextSituationID: 20
     strRequirement: 0
     dexRequirement: 0
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers:
+    - chapter: 2
+      situation: 16
     startBattle: 0
-  - description: The reason, why you raiding. (truth -> goblin)
+  - description: The reason, why you raid.
     nextSituationID: 20
     strRequirement: 0
     dexRequirement: 0
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers:
+    - chapter: 2
+      situation: 16
     startBattle: 0
   enemies: []
   enemyPosition: []

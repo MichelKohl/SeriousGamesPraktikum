@@ -15,10 +15,13 @@ MonoBehaviour:
   camPosition: {x: 272.43, y: 5.29, z: 247.43}
   camRotation: {x: 0, y: 228.477, z: 0}
   spotlightRange: 20
-  flushDeadEnemies: 0
+  flushDeadEnemies: 1
+  important: 0
   description: '
 
 '
+  activateGameObject: 
+  deactivateGameObject: 02000000
   dialogueStart: 1
   options:
   - description: Fight
@@ -28,6 +31,8 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     startBattle: 1
   enemies:
   - {fileID: 4746678528496236267, guid: 81b0c467e8299437e83f4a2d745ed4f7, type: 3}

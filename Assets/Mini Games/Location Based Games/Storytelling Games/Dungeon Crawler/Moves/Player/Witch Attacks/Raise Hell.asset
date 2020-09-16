@@ -42,7 +42,7 @@ MonoBehaviour:
   status: 3
   timesStatusApplied: 1
   statusProbability: 0.1
-  multipleHits: 0
+  multipleHits: 1
   type: 2
   projectile:
   - {fileID: 5838905162849911863, guid: 7567463367868436d83ee225710de57c, type: 3}

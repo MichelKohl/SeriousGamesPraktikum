@@ -16,7 +16,10 @@ MonoBehaviour:
   camRotation: {x: 0, y: 330.756, z: 0}
   spotlightRange: 50
   flushDeadEnemies: 1
+  important: 0
   description: You hear little steps.
+  activateGameObject: 
+  deactivateGameObject: 
   options:
   - description: Ignore & Go to next village
     nextSituationID: 4
@@ -25,6 +28,10 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks:
+    - chapter: 2
+      situation: 1
+    enablers: []
     changeChapter: 0
     nextChapter: 0
     startSituation: 0
@@ -36,6 +43,8 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     changeChapter: 0
     nextChapter: 0
     startSituation: 0

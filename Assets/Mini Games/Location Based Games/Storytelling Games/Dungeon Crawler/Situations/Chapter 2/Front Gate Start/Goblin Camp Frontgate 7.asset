@@ -15,17 +15,22 @@ MonoBehaviour:
   camPosition: {x: 0, y: 0, z: 0}
   camRotation: {x: 0, y: 0, z: 0}
   spotlightRange: 20
-  flushDeadEnemies: 0
+  flushDeadEnemies: 1
+  important: 0
   description: NEVER!
+  activateGameObject: 
+  deactivateGameObject: 
   dialogueStart: 0
   options:
   - description: Fight
-    nextSituationID: 9
+    nextSituationID: 16
     strRequirement: 0
     dexRequirement: 0
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     startBattle: 1
   enemies: []
   enemyPosition: []

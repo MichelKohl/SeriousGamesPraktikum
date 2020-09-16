@@ -20291,7 +20291,14 @@ MonoBehaviour:
   turnOffWalkingRequirement: 1
   textWhenWalking: {fileID: 35032541}
   skyboxRotationSpeed: 0.2
-  toggleableObjects: []
+  toggleableObjects:
+  - {fileID: 990182923}
+  - {fileID: 358045462}
+  - {fileID: 809702681}
+  - {fileID: 635412234}
+  - {fileID: 672051607}
+  - {fileID: 600391391}
+  - {fileID: 286889319}
 --- !u!4 &1585297040
 Transform:
   m_ObjectHideFlags: 0

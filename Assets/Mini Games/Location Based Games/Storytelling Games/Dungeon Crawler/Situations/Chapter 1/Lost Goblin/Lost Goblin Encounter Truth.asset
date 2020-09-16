@@ -18,6 +18,8 @@ MonoBehaviour:
   flushDeadEnemies: 0
   important: 1
   description: Thank you.
+  activateGameObject: 
+  deactivateGameObject: 
   options:
   - description: Head towards goblin camp
     nextSituationID: 5
@@ -26,6 +28,8 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     changeChapter: 0
     nextChapter: 0
     startSituation: 0
@@ -37,6 +41,10 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks:
+    - chapter: 2
+      situation: 1
+    enablers: []
     changeChapter: 0
     nextChapter: 0
     startSituation: 0

@@ -15,9 +15,11 @@ MonoBehaviour:
   camPosition: {x: 371.93, y: 16.32, z: 88.83}
   camRotation: {x: 0, y: 90, z: 0}
   spotlightRange: 20
-  flushDeadEnemies: 0
+  flushDeadEnemies: 1
   important: 0
   description: yOu WoN't StOp Me!
+  activateGameObject: 
+  deactivateGameObject: 
   dialogueStart: 1
   options:
   - description: Fight
@@ -27,6 +29,8 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     startBattle: 1
   enemies:
   - {fileID: 496783800356677502, guid: d850e2cea34704677b7d771f583884d3, type: 3}

@@ -16,18 +16,23 @@ MonoBehaviour:
   camRotation: {x: 0, y: 417, z: 0}
   spotlightRange: 50
   flushDeadEnemies: 1
+  important: 0
   description: "You made it through the forest and \nyou are heading towards the
     goblin camp."
+  activateGameObject: 
+  deactivateGameObject: 
   options:
-  - description: Climb Mountain to spy on camp
+  - description: Climb Mountain
     nextSituationID: 0
     strRequirement: 5
     dexRequirement: 0
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     changeChapter: 1
-    nextChapter: 2
+    nextChapter: 3
     startSituation: 0
     conditionDistance: 0
   - description: Go To Frontgate of Camp
@@ -37,7 +42,9 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     changeChapter: 1
-    nextChapter: 2
-    startSituation: 0
+    nextChapter: 3
+    startSituation: 17
     conditionDistance: 0

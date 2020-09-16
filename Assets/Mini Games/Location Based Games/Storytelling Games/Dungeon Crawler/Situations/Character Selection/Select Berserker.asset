@@ -18,6 +18,8 @@ MonoBehaviour:
   flushDeadEnemies: 0
   important: 0
   description: Strong and fast.
+  activateGameObject: 
+  deactivateGameObject: 
   options:
   - description: Choose
     nextSituationID: 0
@@ -26,9 +28,11 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     changeChapter: 1
-    nextChapter: 2
-    startSituation: 0
+    nextChapter: 3
+    startSituation: 17
     conditionDistance: 0
   - description: The Knight
     nextSituationID: 0
@@ -37,6 +41,8 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     changeChapter: 0
     nextChapter: 0
     startSituation: 0
@@ -48,6 +54,8 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     changeChapter: 0
     nextChapter: 0
     startSituation: 0
@@ -59,6 +67,8 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     changeChapter: 0
     nextChapter: 0
     startSituation: 0

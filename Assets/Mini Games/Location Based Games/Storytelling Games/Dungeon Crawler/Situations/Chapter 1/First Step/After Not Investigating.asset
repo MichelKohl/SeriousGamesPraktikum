@@ -16,7 +16,10 @@ MonoBehaviour:
   camRotation: {x: 0, y: 89.08601, z: 0}
   spotlightRange: 20
   flushDeadEnemies: 0
+  important: 0
   description: You sense that you are not alone.
+  activateGameObject: 
+  deactivateGameObject: 
   options:
   - description: Go to nearby village
     nextSituationID: 4
@@ -25,6 +28,10 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks:
+    - chapter: 2
+      situation: 1
+    enablers: []
     changeChapter: 0
     nextChapter: 0
     startSituation: 0
@@ -36,6 +43,8 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     changeChapter: 0
     nextChapter: 0
     startSituation: 0

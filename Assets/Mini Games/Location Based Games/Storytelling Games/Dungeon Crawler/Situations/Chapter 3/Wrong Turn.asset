@@ -15,7 +15,9 @@ MonoBehaviour:
   camPosition: {x: 370.3, y: 3.16, z: 87.63}
   camRotation: {x: 0, y: 114.682, z: 0}
   spotlightRange: 20
-  flushDeadEnemies: 1
+  flushDeadEnemies: 0
   important: 0
   description: You chose poorly and died.
+  activateGameObject: 
+  deactivateGameObject: 
   vfx: {fileID: 0}

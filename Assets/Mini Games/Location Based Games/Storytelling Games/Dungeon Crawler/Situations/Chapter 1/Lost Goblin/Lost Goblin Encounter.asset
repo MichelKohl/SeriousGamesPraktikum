@@ -16,7 +16,10 @@ MonoBehaviour:
   camRotation: {x: 0, y: 379.208, z: 0}
   spotlightRange: 20
   flushDeadEnemies: 0
+  important: 1
   description: A goblin was hiding behind a tree.
+  activateGameObject: 
+  deactivateGameObject: 
   dialogueStart: 1
   options:
   - description: Wow, you are quite ugly!
@@ -26,6 +29,8 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     startBattle: 0
   - description: Are you lost?
     nextSituationID: 15
@@ -34,6 +39,8 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     startBattle: 0
   - description: You are going to pay!
     nextSituationID: 13
@@ -42,6 +49,8 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     startBattle: 1
   enemies:
   - {fileID: 4746678528496236267, guid: 81b0c467e8299437e83f4a2d745ed4f7, type: 3}

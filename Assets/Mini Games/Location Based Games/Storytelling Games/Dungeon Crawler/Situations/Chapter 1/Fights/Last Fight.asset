@@ -15,9 +15,11 @@ MonoBehaviour:
   camPosition: {x: 63.2, y: 4.43, z: 100.2}
   camRotation: {x: 0, y: 504.03, z: 0}
   spotlightRange: 50
-  flushDeadEnemies: 0
+  flushDeadEnemies: 1
   important: 0
   description: Three wolves are in front of you.
+  activateGameObject: 
+  deactivateGameObject: 
   dialogueStart: 1
   options:
   - description: Fight
@@ -27,6 +29,8 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     startBattle: 1
   enemies:
   - {fileID: 3816733659319154455, guid: 57665b2c1f6534f8baf7e29b39bdc18b, type: 3}

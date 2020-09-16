@@ -41,7 +41,9 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
-    blocks: []
+    blocks:
+    - chapter: 2
+      situation: 1
     enablers: []
     changeChapter: 0
     nextChapter: 0
