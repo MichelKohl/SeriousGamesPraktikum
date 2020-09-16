@@ -1080,6 +1080,7 @@ MonoBehaviour:
   hitboxes:
   - {fileID: 263350086516600524}
   - {fileID: 629105257034218654}
+  hurtbox: {fileID: 7414448146763636680}
   spellSpawnTransforms:
   - {fileID: 1845489839953025014}
   poisonDamageRecieved: 3
@@ -1089,18 +1090,18 @@ MonoBehaviour:
   poisonFX: {fileID: 4773001518935119339}
   burnFX: {fileID: 5586868672902618363}
   projectileTarget: {fileID: 1845489839953025014}
-  baseProbabilityOfBlock: 0
+  baseProbabilityOfBlock: 0.3
   testAttacks: 0
-  hurtbox: {fileID: 7414448146763636680}
   strength: 1
   dexterity: 1
   intelligence: 1
   faith: 1
   luck: 1
-  damageReduction: 0
+  damageReduction: 0.1
   xpForNextLvlUp: 100
   nextXpMultiplier: 1.5
   allPerks: {fileID: 11400000, guid: f14bb20e623d042c59cfc009621df3ce, type: 2}
+  unlockedPerks: 
   skillPoints: 10
 --- !u!54 &5655035007010921423
 Rigidbody:

@@ -174,7 +174,10 @@ public class AchievementManager : MonoBehaviour
     {
         observableBools[name] = value;
     }
-
+    /// <summary>
+    /// instantiates a small pop up, when an achievement is achieved.
+    /// </summary>
+    /// <param name="achievement">achievement that pops up</param>
     private void AchievementPopUp(Achievement achievement)
     {
         Debug.Log($"Trophy: {achievement.achievementName} earned.");

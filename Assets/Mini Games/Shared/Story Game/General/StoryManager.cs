@@ -5,11 +5,14 @@ using System.Collections.Generic;
 using System;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Handles everything story related.
+/// </summary>
 public class StoryManager : MonoBehaviour
 {
-    [SerializeField] private Cam cam;
-    [SerializeField] private StarterClass[] starterClasses;
-    [SerializeField] private DCPlayer[] starterModels;
+    [SerializeField] private Cam cam;                       
+    [SerializeField] private StarterClass[] starterClasses; 
+    [SerializeField] private DCPlayer[] starterModels;      
     [SerializeField] private Lifebar playerLifebar;
     [SerializeField] private int startChapter = 0;
     [SerializeField] private int startSituationID = 0;
@@ -27,7 +30,7 @@ public class StoryManager : MonoBehaviour
     [SerializeField] private GameObject[] toggleableObjects;
 
     private DCPlayer player;
-    private int classID = -1;
+    private int classID = -1;       
     private int currentSituationID = 0;
     private int currentChapterID = 0;
     private GameManager manager;
@@ -37,13 +40,23 @@ public class StoryManager : MonoBehaviour
     private List<PlotPoint> pathPlayerTook = new List<PlotPoint>();
     private bool startSet = false;
 
+    /// <summary>
+    /// changes from one plot point to another.
+    /// </summary>
+    /// <param name="toID"> id of next plot point</param>
+    /// <param name="distanceToWalk"> distance, that needs to be traveled to reach the next point of the story</param>
+    /// <param name="startBattle">true, if battle should occure</param>
     public void ChangeSituation(int toID = 0, double distanceToWalk = 0, bool startBattle = false)
     {
         if (startBattle) battleManager.StartBattle();
 
         StartCoroutine(WaitTillDistanceWalked(toID, distanceToWalk, startBattle));
     }
-
+    /// <summary>
+    /// changes from one chapter to another.
+    /// </summary>
+    /// <param name="toChapter">chapter id of next chapter</param>
+    /// <param name="startSituation">id of plot point starting the new chapter</param>
     public void ChangeChapter(int toChapter, int startSituation = 0)
     {
         currentChapterID = toChapter;
@@ -63,6 +76,13 @@ public class StoryManager : MonoBehaviour
         if (manager == null) manager = GameManager.INSTANCE;
     }
 
+    /// <summary>
+    /// method, that handles current situation 
+    /// </summary>
+    /// <param name="id">id of current situation</param>
+    /// <param name="distanceToWalk">distance that needs to be walked</param>
+    /// <param name="startBattle">true, if battle should start</param>
+    /// <returns></returns>
     private IEnumerator WaitTillDistanceWalked(int id, double distanceToWalk,
         bool startBattle)
     {
@@ -181,7 +201,9 @@ public class StoryManager : MonoBehaviour
     {
         return player;
     }
-
+    /// <summary>
+    /// resets gameplay options
+    /// </summary>
     public void ResetDecisions()
     {
         decisionsPanel.Flush();
@@ -260,7 +282,10 @@ public class StoryManager : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
-
+    /// <summary>
+    /// instantiates gameplay option (buttons) for possible next plot points
+    /// </summary>
+    /// <param name="info">information needed for gameplay option instantiation</param>
     private void InstantiateDecision(NextPoint info)
     {
         if ((player == null || player.StatsCheckOut(info.strRequirement, info.dexRequirement,
@@ -274,7 +299,10 @@ public class StoryManager : MonoBehaviour
                 Instantiate(decisionPrefab, decisionsPanel.transform).
                     Init(info.description, info.nextSituationID, info.conditionDistance);
     }
-
+    /// <summary>
+    /// instantiates gameplay option (buttons) for possible next plot points
+    /// </summary>
+    /// <param name="info">information needed for gameplay option instantiation</param>
     private void InstantiateDecision(DialogueOption info)
     {
         if (player.StatsCheckOut(info.strRequirement, info.dexRequirement,
