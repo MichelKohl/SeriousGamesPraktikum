@@ -64,3 +64,18 @@ MonoBehaviour:
     nextChapter: 0
     startSituation: 0
     conditionDistance: 0
+  - description: Flee
+    nextSituationID: 25
+    strRequirement: 0
+    dexRequirement: 0
+    intRequirement: 0
+    fthRequirement: 0
+    lckRequirement: 0
+    blocks:
+    - chapter: 2
+      situation: 16
+    enablers: []
+    changeChapter: 0
+    nextChapter: 0
+    startSituation: 0
+    conditionDistance: 0
