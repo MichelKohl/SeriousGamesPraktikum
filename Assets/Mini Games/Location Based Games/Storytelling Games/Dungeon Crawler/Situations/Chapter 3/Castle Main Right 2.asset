@@ -12,11 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f8ad97bc0ae4352b3c1e638b5c1f39, type: 3}
   m_Name: Castle Main Right 2
   m_EditorClassIdentifier: 
-  camPosition: {x: 364.55, y: 3.16, z: 66.63}
-  camRotation: {x: 0, y: 114.214, z: 0}
+  camPosition: {x: 371.53, y: 3.16, z: 62.54}
+  camRotation: {x: 0, y: 104.722, z: 0}
   spotlightRange: 20
-  flushDeadEnemies: 0
+  flushDeadEnemies: 1
+  important: 0
   description: REEEEEEE!!!
+  activateGameObject: 
+  deactivateGameObject: 
   dialogueStart: 1
   options:
   - description: Fight
@@ -26,10 +29,12 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     startBattle: 1
   enemies:
   - {fileID: 5469584985690719054, guid: 2c83233e70e4b4c00a37cfbda2237f67, type: 3}
   enemyPosition:
-  - {x: 374.0951, y: 0.01350975, z: 62.93691}
+  - {x: 383.2026, y: 0.01350975, z: 59.49769}
   enemyRotation:
-  - {x: 0, y: -67.456, z: 0}
+  - {x: 0, y: -73.277, z: 0}

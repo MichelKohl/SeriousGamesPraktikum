@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5209a272026e849a6b269392eebfbdee, type: 3}
-  m_Name: Leave Camp
+  m_Name: Flee
   m_EditorClassIdentifier: 
   camPosition: {x: 284.7, y: 5.29, z: 240.3}
   camRotation: {x: 0, y: 147.187, z: 0}
   spotlightRange: 20
-  flushDeadEnemies: 0
+  flushDeadEnemies: 1
   important: 0
-  description: You left the camp unnoticed.
+  description: You fled.
   activateGameObject: 
   deactivateGameObject: 
   options:
-  - description: Go to castle
+  - description: Go to the castle
     nextSituationID: 0
     strRequirement: 0
     dexRequirement: 0

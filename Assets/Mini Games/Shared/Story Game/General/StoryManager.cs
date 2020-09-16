@@ -70,13 +70,13 @@ public class StoryManager : MonoBehaviour
             yield return new WaitUntil(() => battleManager.BattleOver);
         // do some "walking"
 
-        if (!turnOffWalkingRequirement)
+        if (!turnOffWalkingRequirement && distanceToWalk > 0)
         {
             textWhenWalking.gameObject.SetActive(true);
             decisionsPanel.gameObject.SetActive(false);
             currentSituation.gameObject.SetActive(false);
 
-            if(!startSet && manager != null)
+            if(!startSet)
             {
                 textWhenWalking.SetStart(manager.profile.GetDistanceTraveled(), distanceToWalk);
                 startSet = true;

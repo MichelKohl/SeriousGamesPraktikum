@@ -22,12 +22,8 @@ public class WalkingText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         if (GameManager.INSTANCE != null)
-        {
-            text.text = $"You need to walk {distanceToWalk - Distance} kilometers to reach next part of the story.";
-        }
-        
+            text.text = $"You need to walk {(distanceToWalk - Distance) * 1000}m to reach next part of the story.";
     }
 
     public void SetStart(double startDistance, double distanceToWalk)
