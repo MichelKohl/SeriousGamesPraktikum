@@ -35,6 +35,8 @@ public class Cam : MonoBehaviour
     {
         firstPersonPos = transform.position;
         firstPersonQuat = transform.rotation;
+
+        ChangeToStartMenuCam();
     }
 
     // Update is called once per frame

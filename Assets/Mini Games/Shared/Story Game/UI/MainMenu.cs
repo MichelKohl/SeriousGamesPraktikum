@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
@@ -13,6 +15,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject mainMenuButton;
     [SerializeField] private GameObject mainMenuUI;
     [SerializeField] private GameObject gameplayUI;
+    [SerializeField] private GameObject startMenuUI;
     [SerializeField] private GameObject pedestal;
     [SerializeField] private SkillButton skillPrefab;
 
@@ -39,6 +42,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private TextMeshProUGUI moveInfo;
     [SerializeField] private TextMeshProUGUI blockEnable;
 
+    [SerializeField] private Button continueButton;
+
     private DCPlayer player;
     private Vector3 currentPlayerPosition;
     private Vector3 currentCamPosition;
@@ -60,6 +65,8 @@ public class MainMenu : MonoBehaviour
         mainMenuUI.SetActive(false);
         unlockButton.gameObject.SetActive(false);
         mainMenuButton.SetActive(false);
+
+        ChangeToStartMenu();
     }
 
     private void Update()
@@ -77,6 +84,13 @@ public class MainMenu : MonoBehaviour
         classLabel.text = player.GetClass();
         levelLabel.text = $"{player.GetLevel()}";
         skillLabel.text = $"{player.GetSkillPoints()}";
+    }
+
+    public void ChangeToStartMenu()
+    {
+        Profile profile = GameManager.INSTANCE.profile;
+        StoryGameSave save = profile.GetStoryGameSave();
+        if (!save.newGame) continueButton.gameObject.SetActive(true);
     }
 
     public void ChangeToMainMenu()
@@ -121,23 +135,39 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    public void DisableStartMenu()
+    {
+        startMenuUI.gameObject.SetActive(false);
+    }
+
+    public void EnableStartMenu()
+    {
+        startMenuUI.gameObject.SetActive(true);
+    }
+
     public void ChangeBackToGameplay()
     {
         if (player == null)
             player = storyManager.GetPlayerCharacter();
+        try
+        {
+            player.transform.position = currentPlayerPosition;
+            player.transform.rotation = currentPlayerRotation;
+            player.gameObject.SetActive(false);
+            player.ResetFighterValues();
+        }
+        catch (Exception) { }
 
-        player.transform.position = currentPlayerPosition;
-        player.transform.rotation = currentPlayerRotation;
+
         cam.transform.position = currentCamPosition;
         cam.transform.rotation = currentCamRotation;
 
-        player.gameObject.SetActive(false);
         pedestal.SetActive(false);
 
         gameplayUI.SetActive(true);
         mainMenuUI.SetActive(false);
 
-        player.ResetFighterValues();
+        
         storyManager.ResetDecisions();
 
         cam.ResetSpotlight();

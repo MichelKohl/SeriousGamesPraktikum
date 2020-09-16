@@ -350,7 +350,7 @@ public class Fighter : MonoBehaviour
             perks.Add(perk);
     }
 
-    protected void AddPerk(Perk perk, int durationEnhancer = 0, bool preview = false)
+    public void AddPerk(Perk perk, int durationEnhancer = 0, bool preview = false)
     {
         perks.Add(perk);
         perkRoundsPassed[perk] = -durationEnhancer;
@@ -469,7 +469,7 @@ public class Fighter : MonoBehaviour
 }
 
 
-//
+[Serializable]
 public class Attributes
 {
     private float stamina = 100f;

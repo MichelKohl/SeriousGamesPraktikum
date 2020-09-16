@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5209a272026e849a6b269392eebfbdee, type: 3}
   m_Name: Lost Goblin Encounter 3
   m_EditorClassIdentifier: 
-  camPosition: {x: 0, y: 0, z: 0}
-  camRotation: {x: 0, y: 0, z: 0}
+  camPosition: {x: 48.49, y: 4.72, z: 110.74}
+  camRotation: {x: 0, y: 379.208, z: 0}
   spotlightRange: 20
   flushDeadEnemies: 0
   important: 1
   description: You defeated the goblin.
+  activateGameObject: 
+  deactivateGameObject: 
   options:
   - description: Head to goblin camp
     nextSituationID: 5
@@ -26,6 +28,8 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     changeChapter: 0
     nextChapter: 0
     startSituation: 0
@@ -37,6 +41,8 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     changeChapter: 0
     nextChapter: 0
     startSituation: 0

@@ -20,7 +20,9 @@ MonoBehaviour:
   description: 'And you will be even uglier when I am
 
     done with you!'
-  dialogueStart: 1
+  activateGameObject: 
+  deactivateGameObject: 
+  dialogueStart: 0
   options:
   - description: Fight
     nextSituationID: 13
@@ -29,6 +31,8 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     startBattle: 1
   enemies: []
   enemyPosition: []

@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 using System;
+using UnityEngine.SceneManagement;
 
 public class StoryManager : MonoBehaviour
 {
@@ -38,7 +39,6 @@ public class StoryManager : MonoBehaviour
     public void ChangeSituation(int toID = 0, double distanceToWalk = 0, bool startBattle = false)
     {
         if (startBattle) battleManager.StartBattle();
-        // TODO save coroutine in profile
 
         StartCoroutine(WaitTillDistanceWalked(toID, distanceToWalk, startBattle));
     }
@@ -53,8 +53,6 @@ public class StoryManager : MonoBehaviour
     {
         manager = GameManager.INSTANCE;
         battleManager = GetComponent<BattleManager>();
-        //StoryGameSave save = GameManager.INSTANCE.profile.GetStoryGameSave();
-        ChangeChapter(startChapter);
     }
 
     protected virtual void Update()
@@ -199,6 +197,37 @@ public class StoryManager : MonoBehaviour
         destroyOnSituationChange.Add(gameObject);
     }
 
+    public void ContinueGame()
+    {
+        StoryGameSave save = GameManager.INSTANCE.profile.GetStoryGameSave();
+
+       // if (save.newGame) return;
+
+        Debug.Log($"Loading current chapter: {save.currentChapter}, {save.currentSituation}");
+
+        pathPlayerTook = save.playerPath;
+
+        player = starterClasses[save.classID].Init(transform.parent, Vector3.zero, Quaternion.identity);
+        player.SetLevel(save.level);
+        player.SetAttributes(save.playerAttributes);
+        /*
+        foreach (Perk perk in save.perks)
+            player.AddPerk(perk);
+        */
+        player.SetUnlockedAttacks(save.unlockedAttacks);
+        player.SetStat(Stat.STR, save.strength);
+        player.SetStat(Stat.DEX, save.dexterity);
+        player.SetStat(Stat.INT, save.intelligence);
+        player.SetStat(Stat.FTH, save.faith);
+        player.SetStat(Stat.LCK, save.luck);
+        player.SetSkillPoints(save.skillPoints);
+
+        startChapter = save.currentChapter;
+        startSituationID = save.currentSituation;
+
+        ChangeChapter(save.currentChapter, save.currentSituation);
+    }
+
     public void StartNewGame()
     {
         ChangeChapter(startChapter);
@@ -206,30 +235,25 @@ public class StoryManager : MonoBehaviour
 
     public void SaveGame()
     {
-        Profile profile = GameManager.INSTANCE.profile;
-        StoryGameSave save = new StoryGameSave();
-        save.newGame = false;
-        save.classID = classID;
-        save.currentChapter = currentChapterID;
-        save.currentSituation = currentSituationID;
-        save.playerPath = pathPlayerTook;
-        save.playerAttributes = player.GetAttributes();
-        save.perks = player.GetAllPerks();
-        save.unlockedAttacks = player.GetUnlockedAttacks();
-        save.level = player.GetLevel();
-        save.skillPoints = player.GetSkillPoints();
-        save.strength = player.GetStat(Stat.STR).Item2;
-        save.dexterity = player.GetStat(Stat.DEX).Item2;
-        save.intelligence = player.GetStat(Stat.INT).Item2;
-        save.faith = player.GetStat(Stat.FTH).Item2;
-        save.luck = player.GetStat(Stat.LCK).Item2;
+        //save.perks = player.GetActivePerks().ToArray();
 
-        profile.SaveStoryGame(save);
+        Debug.Log($"Saving current situation: {currentChapterID}, {currentSituationID}");
+        GameManager.INSTANCE.profile.SaveStoryGame(classID, currentChapterID, currentSituationID, pathPlayerTook,
+            player.GetAttributes(), player.GetUnlockedAttacks(), player.GetLevel(), player.GetSkillPoints(),
+            player.GetStat(Stat.STR).Item2, player.GetStat(Stat.DEX).Item2, player.GetStat(Stat.INT).Item2,
+            player.GetStat(Stat.FTH).Item2, player.GetStat(Stat.LCK).Item2
+            );
     }
 
     public void ExitGame()
     {
+        SaveGame();
+        SceneManager.LoadScene(0);
+    }
 
+    public void ExitGameFromStartMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     private void InstantiateDecision(NextPoint info)
@@ -260,11 +284,12 @@ public class StoryManager : MonoBehaviour
 public class StoryGameSave
 {
     public bool newGame = true;
-    public int classID = 0;
-    public int currentChapter = 0;
-    public int currentSituation = 0;
+    public int classID;
+    public int currentChapter;
+    public int currentSituation;
     public List<PlotPoint> playerPath = new List<PlotPoint>();
     public int level;
+    public int xp;
     public int skillPoints;
     public int strength;
     public int dexterity;

@@ -85,9 +85,24 @@ public class Profile
         return storyGameSave;
     }
 
-    public void SaveStoryGame(StoryGameSave save)
+    public void SaveStoryGame(int classID, int currentChapterID, int currentSituationID,
+            List<PlotPoint> playerPath, Attributes attributes, bool[] unlockedAttacks, int playerLevel,
+            int skillPoints, int strength, int dexterity, int intelligence, int faith, int luck)
     {
-        storyGameSave = save;
+        storyGameSave.newGame = false;
+        storyGameSave.classID = classID;
+        storyGameSave.currentChapter = currentChapterID;
+        storyGameSave.currentSituation = currentSituationID;
+        storyGameSave.playerPath = playerPath;
+        storyGameSave.playerAttributes = attributes;
+        storyGameSave.unlockedAttacks = unlockedAttacks;
+        storyGameSave.level = playerLevel;
+        storyGameSave.skillPoints = skillPoints;
+        storyGameSave.strength = strength;
+        storyGameSave.dexterity = dexterity;
+        storyGameSave.intelligence = intelligence;
+        storyGameSave.faith = faith;
+        storyGameSave.luck = luck;
     }
 
     public void SetProfileName(string name) {
@@ -209,6 +224,9 @@ public AchievementStorage GetAchievements()
 }
 
 }
+
+
+
 public enum Profiletype {
     NONE = -1,
     LOCALRESIDENT = 0,

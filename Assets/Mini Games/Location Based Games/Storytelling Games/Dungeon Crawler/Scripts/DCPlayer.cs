@@ -167,6 +167,38 @@ public class DCPlayer : Fighter
         return 0;
     }
 
+    public void SetUnlockedAttacks(bool[] unlocked)
+    {
+        this.unlocked = unlocked;
+    }
+
+    public void SetSkillPoints(int points)
+    {
+        skillPoints = points;
+    }
+
+    public void SetStat(Stat stat, int value)
+    {
+        switch (stat)
+        {
+            case Stat.STR:
+                strength = value;
+                return;
+            case Stat.DEX:
+                dexterity = value;
+                return;
+            case Stat.INT:
+                intelligence = value;
+                return;
+            case Stat.FTH:
+                faith = value;
+                return;
+            case Stat.LCK:
+                luck = value;
+                return;
+        }
+    }
+
     public void SetCurrentAttack(Move attack)
     {
         currentMove = attack;
@@ -280,6 +312,21 @@ public class DCPlayer : Fighter
             level++;
         }
     }
+
+    public void SetAttributes(Attributes attributes)
+    {
+        this.attributes = attributes;
+    }
+
+    public void SetLevel(int level)
+    {
+        this.level = level;
+
+        for (int i = 0; i < level; i++)
+            xpForNextLvlUp = Mathf.RoundToInt(xpForNextLvlUp * nextXpMultiplier);
+    }
+
+   
 
     public void IncreaseStat(Stat stat)
     {
