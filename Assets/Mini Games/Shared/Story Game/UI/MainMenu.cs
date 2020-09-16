@@ -86,11 +86,12 @@ public class MainMenu : MonoBehaviour
         skillLabel.text = $"{player.GetSkillPoints()}";
     }
 
+
     public void ChangeToStartMenu()
     {
         Profile profile = GameManager.INSTANCE.profile;
         StoryGameSave save = profile.GetStoryGameSave();
-        if (!save.newGame) continueButton.gameObject.SetActive(true);
+        continueButton.gameObject.SetActive(!save.newGame);
     }
 
     public void ChangeToMainMenu()

@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2d6c18ec18d04f2d99e3fc3e88c5966, type: 3}
-  m_Name: New Achievement
+  m_Name: teleported twice
   m_EditorClassIdentifier: 
-  achievementName: Test02
-  trophyType: 0
-  description: Hello.
-  reward: 100
+  achievementName: Achievement
+  trophyType: 1
+  description: You used portal twice.
+  reward: 2
   conditions:
-  - variableName: score
+  - variableName: times teleported
     condition: 2
-    value: 0
+    value: 1
     varType: 2

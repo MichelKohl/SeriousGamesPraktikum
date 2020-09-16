@@ -31,8 +31,8 @@ MonoBehaviour:
     blocks: []
     enablers: []
     changeChapter: 1
-    nextChapter: 3
-    startSituation: 17
+    nextChapter: 2
+    startSituation: 0
     conditionDistance: 0
   - description: The Knight
     nextSituationID: 0

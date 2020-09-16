@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationName: three attack combo
   healthCost: 0
-  staminaCost: 30
-  manaCost: 0
+  staminaCost: 50
+  manaCost: 10
   particleEffects: []
   particleDelay: []
   particleDuration: []
@@ -28,7 +28,8 @@ MonoBehaviour:
   INT: 1
   FTH: 1
   LCK: 2
-  healthDamage: 5
+  probOfBlock: 0
+  healthDamage: 15
   staminaDamage: 0
   manaDamage: 0
   critMultiplier: 1.2

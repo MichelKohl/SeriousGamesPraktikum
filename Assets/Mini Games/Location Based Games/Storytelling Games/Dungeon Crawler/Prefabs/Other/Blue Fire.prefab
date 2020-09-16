@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100010, guid: ef20b219f31a7c94c98a1fb42c491ea6, type: 3}
       propertyPath: m_Name
-      value: L_Blue_fire
+      value: Blue Fire
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: ef20b219f31a7c94c98a1fb42c491ea6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -53,6 +53,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: ef20b219f31a7c94c98a1fb42c491ea6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200000, guid: ef20b219f31a7c94c98a1fb42c491ea6, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

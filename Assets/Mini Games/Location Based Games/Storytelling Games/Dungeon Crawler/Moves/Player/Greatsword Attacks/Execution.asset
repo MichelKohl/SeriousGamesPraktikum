@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationName: spell cast
   healthCost: 0
-  staminaCost: 60
-  manaCost: 0
+  staminaCost: 70
+  manaCost: 10
   particleEffects: []
   particleDelay: []
   particleDuration: []
@@ -28,6 +28,7 @@ MonoBehaviour:
   INT: 1
   FTH: 1
   LCK: 3
+  probOfBlock: 0
   healthDamage: 80
   staminaDamage: 20
   manaDamage: 20

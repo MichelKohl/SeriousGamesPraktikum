@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f8ad97bc0ae4352b3c1e638b5c1f39, type: 3}
   m_Name: Endboss
   m_EditorClassIdentifier: 
-  camPosition: {x: 371.93, y: 16.32, z: 88.83}
+  camPosition: {x: 377, y: 16.32, z: 88.83}
   camRotation: {x: 0, y: 90, z: 0}
   spotlightRange: 20
   flushDeadEnemies: 1
@@ -23,7 +23,7 @@ MonoBehaviour:
   dialogueStart: 1
   options:
   - description: Fight
-    nextSituationID: 0
+    nextSituationID: 13
     strRequirement: 0
     dexRequirement: 0
     intRequirement: 0
@@ -35,6 +35,6 @@ MonoBehaviour:
   enemies:
   - {fileID: 496783800356677502, guid: d850e2cea34704677b7d771f583884d3, type: 3}
   enemyPosition:
-  - {x: 382.4851, y: 13.20819, z: 88.80183}
+  - {x: 387, y: 13.20819, z: 88.80183}
   enemyRotation:
   - {x: 0, y: -90, z: 0}

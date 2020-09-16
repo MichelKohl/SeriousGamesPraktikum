@@ -15,7 +15,7 @@ MonoBehaviour:
   animationName: load spell release
   healthCost: 0
   staminaCost: 0
-  manaCost: 0
+  manaCost: 70
   particleEffects:
   - {fileID: 4106224336917688902, guid: 9e1ad4c2f2d8d414f9c2234ea6c4afbc, type: 3}
   - {fileID: 198000012777718758, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
@@ -35,13 +35,13 @@ MonoBehaviour:
   FTH: 2
   LCK: 1
   probOfBlock: 0
-  healthDamage: 0
+  healthDamage: 30
   staminaDamage: 0
   manaDamage: 0
   critMultiplier: 1.2
   status: 3
-  timesStatusApplied: 1
-  statusProbability: 0.1
+  timesStatusApplied: 2
+  statusProbability: 1
   multipleHits: 1
   type: 2
   projectile:

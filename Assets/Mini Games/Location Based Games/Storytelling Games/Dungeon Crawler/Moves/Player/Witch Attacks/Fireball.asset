@@ -15,7 +15,7 @@ MonoBehaviour:
   animationName: throw
   healthCost: 0
   staminaCost: 0
-  manaCost: 0
+  manaCost: 20
   particleEffects: []
   particleDelay: []
   particleDuration: []
@@ -29,7 +29,7 @@ MonoBehaviour:
   FTH: 2
   LCK: 1
   probOfBlock: 0
-  healthDamage: 0
+  healthDamage: 30
   staminaDamage: 0
   manaDamage: 0
   critMultiplier: 1.2

@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2564bb9e649694076b4d88a67a549d04, type: 3}
   m_Name: Won Game
   m_EditorClassIdentifier: 
-  camPosition: {x: 0, y: 0, z: 0}
-  camRotation: {x: 0, y: 0, z: 0}
+  camPosition: {x: 377, y: 16.32, z: 88.83}
+  camRotation: {x: 0, y: 90, z: 0}
   spotlightRange: 20
   flushDeadEnemies: 0
   important: 0
   description: 
-  death: 0
+  activateGameObject: 
+  deactivateGameObject: 
   vfx: {fileID: 0}

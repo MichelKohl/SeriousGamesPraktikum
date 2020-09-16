@@ -15,7 +15,7 @@ MonoBehaviour:
   animationName: spell cast
   healthCost: 0
   staminaCost: 30
-  manaCost: 40
+  manaCost: 80
   particleEffects:
   - {fileID: 3489211779243905211, guid: 705bf6551d9b94215bee6bc71acb7c3d, type: 3}
   - {fileID: 6427335170871500006, guid: 775d1b123d29940669bb2165883ae7c4, type: 3}
@@ -35,7 +35,7 @@ MonoBehaviour:
   FTH: 2
   LCK: 1
   probOfBlock: 0
-  healthDamage: 100
+  healthDamage: 50
   staminaDamage: 0
   manaDamage: 0
   critMultiplier: 1.2

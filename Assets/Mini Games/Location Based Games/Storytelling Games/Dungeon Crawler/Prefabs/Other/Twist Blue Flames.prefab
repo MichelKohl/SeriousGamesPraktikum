@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100004, guid: d58b569be32ed6c4dbd3a502433f2eff, type: 3}
       propertyPath: m_Name
-      value: L_Twist_sorsery
+      value: Twist Blue Flames
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: d58b569be32ed6c4dbd3a502433f2eff, type: 3}
       propertyPath: m_LocalPosition.x
@@ -53,6 +53,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: d58b569be32ed6c4dbd3a502433f2eff, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200000, guid: d58b569be32ed6c4dbd3a502433f2eff, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

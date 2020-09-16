@@ -33,9 +33,9 @@ MonoBehaviour:
   staminaDamage: 0
   manaDamage: 0
   critMultiplier: 1.2
-  status: 4
-  timesStatusApplied: 0
-  statusProbability: 0
+  status: 2
+  timesStatusApplied: 1
+  statusProbability: 0.2
   multipleHits: 0
   hitboxID: 0
   hitParticles: {fileID: 3165635681705289858, guid: 153a3ad63d1db48d0bea5fd3b21bbd29,

@@ -15,14 +15,14 @@ MonoBehaviour:
   animationName: attack
   healthCost: 0
   staminaCost: 30
-  manaCost: 40
+  manaCost: 60
   particleEffects: []
   particleDelay: []
   particleDuration: []
   particleSpawnPositionID: 
   releaseOnInit: 
   levelMultiplier: 0
-  healthDamage: 25
+  healthDamage: 30
   staminaDamage: 5
   manaDamage: 5
   status: 3

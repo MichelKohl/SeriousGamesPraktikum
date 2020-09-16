@@ -158,7 +158,8 @@ public class StoryManager : MonoBehaviour
                     player.transform.rotation, transform);
                 gameOverVFX.Play();
             }
-            //TODO: handle game over
+            yield return new WaitForSeconds(3f);
+            SceneManager.LoadScene(4);
         }
         if(dialogue == null || dialogue.dialogueStart)
         {

@@ -22,7 +22,7 @@ MonoBehaviour:
   particleSpawnPositionID: 
   releaseOnInit: 
   levelMultiplier: 0
-  healthDamage: 20
+  healthDamage: 15
   staminaDamage: 0
   manaDamage: 0
   status: 0

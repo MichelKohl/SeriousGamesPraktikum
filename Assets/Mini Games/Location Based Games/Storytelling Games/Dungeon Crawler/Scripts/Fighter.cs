@@ -74,7 +74,9 @@ public class Fighter : MonoBehaviour
         ResetFighterValues();
         currentStatus = new List<Status>();
         battleManager = GameObject.Find("Story Manager").GetComponent<BattleManager>();
-        if(this is Enemy) GetComponent<Rigidbody>().useGravity = false;
+        if(this is Enemy)
+            if(GetComponent<Rigidbody>() != null)
+                GetComponent<Rigidbody>().useGravity = false;
     }
 
     // Update is called once per frame

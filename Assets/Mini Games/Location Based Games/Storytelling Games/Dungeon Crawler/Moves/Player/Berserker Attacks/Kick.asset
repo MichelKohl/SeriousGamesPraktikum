@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationName: kick
   healthCost: 0
-  staminaCost: 5
+  staminaCost: 10
   manaCost: 0
   particleEffects: []
   particleDelay: []
@@ -28,13 +28,14 @@ MonoBehaviour:
   INT: 1
   FTH: 1
   LCK: 2
-  healthDamage: 100
+  probOfBlock: 0
+  healthDamage: 10
   staminaDamage: 20
   manaDamage: 0
   critMultiplier: 1.2
   status: 1
   timesStatusApplied: 1
-  statusProbability: 1
+  statusProbability: 0.2
   multipleHits: 0
   hitboxID: 1
   hitParticles: {fileID: 1637663880425986105, guid: 087a9e46e4d4b48f5bd7bbc76407b33e,

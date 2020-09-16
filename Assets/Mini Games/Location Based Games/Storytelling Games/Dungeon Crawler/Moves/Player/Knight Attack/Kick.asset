@@ -28,13 +28,14 @@ MonoBehaviour:
   INT: 1
   FTH: 1
   LCK: 1
+  probOfBlock: 0
   healthDamage: 10
   staminaDamage: 0
   manaDamage: 0
   critMultiplier: 1.2
-  status: 4
-  timesStatusApplied: 0
-  statusProbability: 0
+  status: 1
+  timesStatusApplied: 1
+  statusProbability: 0.1
   multipleHits: 0
   hitboxID: 1
   hitParticles: {fileID: 1637663880425986105, guid: 087a9e46e4d4b48f5bd7bbc76407b33e,

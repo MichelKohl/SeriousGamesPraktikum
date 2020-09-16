@@ -67,6 +67,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 8200000, guid: d9751637d4fc2de40a234b45e10cb88d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 19800000, guid: d9751637d4fc2de40a234b45e10cb88d, type: 3}
       propertyPath: InitialModule.startSizeY.minMaxState
       value: 3

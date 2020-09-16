@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationName: attack
   healthCost: 0
-  staminaCost: 30
+  staminaCost: 50
   manaCost: 0
   particleEffects: []
   particleDelay: []

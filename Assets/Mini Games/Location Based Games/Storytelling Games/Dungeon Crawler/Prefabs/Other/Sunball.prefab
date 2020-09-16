@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100010, guid: 729c77445b617084e969190942fb898b, type: 3}
       propertyPath: m_Name
-      value: L_Unity_keeper
+      value: Sunball
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: 729c77445b617084e969190942fb898b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -53,6 +53,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: 729c77445b617084e969190942fb898b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200000, guid: 729c77445b617084e969190942fb898b, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
