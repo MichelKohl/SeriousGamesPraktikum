@@ -87,7 +87,7 @@ public class Profile
 
     public void SaveStoryGame(int classID, int currentChapterID, int currentSituationID,
             List<PlotPoint> playerPath, Attributes attributes, bool[] unlockedAttacks, int playerLevel,
-            int skillPoints, int strength, int dexterity, int intelligence, int faith, int luck, bool[] perks)
+            int skillPoints, int strength, int dexterity, int intelligence, int faith, int luck, bool[] perks, bool startSet)
     {
         if (storyGameSave == null)
             storyGameSave = new StoryGameSave();
@@ -107,6 +107,7 @@ public class Profile
         storyGameSave.faith = faith;
         storyGameSave.luck = luck;
         storyGameSave.unlockedPerks = perks;
+        storyGameSave.startSet = startSet;
     }
 
     public void SetProfileName(string name) {

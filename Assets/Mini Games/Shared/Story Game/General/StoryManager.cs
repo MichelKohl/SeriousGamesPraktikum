@@ -35,6 +35,7 @@ public class StoryManager : MonoBehaviour
     private bool characterChosen = false;// must be set to true when loading a saved game state.
     private List<GameObject> destroyOnSituationChange = new List<GameObject>();
     private List<PlotPoint> pathPlayerTook = new List<PlotPoint>();
+    private bool startSet = false;
 
     public void ChangeSituation(int toID = 0, double distanceToWalk = 0, bool startBattle = false)
     {
@@ -63,7 +64,7 @@ public class StoryManager : MonoBehaviour
     }
 
     private IEnumerator WaitTillDistanceWalked(int id, double distanceToWalk,
-        bool startBattle, bool startSet = false)
+        bool startBattle)
     {
         if (startBattle)
             yield return new WaitUntil(() => battleManager.BattleOver);
@@ -76,10 +77,13 @@ public class StoryManager : MonoBehaviour
             currentSituation.gameObject.SetActive(false);
 
             if(!startSet && manager != null)
+            {
                 textWhenWalking.SetStart(manager.profile.GetDistanceTraveled(), distanceToWalk);
+                startSet = true;
+            }
 
-            while (distanceToWalk - textWhenWalking.Distance <= 0 && !turnOffWalkingRequirement)
-                yield return null;
+            yield return new WaitUntil(() => distanceToWalk - textWhenWalking.Distance <= 0);
+            startSet = false;
 
             textWhenWalking.gameObject.SetActive(false);
             decisionsPanel.gameObject.SetActive(true);
@@ -201,10 +205,7 @@ public class StoryManager : MonoBehaviour
     {
         StoryGameSave save = GameManager.INSTANCE.profile.GetStoryGameSave();
 
-       // if (save.newGame) return;
-
-        Debug.Log($"Loading current chapter: {save.currentChapter}, {save.currentSituation}");
-
+        startSet = save.startSet;
         pathPlayerTook = save.playerPath;
 
         classID = save.classID;
@@ -219,10 +220,6 @@ public class StoryManager : MonoBehaviour
 
         player.SetLevel(save.level);
         player.SetAttributes(save.playerAttributes);
-        /*
-        foreach (Perk perk in save.perks)
-            player.AddPerk(perk);
-        */
         player.SetUnlockedAttacks(save.unlockedAttacks);
         player.SetStat(Stat.STR, save.strength);
         player.SetStat(Stat.DEX, save.dexterity);
@@ -247,7 +244,7 @@ public class StoryManager : MonoBehaviour
         GameManager.INSTANCE.profile.SaveStoryGame(classID, currentChapterID, currentSituationID, pathPlayerTook,
             player.GetAttributes(), player.GetUnlockedAttacks(), player.GetLevel(), player.GetSkillPoints(),
             player.GetStat(Stat.STR).Item2, player.GetStat(Stat.DEX).Item2, player.GetStat(Stat.INT).Item2,
-            player.GetStat(Stat.FTH).Item2, player.GetStat(Stat.LCK).Item2, player.GetUnlockedPerks()
+            player.GetStat(Stat.FTH).Item2, player.GetStat(Stat.LCK).Item2, player.GetUnlockedPerks(), startSet
             );
         GameManager.INSTANCE.SaveProfile(GameManager.INSTANCE.profile);
     }
@@ -306,4 +303,5 @@ public class StoryGameSave
     public Attributes playerAttributes = new Attributes();
     public bool[] unlockedAttacks;
     public bool[] unlockedPerks;
+    public bool startSet;
 }
