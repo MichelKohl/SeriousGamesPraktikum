@@ -343,7 +343,7 @@ public class Fighter : MonoBehaviour
         battleManager.WriteInDescription();
     }
 
-    protected void InitializePerks()
+    protected virtual void InitializePerks()
     {
         perks = new List<Perk>();
         foreach (Perk perk in startPerks)

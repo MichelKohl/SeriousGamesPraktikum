@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -19,6 +20,7 @@ public class DCPlayer : Fighter
     [SerializeField] private float nextXpMultiplier = 1.5f;
 
     [SerializeField] private PerkCollection allPerks;
+    [SerializeField] private bool[] unlockedPerks;
 
     private string playerName = "";
     private string className;
@@ -41,6 +43,14 @@ public class DCPlayer : Fighter
         className =         starter.name;
 
         return this;
+    }
+
+    protected override void InitializePerks()
+    {
+        base.InitializePerks();
+        for (int i = 0; i < unlockedPerks.Length; i++)
+            if (unlockedPerks[i])
+                perks.Add(allPerks.perks[i]);
     }
 
     protected override IEnumerator Attacking()
@@ -326,6 +336,11 @@ public class DCPlayer : Fighter
             xpForNextLvlUp = Mathf.RoundToInt(xpForNextLvlUp * nextXpMultiplier);
     }
 
+    public bool[] GetUnlockedPerks()
+    {
+        return unlockedPerks;
+    }
+
    
 
     public void IncreaseStat(Stat stat)
@@ -415,6 +430,7 @@ public class DCPlayer : Fighter
     {
         if (skillPoints < perk.skillPointCost || perks.Contains(perk)) return;
         skillPoints -= perk.skillPointCost;
+        unlockedPerks[Enumerable.ToList(allPerks.GetAllPerks()).IndexOf(perk)] = true;
         perks.Add(perk);
     }
 

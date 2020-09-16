@@ -207,7 +207,16 @@ public class StoryManager : MonoBehaviour
 
         pathPlayerTook = save.playerPath;
 
-        player = starterClasses[save.classID].Init(transform.parent, Vector3.zero, Quaternion.identity);
+        classID = save.classID;
+
+        player = starterClasses[classID].Init(transform.parent, Vector3.zero, Quaternion.identity);
+        Destroy(starterModels[0].transform.parent.gameObject);
+
+        playerLifebar.SetFighter(player);
+        player.SetLifebar(playerLifebar);
+        player.gameObject.SetActive(false);
+        characterChosen = true;
+
         player.SetLevel(save.level);
         player.SetAttributes(save.playerAttributes);
         /*
@@ -235,14 +244,12 @@ public class StoryManager : MonoBehaviour
 
     public void SaveGame()
     {
-        //save.perks = player.GetActivePerks().ToArray();
-
-        Debug.Log($"Saving current situation: {currentChapterID}, {currentSituationID}");
         GameManager.INSTANCE.profile.SaveStoryGame(classID, currentChapterID, currentSituationID, pathPlayerTook,
             player.GetAttributes(), player.GetUnlockedAttacks(), player.GetLevel(), player.GetSkillPoints(),
             player.GetStat(Stat.STR).Item2, player.GetStat(Stat.DEX).Item2, player.GetStat(Stat.INT).Item2,
-            player.GetStat(Stat.FTH).Item2, player.GetStat(Stat.LCK).Item2
+            player.GetStat(Stat.FTH).Item2, player.GetStat(Stat.LCK).Item2, player.GetUnlockedPerks()
             );
+        GameManager.INSTANCE.SaveProfile(GameManager.INSTANCE.profile);
     }
 
     public void ExitGame()
@@ -297,6 +304,6 @@ public class StoryGameSave
     public int faith;
     public int luck;
     public Attributes playerAttributes = new Attributes();
-    public Perk[] perks;
     public bool[] unlockedAttacks;
+    public bool[] unlockedPerks;
 }
