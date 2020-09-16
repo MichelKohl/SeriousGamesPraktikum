@@ -14,9 +14,10 @@ public class ShowGamePopUpMouseDown : MonoBehaviour
     /// </summary>
     private void OnMouseDown()
     {
-        if (script.inRange)
+        if (script.inRange && GameObject.Find("GamePopUp") == null)
         {
-            var gamePopUp = GameManager.INSTANCE.GamePopUp;
+            var gamePopUp = Instantiate(GameManager.INSTANCE.GamePopUp, GameObject.Find("Canvas").gameObject.transform);
+            gamePopUp.name = "GamePopUp";
             var miniGameStarter = gamePopUp.GetComponent<MiniGameStarter>();
 
             miniGameStarter.miniGame = GameManager.INSTANCE.GetRandomMiniGame();

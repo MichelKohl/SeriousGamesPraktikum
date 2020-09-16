@@ -177,6 +177,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: VisualRadius
       objectReference: {fileID: 0}
+    - target: {fileID: 8498781168101333519, guid: 2705960bd251c2443a4d06d3f1dd1c88,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2705960bd251c2443a4d06d3f1dd1c88, type: 3}
 --- !u!1 &8498781168948166070 stripped

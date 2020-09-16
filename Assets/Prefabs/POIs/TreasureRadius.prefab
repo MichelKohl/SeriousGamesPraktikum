@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6360839550882902304}
   - component: {fileID: 8201348682940921347}
   - component: {fileID: 1353077077201179809}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: TreasureRadius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,4 +180,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inRange: 0
-  rangeCollider: {fileID: 3476743508487716801}

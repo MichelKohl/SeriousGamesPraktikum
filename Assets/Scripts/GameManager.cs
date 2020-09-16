@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
             INSTANCE = this;
             INSTANCE.profile = null;
             DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(this);
         }
 
         Debug.Log(Application.persistentDataPath);
@@ -65,7 +66,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -93,14 +94,6 @@ public class GameManager : MonoBehaviour
                 "Snake",
                 "Mini Games/Snake/Gameplay",
                 Resources.Load<Sprite>("Snake")
-            )
-        );
-
-        miniGames.Add(
-            new MiniGame(
-                "Dungeon Crawler",
-                "Mini Games/DungeonCrawler/Gameplay",
-                Resources.Load<Sprite>("DungeonCrawler")
             )
         );
     }

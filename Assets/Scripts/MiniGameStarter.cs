@@ -14,7 +14,17 @@ public class MiniGameStarter : MonoBehaviour
     /// </summary>
     public MiniGame miniGame { get; set; }
 
-    private void Awake() {
+ /*   private void Awake() {
+
+        var gameName = this.transform.Find("GameName");
+        var gameThumbnail = transform.Find("GameThumbnail");
+
+        gameName.GetComponent<TextMeshProUGUI>().text = miniGame.name;
+        gameThumbnail.GetComponent<Image>().sprite = miniGame.thumbnail;
+    } */
+
+    private void Start()
+    {
         var gameName = this.transform.Find("GameName");
         var gameThumbnail = transform.Find("GameThumbnail");
 
@@ -41,7 +51,8 @@ public class MiniGameStarter : MonoBehaviour
     public void OnClose() {
         // no scene transition
         // just deactivate pop up
-        gameObject.SetActive(false);
+        // gameObject.SetActive(false);
+        Destroy(this.gameObject);
     }
 
 }
