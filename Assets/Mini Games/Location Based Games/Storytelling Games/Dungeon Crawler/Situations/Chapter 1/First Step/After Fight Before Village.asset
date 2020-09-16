@@ -18,6 +18,8 @@ MonoBehaviour:
   flushDeadEnemies: 0
   important: 0
   description: You defeated the wolf.
+  activateGameObject: 
+  deactivateGameObject: 
   options:
   - description: Go to village
     nextSituationID: 1
@@ -26,7 +28,9 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     changeChapter: 0
     nextChapter: 0
     startSituation: 0
-    conditionDistance: 0
+    conditionDistance: 0.07

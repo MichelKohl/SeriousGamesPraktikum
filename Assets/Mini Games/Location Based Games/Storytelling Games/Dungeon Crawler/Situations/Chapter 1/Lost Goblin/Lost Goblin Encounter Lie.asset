@@ -48,4 +48,4 @@ MonoBehaviour:
     changeChapter: 0
     nextChapter: 0
     startSituation: 0
-    conditionDistance: 0
+    conditionDistance: 0.07

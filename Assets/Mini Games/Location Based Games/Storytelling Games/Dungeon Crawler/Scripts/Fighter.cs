@@ -43,7 +43,7 @@ public class Fighter : MonoBehaviour
     // attributes
     protected Attributes attributes = new Attributes();
     protected List<Perk> perks = new List<Perk>();
-    private List<Status> currentStatus;
+    protected List<Status> currentStatus;
     private bool timerOnPause = false;
     private float timer;
     private float statusTimer;

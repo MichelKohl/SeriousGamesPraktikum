@@ -20288,7 +20288,7 @@ MonoBehaviour:
   - {fileID: 283310994}
   - {fileID: 586768731}
   decisionPrefab: {fileID: 9151792647379436557}
-  turnOffWalkingRequirement: 1
+  turnOffWalkingRequirement: 0
   textWhenWalking: {fileID: 35032541}
   skyboxRotationSpeed: 0.2
   toggleableObjects:

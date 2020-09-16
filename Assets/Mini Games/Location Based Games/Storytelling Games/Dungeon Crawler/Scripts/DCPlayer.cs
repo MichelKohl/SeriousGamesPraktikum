@@ -310,6 +310,7 @@ public class DCPlayer : Fighter
         base.ResetFighterValues();
         attributes.Init((float)(strength + dexterity) / 2,
             (float)(intelligence + faith) / 2, dexterity);
+        currentStatus = new List<Status>();
     }
 
     public void GiveXP(int xp)

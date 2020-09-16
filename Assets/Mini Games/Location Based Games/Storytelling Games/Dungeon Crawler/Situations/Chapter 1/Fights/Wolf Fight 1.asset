@@ -15,7 +15,7 @@ MonoBehaviour:
   camPosition: {x: 57.45, y: 3, z: 74.28}
   camRotation: {x: 0, y: 209.772, z: 0}
   spotlightRange: 50
-  flushDeadEnemies: 1
+  flushDeadEnemies: 0
   important: 0
   description: A wolf is in front of you.
   activateGameObject: 

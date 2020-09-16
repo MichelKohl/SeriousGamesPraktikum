@@ -16,8 +16,11 @@ MonoBehaviour:
   camRotation: {x: 0, y: 295.085, z: 0}
   spotlightRange: 20
   flushDeadEnemies: 1
+  important: 0
   description: "I saw one of them go north east, but \nI know their camp is west
     from here."
+  activateGameObject: 
+  deactivateGameObject: 
   options:
   - description: Follow Goblin
     nextSituationID: 8
@@ -26,6 +29,8 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     changeChapter: 0
     nextChapter: 0
     startSituation: 0
@@ -37,7 +42,9 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     changeChapter: 0
     nextChapter: 0
     startSituation: 0
-    conditionDistance: 0
+    conditionDistance: 0.07
