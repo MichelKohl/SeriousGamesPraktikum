@@ -228,7 +228,7 @@ public class DCPlayer : Fighter
             if (Input.GetMouseButtonDown(0))
             {
                 RaycastHit hit;
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Ray ray = Camera.allCameras[1].ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out hit))
                     if (hit.transform.CompareTag("Enemy"))
                     {
@@ -243,7 +243,7 @@ public class DCPlayer : Fighter
             {
                 if (Input.GetTouch(i).phase == TouchPhase.Began)
                 {
-                    Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(i).position);
+                    Ray ray = Camera.allCameras[1].ScreenPointToRay(Input.GetTouch(i).position);
                     if (Physics.Raycast(ray, out RaycastHit hit))
                     {
                         if (hit.transform.CompareTag("Enemy"))

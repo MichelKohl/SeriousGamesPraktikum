@@ -27,14 +27,19 @@
             if (SceneManager.GetActiveScene().name == "Story Game" || SceneManager.GetActiveScene().name == "Snake"
                     || SceneManager.GetActiveScene().name == "SpaceInvader")
             {
-                Vector3 newPos = new Vector3(transform.position.x, -50, transform.position.z);
+                Vector3 newPos = new Vector3(transform.position.x, -100, transform.position.z);
                 this.transform.position = newPos;
+            /*    if (GameObject.Find("Player") != null && GameObject.Find("Player").gameObject.activeSelf == true)
+                {
+                    GameObject.Find("Player").gameObject.SetActive(false);
+                }   */
             }
 
             if (SceneManager.GetActiveScene().name == "DefaultScreen")
             {
                 Vector3 newPos = new Vector3(0, 0, 0);
                 this.transform.position = newPos;
+                //GameObject.Find("Player").gameObject.SetActive(true);
             }
         }
     }
