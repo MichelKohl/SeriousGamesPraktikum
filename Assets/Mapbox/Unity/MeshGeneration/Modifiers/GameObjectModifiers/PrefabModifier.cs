@@ -59,7 +59,10 @@ namespace Mapbox.Unity.MeshGeneration.Modifiers
 				go.transform.SetParent(ve.GameObject.transform, false);
 			}
 
-			PositionScaleRectTransform(ve, tile, go);
+			if (go != null)
+			{
+				PositionScaleRectTransform(ve, tile, go);
+			}
 
 			if (_options.AllPrefabsInstatiated != null)
 			{

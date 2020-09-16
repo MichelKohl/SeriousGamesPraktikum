@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
         miniGames.Add(
             new MiniGame(
                 "SpaceInvaders",
-                "Mini Games/Space Invaders/Gameplay",
+                "Mini Games/Space Invaders/SpaceInvader",
                 Resources.Load<Sprite>("Space Invaders")
             )
         );
@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
         miniGames.Add(
             new MiniGame(
                 "Snake",
-                "Mini Games/Snake/Gameplay",
+                "Mini Games/Snake/Snake",
                 Resources.Load<Sprite>("Snake")
             )
         );

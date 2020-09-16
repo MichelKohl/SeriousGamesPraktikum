@@ -31,6 +31,11 @@ public class LocationCalculation : MonoBehaviour
     /// </summary>
     Mapbox.Geocoding.Geocoder geocoder;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     private void Start()
     {
         MapboxConfiguration mc = new MapboxConfiguration();

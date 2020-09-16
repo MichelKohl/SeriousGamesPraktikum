@@ -4872,9 +4872,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1419406076}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 6db3a516f4a7041b4a415b35843f8841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _useSingleInstance: 1
 --- !u!114 &1449229265 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5858054718299889875, guid: b113f4b5f92c60047bbffbcf42b47f86,
@@ -9235,7 +9236,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _locationLogFile
       value: 
-      objectReference: {fileID: 4900000, guid: bda91b0c7820c474cbd4baf67170df2d, type: 3}
+      objectReference: {fileID: 4900000, guid: 5e6bb7224cef35c4788a4817b1c9778d, type: 3}
     - target: {fileID: 114330636339840990, guid: 35ce2bb4caba9434db5e656796b632b1,
         type: 3}
       propertyPath: _measurements

@@ -2603,8 +2603,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameName: Snake
   achievements:
+  - {fileID: 11400000, guid: 3a2f9a5e4631c41358d77c4b2488ecce, type: 2}
+  - {fileID: 11400000, guid: bedcba78742304e4c906c9d9a2f864b7, type: 2}
+  - {fileID: 11400000, guid: c87d6dad9821640c2a2a6c6363431e63, type: 2}
+  - {fileID: 11400000, guid: 284cb9a5f3c3547d2b07c3da309e4d2f, type: 2}
   - {fileID: 11400000, guid: e18748cfd3ece4952806fc54c15a7518, type: 2}
-  - {fileID: 11400000, guid: ff8739144784f422d80bbac2fc34abbe, type: 2}
   achievUpdateFreq: 1
   achievementPopUp: {fileID: 1668073790}
   scoreLabel: {fileID: 1605120316}

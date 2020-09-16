@@ -12,10 +12,10 @@ EditorBuildSettings:
     path: Assets/Scenes/InitialProfileScreen.unity
     guid: cc8befcbe8a838847a944b34c35ca6ee
   - enabled: 1
-    path: Assets/Mini Games/Space Invaders/Gameplay.unity
+    path: Assets/Mini Games/Space Invaders/SpaceInvader.unity
     guid: a1af60f009a4a4e9da61deab7842b388
   - enabled: 1
-    path: Assets/Mini Games/Snake/Gameplay.unity
+    path: Assets/Mini Games/Snake/Snake.unity
     guid: 89a5421dfcede40898a64d0973fb30e0
   - enabled: 1
     path: Assets/Mini Games/Location Based Games/Storytelling Games/Dungeon Crawler/Story
