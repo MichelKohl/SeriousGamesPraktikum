@@ -265,6 +265,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 766b567b6892540c6856e94d2544f4b3, type: 2}
   hitboxes:
   - {fileID: 8871664907354639693}
+  hurtbox: {fileID: 4192710659180942105}
   spellSpawnTransforms:
   - {fileID: 5464889429236590013}
   - {fileID: 5655724464490851446}
@@ -277,8 +278,7 @@ MonoBehaviour:
   projectileTarget: {fileID: 5464889429236590013}
   baseProbabilityOfBlock: 0
   testAttacks: 0
-  hurtbox: {fileID: 4192710659180942105}
-  XP: 0
+  XP: 1000
 --- !u!195 &5777768706737212032
 NavMeshAgent:
   m_ObjectHideFlags: 0

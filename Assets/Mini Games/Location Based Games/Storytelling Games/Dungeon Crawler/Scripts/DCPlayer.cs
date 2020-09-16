@@ -5,6 +5,9 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
+/// <summary>
+///  player class for story game.
+/// </summary>
 public class DCPlayer : Fighter
 {
     private bool[] unlocked; // which attacks are unlocked for usage
@@ -52,7 +55,6 @@ public class DCPlayer : Fighter
             if (unlockedPerks[i])
                 perks.Add(allPerks.perks[i]);
     }
-
     protected override IEnumerator Attacking()
     {
         isAttacking = true;
@@ -341,8 +343,6 @@ public class DCPlayer : Fighter
     {
         return unlockedPerks;
     }
-
-   
 
     public void IncreaseStat(Stat stat)
     {

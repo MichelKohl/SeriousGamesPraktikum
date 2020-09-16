@@ -5,7 +5,9 @@ using UnityEngine.AI;
 using System.Collections.Generic;
 
 #pragma warning disable 0414 // disable warnings caused by line 66
-
+/// <summary>
+/// class that is inherited by the player (DCPlayer) and enemy (Enemy) classes for the story game.
+/// </summary>
 public class Fighter : MonoBehaviour
 {
     // fighter settings
@@ -198,7 +200,9 @@ public class Fighter : MonoBehaviour
             }
         }
     }
-
+    /// <summary>
+    /// resets attributes and dependant gameobjects.
+    /// </summary>
     public virtual void ResetFighterValues()
     {
         attributes.Init(maxHealth, maxStamina, maxMana, healthRegen, staminaRegen, manaRegen,
@@ -272,7 +276,10 @@ public class Fighter : MonoBehaviour
     {
         StartCoroutine(Attacking());
     }
-
+    /// <summary>
+    /// coroutine, that handles the attack procedures.
+    /// </summary>
+    /// <returns></returns>
     protected virtual IEnumerator Attacking()
     {
         // end attack
@@ -282,7 +289,15 @@ public class Fighter : MonoBehaviour
         isAttacking = false;
         yield return null;
     }
-
+    /// <summary>
+    /// plays particles for looks
+    /// </summary>
+    /// <param name="delay">start delay</param>
+    /// <param name="particles">particles prefab</param>
+    /// <param name="origin">transform for particle system instantiation</param>
+    /// <param name="duration">play time of particles system</param>
+    /// <param name="releaseOnInit">if true, particle system doesn't stick to parent transform</param>
+    /// <returns></returns>
     public IEnumerator PlayParticles(float delay, ParticleSystem particles, Transform origin, float duration = 0, bool releaseOnInit = false)
     {
         yield return new WaitForSeconds(delay);
@@ -293,7 +308,12 @@ public class Fighter : MonoBehaviour
         yield return new WaitForSeconds(duration == 0 ? vfx.main.duration : duration);
         Destroy(vfx.gameObject);
     }
-
+    /// <summary>
+    /// plays particles for looks
+    /// </summary>
+    /// <param name="perk">perk, that stores the particles system info</param>
+    /// <param name="preview">true, if for preview purposes</param>
+    /// <returns></returns>
     private IEnumerator PlayBuffParticles(Perk perk, bool preview = false)
     {
         yield return new WaitForSeconds(perk.particleSpawnDelay);
@@ -338,6 +358,7 @@ public class Fighter : MonoBehaviour
 
         return healthDamage;
     }
+
 
     protected void PayForAttack()
     {
