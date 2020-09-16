@@ -13,7 +13,9 @@ public class Cam : MonoBehaviour
     [SerializeField] private float moveDelta = 0.001f;
     [SerializeField] private float rotateStep = 2f;
     [SerializeField] private float rotateDelta = 0.001f;
-
+    [SerializeField] private Vector3 startMenuPos;
+    [SerializeField] private Vector3 startMenuRot;
+ 
     private DCPlayer player;
 
     private Vector3 firstPersonPos;
@@ -25,6 +27,8 @@ public class Cam : MonoBehaviour
     private bool firstPerson = true;
     private bool death = false;
     public bool PositionSet { get => positionSet; }
+    private float lastSpotlightRange;
+    private float lastSpotlightIntensity;
 
 
     private void Start()
@@ -54,14 +58,22 @@ public class Cam : MonoBehaviour
                 firstPerson = !firstPerson;
                 if(!death) player.gameObject.SetActive(!firstPerson);
             }
-
         }
-        
     }
 
-    public void SetSpotlightRange(float range)
+    public void SetSpotlight(float range, float intensity = 1)
     {
+        lastSpotlightRange = spotlight.range;
+        lastSpotlightIntensity = spotlight.intensity;
+
         spotlight.range = range;
+        spotlight.intensity = intensity;
+    }
+
+    public void ResetSpotlight()
+    {
+        spotlight.range = lastSpotlightRange;
+        spotlight.intensity = lastSpotlightIntensity;
     }
 
     public void UpdateCamPositionAndRotation(Vector3 position, Quaternion rotation)
@@ -104,6 +116,12 @@ public class Cam : MonoBehaviour
             moveToPosition = deathCam.position;
             rotateToRotation = deathCam.rotation;
         }
+    }
+
+    public void ChangeToStartMenuCam()
+    {
+        transform.position = startMenuPos;
+        transform.rotation = Quaternion.Euler(startMenuRot);
     }
 
     private bool Approx(Quaternion current, Quaternion target, float delta)

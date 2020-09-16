@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0f8ad97bc0ae4352b3c1e638b5c1f39, type: 3}
+  m_Name: Troll Dialogue 1
+  m_EditorClassIdentifier: 
+  camPosition: {x: 0, y: 0, z: 0}
+  camRotation: {x: 0, y: 0, z: 0}
+  spotlightRange: 20
+  flushDeadEnemies: 0
+  description: Was told goblins pass only.
+  dialogueStart: 0
+  options:
+  - description: Let me pass you stupid trolls!
+    nextSituationID: 2
+    strRequirement: 0
+    dexRequirement: 0
+    intRequirement: 0
+    fthRequirement: 0
+    lckRequirement: 0
+    startBattle: 0
+  - description: But can't you see? I am a goblin.
+    nextSituationID: 3
+    strRequirement: 0
+    dexRequirement: 0
+    intRequirement: 5
+    fthRequirement: 0
+    lckRequirement: 5
+    startBattle: 0
+  - description: Fight
+    nextSituationID: 4
+    strRequirement: 0
+    dexRequirement: 0
+    intRequirement: 0
+    fthRequirement: 0
+    lckRequirement: 0
+    startBattle: 1
+  enemies: []
+  enemyPosition: []
+  enemyRotation: []

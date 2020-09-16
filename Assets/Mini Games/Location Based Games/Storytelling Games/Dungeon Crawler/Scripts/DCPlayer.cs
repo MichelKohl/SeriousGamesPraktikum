@@ -6,7 +6,6 @@ using UnityEngine.AI;
 
 public class DCPlayer : Fighter
 {
-    [SerializeField] private Collider hurtbox;
     private bool[] unlocked; // which attacks are unlocked for usage
     // character stats
     [SerializeField] private int strength = 1;      // -> one and two handed weapons & stamina regen
@@ -80,6 +79,7 @@ public class DCPlayer : Fighter
             walkingForward = true;
             agent.SetDestination(currentTarget.GetAttackPosition().position);
             agent.stoppingDistance = attackPositionOffset;
+            yield return new WaitUntil(() => !agent.pathPending);
             yield return new WaitUntil(() => agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance <= attackPositionOffset);
             hitboxes[melee.hitboxID].enabled = true;
         }
@@ -98,14 +98,17 @@ public class DCPlayer : Fighter
         if (spell != null)
         {
             if(spell.type == SpellType.Areal)
-                foreach(Enemy enemy in battleManager.GetEnemies())
+            {
+                yield return new WaitForSeconds(spell.delay[0]);
+                foreach (Enemy enemy in battleManager.GetEnemies())
                     for (int i = 0; i < spell.projectile.Length; i++)
                     {
-                        yield return new WaitForSeconds(spell.delay[i]);
-                        projectile = Instantiate(spell.projectile[i], enemy.transform.position,
+                        //yield return new WaitForSeconds(spell.delay[i]);
+                        projectile = Instantiate(spell.projectile[i], spellSpawnTransforms[0].position,
                         transform.rotation, transform.parent);
                         projectile.LockOnTarget(enemy.GetProjectileTarget());
                     }
+            }
             else
             {
                 bool isMultiple = spell.type == SpellType.Multiple;
@@ -133,6 +136,7 @@ public class DCPlayer : Fighter
             agent.SetDestination(startPos);
             agent.stoppingDistance = 0f;
             hitboxes[melee.hitboxID].enabled = false;
+            yield return new WaitUntil(() => !agent.pathPending);
             yield return new WaitUntil(() => agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0);
             agent.updateRotation = true;
             transform.rotation = startRot;
@@ -395,6 +399,16 @@ public class DCPlayer : Fighter
             projectile.DoExplosion(0.5f);
         }
         yield return new WaitUntil(() => projectile == null);
+    }
+
+    public Attributes GetAttributes()
+    {
+        return attributes;
+    }
+
+    public bool[] GetUnlockedAttacks()
+    {
+        return unlocked;
     }
 }
 

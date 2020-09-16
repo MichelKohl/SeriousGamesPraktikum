@@ -52,6 +52,8 @@ public class Profile
     /// </summary>
     private AchievementStorage achievementStorage;
 
+    private StoryGameSave storyGameSave;
+
     /// <summary>
     /// The list of characters that already were bought by the player.
     /// </summary>
@@ -75,6 +77,17 @@ public class Profile
         this.selectedCharacterID = selectedCharacterID;
         highscoreStorage = new HighscoreStorage();
         achievementStorage = new AchievementStorage();
+        storyGameSave = new StoryGameSave();
+    }
+
+    public StoryGameSave GetStoryGameSave()
+    {
+        return storyGameSave;
+    }
+
+    public void SaveStoryGame(StoryGameSave save)
+    {
+        storyGameSave = save;
     }
 
     public void SetProfileName(string name) {

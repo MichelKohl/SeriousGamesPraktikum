@@ -28,6 +28,7 @@ public class Fighter : MonoBehaviour
     [SerializeField] protected Animator animator;
     [SerializeField] protected Move[] moves;
     [SerializeField] protected Collider[] hitboxes;
+    [SerializeField] protected Collider hurtbox;
     [SerializeField] protected Transform[] spellSpawnTransforms;
     [SerializeField] protected float poisonDamageRecieved = 4f;
     [SerializeField] protected float bleedDamageRecieved = 4f;
@@ -73,11 +74,16 @@ public class Fighter : MonoBehaviour
         ResetFighterValues();
         currentStatus = new List<Status>();
         battleManager = GameObject.Find("Story Manager").GetComponent<BattleManager>();
+        if(this is Enemy) GetComponent<Rigidbody>().useGravity = false;
     }
 
     // Update is called once per frame
     protected void Update()
     {
+        if(IsDead())
+        {
+            hurtbox.enabled = false;
+        }
         if (IsDead() && !deathNotficationSent)
         {
             if (poisonFX.isPlaying) poisonFX.Stop();

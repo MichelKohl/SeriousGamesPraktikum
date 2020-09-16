@@ -2,6 +2,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using System;
 
 public class StoryManager : MonoBehaviour
 {
@@ -22,13 +23,17 @@ public class StoryManager : MonoBehaviour
     [SerializeField] private WalkingText textWhenWalking;
     [SerializeField] private float skyboxRotationSpeed = 0.2f;
 
+    [SerializeField] private GameObject[] toggleableObjects;
+
     private DCPlayer player;
+    private int classID = -1;
     private int currentSituationID = 0;
-    private Chapter currentChapter;
+    private int currentChapterID = 0;
     private GameManager manager;
     private BattleManager battleManager;
     private bool characterChosen = false;// must be set to true when loading a saved game state.
     private List<GameObject> destroyOnSituationChange = new List<GameObject>();
+    private List<PlotPoint> pathPlayerTook = new List<PlotPoint>();
 
     public void ChangeSituation(int toID = 0, double distanceToWalk = 0, bool startBattle = false)
     {
@@ -40,7 +45,7 @@ public class StoryManager : MonoBehaviour
 
     public void ChangeChapter(int toChapter, int startSituation = 0)
     {
-        currentChapter = chapters[toChapter];
+        currentChapterID = toChapter;
         ChangeSituation(startSituation);
     }
 
@@ -48,6 +53,7 @@ public class StoryManager : MonoBehaviour
     {
         manager = GameManager.INSTANCE;
         battleManager = GetComponent<BattleManager>();
+        //StoryGameSave save = GameManager.INSTANCE.profile.GetStoryGameSave();
         ChangeChapter(startChapter);
     }
 
@@ -85,26 +91,33 @@ public class StoryManager : MonoBehaviour
         decisionsPanel.Flush();
         // set new id for current situation
         currentSituationID = id;
-        Situation current = currentChapter.situations[currentSituationID];
+        Situation current = chapters[currentChapterID].situations[currentSituationID];
         currentSituation.text = current.description;
+
+        CharacterSelection charSel = current as CharacterSelection;
+        Navigation navi = current as Navigation;
+        Dialogue dialogue = current as Dialogue;
+        GameOverSituation gameOver = current as GameOverSituation;
       
         if (!characterChosen && !(current is CharacterSelection))
         {
             for (int i = 0; i < starterModels.Length; i++)
                 if (starterModels[i].isActiveAndEnabled)
+                {
                     player = starterClasses[i].Init(transform.parent, Vector3.zero, Quaternion.identity);
+                    classID = i;
+                }
             Destroy(starterModels[0].transform.parent.gameObject);
             playerLifebar.SetFighter(player);
             player.SetLifebar(playerLifebar);
             player.gameObject.SetActive(false);
             characterChosen = true;
         }
-        if (!(current is CharacterSelection) && current is Navigation)
+        if (charSel == null && navi != null)
             foreach (NextPoint info in (current as Navigation).options)
                 InstantiateDecision(info);
-        if (current is Dialogue)
+        if (dialogue != null)
         {
-            Dialogue dialogue = current as Dialogue;
             foreach (DialogueOption info in dialogue.options)
                 InstantiateDecision(info);
 
@@ -115,25 +128,50 @@ public class StoryManager : MonoBehaviour
                 battleManager.AddEnemy(enemy);
             }
         }
-        if(current is CharacterSelection)
+        if(charSel != null)
         {
-            CharacterSelection charSel = current as CharacterSelection;
             for(int i = 0; i < starterModels.Length; i++)
                 starterModels[i].gameObject.SetActive(i == charSel.classID);
             foreach (NextPoint info in (current as Navigation).options)
                 InstantiateDecision(info);
         }
-        // change to new situation
-        Debug.Log($"change to situation [{current.name}] with id: [{currentSituationID}]");
-        cam.UpdateCamPositionAndRotation(current.camPosition, Quaternion.Euler(current.camRotation));
-        cam.SetSpotlightRange(current.spotlightRange);
-
         if (current.flushDeadEnemies)
         {
             foreach (GameObject gameObject in destroyOnSituationChange)
                 Destroy(gameObject);
             destroyOnSituationChange = new List<GameObject>();
         }
+        if (current.important)
+        {
+            PlotPoint plotPoint = new PlotPoint();
+            plotPoint.chapter = currentChapterID;
+            plotPoint.situation = currentSituationID;
+            pathPlayerTook.Add(plotPoint);
+        }
+        if(gameOver != null)
+        {
+            if(gameOver.vfx != null)
+            {
+                ParticleSystem gameOverVFX = Instantiate(gameOver.vfx, player.transform.position,
+                    player.transform.rotation, transform);
+                gameOverVFX.Play();
+            }
+            //TODO: handle game over
+        }
+        if(dialogue == null || dialogue.dialogueStart)
+        {
+            cam.UpdateCamPositionAndRotation(current.camPosition, Quaternion.Euler(current.camRotation));
+            cam.SetSpotlight(current.spotlightRange);
+        }
+        try
+        {
+            foreach (int i in current.activateGameObject)
+                toggleableObjects[i].gameObject.SetActive(true);
+            foreach (int i in current.deactivateGameObject)
+                toggleableObjects[i].gameObject.SetActive(false);
+        }
+        catch (NullReferenceException) { }
+        
     }
 
     public DCPlayer GetPlayerCharacter()
@@ -144,7 +182,7 @@ public class StoryManager : MonoBehaviour
     public void ResetDecisions()
     {
         decisionsPanel.Flush();
-        Situation current = currentChapter.situations[currentSituationID];
+        Situation current = chapters[currentChapterID].situations[currentSituationID];
         if (!(current is CharacterSelection) && current is Navigation)
             foreach (NextPoint info in (current as Navigation).options)
                 InstantiateDecision(info);
@@ -161,10 +199,44 @@ public class StoryManager : MonoBehaviour
         destroyOnSituationChange.Add(gameObject);
     }
 
+    public void StartNewGame()
+    {
+        ChangeChapter(startChapter);
+    }
+
+    public void SaveGame()
+    {
+        Profile profile = GameManager.INSTANCE.profile;
+        StoryGameSave save = new StoryGameSave();
+        save.newGame = false;
+        save.classID = classID;
+        save.currentChapter = currentChapterID;
+        save.currentSituation = currentSituationID;
+        save.playerPath = pathPlayerTook;
+        save.playerAttributes = player.GetAttributes();
+        save.perks = player.GetAllPerks();
+        save.unlockedAttacks = player.GetUnlockedAttacks();
+        save.level = player.GetLevel();
+        save.skillPoints = player.GetSkillPoints();
+        save.strength = player.GetStat(Stat.STR).Item2;
+        save.dexterity = player.GetStat(Stat.DEX).Item2;
+        save.intelligence = player.GetStat(Stat.INT).Item2;
+        save.faith = player.GetStat(Stat.FTH).Item2;
+        save.luck = player.GetStat(Stat.LCK).Item2;
+
+        profile.SaveStoryGame(save);
+    }
+
+    public void ExitGame()
+    {
+
+    }
+
     private void InstantiateDecision(NextPoint info)
     {
-        if (player == null || player.StatsCheckOut(info.strRequirement, info.dexRequirement,
-                    info.intRequirement, info.fthRequirement, info.lckRequirement))
+        if ((player == null || player.StatsCheckOut(info.strRequirement, info.dexRequirement,
+                    info.intRequirement, info.fthRequirement, info.lckRequirement)) &&
+                    !info.IsBlocked(pathPlayerTook))
             if (info.changeChapter)
                 Instantiate(decisionPrefab, decisionsPanel.transform).
                     Init(info.description, info.nextSituationID, info.conditionDistance,
@@ -177,8 +249,29 @@ public class StoryManager : MonoBehaviour
     private void InstantiateDecision(DialogueOption info)
     {
         if (player.StatsCheckOut(info.strRequirement, info.dexRequirement,
-                    info.intRequirement, info.fthRequirement, info.lckRequirement))
+                    info.intRequirement, info.fthRequirement, info.lckRequirement) &&
+                    !info.IsBlocked(pathPlayerTook))
             Instantiate(decisionPrefab, decisionsPanel.transform).
                 Init(info.description, info.nextSituationID, info.startBattle);
     }
+}
+
+[Serializable]
+public class StoryGameSave
+{
+    public bool newGame = true;
+    public int classID = 0;
+    public int currentChapter = 0;
+    public int currentSituation = 0;
+    public List<PlotPoint> playerPath = new List<PlotPoint>();
+    public int level;
+    public int skillPoints;
+    public int strength;
+    public int dexterity;
+    public int intelligence;
+    public int faith;
+    public int luck;
+    public Attributes playerAttributes = new Attributes();
+    public Perk[] perks;
+    public bool[] unlockedAttacks;
 }

@@ -173,6 +173,7 @@ MonoBehaviour:
   projectileTarget: {fileID: 5325757052682872626}
   baseProbabilityOfBlock: 0
   testAttacks: 0
+  hurtbox: {fileID: 7238802145696882336}
   XP: 0
 --- !u!195 &5280656509000622126
 NavMeshAgent:

@@ -26,6 +26,7 @@ public class Enemy : Fighter
     {
 
         isAttacking = true;
+        agent.updateRotation = true;
         List<Move> availableAttacks = GetAvailableMoves();
         if(availableAttacks.Count > 0)
         {
@@ -42,8 +43,10 @@ public class Enemy : Fighter
 
             if(melee)
             {
+                hurtbox.enabled = false;
                 agent.SetDestination(player.GetAttackPosition().position);
                 agent.stoppingDistance = attackPositionOffset;
+                yield return new WaitUntil(() => !agent.pathPending);
                 yield return new WaitUntil(() => agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance <= attackPositionOffset);
             }
 
@@ -81,7 +84,10 @@ public class Enemy : Fighter
                 agent.SetDestination(startPos);
                 agent.stoppingDistance = 0f;
                 hitboxes[melee.hitboxID].enabled = false;
+                yield return new WaitUntil(() => !agent.pathPending);
                 yield return new WaitUntil(() => agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0);
+
+                hurtbox.enabled = true;
 
                 while (transform.rotation != startRot)
                 {

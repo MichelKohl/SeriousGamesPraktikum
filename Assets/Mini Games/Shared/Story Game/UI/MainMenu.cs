@@ -87,6 +87,8 @@ public class MainMenu : MonoBehaviour
             return;
         player.DisableAgent(true);
 
+        cam.SetSpotlight(50, 1.5f);
+
         currentPlayerPosition = player.transform.position;
         currentCamPosition = cam.transform.position;
         currentPlayerRotation = player.transform.rotation;
@@ -137,6 +139,8 @@ public class MainMenu : MonoBehaviour
 
         player.ResetFighterValues();
         storyManager.ResetDecisions();
+
+        cam.ResetSpotlight();
 
         ResetUI();
 

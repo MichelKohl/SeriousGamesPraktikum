@@ -76,21 +76,20 @@ public class BattleManager : MonoBehaviour
                 SomeoneGotHit = false;
                 someoneIsAttacking = true;
 
+                foreach (Enemy enemy in enemies)
+                    enemy.PauseInitiativeTimer(true);
+                player.PauseInitiativeTimer(true);
+
                 if (currentAttacker == player)
                 {
                     attackOptionsPanel.Flush();
                     foreach (PlayerMove attack in player.GetAvailableMoves())
                         Instantiate(attackOptionPrefab, attackOptionsPanel.transform).
                             Init(attack, description, player);
-                    foreach (Enemy enemy in enemies)
-                        enemy.PauseInitiativeTimer(true);
                     player.Attack();
                 }
-                else
-                {
-                    player.PauseInitiativeTimer(true);
-                    currentAttacker.Attack();
-                }
+                else currentAttacker.Attack();
+               
             }
         }
     }

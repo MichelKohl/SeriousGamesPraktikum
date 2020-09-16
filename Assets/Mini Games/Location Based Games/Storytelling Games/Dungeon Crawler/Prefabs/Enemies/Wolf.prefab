@@ -210,6 +210,7 @@ MonoBehaviour:
   projectileTarget: {fileID: 4837562920561098902}
   baseProbabilityOfBlock: 0
   testAttacks: 0
+  hurtbox: {fileID: 4837562920557423694}
   XP: 1000
 --- !u!1 &5893342507145416644
 GameObject:
@@ -936,6 +937,14 @@ PrefabInstance:
       propertyPath: InitialModule.startRotationY.minMaxState
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 19870744, guid: f4864ffb159f30048a3bdafeae646afb, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19870744, guid: f4864ffb159f30048a3bdafeae646afb, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4864ffb159f30048a3bdafeae646afb, type: 3}
 --- !u!1 &4837562920560809168 stripped
@@ -959,6 +968,12 @@ Transform:
 --- !u!4 &4837562920561098902 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 480432, guid: f4864ffb159f30048a3bdafeae646afb,
+    type: 3}
+  m_PrefabInstance: {fileID: 4837562920560890918}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &4837562920557423694 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 13580392, guid: f4864ffb159f30048a3bdafeae646afb,
     type: 3}
   m_PrefabInstance: {fileID: 4837562920560890918}
   m_PrefabAsset: {fileID: 0}

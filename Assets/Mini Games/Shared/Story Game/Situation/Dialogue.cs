@@ -5,6 +5,7 @@ using System;
 [Serializable]
 public class Dialogue : Situation
 {
+    public bool dialogueStart = false;
     public DialogueOption[] options;
     public Enemy[] enemies;
     public Vector3[] enemyPosition;

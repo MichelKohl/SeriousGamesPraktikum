@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0f8ad97bc0ae4352b3c1e638b5c1f39, type: 3}
+  m_Name: Attack Goblin Front Gate
+  m_EditorClassIdentifier: 
+  camPosition: {x: 231.62, y: 5.56, z: 238.52}
+  camRotation: {x: 0, y: 89.87701, z: 0}
+  spotlightRange: 20
+  flushDeadEnemies: 0
+  description: 
+  dialogueStart: 1
+  options:
+  - description: 
+    nextSituationID: 0
+    strRequirement: 0
+    dexRequirement: 0
+    intRequirement: 0
+    fthRequirement: 0
+    lckRequirement: 0
+    startBattle: 0
+  enemies:
+  - {fileID: 2301715145561556678, guid: 2d7796d104ec346db89685852873127f, type: 3}
+  enemyPosition:
+  - {x: -30.60316, y: 6.06, z: -14.89351}
+  enemyRotation:
+  - {x: 0, y: -64.11501, z: 0}

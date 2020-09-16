@@ -16,6 +16,7 @@ MonoBehaviour:
   camRotation: {x: 0, y: 232.454, z: 0}
   spotlightRange: 20
   flushDeadEnemies: 0
+  important: 0
   description: Strong and fast.
   options:
   - description: Choose
@@ -26,7 +27,7 @@ MonoBehaviour:
     fthRequirement: 0
     lckRequirement: 0
     changeChapter: 1
-    nextChapter: 1
+    nextChapter: 2
     startSituation: 0
     conditionDistance: 0
   - description: The Knight

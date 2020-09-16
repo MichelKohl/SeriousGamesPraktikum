@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0f8ad97bc0ae4352b3c1e638b5c1f39, type: 3}
+  m_Name: Wolf Fight 1
+  m_EditorClassIdentifier: 
+  camPosition: {x: 57.45, y: 3, z: 74.28}
+  camRotation: {x: 0, y: 209.772, z: 0}
+  spotlightRange: 50
+  flushDeadEnemies: 0
+  important: 0
+  description: A wolf is in front of you.
+  dialogueStart: 1
+  options:
+  - description: Fight
+    nextSituationID: 0
+    strRequirement: 0
+    dexRequirement: 0
+    intRequirement: 0
+    fthRequirement: 0
+    lckRequirement: 0
+    startBattle: 1
+  enemies:
+  - {fileID: 3816733659319154455, guid: 57665b2c1f6534f8baf7e29b39bdc18b, type: 3}
+  enemyPosition:
+  - {x: 53.1, y: 0.69, z: 66.74}
+  enemyRotation:
+  - {x: 0, y: 29.208, z: 0}

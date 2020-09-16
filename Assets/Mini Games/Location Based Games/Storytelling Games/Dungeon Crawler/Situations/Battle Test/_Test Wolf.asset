@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f8ad97bc0ae4352b3c1e638b5c1f39, type: 3}
   m_Name: _Test Wolf
   m_EditorClassIdentifier: 
-  camPosition: {x: 184.68, y: 4, z: 73.13}
+  camPosition: {x: 295.7, y: 4, z: 90.3}
   camRotation: {x: 0, y: 90, z: 0}
   spotlightRange: 128
   flushDeadEnemies: 1
+  important: 0
   description: 
+  dialogueStart: 1
   options:
   - description: Fight
     nextSituationID: 0
@@ -26,12 +28,9 @@ MonoBehaviour:
     fthRequirement: 0
     lckRequirement: 0
     startBattle: 1
-  talker: []
-  dialogue: []
   enemies:
   - {fileID: 3816733659319154455, guid: 57665b2c1f6534f8baf7e29b39bdc18b, type: 3}
-  enemyDialogue: []
   enemyPosition:
-  - {x: 195.02, y: 0, z: 72.49}
+  - {x: 307.4402, y: 0.01350975, z: 89.52412}
   enemyRotation:
   - {x: 0, y: -88.374, z: 0}
