@@ -16,6 +16,8 @@ public class GeneralGUI : MonoBehaviour
     [SerializeField]
     private Button profileButton;
     [SerializeField]
+    private Button storyButton;
+    [SerializeField]
     private GameObject profileView;
     [SerializeField]
     private Button returnFromProfileViewButton;
@@ -128,6 +130,7 @@ public class GeneralGUI : MonoBehaviour
         CharacterSelectionPanel.SetActive(false);
         profileView.SetActive(true);
         profileButton.gameObject.SetActive(false);
+        storyButton.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -150,6 +153,7 @@ public class GeneralGUI : MonoBehaviour
         CharacterSelectionPanel.SetActive(false);
         profileView.SetActive(false);
         profileButton.gameObject.SetActive(true);
+        storyButton.gameObject.SetActive(true);
 
         GameManager.INSTANCE.SaveProfile(GameManager.INSTANCE.profile);
     }
