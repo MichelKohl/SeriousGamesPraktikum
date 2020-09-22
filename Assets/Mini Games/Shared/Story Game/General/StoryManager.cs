@@ -105,16 +105,12 @@ public class StoryManager : MonoBehaviour
                 startSet = true;
             }
 
-            ToggleLocationBasedGame(true);
-
             yield return new WaitUntil(() => distanceToWalk - textWhenWalking.Distance <= 0);
             startSet = false;
 
             textWhenWalking.gameObject.SetActive(false);
             decisionsPanel.gameObject.SetActive(true);
             currentSituation.gameObject.SetActive(true);
-
-            ToggleLocationBasedGame(false);
         }
         // flush current options
         decisionsPanel.Flush();

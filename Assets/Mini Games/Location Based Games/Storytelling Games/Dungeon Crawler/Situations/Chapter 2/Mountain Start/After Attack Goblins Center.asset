@@ -12,12 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5209a272026e849a6b269392eebfbdee, type: 3}
   m_Name: After Attack Goblins Center
   m_EditorClassIdentifier: 
-  camPosition: {x: 272.43, y: 5.29, z: 247.43}
+  camPosition: {x: 272.43, y: 105.29, z: 247.43}
   camRotation: {x: 0, y: 228.477, z: 0}
   spotlightRange: 20
   flushDeadEnemies: 0
+  important: 0
   description: "You defeated the goblins at the campfire, \nbut alerted the other
     goblins."
+  activateGameObject: 
+  deactivateGameObject: 
   options:
   - description: Go To Eastgate
     nextSituationID: 11
@@ -26,6 +29,8 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     changeChapter: 0
     nextChapter: 0
     startSituation: 0
@@ -37,6 +42,8 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     changeChapter: 0
     nextChapter: 0
     startSituation: 0

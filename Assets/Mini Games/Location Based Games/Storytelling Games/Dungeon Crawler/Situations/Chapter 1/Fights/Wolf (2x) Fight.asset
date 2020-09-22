@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f8ad97bc0ae4352b3c1e638b5c1f39, type: 3}
   m_Name: Wolf (2x) Fight
   m_EditorClassIdentifier: 
-  camPosition: {x: 57.45, y: 3, z: 74.28}
+  camPosition: {x: 57.45, y: 103, z: 74.28}
   camRotation: {x: 0, y: 133.55, z: 0}
   spotlightRange: 50
   flushDeadEnemies: 1
@@ -36,8 +36,8 @@ MonoBehaviour:
   - {fileID: 3816733659319154455, guid: 57665b2c1f6534f8baf7e29b39bdc18b, type: 3}
   - {fileID: 3816733659319154455, guid: 57665b2c1f6534f8baf7e29b39bdc18b, type: 3}
   enemyPosition:
-  - {x: 63.40664, y: 0.16, z: 66.53809}
-  - {x: 65.26025, y: 0.04999995, z: 68.3489}
+  - {x: 63.40664, y: 100.16, z: 66.53809}
+  - {x: 65.26025, y: 100.05, z: 68.3489}
   enemyRotation:
   - {x: 0, y: -35.57, z: 0}
   - {x: 0, y: -53.969, z: 0}

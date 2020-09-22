@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f8ad97bc0ae4352b3c1e638b5c1f39, type: 3}
   m_Name: Fight South Gate Goblins
   m_EditorClassIdentifier: 
-  camPosition: {x: 298.8, y: 5.56, z: 253.7}
+  camPosition: {x: 298.8, y: 105.56, z: 253.7}
   camRotation: {x: 0, y: 153.577, z: 0}
   spotlightRange: 20
   flushDeadEnemies: 1
@@ -36,8 +36,8 @@ MonoBehaviour:
   - {fileID: 4746678528496236267, guid: 81b0c467e8299437e83f4a2d745ed4f7, type: 3}
   - {fileID: 2301715145561556678, guid: 2d7796d104ec346db89685852873127f, type: 3}
   enemyPosition:
-  - {x: 303.2465, y: 3.25, z: 247.1877}
-  - {x: 301.2, y: 3.233172, z: 245.2}
+  - {x: 303.2465, y: 103.25, z: 247.1877}
+  - {x: 301.2, y: 103.23317, z: 245.2}
   enemyRotation:
   - {x: 0, y: -33.218, z: 0}
   - {x: 0, y: -13.735, z: 0}

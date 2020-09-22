@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5209a272026e849a6b269392eebfbdee, type: 3}
   m_Name: Chapter Transition
   m_EditorClassIdentifier: 
-  camPosition: {x: 75.5, y: 4.43, z: 113.5}
+  camPosition: {x: 75.5, y: 104.43, z: 113.5}
   camRotation: {x: 0, y: 417, z: 0}
   spotlightRange: 50
   flushDeadEnemies: 1

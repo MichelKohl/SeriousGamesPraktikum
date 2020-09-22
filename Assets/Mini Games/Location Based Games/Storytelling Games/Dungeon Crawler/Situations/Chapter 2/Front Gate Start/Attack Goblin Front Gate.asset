@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f8ad97bc0ae4352b3c1e638b5c1f39, type: 3}
   m_Name: Attack Goblin Front Gate
   m_EditorClassIdentifier: 
-  camPosition: {x: 231.62, y: 5.56, z: 238.52}
+  camPosition: {x: 231.62, y: 105.56, z: 238.52}
   camRotation: {x: 0, y: 89.87701, z: 0}
   spotlightRange: 20
   flushDeadEnemies: 1
@@ -35,6 +35,6 @@ MonoBehaviour:
   enemies:
   - {fileID: 2301715145561556678, guid: 2d7796d104ec346db89685852873127f, type: 3}
   enemyPosition:
-  - {x: -30.60316, y: 6.06, z: -14.89351}
+  - {x: -30.60316, y: 106.06, z: -14.89351}
   enemyRotation:
   - {x: 0, y: -64.11501, z: 0}

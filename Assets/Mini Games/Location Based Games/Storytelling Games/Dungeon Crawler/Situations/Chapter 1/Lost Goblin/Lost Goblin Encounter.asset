@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f8ad97bc0ae4352b3c1e638b5c1f39, type: 3}
   m_Name: Lost Goblin Encounter
   m_EditorClassIdentifier: 
-  camPosition: {x: 48.49, y: 4.72, z: 110.74}
+  camPosition: {x: 48.49, y: 104.72, z: 110.74}
   camRotation: {x: 0, y: 379.208, z: 0}
   spotlightRange: 20
   flushDeadEnemies: 0
@@ -55,6 +55,6 @@ MonoBehaviour:
   enemies:
   - {fileID: 4746678528496236267, guid: 81b0c467e8299437e83f4a2d745ed4f7, type: 3}
   enemyPosition:
-  - {x: 51.05, y: 1.34, z: 118.03}
+  - {x: 51.05, y: 101.34, z: 118.03}
   enemyRotation:
   - {x: 0, y: -163.15, z: 0}

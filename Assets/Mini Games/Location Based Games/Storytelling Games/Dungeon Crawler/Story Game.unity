@@ -5940,7 +5940,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 814055978}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 100, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1888670730}
@@ -11844,7 +11844,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1068066502}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 214.3, y: -6.3, z: 94.2}
+  m_LocalPosition: {x: 214.3, y: 95, z: 94.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2125294461}
@@ -18198,7 +18198,7 @@ MonoBehaviour:
   moveDelta: 0.001
   rotateStep: 1
   rotateDelta: 0.001
-  startMenuPos: {x: 238.6, y: 15.63, z: 253.6}
+  startMenuPos: {x: 238.6, y: 115.63, z: 253.6}
   startMenuRot: {x: 20.021, y: 116.949, z: -1.77}
 --- !u!20 &1478741718
 Camera:
@@ -24145,7 +24145,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2063366816}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 100, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1897383332}

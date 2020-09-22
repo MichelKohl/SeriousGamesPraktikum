@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f8ad97bc0ae4352b3c1e638b5c1f39, type: 3}
   m_Name: Castle Main Right 2
   m_EditorClassIdentifier: 
-  camPosition: {x: 371.53, y: 3.16, z: 62.54}
+  camPosition: {x: 371.53, y: 103.16, z: 62.54}
   camRotation: {x: 0, y: 104.722, z: 0}
   spotlightRange: 20
   flushDeadEnemies: 1
@@ -35,6 +35,6 @@ MonoBehaviour:
   enemies:
   - {fileID: 5469584985690719054, guid: 2c83233e70e4b4c00a37cfbda2237f67, type: 3}
   enemyPosition:
-  - {x: 383.2026, y: 0.01350975, z: 59.49769}
+  - {x: 383.2026, y: 100.01351, z: 59.49769}
   enemyRotation:
   - {x: 0, y: -73.277, z: 0}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5209a272026e849a6b269392eebfbdee, type: 3}
   m_Name: On Top of Mountain
   m_EditorClassIdentifier: 
-  camPosition: {x: 400.6, y: 57.9, z: 243.9}
+  camPosition: {x: 400.6, y: 157.9, z: 243.9}
   camRotation: {x: 43.568, y: 270.761, z: 0}
   spotlightRange: 20
   flushDeadEnemies: 0

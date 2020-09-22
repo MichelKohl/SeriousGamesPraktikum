@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5209a272026e849a6b269392eebfbdee, type: 3}
   m_Name: After Fight Before Village
   m_EditorClassIdentifier: 
-  camPosition: {x: 60.69, y: 4.3, z: 99.73}
+  camPosition: {x: 60.69, y: 104.3, z: 99.73}
   camRotation: {x: 0, y: 214.672, z: 0}
   spotlightRange: 20
   flushDeadEnemies: 0

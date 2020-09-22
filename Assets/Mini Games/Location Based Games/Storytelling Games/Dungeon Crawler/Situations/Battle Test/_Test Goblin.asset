@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f8ad97bc0ae4352b3c1e638b5c1f39, type: 3}
   m_Name: _Test Goblin
   m_EditorClassIdentifier: 
-  camPosition: {x: 184.68, y: 4, z: 73.13}
+  camPosition: {x: 184.68, y: 104, z: 73.13}
   camRotation: {x: 0, y: 90, z: 0}
   spotlightRange: 128
   flushDeadEnemies: 1
+  important: 0
   description: 
+  activateGameObject: 
+  deactivateGameObject: 
+  dialogueStart: 0
   options:
   - description: Fight
     nextSituationID: 0
@@ -25,12 +29,11 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     startBattle: 1
-  talker: []
-  dialogue: []
   enemies:
   - {fileID: 4746678528496236267, guid: 81b0c467e8299437e83f4a2d745ed4f7, type: 3}
-  enemyDialogue: []
   enemyPosition:
   - {x: 194.72, y: 0, z: 72.69}
   enemyRotation:

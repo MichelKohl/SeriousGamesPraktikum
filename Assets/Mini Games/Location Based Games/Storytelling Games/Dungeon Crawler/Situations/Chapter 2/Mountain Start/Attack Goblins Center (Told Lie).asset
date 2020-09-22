@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f8ad97bc0ae4352b3c1e638b5c1f39, type: 3}
   m_Name: Attack Goblins Center (Told Lie)
   m_EditorClassIdentifier: 
-  camPosition: {x: 272.43, y: 5.29, z: 247.43}
+  camPosition: {x: 272.43, y: 105.29, z: 247.43}
   camRotation: {x: 0, y: 228.477, z: 0}
   spotlightRange: 20
   flushDeadEnemies: 1
@@ -38,8 +38,8 @@ MonoBehaviour:
   - {fileID: 4746678528496236267, guid: 81b0c467e8299437e83f4a2d745ed4f7, type: 3}
   - {fileID: 2301715145561556678, guid: 2d7796d104ec346db89685852873127f, type: 3}
   enemyPosition:
-  - {x: 265.68, y: 2.425252, z: 241.15}
-  - {x: 265.33, y: 2.442613, z: 243.9}
+  - {x: 265.68, y: 102.425255, z: 241.15}
+  - {x: 265.33, y: 102.44261, z: 243.9}
   enemyRotation:
   - {x: 0, y: 53.552, z: 0}
   - {x: 0, y: 71.427, z: 0}

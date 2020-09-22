@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f8ad97bc0ae4352b3c1e638b5c1f39, type: 3}
   m_Name: Fight Before Village
   m_EditorClassIdentifier: 
-  camPosition: {x: 60.69, y: 4.3, z: 99.73}
+  camPosition: {x: 60.69, y: 104.3, z: 99.73}
   camRotation: {x: 0, y: 214.672, z: 0}
   spotlightRange: 20
   flushDeadEnemies: 1
@@ -35,6 +35,6 @@ MonoBehaviour:
   enemies:
   - {fileID: 3816733659319154455, guid: 57665b2c1f6534f8baf7e29b39bdc18b, type: 3}
   enemyPosition:
-  - {x: 55.46636, y: 1.52, z: 92.78806}
+  - {x: 55.46636, y: 101.52, z: 92.78806}
   enemyRotation:
   - {x: 0, y: 35.323, z: 0}

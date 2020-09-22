@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f8ad97bc0ae4352b3c1e638b5c1f39, type: 3}
   m_Name: Village
   m_EditorClassIdentifier: 
-  camPosition: {x: 57.45, y: 3, z: 74.28}
+  camPosition: {x: 57.45, y: 103, z: 74.28}
   camRotation: {x: 0, y: 295.085, z: 0}
   spotlightRange: 20
   flushDeadEnemies: 1
@@ -29,6 +29,8 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     startBattle: 0
   enemies: []
   enemyPosition: []

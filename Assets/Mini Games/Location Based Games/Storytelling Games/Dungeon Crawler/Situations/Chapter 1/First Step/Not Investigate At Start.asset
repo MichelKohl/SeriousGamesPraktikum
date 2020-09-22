@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f8ad97bc0ae4352b3c1e638b5c1f39, type: 3}
   m_Name: Not Investigate At Start
   m_EditorClassIdentifier: 
-  camPosition: {x: 57.45, y: 3, z: 74.28}
+  camPosition: {x: 57.45, y: 103, z: 74.28}
   camRotation: {x: 0, y: 89.08601, z: 0}
   spotlightRange: 50
   flushDeadEnemies: 0
   important: 0
   description: A wolf is in front of you.
+  activateGameObject: 
+  deactivateGameObject: 
   dialogueStart: 1
   options:
   - description: Fight
@@ -27,10 +29,12 @@ MonoBehaviour:
     intRequirement: 0
     fthRequirement: 0
     lckRequirement: 0
+    blocks: []
+    enablers: []
     startBattle: 1
   enemies:
   - {fileID: 3816733659319154455, guid: 57665b2c1f6534f8baf7e29b39bdc18b, type: 3}
   enemyPosition:
-  - {x: 67.65, y: 0.16, z: 74.3}
+  - {x: 67.65, y: 100.16, z: 74.3}
   enemyRotation:
   - {x: 0, y: -92.344, z: 0}

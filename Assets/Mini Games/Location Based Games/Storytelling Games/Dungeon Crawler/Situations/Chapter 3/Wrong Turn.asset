@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2564bb9e649694076b4d88a67a549d04, type: 3}
   m_Name: Wrong Turn
   m_EditorClassIdentifier: 
-  camPosition: {x: 370.3, y: 3.16, z: 87.63}
+  camPosition: {x: 370.3, y: 103.16, z: 87.63}
   camRotation: {x: 0, y: 114.682, z: 0}
   spotlightRange: 20
   flushDeadEnemies: 0

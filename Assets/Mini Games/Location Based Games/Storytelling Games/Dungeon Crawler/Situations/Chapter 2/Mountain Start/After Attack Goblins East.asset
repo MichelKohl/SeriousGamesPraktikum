@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5209a272026e849a6b269392eebfbdee, type: 3}
   m_Name: After Attack Goblins East
   m_EditorClassIdentifier: 
-  camPosition: {x: 250.84, y: 5.82, z: 255.52}
+  camPosition: {x: 250.84, y: 105.82, z: 255.52}
   camRotation: {x: 0, y: 425.351, z: 0}
   spotlightRange: 20
   flushDeadEnemies: 0

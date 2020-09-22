@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5209a272026e849a6b269392eebfbdee, type: 3}
   m_Name: Camp Enter
   m_EditorClassIdentifier: 
-  camPosition: {x: 290.5, y: 5.56, z: 243.8}
+  camPosition: {x: 290.5, y: 105.56, z: 243.8}
   camRotation: {x: 0, y: 260.313, z: 0}
   spotlightRange: 20
   flushDeadEnemies: 1

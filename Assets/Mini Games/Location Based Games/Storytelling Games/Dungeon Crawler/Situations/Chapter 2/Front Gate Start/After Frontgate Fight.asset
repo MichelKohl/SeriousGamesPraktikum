@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5209a272026e849a6b269392eebfbdee, type: 3}
   m_Name: After Frontgate Fight
   m_EditorClassIdentifier: 
-  camPosition: {x: 231.62, y: 5.56, z: 238.52}
+  camPosition: {x: 231.62, y: 105.56, z: 238.52}
   camRotation: {x: 0, y: 89.87701, z: 0}
   spotlightRange: 20
   flushDeadEnemies: 0

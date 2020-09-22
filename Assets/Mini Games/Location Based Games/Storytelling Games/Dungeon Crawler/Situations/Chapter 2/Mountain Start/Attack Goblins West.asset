@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f8ad97bc0ae4352b3c1e638b5c1f39, type: 3}
   m_Name: Attack Goblins West
   m_EditorClassIdentifier: 
-  camPosition: {x: 241.2, y: 5.82, z: 244}
+  camPosition: {x: 241.2, y: 105.82, z: 244}
   camRotation: {x: 0, y: 504.472, z: 0}
   spotlightRange: 20
   flushDeadEnemies: 1
@@ -36,8 +36,8 @@ MonoBehaviour:
   - {fileID: 4746678528496236267, guid: 81b0c467e8299437e83f4a2d745ed4f7, type: 3}
   - {fileID: 2301715145561556678, guid: 2d7796d104ec346db89685852873127f, type: 3}
   enemyPosition:
-  - {x: 249.75, y: 2.72, z: 234.64}
-  - {x: 246.85, y: 2.79, z: 232.33}
+  - {x: 249.75, y: 102.72, z: 234.64}
+  - {x: 246.85, y: 102.79, z: 232.33}
   enemyRotation:
   - {x: 0, y: -49.944, z: 0}
   - {x: 0, y: -21.533, z: 0}

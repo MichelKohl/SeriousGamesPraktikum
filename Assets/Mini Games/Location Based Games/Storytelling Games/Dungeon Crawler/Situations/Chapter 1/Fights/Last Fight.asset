@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f8ad97bc0ae4352b3c1e638b5c1f39, type: 3}
   m_Name: Last Fight
   m_EditorClassIdentifier: 
-  camPosition: {x: 63.2, y: 4.43, z: 100.2}
+  camPosition: {x: 63.2, y: 104.43, z: 100.2}
   camRotation: {x: 0, y: 504.03, z: 0}
   spotlightRange: 50
   flushDeadEnemies: 1
@@ -37,9 +37,9 @@ MonoBehaviour:
   - {fileID: 3816733659319154455, guid: 57665b2c1f6534f8baf7e29b39bdc18b, type: 3}
   - {fileID: 3816733659319154455, guid: 57665b2c1f6534f8baf7e29b39bdc18b, type: 3}
   enemyPosition:
-  - {x: 67.46493, y: 1.13, z: 90.9948}
-  - {x: 71.34972, y: 0.78, z: 93.57542}
-  - {x: 70.75281, y: 0.91, z: 89.65211}
+  - {x: 67.46493, y: 101.13, z: 90.9948}
+  - {x: 71.34972, y: 100.78, z: 93.57542}
+  - {x: 70.75281, y: 100.91, z: 89.65211}
   enemyRotation:
   - {x: 0, y: -29.117, z: 0}
   - {x: 0, y: -60.036, z: 0}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f8ad97bc0ae4352b3c1e638b5c1f39, type: 3}
   m_Name: Eavesdrop
   m_EditorClassIdentifier: 
-  camPosition: {x: 284.49, y: 5.56, z: 247.64}
+  camPosition: {x: 284.49, y: 105.56, z: 247.64}
   camRotation: {x: 0, y: 249.983, z: 0}
   spotlightRange: 20
   flushDeadEnemies: 1
