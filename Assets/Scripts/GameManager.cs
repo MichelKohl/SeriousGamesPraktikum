@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject locationBasedGame;
     [SerializeField] private GameObject locationCalculation;
+    [SerializeField] public GameObject defaultScreenCamera;
 
     /// <summary>
     /// The singleton variable.
@@ -84,6 +85,7 @@ public class GameManager : MonoBehaviour
         {
             locationBasedGame.SetActive(activate);
             locationCalculation.SetActive(activate);
+            defaultScreenCamera.SetActive(!activate);
         } else
         {
             locationCalculation.SetActive(activate);

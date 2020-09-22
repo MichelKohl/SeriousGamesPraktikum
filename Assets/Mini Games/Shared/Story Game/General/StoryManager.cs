@@ -285,6 +285,7 @@ public class StoryManager : MonoBehaviour
     {
         SaveGame();
         ToggleLocationBasedGame(true);
+        manager.defaultScreenCamera.SetActive(true);
         SceneManager.LoadScene(0);
     }
 
