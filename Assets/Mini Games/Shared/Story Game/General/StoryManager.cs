@@ -93,7 +93,7 @@ public class StoryManager : MonoBehaviour
         // do some "walking"
         if (!turnOffWalkingRequirement && distanceToWalk > 0)
         {
-            ToggleLocationBasedGame(true);
+            
 
             textWhenWalking.gameObject.SetActive(true);
             decisionsPanel.gameObject.SetActive(false);
@@ -104,6 +104,8 @@ public class StoryManager : MonoBehaviour
                 textWhenWalking.SetStart(manager.profile.GetDistanceTraveled(), distanceToWalk);
                 startSet = true;
             }
+
+            ToggleLocationBasedGame(true);
 
             yield return new WaitUntil(() => distanceToWalk - textWhenWalking.Distance <= 0);
             startSet = false;

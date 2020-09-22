@@ -3,6 +3,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Mapbox.Unity.Map;
 
 /// <summary>
 /// This class manages all main events of the game.
@@ -11,6 +12,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject locationBasedGame;
     [SerializeField] private GameObject locationCalculation;
+    [SerializeField] private AbstractMap map;
     [SerializeField] public GameObject defaultScreenCamera;
 
     /// <summary>
@@ -81,15 +83,21 @@ public class GameManager : MonoBehaviour
 
     public void ToggleLocationBasedGame(bool activate)
     {
-        if (activate)
+        ActivateMeshRenderer(activate, map.gameObject);
+        if (!activate)
+            defaultScreenCamera.SetActive(false);
+    }
+
+    private void ActivateMeshRenderer(bool activate, GameObject gobject)
+    {
+        foreach (Transform child in gobject.transform)
         {
-            locationBasedGame.SetActive(activate);
-            locationCalculation.SetActive(activate);
-            defaultScreenCamera.SetActive(!activate);
-        } else
-        {
-            locationCalculation.SetActive(activate);
-            locationBasedGame.SetActive(activate);
+            MeshRenderer meshRenderer = child.GetComponent<MeshRenderer>();
+            if(meshRenderer != null)
+            {
+                meshRenderer.enabled = activate;
+                ActivateMeshRenderer(activate, child.gameObject);
+            }
         }
     }
 
