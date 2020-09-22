@@ -1108,6 +1108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88da8e4e8242f1840a0b0217e71f2a71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  locationProviderFactory: {fileID: 1040346910}
   old_loc:
     x: 0
     y: 0
@@ -2248,6 +2249,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 553872dfe65492340a14abb270b9b48b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  locationBasedGame: {fileID: 1419406076}
+  locationCalculation: {fileID: 223974226}
   profile:
     charactersBought: 
     selectedCharacterID: 0
@@ -3960,6 +3963,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1040346910 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114467468983267246, guid: 35ce2bb4caba9434db5e656796b632b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 2010999389}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b55f37f9a6f7e44f7bb35e6bc3863847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!21 &1049915374

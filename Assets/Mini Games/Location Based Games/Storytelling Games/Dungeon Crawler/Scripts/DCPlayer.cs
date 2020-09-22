@@ -33,6 +33,7 @@ public class DCPlayer : Fighter
     private Fighter currentTarget;
 
     private bool attackChosen = false;
+    private Camera gameplayCam;
 
     public DCPlayer Init(StarterClass starter)
     {
@@ -223,12 +224,14 @@ public class DCPlayer : Fighter
         if (currentMove is PlayerSpell)
             if ((currentMove as PlayerSpell).type != SpellType.Single)
                 return true;
+        if (gameplayCam == null)
+            gameplayCam = GameObject.Find("Story Manager").GetComponent<StoryManager>().GetCamera();
         if (Application.isEditor)
         {
             if (Input.GetMouseButtonDown(0))
             {
                 RaycastHit hit;
-                Ray ray = Camera.allCameras[1].ScreenPointToRay(Input.mousePosition);
+                Ray ray = gameplayCam.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out hit))
                     if (hit.transform.CompareTag("Enemy"))
                     {
@@ -243,7 +246,7 @@ public class DCPlayer : Fighter
             {
                 if (Input.GetTouch(i).phase == TouchPhase.Began)
                 {
-                    Ray ray = Camera.allCameras[1].ScreenPointToRay(Input.GetTouch(i).position);
+                    Ray ray = gameplayCam.ScreenPointToRay(Input.GetTouch(i).position);
                     if (Physics.Raycast(ray, out RaycastHit hit))
                     {
                         if (hit.transform.CompareTag("Enemy"))

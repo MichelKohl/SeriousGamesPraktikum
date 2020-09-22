@@ -23,7 +23,7 @@ public class WalkingText : MonoBehaviour
     void Update()
     {
         if (GameManager.INSTANCE != null)
-            text.text = $"You need to walk {(distanceToWalk - Distance) * 1000}m to reach next part of the story.";
+            text.text = $"You need to walk {Mathf.Floor((float)((distanceToWalk - Distance) * 1000))}m to reach next part of the story.";
     }
 
     public void SetStart(double startDistance, double distanceToWalk)

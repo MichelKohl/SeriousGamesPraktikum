@@ -5,12 +5,15 @@ using Mapbox.Unity.Location;
 using Mapbox.CheapRulerCs;
 using Mapbox.Unity;
 using System.Text;
+using System;
 
 /// <summary>
 /// This class handles all calculations, that are bounded to the players location.
 /// </summary>
-public class LocationCalculation : MonoBehaviour
-{   
+public class LocationCalculation : MonoBehaviour {
+    [SerializeField] private LocationProviderFactory locationProviderFactory;
+
+    private static LocationCalculation INSTANCE;
     /// <summary>
     /// A bool field which holds the information, if the gps location was recently updated or not.
     /// </summary>
@@ -33,7 +36,13 @@ public class LocationCalculation : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        if (INSTANCE != null && INSTANCE != this)
+            Destroy(gameObject);
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+            INSTANCE = this;
+        }
     }
 
     private void Start()
@@ -50,17 +59,17 @@ public class LocationCalculation : MonoBehaviour
 
     private void Update()
     {
-        if (!locationUpdated && GameObject.Find("LocationProvider").GetComponent<LocationProviderFactory>().DefaultLocationProvider.CurrentLocation.LatitudeLongitude.x != 0
-               && GameObject.Find("LocationProvider").GetComponent<LocationProviderFactory>().DefaultLocationProvider.CurrentLocation.LatitudeLongitude.y != 0)
+        if (!locationUpdated && locationProviderFactory.DefaultLocationProvider.CurrentLocation.LatitudeLongitude.x != 0
+               && locationProviderFactory.GetComponent<LocationProviderFactory>().DefaultLocationProvider.CurrentLocation.LatitudeLongitude.y != 0)
         {
-            old_loc = GameObject.Find("LocationProvider").GetComponent<LocationProviderFactory>().DefaultLocationProvider.CurrentLocation.LatitudeLongitude;
+            old_loc = locationProviderFactory.GetComponent<LocationProviderFactory>().DefaultLocationProvider.CurrentLocation.LatitudeLongitude;
             old_loc_array = old_loc.ToArray();
             locationUpdated = true;
         }
 
-        if (locationUpdated && GameObject.Find("LocationProvider").GetComponent<LocationProviderFactory>().DefaultLocationProvider.CurrentLocation.IsLocationUpdated)
+        if (locationUpdated && locationProviderFactory.GetComponent<LocationProviderFactory>().DefaultLocationProvider.CurrentLocation.IsLocationUpdated)
         {
-            Mapbox.Utils.Vector2d new_loc = GameObject.Find("LocationProvider").GetComponent<LocationProviderFactory>().DefaultLocationProvider.CurrentLocation.LatitudeLongitude;
+            Mapbox.Utils.Vector2d new_loc = locationProviderFactory.GetComponent<LocationProviderFactory>().DefaultLocationProvider.CurrentLocation.LatitudeLongitude;
             double[] new_loc_array = new_loc.ToArray();
             CheapRuler cr = new CheapRuler(old_loc_array[1], CheapRulerUnits.Kilometers);
             GameManager.INSTANCE.profile.SetDistanceTraveled(GameManager.INSTANCE.profile.GetDistanceTraveled() + cr.Distance(old_loc_array, new_loc_array));
@@ -120,8 +129,12 @@ public class LocationCalculation : MonoBehaviour
             countrysb.Append(temp[j]);
         }
         string country = countrysb.ToString();
-
-        GameObject.Find("Canvas").GetComponent<GeneralGUI>().locationTagText.SetText(city + ", " + country);
+        try
+        {
+            GameObject.Find("Canvas").GetComponent<GeneralGUI>().locationTagText.SetText(city + ", " + country);
+        }
+        catch (NullReferenceException) { }
+        
         return data;
     }
 }

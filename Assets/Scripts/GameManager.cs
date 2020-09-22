@@ -9,6 +9,9 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private GameObject locationBasedGame;
+    [SerializeField] private GameObject locationCalculation;
+
     /// <summary>
     /// The singleton variable.
     /// </summary>
@@ -73,6 +76,19 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void ToggleLocationBasedGame(bool activate)
+    {
+        if (activate)
+        {
+            locationBasedGame.SetActive(activate);
+            locationCalculation.SetActive(activate);
+        } else
+        {
+            locationCalculation.SetActive(activate);
+            locationBasedGame.SetActive(activate);
+        }
     }
 
     /// <summary>

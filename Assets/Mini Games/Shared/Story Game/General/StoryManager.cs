@@ -67,6 +67,7 @@ public class StoryManager : MonoBehaviour
     {
         manager = GameManager.INSTANCE;
         battleManager = GetComponent<BattleManager>();
+        ToggleLocationBasedGame(false);
     }
 
     protected virtual void Update()
@@ -88,10 +89,12 @@ public class StoryManager : MonoBehaviour
     {
         if (startBattle)
             yield return new WaitUntil(() => battleManager.BattleOver);
-        // do some "walking"
 
+        // do some "walking"
         if (!turnOffWalkingRequirement && distanceToWalk > 0)
         {
+            ToggleLocationBasedGame(true);
+
             textWhenWalking.gameObject.SetActive(true);
             decisionsPanel.gameObject.SetActive(false);
             currentSituation.gameObject.SetActive(false);
@@ -108,6 +111,8 @@ public class StoryManager : MonoBehaviour
             textWhenWalking.gameObject.SetActive(false);
             decisionsPanel.gameObject.SetActive(true);
             currentSituation.gameObject.SetActive(true);
+
+            ToggleLocationBasedGame(false);
         }
         // flush current options
         decisionsPanel.Flush();
@@ -264,17 +269,22 @@ public class StoryManager : MonoBehaviour
 
     public void SaveGame()
     {
-        GameManager.INSTANCE.profile.SaveStoryGame(classID, currentChapterID, currentSituationID, pathPlayerTook,
+        try
+        {
+            GameManager.INSTANCE.profile.SaveStoryGame(classID, currentChapterID, currentSituationID, pathPlayerTook,
             player.GetAttributes(), player.GetUnlockedAttacks(), player.GetLevel(), player.GetSkillPoints(),
             player.GetStat(Stat.STR).Item2, player.GetStat(Stat.DEX).Item2, player.GetStat(Stat.INT).Item2,
             player.GetStat(Stat.FTH).Item2, player.GetStat(Stat.LCK).Item2, player.GetUnlockedPerks(), startSet
             );
-        GameManager.INSTANCE.SaveProfile(GameManager.INSTANCE.profile);
+            GameManager.INSTANCE.SaveProfile(GameManager.INSTANCE.profile);
+        }
+        catch (NullReferenceException) { };
     }
 
     public void ExitGame()
     {
         SaveGame();
+        ToggleLocationBasedGame(true);
         SceneManager.LoadScene(0);
     }
 
@@ -310,6 +320,17 @@ public class StoryManager : MonoBehaviour
                     !info.IsBlocked(pathPlayerTook))
             Instantiate(decisionPrefab, decisionsPanel.transform).
                 Init(info.description, info.nextSituationID, info.startBattle);
+    }
+
+
+    public Camera GetCamera()
+    {
+        return cam.GetComponent<Camera>();
+    }
+
+    private void ToggleLocationBasedGame(bool activate)
+    {
+        manager.ToggleLocationBasedGame(activate);
     }
 }
 
