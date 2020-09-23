@@ -28,7 +28,7 @@ MonoBehaviour:
   INT: 1
   FTH: 1
   LCK: 2
-  probOfBlock: 0
+  probOfBlock: 0.1
   healthDamage: 15
   staminaDamage: 0
   manaDamage: 0

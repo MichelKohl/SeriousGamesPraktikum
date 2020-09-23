@@ -28,4 +28,5 @@ MonoBehaviour:
   INT: 1
   FTH: 5
   LCK: 1
+  probOfBlock: 0
   buff: {fileID: 11400000, guid: 7f6e3ff6fbe6c47c5b6d966311fbbedd, type: 2}
