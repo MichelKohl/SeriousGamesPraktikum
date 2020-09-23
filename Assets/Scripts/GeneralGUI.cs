@@ -85,6 +85,8 @@ public class GeneralGUI : MonoBehaviour
     [SerializeField]
     private GameObject insufficientCoinsTextbox;
 
+    public static bool profileViewActive = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -124,6 +126,7 @@ public class GeneralGUI : MonoBehaviour
     /// </summary>
     public void ShowProfileView()
     {
+        profileViewActive = true;
         InitCharacterSelection();
         SetProfileInfo();
 
@@ -138,6 +141,8 @@ public class GeneralGUI : MonoBehaviour
     /// </summary>
     public void BackToDefaultView()
     {
+        profileViewActive = false;
+
         if (notificationsToggle.GetComponent<Toggle>().isOn)
         {
             GameManager.INSTANCE.profile.SetNotificationStatus(true);

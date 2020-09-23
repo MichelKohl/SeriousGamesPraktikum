@@ -14,6 +14,11 @@ public class ShowGamePopUpMouseDown : MonoBehaviour
     /// </summary>
     private void OnMouseDown()
     {
+        if (GeneralGUI.profileViewActive) {
+            //do nothing
+            return;
+        }
+
         if (script.inRange && GameObject.Find("GamePopUp") == null)
         {
             var gamePopUp = Instantiate(GameManager.INSTANCE.GamePopUp, GameObject.Find("Canvas").gameObject.transform);

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6360839550882902304}
   - component: {fileID: 8201348682940921347}
   - component: {fileID: 2312092717596107819}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: VisualRadius
   m_TagString: Untagged
   m_Icon: {fileID: 0}

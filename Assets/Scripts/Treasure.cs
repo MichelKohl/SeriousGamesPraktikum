@@ -44,6 +44,11 @@ public class Treasure : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (GeneralGUI.profileViewActive) {
+            //do nothing
+            return;
+        }
+
         GameObject ring = this.transform.GetChild(0).gameObject;
         CanClickOnTreasure ccot = ring.GetComponent<CanClickOnTreasure>();
         if (ccot.inRange)

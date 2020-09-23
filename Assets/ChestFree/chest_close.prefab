@@ -96,7 +96,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 50
-  forceStrength: 10
   coins: 0
 --- !u!135 &7768359788166440472
 SphereCollider:
@@ -109,7 +108,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 1
   m_Center: {x: -0.029200032, y: 0.0020999913, z: 0.2680501}
 --- !u!54 &3138518833215794783
 Rigidbody:
