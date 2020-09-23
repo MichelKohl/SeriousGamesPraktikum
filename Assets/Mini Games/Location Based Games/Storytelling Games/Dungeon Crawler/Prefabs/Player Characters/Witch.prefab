@@ -1691,9 +1691,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 57edcc31a242a4d14a2b044ac9345cfb, type: 2}
   - {fileID: 11400000, guid: 9a3272917ff5a4aa98ac7ba198f5f6b7, type: 2}
   - {fileID: 11400000, guid: 91cdfa5d914ec4a7da91ef47fe428d7f, type: 2}
-  - {fileID: 11400000, guid: 3224baa3f42384915b12640c27e36b94, type: 2}
   - {fileID: 11400000, guid: e8d00488baaa14701bb9b047a8f3b273, type: 2}
   hitboxes: []
+  hurtbox: {fileID: 6816254814681631311}
   spellSpawnTransforms:
   - {fileID: 6077922280928125035}
   - {fileID: 2783423280000839149}
@@ -1708,7 +1708,6 @@ MonoBehaviour:
   projectileTarget: {fileID: 6077922280928125035}
   baseProbabilityOfBlock: 1
   testAttacks: 0
-  hurtbox: {fileID: 6816254814681631311}
   strength: 1
   dexterity: 1
   intelligence: 1
@@ -1718,6 +1717,7 @@ MonoBehaviour:
   xpForNextLvlUp: 100
   nextXpMultiplier: 1.5
   allPerks: {fileID: 11400000, guid: f14bb20e623d042c59cfc009621df3ce, type: 2}
+  unlockedPerks: 
   skillPoints: 0
 --- !u!1 &5969251062360008268
 GameObject:

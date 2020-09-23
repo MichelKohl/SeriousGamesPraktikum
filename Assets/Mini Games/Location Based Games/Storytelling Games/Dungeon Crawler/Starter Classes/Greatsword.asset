@@ -19,5 +19,4 @@ MonoBehaviour:
   intelligence: 2
   faith: 4
   luck: 2
-  unlocked: 010101010101
-  consumables: []
+  unlocked: 000001010101
